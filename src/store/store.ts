@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { experience } from 'src/store/experience';
+import { experience } from 'store/experience';
 import { token } from './token';
 import { menu } from './menu';
 

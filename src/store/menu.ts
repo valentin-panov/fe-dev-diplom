@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Menu } from '../interfaces/Interfaces';
+import { Menu } from 'interfaces/Interfaces';
 
 const initialState: Menu[] = [
   {

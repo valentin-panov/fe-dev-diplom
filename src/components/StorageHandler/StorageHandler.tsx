@@ -1,8 +1,8 @@
 import { memo, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from 'src/store';
-import { storageHandlerAdapter } from 'src/packages/storage/adapters/StorageHandlerAdapter';
-import { experienceSet } from 'src/store/experience';
+import { RootState } from 'store';
+import { storageHandlerAdapter } from 'packages/storage/adapters/StorageHandlerAdapter';
+import { experienceSet } from 'store/experience';
 
 export type Props = {
   className?: string;

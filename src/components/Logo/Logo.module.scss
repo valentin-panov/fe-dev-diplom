@@ -1,12 +1,11 @@
 @import 'src/styles/common';
 
 .root {
-  color: $logo-color;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 900;
-  line-height: 42px;
-  margin: 0;
-  //padding-top: 15px;
-  //padding-left: 258px;
+  margin      : 0;
+  padding     : 0;
+  font-size   : 36px;
+  line-height : 42px;
+  font-weight : 900;
+  font-style  : normal;
+  color       : $logo-color;
 }

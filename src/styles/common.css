@@ -1,22 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic-ext");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed&subset=cyrillic-ext");
-
-$maxWidth: 1920;
-@mixin adaptiveFont($pcSize, $mobSize) {
-  $addSize: $pcSize - $mobSize;
-  $maxWidth: $maxWidth - 320;
-  font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
-}
-
-$logo-bg: rgba(41, 41, 41, 1);
-$logo-color: rgba(229, 229, 229, 1);
-$logo-bg-transparent: rgba(41, 41, 41, 0.8);
-
-$footer-border: rgba(229, 229, 229, 1);
-$footer-bg: rgba(45, 43, 47, 1);
-
-$white: rgba(255, 255, 255, 1);
-
 .root {
   margin: 0 auto;
   padding: 1rem;
@@ -83,12 +66,8 @@ section {
   box-shadow: 0 5px 5px -5px rgba(34, 60, 80, 0.6);
 }
 
-header {
-}
-
 main {
   flex: 1 1 auto;
 }
 
-footer {
-}
+/*# sourceMappingURL=common.css.map */

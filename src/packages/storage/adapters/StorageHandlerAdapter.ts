@@ -1,4 +1,4 @@
-import { Data, StorageHandlerInterface } from 'src/components/StorageHandler/StorageHandlerInterface';
+import { Data, StorageHandlerInterface } from 'components/StorageHandler/StorageHandlerInterface';
 import { getItem, setItem } from '../storage';
 
 const KEY = 'StorageHandlerAdapter';
