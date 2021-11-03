@@ -1,11 +1,11 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic-ext');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&subset=cyrillic-ext');
-//@import url('https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css');
 
 $maxWidth: 1920;
 @mixin adaptiveFont($pcSize, $mobSize) {
   $addSize: $pcSize - $mobSize;
   $maxWidth: $maxWidth - 320;
+
   font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
 }
 
@@ -27,10 +27,11 @@ $white: rgba(255, 255, 255, 1);
   padding: 1rem;
 }
 
-html, body {
-  height: 100%;
-  font-family: 'Roboto', sans-serif;
+html,
+body {
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
 }
 
 a {
@@ -81,9 +82,9 @@ section {
 }
 
 .shadow {
-  //-webkit-box-shadow: 0 5px 5px -5px rgba(34, 60, 80, 0.6);
-  //-moz-box-shadow: 0 5px 5px -5px rgba(34, 60, 80, 0.6);
   box-shadow: 0 5px 5px -5px rgba(34, 60, 80, 0.6);
+  -webkit-box-shadow: 0 5px 5px -5px rgba(34, 60, 80, 0.6);
+  -moz-box-shadow: 0 5px 5px -5px rgba(34, 60, 80, 0.6);
 }
 
 header {

@@ -1,10 +1,10 @@
-@import "../../styles/common";
+@import './src/styles/common';
 
 .root {
-  background-image: url("img/image.png");
-  object-fit: cover;
-  margin: 0;
-  padding: 0;
-  min-width: 100%;
+  background-image: url('img/image.png');
   height: 985px;
+  margin: 0;
+  min-width: 100%;
+  object-fit: cover;
+  padding: 0;
 }

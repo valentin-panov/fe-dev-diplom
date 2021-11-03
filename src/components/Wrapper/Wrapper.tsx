@@ -6,12 +6,13 @@ import { Footer } from '../Footer';
 
 export type Props = {
   className?: string;
+  children: React.ReactChildren | React.ReactNode;
 };
 
-export const Wrapper = memo<Props>(({ className }) => (
+export const Wrapper = memo<Props>(({ className, children }) => (
   <div className={cn(s.root, className)}>
     <Header />
-    <main />
+    <main>{children}</main>
     <Footer />
   </div>
 ));

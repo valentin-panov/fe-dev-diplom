@@ -1,4 +1,4 @@
-@import "src/styles/common";
+@import 'src/styles/common';
 
 .root {
   background: $logo-bg;
@@ -8,22 +8,22 @@
 }
 
 .navBar {
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  height: 100%;
   justify-content: flex-start;
   width: 100%;
-  height: 100%;
 }
 
 .navLink {
-  padding: 0;
+  color: #ffffff;
+  font-size: 30px;
   font-style: normal;
   font-weight: 300;
-  font-size: 30px;
   line-height: 35px;
-  color: #FFFFFF;
   margin-right: 82px;
+  padding: 0;
 }
 
 .navLink.active {
