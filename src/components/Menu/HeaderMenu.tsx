@@ -6,6 +6,7 @@ import s from './HeaderMenu.module.scss';
 import { RootState } from '../../store';
 import { HeaderMenuItem } from './HeaderMenuItem';
 import { Menu } from '../../interfaces/Interfaces';
+import { appURL } from '../../App';
 
 export type Props = {
   className?: string;
@@ -15,7 +16,7 @@ export const HeaderMenu = memo<Props>(({ className }) => {
   const { menu } = useSelector((store: RootState) => store);
   const location = useLocation();
   const { pathname } = location;
-  const splitLocation: string = pathname.split('/')[1];
+  const splitLocation: string = pathname.replace(appURL, '').split('/')[1];
 
   return (
     <div className={cn(s.root, className)}>

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import React, { memo } from 'react';
+import React, { ReactElement } from 'react';
 
 export type Props = {
   id: number;
@@ -8,10 +8,10 @@ export type Props = {
   pathName: string;
 };
 
-export const HeaderMenuItem = memo<Props>(({ className, title, pathName }) => (
-  <li className="nav-item">
+export const HeaderMenuItem = ({ className, title, pathName }: Props): ReactElement => (
+  <li>
     <Link className={className} to={`/${pathName}`}>
       {title}
     </Link>
   </li>
-));
+);
