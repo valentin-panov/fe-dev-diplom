@@ -22,7 +22,7 @@ export const Header = memo<Props>(({ className }) => {
   const activePreset: {
     class: string;
     back: string;
-  } = { class: '', back: headerMain };
+  } = { class: 'main', back: headerMain };
 
   switch (splitLocation) {
     case 'select':
@@ -46,12 +46,14 @@ export const Header = memo<Props>(({ className }) => {
           <Logo />
         </div>
         <HeaderMenu location={splitLocation} />
-        <div className="row">
-          <div className="col">
-            <MSHeaderMotto />
+        <div className={s.header__controls}>
+          <div className={s.header__controls_col}>
+            <div className={s.motto_holder}>
+              <MSHeaderMotto />
+            </div>
           </div>
-          <div className="col">
-            <MSHeaderMotto />
+          <div className={s.header__controls_col}>
+            <Logo />
           </div>
         </div>
       </div>

@@ -7,5 +7,8 @@ export type Props = {
 };
 
 export const MSHeaderMotto = memo<Props>(({ className }) => (
-  <div className={cn(s.root, className)}>Вся жизнь - путешествие!</div>
+  <div className={cn(s.root, className)}>
+    <span>Вся жизнь -</span>
+    <span className={s.secondLine}>путешествие!</span>
+  </div>
 ));
