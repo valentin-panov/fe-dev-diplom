@@ -53,7 +53,9 @@ export const Header = memo<Props>(({ className }) => {
             </div>
           </div>
           <div className={s.header__controls_col}>
-            <Logo />
+            <div className={s.picker_holder}>
+              <Logo />
+            </div>
           </div>
         </div>
       </div>
