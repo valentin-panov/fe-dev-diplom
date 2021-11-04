@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { useLocation } from 'react-router-dom';
+import { Button } from 'antd';
 import s from './Header.module.scss';
 import { Logo } from '../Logo';
 import { HeaderMenu } from '../Menu';
@@ -9,6 +10,8 @@ import headerMain from './img/header_main.png';
 import headerTrain from './img/header_train.png';
 import headerSuccess from './img/header_success.png';
 import { appURL } from '../../App';
+import { DatePicker } from '../Pickers/DatePicker';
+import { DestinationPicker } from '../Pickers/DestinationPicker';
 
 export type Props = {
   className?: string;
@@ -54,7 +57,9 @@ export const Header = memo<Props>(({ className }) => {
           </div>
           <div className={s.header__controls_col}>
             <div className={s.picker_holder}>
-              <Logo />
+              <DestinationPicker />
+              <DatePicker />
+              <Button>НАЙТИ БИЛЕТЫ</Button>
             </div>
           </div>
         </div>
