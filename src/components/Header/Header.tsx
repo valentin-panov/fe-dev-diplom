@@ -10,7 +10,7 @@ import headerMain from './img/header_main.png';
 import headerTrain from './img/header_train.png';
 import headerSuccess from './img/header_success.png';
 import { appURL } from '../../App';
-import { DatePicker } from '../Pickers/DatePicker';
+import { DatePickerOrigin } from '../Pickers/DatePickerOrigin';
 import { DestinationPicker } from '../Pickers/DestinationPicker';
 
 export type Props = {
@@ -58,8 +58,10 @@ export const Header = memo<Props>(({ className }) => {
           <div className={s.header__controls_col}>
             <div className={s.picker_holder}>
               <DestinationPicker />
-              <DatePicker />
-              <Button>НАЙТИ БИЛЕТЫ</Button>
+              <DatePickerOrigin />
+              <div className={s.search_btn_holder}>
+                <Button className={s.searchBtn}>НАЙТИ БИЛЕТЫ</Button>
+              </div>
             </div>
           </div>
         </div>

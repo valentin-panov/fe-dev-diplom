@@ -22,7 +22,7 @@ export const DestinationPicker = memo<Props>(({ className }) => {
           defaultOpen={false}
           backfill
           options={options}
-          filterOption={(inputValue, option) => option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
+          filterOption={(inputValue, option) => option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
         >
           <Input
             className={s.autocomplete}
@@ -42,7 +42,7 @@ export const DestinationPicker = memo<Props>(({ className }) => {
           defaultOpen={false}
           backfill
           options={options}
-          filterOption={(inputValue, option) => option!.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
+          filterOption={(inputValue, option) => option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
         >
           <Input
             className={s.autocomplete}
