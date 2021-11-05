@@ -9,13 +9,15 @@ export type Props = {
 };
 
 export const DatePickerOrigin = memo<Props>(({ className }) => {
-  const onChange = (date: unknown, dateString: unknown) => {
-    console.log(date, dateString);
+  const dates: string[] = [];
+
+  const onChange = (value: unknown, dateString: string) => {
+    dates[0] = dateString;
   };
 
   return (
     <div className={cn(s.root, className)}>
-      <span className={s.title}>Дата</span>
+      <span className={s.title}>Дата {dates[0]}</span>
       <div className={s.input_holder}>
         <DatePicker onChange={onChange} className={s.inputItem} locale={locale} allowClear />
         <DatePicker onChange={onChange} className={s.inputItem} locale={locale} allowClear />

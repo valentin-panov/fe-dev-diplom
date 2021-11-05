@@ -1,9 +1,9 @@
 {
   "parser": "@typescript-eslint/parser",
   "plugins": [
-    "@typescript-eslint",
     "prettier",
-    "react-hooks"
+    "react-hooks",
+    "@typescript-eslint"
   ],
   "extends": [
     "airbnb",
