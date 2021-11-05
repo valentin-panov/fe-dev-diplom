@@ -15,7 +15,7 @@ export const Reviews = memo<Props>(({ className }) => (
   <div className={cn(s.root, className)} id="reviews">
     <span className={s.title}>отзывы</span>
     <div className={s.slidesBlock}>
-      <Carousel slidesToShow={2} autoplay>
+      <Carousel slidesToShow={2} autoplay pauseOnHover>
         <div>
           <div className={s.reviewCard}>
             <div className={s.avatar__container}>

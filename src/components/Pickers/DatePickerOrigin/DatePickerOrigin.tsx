@@ -15,12 +15,28 @@ export const DatePickerOrigin = memo<Props>(({ className }) => {
     dates[0] = dateString; // temporary stub
   };
 
+  const dateFormat = 'DD/MM/YY';
+
   return (
     <div className={cn(s.root, className)}>
       <span className={s.title}>Дата {dates[0]}</span>
       <div className={s.input_holder}>
-        <DatePicker onChange={onChange} className={s.inputItem} locale={locale} allowClear />
-        <DatePicker onChange={onChange} className={s.inputItem} locale={locale} allowClear />
+        <DatePicker
+          onChange={onChange}
+          className={s.inputItem}
+          locale={locale}
+          allowClear
+          format={dateFormat}
+          placeholder="ДД/ММ/ГГ"
+        />
+        <DatePicker
+          onChange={onChange}
+          className={s.inputItem}
+          locale={locale}
+          allowClear
+          format={dateFormat}
+          placeholder="ДД/ММ/ГГ"
+        />
       </div>
     </div>
   );

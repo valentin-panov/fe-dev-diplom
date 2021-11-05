@@ -70,14 +70,15 @@
 }
 
 .picker_holder {
-  position   : relative;
-  z-index    : 1;
-  padding    : 60px 25px;
-  box-sizing : border-box;
-  width      : 729px;
-  height     : 540px;
-  background : rgba(41, 41, 41, 0.8);
-  align-self : flex-end;
+  position      : relative;
+  z-index       : 1;
+  margin-bottom : 8px;
+  padding       : 60px 25px;
+  box-sizing    : border-box;
+  width         : 729px;
+  height        : 540px;
+  background    : rgba(41, 41, 41, 0.8);
+  align-self    : flex-end;
 }
 
 .searchBtn {
