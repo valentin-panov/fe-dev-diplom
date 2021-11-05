@@ -9,10 +9,10 @@ export type Props = {
 };
 
 export const DatePickerOrigin = memo<Props>(({ className }) => {
-  const dates: string[] = [];
+  const dates: string[] = []; // temporary stub
 
   const onChange = (value: unknown, dateString: string) => {
-    dates[0] = dateString;
+    dates[0] = dateString; // temporary stub
   };
 
   return (

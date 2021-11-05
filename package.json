@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "license": "MIT",
-  "homepage": "https://valentin-panov.github.io/fe-diploma/",
+  "homepage": "https://valentin-panov.github.io/fe-dev-diplom/",
   "sideEffects": [
     "**/*.scss"
   ],
