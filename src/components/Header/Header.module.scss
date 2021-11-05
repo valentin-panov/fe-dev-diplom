@@ -5,6 +5,7 @@
   z-index   : 1;
   margin    : 0;
   padding   : 0;
+  overflow  : hidden;
   min-width : 100%;
   
   & .back {
@@ -51,13 +52,13 @@
 }
 
 .header__controls {
-  display         : flex;
-  flex-direction  : row;
-  justify-content : center;
-  align-items     : flex-start;
+  display        : flex;
+  min-height     : 820px;
+  flex-direction : row;
 }
 
 .header__controls_col {
+  display    : flex;
   width      : 50%;
   min-height : 100%;
 }
@@ -71,12 +72,12 @@
 .picker_holder {
   position   : relative;
   z-index    : 1;
-  margin-top : 280px;
   padding    : 60px 25px;
   box-sizing : border-box;
   width      : 729px;
   height     : 540px;
   background : rgba(41, 41, 41, 0.8);
+  align-self : flex-end;
 }
 
 .searchBtn {
@@ -84,8 +85,8 @@
   height         : 60px;
   font-size      : 24px;
   line-height    : 28px;
-  
   font-weight    : bold;
+  
   text-align     : center;
   text-transform : uppercase;
   color          : #292929;

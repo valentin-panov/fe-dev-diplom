@@ -11,19 +11,19 @@ const initialState: Menu[] = [
   {
     id: 1,
     title: 'Как это работает',
-    pathName: 'how',
+    pathName: '#how',
   },
 
   {
     id: 2,
     title: 'Отзывы',
-    pathName: 'reviews',
+    pathName: '#reviews',
   },
 
   {
     id: 3,
     title: 'Контакты',
-    pathName: 'contacts',
+    pathName: '#contacts',
   },
 ];
 

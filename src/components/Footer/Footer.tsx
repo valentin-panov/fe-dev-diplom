@@ -23,7 +23,7 @@ export type Props = {
 };
 
 export const Footer = memo<Props>(({ className }) => (
-  <footer className={cn(s.root, className)}>
+  <footer className={cn(s.root, className)} id="contacts">
     <div className={s.top}>
       <section className={s.topSection}>
         <FooterTitle text="Свяжитесь с нами" />

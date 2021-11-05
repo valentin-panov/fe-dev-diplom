@@ -2061,7 +2061,7 @@
     hoist-non-react-statics "^3.3.0"
     redux "^4.0.0"
 
-"@types/react-router-dom@^5.1.8":
+"@types/react-router-dom@*", "@types/react-router-dom@^5.1.8":
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/@types/react-router-dom/-/react-router-dom-5.3.2.tgz#ebd8e145cf056db5c66eb1dac63c72f52e8542ee"
   integrity sha512-ELEYRUie2czuJzaZ5+ziIp9Hhw+juEw8b7C11YNA4QdLCVbQ3qLi2l4aq8XnlqM7V31LZX8dxUuFUCrzHm6sqQ==
@@ -2069,6 +2069,14 @@
     "@types/history" "*"
     "@types/react" "*"
     "@types/react-router" "*"
+
+"@types/react-router-hash-link@^2.4.2":
+  version "2.4.2"
+  resolved "https://registry.yarnpkg.com/@types/react-router-hash-link/-/react-router-hash-link-2.4.2.tgz#536ff3dce8d846137643c71db57a3b168384dbfc"
+  integrity sha512-DpTvUnvjTgy5VKd+qI+sa/hliGoAhmdrbIJJBPatcgKmvzYd9mzhssAalCOOOkY4anViKUAB/D6MbE11JnK8oA==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-router-dom" "*"
 
 "@types/react-router@*":
   version "5.1.17"
@@ -12091,6 +12099,13 @@ react-router-dom@^5.2.0:
     react-router "5.2.1"
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
+
+react-router-hash-link@^2.4.3:
+  version "2.4.3"
+  resolved "https://registry.yarnpkg.com/react-router-hash-link/-/react-router-hash-link-2.4.3.tgz#570824d53d6c35ce94d73a46c8e98673a127bf08"
+  integrity sha512-NU7GWc265m92xh/aYD79Vr1W+zAIXDWp3L2YZOYP4rCqPnJ6LI6vh3+rKgkidtYijozHclaEQTAHaAaMWPVI4A==
+  dependencies:
+    prop-types "^15.7.2"
 
 react-router@5.2.1:
   version "5.2.1"

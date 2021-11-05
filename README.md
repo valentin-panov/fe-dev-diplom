@@ -2,6 +2,8 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/bd74oa5cako2b884?svg=true)](https://ci.appveyor.com/project/vapanov/fe-dev-diplom)
 
+WEB VERSION https://valentin-panov.github.io/fe-dev-diplom/
+
 ### Краткое описание задачи дипломной работы:
 
 Создать SPA на React для сервиса покупки билетов на ж/д, сверстанное
