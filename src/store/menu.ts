@@ -5,7 +5,7 @@ const initialState: Menu[] = [
   {
     id: 0,
     title: 'О нас',
-    pathName: '',
+    pathName: '#about',
   },
 
   {
