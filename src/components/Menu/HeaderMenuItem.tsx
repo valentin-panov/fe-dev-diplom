@@ -10,7 +10,7 @@ export type Props = {
 
 export const HeaderMenuItem = ({ className, title, pathName }: Props): ReactElement => (
   <li>
-    <Link className={className} to={`/${pathName}`}>
+    <Link smooth className={className} to={`/${pathName}`}>
       {title}
     </Link>
   </li>
