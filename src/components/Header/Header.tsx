@@ -50,11 +50,13 @@ export const Header = memo<Props>(({ className }) => {
         </div>
         <HeaderMenu location={splitLocation} />
         <div className={s.header__controls}>
-          <div className={s.header__controls_col}>
-            <div className={s.motto_holder}>
-              <MSHeaderMotto />
+          {activePreset.class === 'main' && (
+            <div className={s.header__controls_col}>
+              <div className={s.motto_holder}>
+                <MSHeaderMotto />
+              </div>
             </div>
-          </div>
+          )}
           <div className={s.header__controls_col}>
             <div className={s.picker_holder}>
               <DestinationPicker />
