@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import { Carousel } from 'antd';
 import s from './Reviews.module.scss';
+import './slider.css';
 import ava1 from './img/ava1.png';
 import ava2 from './img/ava2.png';
 import openQ from './img/open.svg';
