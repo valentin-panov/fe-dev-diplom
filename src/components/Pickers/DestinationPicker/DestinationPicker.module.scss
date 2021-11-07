@@ -16,9 +16,10 @@
 
 .input_holder {
   margin-top      : 14px;
-  margin-bottom   : 60px;
+  //margin-bottom   : 60px;
   display         : flex;
-  min-width       : 100%;
+  //min-width       : 100%;
+  max-width       : 685px;
   flex-direction  : row;
   justify-content : space-between;
   align-items     : center;

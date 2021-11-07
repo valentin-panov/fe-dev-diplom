@@ -93,6 +93,9 @@
     }
   }
   
+  .picker_holder_main_destination_helper {
+    margin-bottom : 60px;
+  }
 }
 
 .header__controls_select {
@@ -124,20 +127,21 @@
   }
   
   .picker_holder_select_row {
-    display        : flex;
-    flex-direction : row;
-    //justify-content : space-between;
+    display         : flex;
+    flex-direction  : row;
+    justify-content : space-between;
   }
   
 }
 
 .search_btn_holder {
-  margin-top      : 30px;
+  margin-top      : 90px;
   display         : flex;
   justify-content : flex-end;
 }
 
 .search_btn_holder_select {
+  margin-top      : 45px;
   display         : flex;
   flex-direction  : row;
   justify-content : flex-end;

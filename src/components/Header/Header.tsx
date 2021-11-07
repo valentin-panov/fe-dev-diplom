@@ -61,7 +61,9 @@ export const Header = memo<Props>(({ className }) => {
 
             <div className={s.header__controls_col}>
               <div className={cn(s.picker_holder_main)}>
-                <DestinationPicker />
+                <div className={s.picker_holder_main_destination_helper}>
+                  <DestinationPicker />
+                </div>
                 <DatePickerOrigin />
                 <div className={s.search_btn_holder}>
                   <Button className={s.searchBtn}>НАЙТИ БИЛЕТЫ</Button>
