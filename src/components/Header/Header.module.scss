@@ -51,7 +51,7 @@
   
 }
 
-.header__controls {
+.header__controls_main {
   display        : flex;
   min-height     : 820px;
   flex-direction : row;
@@ -59,6 +59,7 @@
 
 .header__controls_col {
   display    : flex;
+  box-sizing : border-box;
   width      : 50%;
   min-height : 100%;
 }
@@ -69,16 +70,77 @@
   padding-left : 340px;
 }
 
-.picker_holder {
-  position      : relative;
-  z-index       : 1;
-  margin-bottom : 9px;
-  padding       : 60px 25px;
-  box-sizing    : border-box;
-  width         : 729px;
-  height        : 540px;
-  background    : rgba(41, 41, 41, 0.8);
-  align-self    : flex-end;
+.picker_holder_main {
+  position        : relative;
+  z-index         : 1;
+  padding         : 60px 25px;
+  display         : flex;
+  box-sizing      : border-box;
+  
+  width           : 729px;
+  height          : 540px;
+  flex-direction  : column;
+  justify-content : flex-start;
+  align-items     : flex-end;
+  background      : rgba(41, 41, 41, 0.8);
+  border          : 0;
+  align-self      : flex-end;
+  
+  @media not all and (min-resolution : .001dpcm) {
+    @supports (-webkit-appearance: none) {
+      /* Safari Only CSS here */
+      margin-bottom : 9px;
+    }
+  }
+  
+}
+
+.header__controls_select {
+  display        : flex;
+  box-sizing     : border-box;
+  min-height     : 435px;
+  flex-direction : row;
+}
+
+.picker_holder_select {
+  position       : relative;
+  z-index        : 1;
+  margin         : 110px 215px 0;
+  padding        : 30px 45px;
+  display        : flex;
+  
+  box-sizing     : border-box;
+  width          : 100%;
+  flex-direction : column;
+  background     : rgba(41, 41, 41, 0.8);
+  border         : 0;
+  align-self     : flex-end;
+  
+  @media not all and (min-resolution : .001dpcm) {
+    @supports (-webkit-appearance: none) {
+      /* Safari Only CSS here */
+      //margin-bottom : 9px;
+    }
+  }
+  
+  .picker_holder_select_row {
+    display        : flex;
+    flex-direction : row;
+    //justify-content : space-between;
+  }
+  
+}
+
+.search_btn_holder {
+  margin-top      : 30px;
+  display         : flex;
+  justify-content : flex-end;
+}
+
+.search_btn_holder_select {
+  display         : flex;
+  flex-direction  : row;
+  justify-content : flex-end;
 }
 
 .searchBtn {
@@ -109,8 +171,3 @@
   }
 }
 
-.search_btn_holder {
-  margin-top      : 90px;
-  display         : flex;
-  justify-content : flex-end;
-}

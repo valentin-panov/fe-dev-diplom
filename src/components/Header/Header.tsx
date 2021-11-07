@@ -1,6 +1,8 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { useLocation } from 'react-router-dom';
+import { DestinationPicker } from 'components/Pickers/DestinationPicker';
+import { DatePickerOrigin } from 'components/Pickers/DatePickerOrigin';
 import { Button } from 'antd';
 import s from './Header.module.scss';
 import { Logo } from '../Logo';
@@ -10,8 +12,6 @@ import headerMain from './img/header_main.png';
 import headerTrain from './img/header_train.png';
 import headerSuccess from './img/header_success.png';
 import { appURL } from '../../App';
-import { DatePickerOrigin } from '../Pickers/DatePickerOrigin';
-import { DestinationPicker } from '../Pickers/DestinationPicker';
 
 export type Props = {
   className?: string;
@@ -48,26 +48,44 @@ export const Header = memo<Props>(({ className }) => {
         <div className={s.logo_holder}>
           <Logo />
         </div>
+
         <HeaderMenu location={splitLocation} />
-        <div className={s.header__controls}>
-          {activePreset.class === 'main' && (
+
+        {activePreset.class === 'main' && (
+          <div className={s.header__controls_main}>
             <div className={s.header__controls_col}>
               <div className={s.motto_holder}>
                 <MSHeaderMotto />
               </div>
             </div>
-          )}
-          <div className={s.header__controls_col}>
-            <div className={s.picker_holder}>
-              <DestinationPicker />
-              <DatePickerOrigin />
-              <div className={s.search_btn_holder}>
+
+            <div className={s.header__controls_col}>
+              <div className={cn(s.picker_holder_main)}>
+                <DestinationPicker />
+                <DatePickerOrigin />
+                <div className={s.search_btn_holder}>
+                  <Button className={s.searchBtn}>НАЙТИ БИЛЕТЫ</Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activePreset.class === 'select' && (
+          <div className={s.header__controls_select}>
+            <div className={cn(s.picker_holder_select)}>
+              <div className={s.picker_holder_select_row}>
+                <DestinationPicker />
+                <DatePickerOrigin />
+              </div>
+              <div className={s.search_btn_holder_select}>
                 <Button className={s.searchBtn}>НАЙТИ БИЛЕТЫ</Button>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
+
       <img className={s.back} src={activePreset.back} alt="header background" />
     </header>
   );
