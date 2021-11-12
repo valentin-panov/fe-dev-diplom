@@ -1,5 +1,6 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
+import { Link } from 'react-router-dom';
 import s from './Progress.module.scss';
 import { ReactComponent as Circle1 } from './svg/1.svg';
 import { ReactComponent as Circle2 } from './svg/2.svg';
@@ -13,22 +14,32 @@ export type Props = {
 export const Progress = memo<Props>(({ className }) => (
   <div className={cn(s.root, className)}>
     <div className={cn(s.progress__item, s.progress__item_active)}>
-      <Circle1 />
-      <span>Билеты</span>
+      <Link to="/">
+        <div className={cn(s.container, s.container_active)}>
+          <Circle1 />
+          <span>Билеты</span>
+        </div>
+      </Link>
     </div>
     <div className={s.progress__item}>
-      <Circle2 />
-      <span>Пассажиры</span>
+      <div className={cn(s.container)}>
+        <Circle2 />
+        <span>Пассажиры</span>
+      </div>
     </div>
 
     <div className={s.progress__item}>
-      <Circle3 />
-      <span>Оплата</span>
+      <div className={cn(s.container)}>
+        <Circle3 />
+        <span>Оплата</span>
+      </div>
     </div>
 
-    <div className={s.progress__item}>
-      <Circle4 />
-      <span>Проверка</span>
+    <div className={cn(s.progress__item)}>
+      <div className={cn(s.container)}>
+        <Circle4 />
+        <span>Проверка</span>
+      </div>
     </div>
   </div>
 ));
