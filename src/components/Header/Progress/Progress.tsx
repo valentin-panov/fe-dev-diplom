@@ -15,31 +15,38 @@ export const Progress = memo<Props>(({ className }) => (
   <div className={cn(s.root, className)}>
     <div className={cn(s.progress__item, s.progress__item_active)}>
       <Link to="/">
-        <div className={cn(s.container, s.container_active)}>
+        <div className={cn(s.container)}>
           <Circle1 />
           <span>Билеты</span>
         </div>
       </Link>
     </div>
-    <div className={s.progress__item}>
-      <div className={cn(s.container)}>
-        <Circle2 />
-        <span>Пассажиры</span>
-      </div>
-    </div>
 
-    <div className={s.progress__item}>
-      <div className={cn(s.container)}>
-        <Circle3 />
-        <span>Оплата</span>
-      </div>
+    <div className={cn(s.progress__item)}>
+      <Link to="/">
+        <div className={cn(s.container)}>
+          <Circle2 />
+          <span>Пассажиры</span>
+        </div>
+      </Link>
     </div>
 
     <div className={cn(s.progress__item)}>
-      <div className={cn(s.container)}>
-        <Circle4 />
-        <span>Проверка</span>
-      </div>
+      <Link to="/">
+        <div className={cn(s.container)}>
+          <Circle3 />
+          <span>Оплата</span>
+        </div>
+      </Link>
+    </div>
+
+    <div className={cn(s.progress__item)}>
+      <Link to="/">
+        <div className={cn(s.container)}>
+          <Circle4 />
+          <span>Проверка</span>
+        </div>
+      </Link>
     </div>
   </div>
 ));
