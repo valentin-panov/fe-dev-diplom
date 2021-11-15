@@ -8,6 +8,7 @@ import 'moment/locale/ru';
 
 import cn from 'clsx';
 import s from './DatePickerOrigin.module.scss';
+import './replaceAntd.css';
 
 moment.locale('ru');
 
