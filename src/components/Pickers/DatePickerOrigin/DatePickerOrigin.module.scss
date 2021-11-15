@@ -37,3 +37,27 @@
     margin-right : 35px;
   }
 }
+
+.dropDown {
+  
+  &::before, &::after {
+    position      : absolute;
+    top           : -30px;
+    left          : calc(50% - 15px);
+    content       : '';
+    border        : 15px solid transparent;
+    border-bottom : 15px solid lightgrey;
+  }
+  
+  &::after {
+    position      : absolute;
+    top           : -28px;
+    left          : calc(50% - 14px);
+    content       : '';
+    border        : 14px solid transparent;
+    border-bottom : 14px solid white;
+  }
+}
+
+
+
