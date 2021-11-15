@@ -3,7 +3,7 @@ import { ConfigProvider, DatePicker } from 'antd';
 // eslint-disable-next-line camelcase
 import ru_RU from 'antd/lib/locale/ru_RU';
 
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import 'moment/locale/ru';
 
 import cn from 'clsx';
@@ -11,6 +11,11 @@ import s from './DatePickerOrigin.module.scss';
 import './replaceAntd.css';
 
 moment.locale('ru');
+
+function disabledDate(current: Moment) {
+  // Can not select days before today
+  return current && current < moment().startOf('day');
+}
 
 export type Props = {
   className?: string;
@@ -29,6 +34,7 @@ export const DatePickerOriginUnit = memo<Props>(({ className, dateFormat, placeh
       format={dateFormat}
       placeholder={placeholder}
       dropdownClassName={s.dropDown}
+      disabledDate={disabledDate}
     />
   </ConfigProvider>
 ));

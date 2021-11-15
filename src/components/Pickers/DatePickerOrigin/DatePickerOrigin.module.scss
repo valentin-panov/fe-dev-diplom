@@ -47,6 +47,12 @@
     content       : '';
     border        : 15px solid transparent;
     border-bottom : 15px solid lightgrey;
+    @media not all and (min-resolution : .001dpcm) {
+      @supports (-webkit-appearance: none) {
+        /* Safari Only CSS here */
+        top : -29px
+      }
+    }
   }
   
   &::after {
@@ -56,6 +62,12 @@
     content       : '';
     border        : 14px solid transparent;
     border-bottom : 14px solid white;
+    @media not all and (min-resolution : .001dpcm) {
+      @supports (-webkit-appearance: none) {
+        /* Safari Only CSS here */
+        top : -27px
+      }
+    }
   }
 }
 
