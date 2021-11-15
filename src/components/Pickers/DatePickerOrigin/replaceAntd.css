@@ -27,3 +27,7 @@
 .ant-picker-today-btn:hover {
   color: rgba(255, 168, 0, 1);
 }
+
+.ant-picker-header-view button:hover {
+  color: rgba(255, 168, 0, 1);
+}
