@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
-import { useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { DestinationPicker } from 'components/Pickers/DestinationPicker';
 import { DatePickerOrigin } from 'components/Pickers/DatePickerOrigin';
 import { Button } from 'antd';
@@ -20,6 +20,7 @@ export type Props = {
 
 export const Header = memo<Props>(({ className }) => {
   const location = useLocation();
+  const history = useHistory();
   const { pathname } = location;
   const splitLocation: string = pathname.replace(appURL, '').split('/')[1];
 
@@ -67,7 +68,14 @@ export const Header = memo<Props>(({ className }) => {
                 </div>
                 <DatePickerOrigin />
                 <div className={s.search_btn_holder}>
-                  <Button className={s.searchBtn}>НАЙТИ БИЛЕТЫ</Button>
+                  <Button
+                    className={s.searchBtn}
+                    onClick={() => {
+                      history.push('/select');
+                    }}
+                  >
+                    НАЙТИ БИЛЕТЫ
+                  </Button>
                 </div>
               </div>
             </div>
