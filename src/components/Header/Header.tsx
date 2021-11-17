@@ -98,6 +98,8 @@ export const Header = memo<Props>(({ className }) => {
             <Progress />
           </>
         )}
+
+        {activePreset.class === 'success' && <div className={s.success__msg}>Благодарим Вас за заказ!</div>}
       </div>
 
       <img className={s.back} src={activePreset.back} alt="header background" />

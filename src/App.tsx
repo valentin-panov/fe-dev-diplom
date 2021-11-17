@@ -7,6 +7,7 @@ import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { Main } from './components/Main';
 import { LandingPage } from './components/LandingPage';
+import { Success } from './components/Success';
 
 export const appURL = '/fe-dev-diplom';
 export const serverURL = 'https://fe-diplom.herokuapp.com';
@@ -20,7 +21,7 @@ function App(): ReactElement {
           <Switch>
             <Route exact path="/" component={LandingPage} />
             <Route exact path="/select" component={Error404} />
-            <Route exact path="/success" component={Error404} />
+            <Route exact path="/success" component={Success} />
             <Route exact path="/items/:id.html" component={Error404} />
             <Route exact path="/cart.html" component={Error404} />
             <Route path="*" component={Error404} /> CartIcon
