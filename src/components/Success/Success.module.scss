@@ -68,12 +68,39 @@
   }
   
   .icons {
+    padding-top     : 40px;
     display         : flex;
     min-height      : 310px;
     flex-direction  : row;
     justify-content : center;
-    align-items     : center;
+    align-items     : flex-start;
     background      : #F4F3F6;
+    
+    .icons__item {
+      display         : flex;
+      box-sizing      : border-box;
+      width           : 180px;
+      flex-direction  : column;
+      justify-content : center;
+      align-items     : center;
+      
+      &:not(:last-child) {
+        margin-right : 120px;
+      }
+      
+      .iconsItem__txt {
+        font-size   : 18px;
+        line-height : 21px;
+        font-weight : 400;
+        text-align  : center;
+        
+        .iconsItem__txt_bold {
+          font-weight : 500;
+          
+        }
+        
+      }
+    }
   }
   
   .msg {

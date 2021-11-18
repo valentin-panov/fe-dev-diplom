@@ -8,6 +8,7 @@ import { Footer } from './components/Footer';
 import { Main } from './components/Main';
 import { LandingPage } from './components/LandingPage';
 import { Success } from './components/Success';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 export const appURL = '/fe-dev-diplom';
 export const serverURL = 'https://fe-diplom.herokuapp.com';
@@ -15,6 +16,7 @@ export const serverURL = 'https://fe-diplom.herokuapp.com';
 function App(): ReactElement {
   return (
     <Router basename={appURL}>
+      <ScrollToTop />
       <Wrapper>
         <Header />
         <Main>
