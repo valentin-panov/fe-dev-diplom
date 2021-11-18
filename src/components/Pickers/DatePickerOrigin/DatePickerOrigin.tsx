@@ -8,9 +8,6 @@ export type Props = {
 };
 
 export const DatePickerOrigin = memo<Props>(({ className }) => {
-  const dateFormat = 'DD/MM/YY';
-  const placeholder = 'ДД/ММ/ГГ';
-
   const dates: string[] = []; // temporary stub
   const onChange = (value: unknown, dateString: string) => {
     dates[0] = dateString; // temporary stub
@@ -20,8 +17,8 @@ export const DatePickerOrigin = memo<Props>(({ className }) => {
     <div className={cn(s.root, className)}>
       <span className={s.title}>Дата {dates[0]}</span>
       <div className={s.input_holder}>
-        <DatePickerOriginUnit dateFormat={dateFormat} getDate={onChange} placeholder={placeholder} />
-        <DatePickerOriginUnit dateFormat={dateFormat} getDate={onChange} placeholder={placeholder} />
+        <DatePickerOriginUnit getDate={onChange} className="headerPicker" />
+        <DatePickerOriginUnit getDate={onChange} className="headerPicker" />
       </div>
     </div>
   );

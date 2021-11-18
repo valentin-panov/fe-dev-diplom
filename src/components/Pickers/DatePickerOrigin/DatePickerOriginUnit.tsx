@@ -13,28 +13,31 @@ import './replaceAntd.css';
 moment.locale('ru');
 
 function disabledDate(current: Moment) {
-  // Can not select days before today
+  // Restricts select days before today
   return current && current < moment().startOf('day');
 }
 
+const dateFormat = 'DD/MM/YY';
+const placeholder = 'ДД/ММ/ГГ';
+
 export type Props = {
-  className?: string;
-  dateFormat: string;
-  placeholder: string;
+  className: string;
+  defaultValue?: moment.Moment;
   getDate: (value: unknown, dateString: string) => void;
 };
 
-export const DatePickerOriginUnit = memo<Props>(({ className, dateFormat, placeholder, getDate }) => (
+export const DatePickerOriginUnit = memo<Props>(({ className, defaultValue, getDate }) => (
   // eslint-disable-next-line camelcase
   <ConfigProvider locale={ru_RU}>
     <DatePicker
+      className={cn(s.inputItem, s[className])}
+      dropdownClassName={s.dropDown}
       onChange={getDate}
-      className={cn(s.inputItem, className)}
-      allowClear
+      defaultValue={defaultValue}
       format={dateFormat}
       placeholder={placeholder}
-      dropdownClassName={s.dropDown}
       disabledDate={disabledDate}
+      allowClear
     />
   </ConfigProvider>
 ));

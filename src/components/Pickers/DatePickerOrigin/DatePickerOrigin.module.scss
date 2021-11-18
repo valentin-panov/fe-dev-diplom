@@ -24,18 +24,29 @@
 }
 
 .inputItem {
-  padding       : 6px 18px;
   box-sizing    : border-box;
-  min-width     : 325px;
-  height        : 60px;
   font-size     : 18px;
   line-height   : 21px;
+  color         : #292929;
   background    : #FFFFFF;
   border-radius : 3px;
+}
+
+.headerPicker {
+  padding   : 6px 18px;
+  min-width : 325px;
+  height    : 60px;
   
   &:not(:last-child) {
     margin-right : 35px;
   }
+}
+
+.asidePicker {
+  margin-bottom : 30px;
+  padding       : 10px 18px 10px 8px;
+  min-width     : 295px;
+  height        : 43px;
 }
 
 .dropDown {

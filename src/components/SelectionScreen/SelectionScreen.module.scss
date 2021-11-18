@@ -1,0 +1,48 @@
+@import 'src/styles/common';
+
+.root {
+  margin          : 0;
+  padding         : $paddings;
+  padding-top     : 95px;
+  padding-bottom  : 190px;
+  display         : flex;
+  min-width       : 100%;
+  height          : 100%;
+  flex-direction  : row;
+  justify-content : space-between;
+  background      : #E5E5E5;
+}
+
+.sideSelection {
+  padding         : 45px 28px 35px;
+  display         : flex;
+  width           : 360px;
+  min-height      : 1012px;
+  flex-direction  : column;
+  justify-content : flex-start;
+  align-items     : center;
+  background      : #3E3C41;
+  
+  .datePicker {
+    display         : flex;
+    flex-direction  : column;
+    justify-content : center;
+    align-items     : center;
+    
+  }
+}
+    .sideSelection__title {
+      padding-bottom : 10px;
+      font-size      : 30px;
+      line-height    : 35px;
+      font-weight    : normal;
+      color          : #FFFFFF;
+      align-self     : flex-start;
+    }
+
+.divider {
+  width            : 360px;
+  min-height       : 1px;
+  max-height       : 1px;
+  background-color : #E5E5E5;
+}
