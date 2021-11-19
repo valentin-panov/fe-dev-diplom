@@ -1,6 +1,7 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { DatePickerOriginUnit } from 'components/Pickers/DatePickerOrigin/DatePickerOriginUnit';
+import { Slider, Switch } from 'antd';
 import s from './SelectionScreen.module.scss';
 
 export type Props = {
@@ -23,13 +24,18 @@ export const SelectionScreen = memo<Props>(({ className }) => {
           <DatePickerOriginUnit getDate={onChange} className="asidePicker" />
         </div>
         <div className={s.divider} />
-        <div>adds</div>
+        <div>
+          <Switch defaultChecked />
+        </div>
         <div className={s.divider} />
         <div className={s.sideSelection__title}>Стоимость</div>
+        <div>
+          <Slider defaultValue={[20, 50]} range={{ draggableTrack: true }} style={{ width: '300px', height: '20px' }} />
+        </div>
         <div className={s.divider} />
-        <div>way</div>
+        <div className={s.sideSelection__title}>Туда</div>
         <div className={s.divider} />
-        <div>return</div>
+        <div className={s.sideSelection__title}>Обратно</div>
       </aside>
       <div>TEBU</div>
     </div>
