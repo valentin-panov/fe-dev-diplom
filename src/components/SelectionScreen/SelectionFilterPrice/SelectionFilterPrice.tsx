@@ -3,6 +3,7 @@ import cn from 'clsx';
 import InputRange, { Range } from 'react-input-range';
 import s from './SelectionFilterPrice.module.scss';
 import 'react-input-range/lib/css/index.css';
+import './rewrite.css';
 
 export type Props = {
   className?: string;

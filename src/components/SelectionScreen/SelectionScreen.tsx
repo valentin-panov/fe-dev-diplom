@@ -41,6 +41,10 @@ export const SelectionScreen = memo<Props>(({ className }) => {
         </ul>
         <div className={s.divider} />
         <div className={s.sideSelection__title}>Стоимость</div>
+        <div className={s.pricePickerLabels}>
+          <span>от</span>
+          <span>до</span>
+        </div>
         <SelectionFilterPrice initialRange={{ min: 1500, max: 7000 }} />
         <div className={s.divider} />
         <div className={s.sideSelection__title}>Туда</div>

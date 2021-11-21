@@ -31,24 +31,39 @@
     
   }
 }
-    .sideSelection__title {
-      padding-bottom : 10px;
-      font-size      : 30px;
-      line-height    : 35px;
-      font-weight    : normal;
-      color          : #FFFFFF;
-      align-self     : flex-start;
-    }
+
+.sideSelection__title {
+  padding-bottom : 10px;
+  font-size      : 30px;
+  line-height    : 35px;
+  font-weight    : normal;
+  color          : #FFFFFF;
+  align-self     : flex-start;
+}
 
 .divider {
+  margin-top       : 30px;
+  margin-bottom    : 30px;
   width            : 360px;
   min-height       : 1px;
   max-height       : 1px;
-  margin-top : 30px;
-  margin-bottom : 30px;
   background-color : #E5E5E5;
 }
 
 .filterList {
-  width: 100%;
+  width : 100%;
+}
+
+.pricePickerLabels {
+  display         : flex;
+  width           : 100%;
+  flex-direction  : row;
+  justify-content : space-between;
+  span {
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 21px;
+  
+    color: #FFFFFF;
+  }
 }
