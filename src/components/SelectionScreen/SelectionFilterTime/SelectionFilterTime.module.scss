@@ -25,3 +25,25 @@
   color       : #FFFFFF;
 }
 
+.timePickerPanel {
+  display        : flex;
+  width          : 290px;
+  flex-direction : column;
+}
+
+.timePickerSubTitle {
+  font-size   : 24px;
+  line-height : 28px;
+  font-weight : normal;
+  font-style  : normal;
+  
+  color       : #E5E5E5;
+}
+
+.firstST {
+  align-self    : flex-start;
+}
+
+.secondST {
+  align-self : flex-end;
+}

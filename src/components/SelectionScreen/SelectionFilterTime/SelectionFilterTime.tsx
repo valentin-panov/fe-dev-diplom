@@ -48,14 +48,26 @@ export const SelectionFilterTime = memo<Props>(({ className, icon, text }) => {
           }
           key={1}
         >
-          <InputRange
-            maxValue={min}
-            minValue={max}
-            value={range}
-            onChange={(value) => onChangeRange(value)}
-            draggableTrack
-            step={1}
-          />
+          <div className={s.timePickerPanel}>
+            <div className={cn(s.timePickerSubTitle, s.firstST)}>Время отбытия</div>
+            <InputRange
+              maxValue={min}
+              minValue={max}
+              value={range}
+              onChange={(value) => onChangeRange(value)}
+              draggableTrack
+              step={1}
+            />
+            <div className={cn(s.timePickerSubTitle, s.secondST)}>Время прибытия</div>
+            <InputRange
+              maxValue={min}
+              minValue={max}
+              value={range}
+              onChange={(value) => onChangeRange(value)}
+              draggableTrack
+              step={1}
+            />
+          </div>
         </Panel>
       </Collapse>
     </div>
