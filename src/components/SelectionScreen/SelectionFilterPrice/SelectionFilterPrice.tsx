@@ -37,6 +37,7 @@ export const SelectionFilterPrice = memo<Props>(({ className, initialRange }) =>
         value={range}
         onChange={(value) => onChangeRange(value)}
         draggableTrack
+        step={10}
       />
     </div>
   );

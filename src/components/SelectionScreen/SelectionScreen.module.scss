@@ -59,11 +59,18 @@
   width           : 100%;
   flex-direction  : row;
   justify-content : space-between;
-  span {
-    font-weight: normal;
-    font-size: 18px;
-    line-height: 21px;
   
-    color: #FFFFFF;
+  span {
+    font-size   : 18px;
+    line-height : 21px;
+    font-weight : normal;
+    color       : #FFFFFF;
+    
+    &:first-child {
+      margin-left : 5px;
+    }
+    &:last-child {
+      margin-right : 5px;
+    }
   }
 }
