@@ -1,7 +1,6 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { DatePickerOriginUnit } from 'components/Pickers/DatePickerOrigin/DatePickerOriginUnit';
-import { Slider } from 'antd';
 import s from './SelectionScreen.module.scss';
 import { SelectionFilterItem } from './SelectionFilterItem';
 import { ReactComponent as Coupe } from './svg/icon_coupe.svg';
@@ -10,6 +9,7 @@ import { ReactComponent as Seat } from './svg/icon_seat.svg';
 import { ReactComponent as Lux } from './svg/icon_lux.svg';
 import { ReactComponent as WiFi } from './svg/icon_wifi.svg';
 import { ReactComponent as Express } from './svg/icon_express.svg';
+import { SelectionFilterPrice } from './SelectionFilterPrice';
 
 export type Props = {
   className?: string;
@@ -41,9 +41,7 @@ export const SelectionScreen = memo<Props>(({ className }) => {
         </ul>
         <div className={s.divider} />
         <div className={s.sideSelection__title}>Стоимость</div>
-        <div>
-          <Slider defaultValue={[20, 50]} range={{ draggableTrack: true }} style={{ width: '300px', height: '20px' }} />
-        </div>
+        <SelectionFilterPrice initialRange={{ min: 1500, max: 7000 }} />
         <div className={s.divider} />
         <div className={s.sideSelection__title}>Туда</div>
         <div className={s.divider} />
