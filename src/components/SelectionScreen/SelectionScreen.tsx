@@ -9,7 +9,10 @@ import { ReactComponent as Seat } from './svg/icon_seat.svg';
 import { ReactComponent as Lux } from './svg/icon_lux.svg';
 import { ReactComponent as WiFi } from './svg/icon_wifi.svg';
 import { ReactComponent as Express } from './svg/icon_express.svg';
+import { ReactComponent as To } from './svg/icon_dest_forward.svg';
+import { ReactComponent as Back } from './svg/icon_dest_back.svg';
 import { SelectionFilterPrice } from './SelectionFilterPrice';
+import { SelectionFilterTime } from './SelectionFilterTime';
 
 export type Props = {
   className?: string;
@@ -47,9 +50,9 @@ export const SelectionScreen = memo<Props>(({ className }) => {
         </div>
         <SelectionFilterPrice initialRange={{ min: 1500, max: 7000 }} />
         <div className={s.divider} />
-        <div className={s.sideSelection__title}>Туда</div>
+        <SelectionFilterTime icon={<To />} text="Туда" />
         <div className={s.divider} />
-        <div className={s.sideSelection__title}>Обратно</div>
+        <SelectionFilterTime icon={<Back />} text="Обратно" />
       </aside>
       <div>TEBU</div>
     </div>

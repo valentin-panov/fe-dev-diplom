@@ -1,0 +1,27 @@
+@import 'src/styles/common';
+
+.root {
+  width : 320px;
+}
+
+.header {
+  display         : flex;
+  flex-direction  : row;
+  justify-content : space-between;
+  align-items     : center;
+}
+
+.icon {
+  width  : 32px;
+  height : 26px;
+}
+
+.sideSelection__title {
+  margin-left : 12px;
+  flex-grow   : 1;
+  font-size   : 30px;
+  line-height : 35px;
+  font-weight : bold;
+  color       : #FFFFFF;
+}
+

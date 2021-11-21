@@ -1,3 +1,11 @@
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  padding: 0;
+}
+
+.ant-collapse-icon-position-right > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
+  top: calc(50% + 2px);
+}
+
 .input-range__slider {
   background-color: #ffffff;
   border: 0;
@@ -23,7 +31,6 @@
 .input-range__label--max {
   bottom: 48px;
   display: none;
-  /*Если не скрывать метки - они будут накладываться с метками от слайдера по дизайну*/
 }
 
 .input-range__label--value {
