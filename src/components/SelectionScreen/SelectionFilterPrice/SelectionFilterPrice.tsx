@@ -1,9 +1,11 @@
 import React, { memo, useState } from 'react';
 import cn from 'clsx';
-import InputRange, { Range } from 'react-input-range';
+import { Slider } from 'antd';
 import s from './SelectionFilterPrice.module.scss';
 import 'react-input-range/lib/css/index.css';
 import './rewrite.css';
+
+export type Range = [number, number];
 
 export type Props = {
   className?: string;
@@ -12,32 +14,34 @@ export type Props = {
 
 export const SelectionFilterPrice = memo<Props>(({ className, initialRange }) => {
   const [range, setRange] = useState<Range>(initialRange);
-  const { min } = initialRange;
-  const { max } = initialRange;
+  const min = initialRange[0];
+  const max = initialRange[1];
 
-  const onChangeRange = (value: Range | number): void => {
+  const onChangeRange = (value: number | Range): void => {
     if (typeof value === 'number') {
       const minValue = 0;
       const maxValue = max > value ? value : max;
-      const setValue = { min: minValue, max: maxValue };
+      const setValue: Range = [minValue, maxValue];
       setRange(setValue);
     } else {
-      const minValue = min < value.min ? value.min : min;
-      const maxValue = max > value.max ? value.max : max;
-      const setValue = { min: minValue, max: maxValue };
+      const minValue = min < value[0] ? value[0] : min;
+      const maxValue = max > value[1] ? value[1] : max;
+      const setValue: Range = [minValue, maxValue];
       setRange(setValue);
     }
   };
 
   return (
     <div className={cn(s.root, className)}>
-      <InputRange
-        maxValue={max}
-        minValue={min}
-        value={range}
-        onChange={(value) => onChangeRange(value)}
-        draggableTrack
+      <Slider
+        max={max}
+        min={min}
+        range={{ draggableTrack: true }}
         step={10}
+        defaultValue={range}
+        tooltipVisible
+        tooltipPlacement="bottom"
+        onChange={(value: number | Range) => onChangeRange(value)}
       />
     </div>
   );
