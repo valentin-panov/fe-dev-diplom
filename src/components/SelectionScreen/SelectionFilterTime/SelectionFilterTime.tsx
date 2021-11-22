@@ -2,6 +2,7 @@ import React, { memo, ReactElement, useState } from 'react';
 import cn from 'clsx';
 import InputRange, { Range } from 'react-input-range';
 import { Collapse } from 'antd';
+
 import { ReactComponent as Plus } from '../svg/icon_dest_plus.svg';
 import { ReactComponent as Minus } from '../svg/icon_dest_minus.svg';
 
@@ -18,9 +19,10 @@ export type Props = {
 };
 
 export const SelectionFilterTime = memo<Props>(({ className, icon, text }) => {
-  const [range, setRange] = useState<Range>({ min: 0, max: 24 });
+  const [range, setRange] = useState<Range>({ min: 0, max: 1440 });
+
   const min = 0;
-  const max = 24;
+  const max = 1440;
 
   const onChangeRange = (value: Range | number): void => {
     if (typeof value === 'number') {
@@ -36,6 +38,24 @@ export const SelectionFilterTime = memo<Props>(({ className, icon, text }) => {
     }
   };
 
+  // const min2hour = (value: Range) => {
+  //   let hours1 = Math.floor(value.min / 60);
+  //   let minutes1 = value.min[0] - hours1 * 60;
+  //
+  //   if (hours1.length < 10) hours1 = `0${hours}`;
+  //   if (minutes1.length < 10) minutes1 = `0${minutes}`;
+  //
+  //   if (minutes1 === 0) minutes1 = '00';
+  //
+  //   let hours2 = Math.floor(value.max / 60);
+  //   let minutes2 = value.max - hours2 * 60;
+  //
+  //   if (hours2.length < 10) hours2 = `0${hours}`;
+  //   if (minutes2.length < 10) minutes2 = `0${minutes}`;
+  //
+  //   if (minutes2 === 0) minutes2 = '00';
+  // };
+
   return (
     <div className={cn(s.root, className)}>
       <Collapse ghost expandIconPosition="right" expandIcon={({ isActive }) => (isActive ? <Minus /> : <Plus />)}>
@@ -50,22 +70,15 @@ export const SelectionFilterTime = memo<Props>(({ className, icon, text }) => {
         >
           <div className={s.timePickerPanel}>
             <div className={cn(s.timePickerSubTitle, s.firstST)}>Время отбытия</div>
-            <InputRange
-              maxValue={min}
-              minValue={max}
-              value={range}
-              onChange={(value) => onChangeRange(value)}
-              draggableTrack
-              step={1}
-            />
+
             <div className={cn(s.timePickerSubTitle, s.secondST)}>Время прибытия</div>
             <InputRange
-              maxValue={min}
-              minValue={max}
+              maxValue={max}
+              minValue={min}
               value={range}
               onChange={(value) => onChangeRange(value)}
               draggableTrack
-              step={1}
+              step={15}
             />
           </div>
         </Panel>
