@@ -7,7 +7,7 @@ import s from './Success.module.scss';
 import { ReactComponent as Icon1 } from './svg/Group1.svg';
 import { ReactComponent as Icon2 } from './svg/Group2.svg';
 import { ReactComponent as Icon3 } from './svg/Group3.svg';
-import { ReactComponent as Rub } from './svg/rub.svg';
+import { ReactComponent as Rub } from '../../svg/rub.svg';
 
 export type Props = {
   className?: string;

@@ -18,6 +18,8 @@ import btnUp from './img/btnUp.svg';
 import { FooterTitle } from './FooterTitle';
 import { FooterSubtitle } from './FooterSubtitle';
 
+// TODO Consider refactoring svg img 2 svr as ReactComponent
+
 export type Props = {
   className?: string;
 };

@@ -2,7 +2,8 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import { Button } from 'antd';
 import s from './DestinationPicker.module.scss';
-import swapBtn from './img/swapBtn.png';
+import { ReactComponent as SwapBtn } from '../../../svg/swapBtn.svg';
+
 import { DestinationPickerUnit } from './DestinationPickerUnit';
 
 export type Props = {
@@ -22,7 +23,7 @@ export const DestinationPicker = memo<Props>(({ className }) => {
       <div className={s.input_holder}>
         <DestinationPickerUnit options={options} placeholder="Откуда" onSelect={getDest} />
         <Button shape="circle" className={s.geoIcon} onClick={() => {}}>
-          <img src={swapBtn} alt="swap points" className={s.swapBtn} />
+          <SwapBtn />
         </Button>
         <DestinationPickerUnit options={options} placeholder="Куда" onSelect={getDest} />
       </div>

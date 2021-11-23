@@ -2,8 +2,8 @@ import React, { memo, ReactElement, useRef, useState } from 'react';
 import cn from 'clsx';
 import { Collapse, Slider } from 'antd';
 
-import { ReactComponent as Plus } from '../svg/icon_dest_plus.svg';
-import { ReactComponent as Minus } from '../svg/icon_dest_minus.svg';
+import { ReactComponent as Plus } from '../../../svg/icon_dest_plus.svg';
+import { ReactComponent as Minus } from '../../../svg/icon_dest_minus.svg';
 
 import s from './SelectionFilterTime.module.scss';
 import './rewrite.css';

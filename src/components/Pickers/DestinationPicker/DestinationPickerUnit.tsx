@@ -1,7 +1,7 @@
 import { AutoComplete, Input } from 'antd';
 import React, { memo } from 'react';
 import s from './DestinationPicker.module.scss';
-import geoMark from './img/geo.svg';
+import geoMark from '../../../svg/icon_geo.svg';
 
 export type Destination = {
   value: string;
