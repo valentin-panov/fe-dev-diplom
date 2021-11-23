@@ -22,6 +22,7 @@ export type serviceList = 'express' | 'wifi' | 'platz' | 'cup';
 export type Services = Array<serviceList>;
 
 export type LastTicketData = {
+  id: number;
   pointA: PointX;
   pointB: PointX;
   price: number;
