@@ -26,6 +26,8 @@
 }
 
 .timePickerPanel {
+  position       : relative;
+  padding-left   : 10px;
   display        : flex;
   width          : 290px;
   flex-direction : column;

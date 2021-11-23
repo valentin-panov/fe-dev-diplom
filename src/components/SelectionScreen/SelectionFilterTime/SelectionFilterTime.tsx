@@ -1,4 +1,4 @@
-import React, { memo, ReactElement, useState } from 'react';
+import React, { memo, ReactElement, useRef, useState } from 'react';
 import cn from 'clsx';
 import { Collapse, Slider } from 'antd';
 
@@ -6,7 +6,6 @@ import { ReactComponent as Plus } from '../svg/icon_dest_plus.svg';
 import { ReactComponent as Minus } from '../svg/icon_dest_minus.svg';
 
 import s from './SelectionFilterTime.module.scss';
-import 'react-input-range/lib/css/index.css';
 import './rewrite.css';
 import { Range } from '../SelectionFilterPrice';
 
@@ -20,6 +19,7 @@ export type Props = {
 
 export const SelectionFilterTime = memo<Props>(({ className, icon, text }) => {
   const [range, setRange] = useState<Range>([0, 1440]);
+  const forward = useRef(null);
 
   const min = 0;
   const max = 1440;
@@ -59,7 +59,7 @@ export const SelectionFilterTime = memo<Props>(({ className, icon, text }) => {
           }
           key={1}
         >
-          <div className={s.timePickerPanel}>
+          <div className={s.timePickerPanel} ref={forward}>
             <div className={cn(s.timePickerSubTitle, s.firstST)}>Время отбытия</div>
             <Slider
               max={max}
@@ -71,6 +71,7 @@ export const SelectionFilterTime = memo<Props>(({ className, icon, text }) => {
               tooltipPlacement="bottom"
               tipFormatter={(value) => formatterDuration(value)}
               onChange={(value: number | Range) => onChangeRange(value)}
+              getTooltipPopupContainer={() => forward.current as unknown as HTMLElement}
             />
             <div className={cn(s.timePickerSubTitle, s.secondST)}>Время прибытия</div>
             <Slider
@@ -83,6 +84,7 @@ export const SelectionFilterTime = memo<Props>(({ className, icon, text }) => {
               tooltipPlacement="bottom"
               tipFormatter={(value) => formatterDuration(value)}
               onChange={(value: number | Range) => onChangeRange(value)}
+              getTooltipPopupContainer={() => forward.current as unknown as HTMLElement}
             />
           </div>
         </Panel>
