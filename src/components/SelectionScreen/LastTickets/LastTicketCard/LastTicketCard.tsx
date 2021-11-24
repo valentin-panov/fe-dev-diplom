@@ -8,19 +8,15 @@ import { ReactComponent as WiFi } from '../../../../svg/filter_wifi.svg';
 import { ReactComponent as Cup } from '../../../../svg/service_cup.svg';
 import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
 
-export type PointX = { city: string; station: string };
-
 const serviceCollection = {
   express: <Express />,
   wifi: <WiFi />,
   platz: <Platz />,
   cup: <Cup />,
 };
-
 export type serviceList = 'express' | 'wifi' | 'platz' | 'cup';
-
 export type Services = Array<serviceList>;
-
+export type PointX = { city: string; station: string };
 export type LastTicketData = {
   id: number;
   pointA: PointX;
