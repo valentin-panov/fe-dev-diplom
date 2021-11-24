@@ -7,7 +7,7 @@ import { SelectionFilterPrice } from './SelectionFilterPrice';
 import { SelectionFilterTime } from './SelectionFilterTime';
 import { LastTickets } from './LastTickets';
 import { iconsCollection, serviceCollection } from '../../Collections/collections';
-import { ResultScreen } from './ResultScreen/ResultScreen';
+import { ResultScreen } from './ResultScreen';
 
 export type Props = {
   className?: string;
