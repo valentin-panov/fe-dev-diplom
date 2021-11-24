@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import s from './ResultScreen.module.scss';
 import { SortFilter } from './SortFilter';
+import { ResultsLimit } from './ResultsLimit';
 
 export type Props = {
   className?: string;
@@ -14,10 +15,13 @@ export const ResultScreen = memo<Props>(({ className }) => (
     <div className={s.header}>
       <div>найдено&nbsp;{found}</div>
       <div>
-        сортировать по:&nbsp;
+        сортировать по:
         <SortFilter />
       </div>
-      <div>показывать по:&nbsp;</div>
+      <div>
+        показывать по:&nbsp;
+        <ResultsLimit />
+      </div>
     </div>
   </section>
 ));
