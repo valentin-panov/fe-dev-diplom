@@ -1,0 +1,54 @@
+@import '../../../styles/common';
+
+.root {
+  //margin          : 90px 0;
+  display         : flex;
+  min-width       : 960px;
+  flex-direction  : column;
+  justify-content : space-between;
+  align-items     : flex-start;
+}
+
+.header {
+  display         : flex;
+  min-width       : 100%;
+  flex-direction  : row;
+  justify-content : space-between;
+  align-items     : center;
+  font-size       : 18px;
+  line-height     : 21px;
+  font-weight     : normal;
+  font-style      : normal;
+  color           : #928F94;
+  margin-top : -5px;
+  
+  & div {
+    display        : flex;
+    flex-direction : row;
+    align-items    : center;
+  }
+}
+
+// LEGACY
+
+.pricePickerLabels {
+  display         : flex;
+  width           : 100%;
+  flex-direction  : row;
+  justify-content : space-between;
+  
+  span {
+    font-size   : 18px;
+    line-height : 21px;
+    font-weight : normal;
+    color       : #FFFFFF;
+    
+    &:first-child {
+      margin-left : 5px;
+    }
+    
+    &:last-child {
+      margin-right : 5px;
+    }
+  }
+}

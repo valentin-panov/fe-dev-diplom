@@ -1,0 +1,13 @@
+.ant-select-arrow {
+  display: none;
+}
+
+.ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled),
+.ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {
+  font-weight: normal;
+  background-color: transparent;
+}
+
+.ant-cascader-menu-item:not(:last-child) {
+  border-bottom: 1px solid #e5e5e5;
+}

@@ -3,17 +3,11 @@ import cn from 'clsx';
 import { DatePickerOriginUnit } from 'components/Pickers/DatePickerOrigin/DatePickerOriginUnit';
 import s from './SelectionScreen.module.scss';
 import { SelectionFilterItem } from './SelectionFilterItem';
-import { ReactComponent as Coupe } from '../../svg/filter_coupe.svg';
-import { ReactComponent as Platz } from '../../svg/filter_platz.svg';
-import { ReactComponent as Seat } from '../../svg/filter_seat.svg';
-import { ReactComponent as Lux } from '../../svg/filter_lux.svg';
-import { ReactComponent as WiFi } from '../../svg/filter_wifi.svg';
-import { ReactComponent as Express } from '../../svg/filter_express.svg';
-import { ReactComponent as To } from '../../svg/icon_dest_forward.svg';
-import { ReactComponent as Back } from '../../svg/icon_dest_back.svg';
 import { SelectionFilterPrice } from './SelectionFilterPrice';
 import { SelectionFilterTime } from './SelectionFilterTime';
 import { LastTickets } from './LastTickets';
+import { iconsCollection, serviceCollection } from '../../Collections/collections';
+import { ResultScreen } from './ResultScreen/ResultScreen';
 
 export type Props = {
   className?: string;
@@ -37,12 +31,12 @@ export const SelectionScreen = memo<Props>(({ className }) => {
           </div>
           <div className={s.divider} />
           <ul className={s.filterList}>
-            <SelectionFilterItem icon={<Coupe />} text="Купе" />
-            <SelectionFilterItem icon={<Platz />} text="Плацкарт" />
-            <SelectionFilterItem icon={<Seat />} text="Сидячий" />
-            <SelectionFilterItem icon={<Lux />} text="Люкс" />
-            <SelectionFilterItem icon={<WiFi />} text="Wi-Fi" />
-            <SelectionFilterItem icon={<Express />} text="Экспресс" />
+            <SelectionFilterItem icon={serviceCollection.coupe} text="Купе" />
+            <SelectionFilterItem icon={serviceCollection.platz} text="Плацкарт" />
+            <SelectionFilterItem icon={serviceCollection.seat} text="Сидячий" />
+            <SelectionFilterItem icon={serviceCollection.lux} text="Люкс" />
+            <SelectionFilterItem icon={serviceCollection.wifi} text="Wi-Fi" />
+            <SelectionFilterItem icon={serviceCollection.express} text="Экспресс" />
           </ul>
           <div className={s.divider} />
           <div className={s.sideSelection__title}>Стоимость</div>
@@ -52,13 +46,15 @@ export const SelectionScreen = memo<Props>(({ className }) => {
           </div>
           <SelectionFilterPrice initialRange={[1500, 7000]} />
           <div className={s.divider} />
-          <SelectionFilterTime icon={<To />} text="Туда" />
+          <SelectionFilterTime icon={iconsCollection.forward} text="Туда" />
           <div className={s.divider} />
-          <SelectionFilterTime icon={<Back />} text="Обратно" />
+          <SelectionFilterTime icon={iconsCollection.backward} text="Обратно" />
         </section>
         <LastTickets />
       </div>
-      <div>TEBU</div>
+      <div>
+        <ResultScreen />
+      </div>
     </div>
   );
 });

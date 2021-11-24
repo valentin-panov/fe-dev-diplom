@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import s from './LastTickets.module.scss';
-import { LastTicketCard, LastTicketData } from './LastTicketCard';
+import { LastTicketCard } from './LastTicketCard';
+import { LastTicketData } from '../../../global';
 
 export type Props = {
   className?: string;

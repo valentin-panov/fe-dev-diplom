@@ -1,29 +1,10 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import s from './LastTicketCard.module.scss';
-import { ReactComponent as Rub } from '../../../../svg/rub.svg';
-import { ReactComponent as Express } from '../../../../svg/filter_express.svg';
-import { ReactComponent as Platz } from '../../../../svg/filter_platz.svg';
-import { ReactComponent as WiFi } from '../../../../svg/filter_wifi.svg';
-import { ReactComponent as Cup } from '../../../../svg/service_cup.svg';
 import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
 
-const serviceCollection = {
-  express: <Express />,
-  wifi: <WiFi />,
-  platz: <Platz />,
-  cup: <Cup />,
-};
-export type serviceList = 'express' | 'wifi' | 'platz' | 'cup';
-export type Services = Array<serviceList>;
-export type PointX = { city: string; station: string };
-export type LastTicketData = {
-  id: number;
-  pointA: PointX;
-  pointB: PointX;
-  price: number;
-  services: Services;
-};
+import { LastTicketData } from '../../../../global';
+import { iconsCollection, serviceCollection } from '../../../../Collections/collections';
 
 export type Props = {
   className?: string;
@@ -70,9 +51,7 @@ export const LastTicketCard = memo<Props>(({ className, data }) => {
         <div className={s.price}>
           <div className={s.price__from}>от</div>
           <div className={s.price__number}>{getBeautifulNumber(price)}</div>
-          <div className={s.price__rub}>
-            <Rub />
-          </div>
+          <div className={s.price__rub}>{iconsCollection.rub}</div>
         </div>
       </div>
     </div>

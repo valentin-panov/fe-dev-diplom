@@ -2,7 +2,6 @@ import React, { memo, useState } from 'react';
 import cn from 'clsx';
 import { Slider } from 'antd';
 import s from './SelectionFilterPrice.module.scss';
-import 'react-input-range/lib/css/index.css';
 import './rewrite.css';
 
 export type Range = [number, number];
