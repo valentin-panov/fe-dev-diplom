@@ -5,12 +5,23 @@ import s from './ResultsLimit.module.scss';
 
 export type Props = {
   className?: string;
+  variants: number[];
+  active: number;
+  onClick: (arg0: number) => void;
 };
 
-export const ResultsLimit = memo<Props>(({ className }) => (
+export const ResultsLimit = memo<Props>(({ className, variants, active, onClick }) => (
   <div className={cn(s.root, className)}>
-    <Button>5</Button>
-    <Button>10</Button>
-    <Button>20</Button>
+    {variants.map((el) => (
+      <Button
+        type="text"
+        className={cn(s.btn, el === active ? s.active : '')}
+        key={el}
+        size="small"
+        onClick={() => onClick(el)}
+      >
+        {el}
+      </Button>
+    ))}
   </div>
 ));

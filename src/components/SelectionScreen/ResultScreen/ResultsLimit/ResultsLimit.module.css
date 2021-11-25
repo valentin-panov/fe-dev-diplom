@@ -65,4 +65,21 @@ main {
   flex: 1 1 auto;
 }
 
+.root {
+  display: flex;
+  flex-direction: row;
+}
+
+.btn {
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: normal;
+  font-style: normal;
+  color: #928F94;
+}
+
+.active {
+  color: #000000;
+}
+
 /*# sourceMappingURL=ResultsLimit.module.css.map */
