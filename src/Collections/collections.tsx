@@ -9,6 +9,8 @@ import { ReactComponent as Seat } from '../svg/filter_seat.svg';
 import { ReactComponent as Lux } from '../svg/filter_lux.svg';
 import { ReactComponent as Forward } from '../svg/icon_dest_forward.svg';
 import { ReactComponent as Backward } from '../svg/icon_dest_back.svg';
+import { ReactComponent as ArrowRB } from '../svg/arrow_right_black.svg';
+import { ReactComponent as ArrowRG } from '../svg/arrow_right_grey.svg';
 
 export const serviceCollection = {
   express: <Express />,
@@ -24,4 +26,6 @@ export const iconsCollection = {
   rub: <Rub />,
   forward: <Forward />,
   backward: <Backward />,
+  arrowRB: <ArrowRB />,
+  arrowRG: <ArrowRG />,
 };
