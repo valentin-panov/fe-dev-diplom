@@ -172,7 +172,7 @@ const trainsList: Train[][] = [
       have_fourth_class: false,
       have_wifi: false,
       have_air_conditioning: false,
-      is_express: false,
+      is_express: true,
       min_price: 1845,
       available_seats: 81,
       available_seats_info: {
@@ -187,7 +187,7 @@ const trainsList: Train[][] = [
         have_fourth_class: false,
         have_wifi: true,
         have_air_conditioning: true,
-        is_express: false,
+        is_express: true,
         min_price: 1845,
         duration: 196140,
         available_seats: 81,

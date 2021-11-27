@@ -52,7 +52,7 @@ export const SeatsBlock = memo<Props>(({ className, train }) => {
       {lux && luxCount && luxPrice && (
         <SeatsBlockRow carriageClass={servicesName.lux} ticketsAmount={luxCount} ticketPrice={luxPrice} />
       )}
-      <ServiceBlock services={{ wifi, ac, express }} className="ticketCard" />
+      <ServiceBlock services={{ wifi, express, ac }} className="ticketCard" />
       <Button>Выбрать места</Button>
     </div>
   );

@@ -15,8 +15,8 @@ import { ReactComponent as ArrowRY } from '../svg/arrow_right_yellow.svg';
 import { ReactComponent as ArrowLY } from '../svg/arrow_left_yellow.svg';
 
 export const serviceCollection: Map<string, ReactElement> = new Map<string, ReactElement>([
-  ['express', <Express />],
   ['wifi', <WiFi />],
+  ['express', <Express />],
   ['ac', <AC />],
 ]);
 
