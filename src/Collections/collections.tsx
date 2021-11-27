@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import { ReactComponent as Rub } from '../svg/rub.svg';
 import { ReactComponent as Express } from '../svg/filter_express.svg';
 import { ReactComponent as WiFi } from '../svg/filter_wifi.svg';
 import { ReactComponent as Platz } from '../svg/filter_platz.svg';
-import { ReactComponent as Cup } from '../svg/service_cup.svg';
+import { ReactComponent as AC } from '../svg/service_cup.svg';
 import { ReactComponent as Coupe } from '../svg/filter_coupe.svg';
 import { ReactComponent as Seat } from '../svg/filter_seat.svg';
 import { ReactComponent as Lux } from '../svg/filter_lux.svg';
@@ -14,11 +14,14 @@ import { ReactComponent as ArrowRG } from '../svg/arrow_right_grey.svg';
 import { ReactComponent as ArrowRY } from '../svg/arrow_right_yellow.svg';
 import { ReactComponent as ArrowLY } from '../svg/arrow_left_yellow.svg';
 
-export const serviceCollection = {
-  express: <Express />,
-  wifi: <WiFi />,
+export const serviceCollection: Map<string, ReactElement> = new Map<string, ReactElement>([
+  ['express', <Express />],
+  ['wifi', <WiFi />],
+  ['ac', <AC />],
+]);
+
+export const carriageType = {
   platz: <Platz />,
-  cup: <Cup />,
   coupe: <Coupe />,
   seat: <Seat />,
   lux: <Lux />,

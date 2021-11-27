@@ -4,7 +4,8 @@ import s from './LastTicketCard.module.scss';
 import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
 
 import { LastTicketData } from '../../../../global';
-import { iconsCollection, serviceCollection } from '../../../../Collections/collections';
+import { iconsCollection } from '../../../../Collections/collections';
+import { ServiceBlock } from '../../ServicesBlock';
 
 export type Props = {
   className?: string;
@@ -41,13 +42,7 @@ export const LastTicketCard = memo<Props>(({ className, data }) => {
         </div>
       </div>
       <div className={s.row}>
-        <div className={s.service__bar}>
-          {services.map((el) => (
-            <div className={s.service__icon} key={el}>
-              {serviceCollection[el]}
-            </div>
-          ))}
-        </div>
+        <ServiceBlock services={services} className="lastTickets" />
         <div className={s.price}>
           <div className={s.price__from}>от</div>
           <div className={s.price__number}>{getBeautifulNumber(price)}</div>

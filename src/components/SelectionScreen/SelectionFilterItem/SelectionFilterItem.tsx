@@ -6,7 +6,7 @@ import './reant.css';
 
 export type Props = {
   className?: string;
-  icon: ReactElement;
+  icon: ReactElement | undefined;
   text: string;
 };
 

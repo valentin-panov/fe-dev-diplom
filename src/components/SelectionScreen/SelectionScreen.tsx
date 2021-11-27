@@ -6,7 +6,7 @@ import { SelectionFilterItem } from './SelectionFilterItem';
 import { SelectionFilterPrice } from './SelectionFilterPrice';
 import { SelectionFilterTime } from './SelectionFilterTime';
 import { LastTickets } from './LastTickets';
-import { iconsCollection, serviceCollection } from '../../Collections/collections';
+import { carriageType, iconsCollection, serviceCollection } from '../../Collections/collections';
 import { ResultScreen } from './ResultScreen';
 
 export type Props = {
@@ -31,12 +31,12 @@ export const SelectionScreen = memo<Props>(({ className }) => {
           </div>
           <div className={s.divider} />
           <ul className={s.filterList}>
-            <SelectionFilterItem icon={serviceCollection.coupe} text="Купе" />
-            <SelectionFilterItem icon={serviceCollection.platz} text="Плацкарт" />
-            <SelectionFilterItem icon={serviceCollection.seat} text="Сидячий" />
-            <SelectionFilterItem icon={serviceCollection.lux} text="Люкс" />
-            <SelectionFilterItem icon={serviceCollection.wifi} text="Wi-Fi" />
-            <SelectionFilterItem icon={serviceCollection.express} text="Экспресс" />
+            <SelectionFilterItem icon={carriageType.coupe} text="Купе" />
+            <SelectionFilterItem icon={carriageType.platz} text="Плацкарт" />
+            <SelectionFilterItem icon={carriageType.seat} text="Сидячий" />
+            <SelectionFilterItem icon={carriageType.lux} text="Люкс" />
+            <SelectionFilterItem icon={serviceCollection.get('wifi')} text="Wi-Fi" />
+            <SelectionFilterItem icon={serviceCollection.get('express')} text="Экспресс" />
           </ul>
           <div className={s.divider} />
           <div className={s.sideSelection__title}>Стоимость</div>

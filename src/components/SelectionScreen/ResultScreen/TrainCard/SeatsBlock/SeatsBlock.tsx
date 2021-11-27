@@ -1,8 +1,10 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
+import { Button } from 'antd';
 import s from './SeatsBlock.module.scss';
 import { Train } from '../../../../../global';
 import { SeatsBlockRow } from './SeatBlockRow';
+import { ServiceBlock } from '../../../ServicesBlock';
 
 export type Props = {
   className?: string;
@@ -19,6 +21,9 @@ const servicesName = {
 export const SeatsBlock = memo<Props>(({ className, train }) => {
   const {
     departure: {
+      have_wifi: wifi,
+      have_air_conditioning: ac,
+      is_express: express,
       have_fourth_class: seat,
       have_third_class: platz,
       have_second_class: coupe,
@@ -47,6 +52,8 @@ export const SeatsBlock = memo<Props>(({ className, train }) => {
       {lux && luxCount && luxPrice && (
         <SeatsBlockRow carriageClass={servicesName.lux} ticketsAmount={luxCount} ticketPrice={luxPrice} />
       )}
+      <ServiceBlock services={{ wifi, ac, express }} className="ticketCard" />
+      <Button>Выбрать места</Button>
     </div>
   );
 });

@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
-export type serviceList = 'express' | 'wifi' | 'platz' | 'cup' | 'coupe' | 'seat' | 'lux';
-export type Services = Array<serviceList>;
+export type Services = { wifi: boolean; express: boolean; ac: boolean };
+
 export type PointX = { city: string; station: string };
 export type LastTicketData = {
   id: number;
