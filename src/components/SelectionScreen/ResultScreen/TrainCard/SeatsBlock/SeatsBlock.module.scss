@@ -1,0 +1,73 @@
+@import 'src/styles/common';
+
+.root {
+  padding        : 40px 25px 25px;
+  display        : flex;
+  box-sizing     : border-box;
+  width          : 100%;
+  flex-direction : column;
+  background     : #FFFFFF;
+}
+
+.row {
+  display         : flex;
+  flex-direction  : row;
+  flex-wrap       : nowrap;
+  justify-content : space-between;
+  align-items     : center;
+  margin-bottom : 35px;
+}
+
+.carriageClass {
+  flex-grow   : 0;
+  font-size   : 16px;
+  line-height : 19px;
+  font-weight : normal;
+  
+  font-style  : normal;
+  color       : #3E3C41;
+}
+
+.ticketsAmount {
+  margin-right : 15px;
+  flex-grow    : 1;
+  font-size    : 16px;
+  line-height  : 19px;
+  font-weight  : 500;
+  font-style   : normal;
+  
+  text-align   : end;
+  color        : #FFA800;
+}
+
+.ticketsPrice {
+  margin-right : 5px;
+  flex-grow    : 0;
+  font-size    : 24px;
+  line-height  : 28px;
+  
+  font-weight  : bold;
+  font-style   : normal;
+  color        : #2D2B2F;
+  display : flex;
+  flex-direction: row;
+  justify-content : center;
+  align-items : center;
+  
+  span {
+    margin-right : 5px;
+    font-size    : 16px;
+    line-height  : 19px;
+    font-weight  : normal;
+    font-style   : normal;
+    color        : #928F94;
+  }
+}
+
+.moneySymbol {
+  margin-bottom : 2px;
+  width         : 16px;
+  height        : 19px;
+  flex-grow     : 0;
+  color         : #928F94;
+}

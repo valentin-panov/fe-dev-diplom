@@ -27,7 +27,7 @@ const data3: LastTicketData = {
   pointA: { city: 'Казань', station: 'Курский вокзал' },
   pointB: { city: 'Нижний новгород', station: 'Московский вокзал' },
   price: 3800,
-  services: ['wifi', 'platz', 'cup'],
+  services: ['wifi', 'express', 'cup'],
 };
 
 const ticketsArray: LastTicketData[] = [data1, data2, data3];

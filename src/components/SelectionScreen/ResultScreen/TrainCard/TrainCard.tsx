@@ -6,6 +6,7 @@ import { ReactComponent as Icon } from '../../../../svg/train_icon.svg';
 import { iconsCollection } from '../../../../Collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
 import { TrainRow } from './TrainRow';
+import { SeatsBlock } from './SeatsBlock';
 
 export type Props = {
   className?: string;
@@ -45,7 +46,9 @@ export const TrainCard = memo<Props>(({ className, trains }) => {
           <TrainRow train={train0} direction />
           {train1 && <TrainRow train={train1} direction={false} />}
         </div>
-        <div className={s.seats}>SEATS</div>
+        <div className={s.seats}>
+          <SeatsBlock train={train0} />
+        </div>
       </div>
     </div>
   );

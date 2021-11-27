@@ -65,8 +65,8 @@ export type Train = {
 
 export type PriceSpectre = {
   price?: number;
-  top_price?: number;
-  bottom_price?: number;
+  top_price: number;
+  bottom_price: number;
   side_price?: number;
 };
 
