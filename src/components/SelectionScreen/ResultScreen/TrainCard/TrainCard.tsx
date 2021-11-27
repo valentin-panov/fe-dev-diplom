@@ -5,18 +5,23 @@ import { Train } from '../../../../global';
 import { ReactComponent as Icon } from '../../../../svg/train_icon.svg';
 import { iconsCollection } from '../../../../Collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
+import { TrainRow } from './TrainRow';
 
 export type Props = {
   className?: string;
-  train: Train;
+  trains: Train[];
 };
 
-export const TrainCard = memo<Props>(({ className, train }) => {
+export const TrainCard = memo<Props>(({ className, trains }) => {
+  const train0 = trains[0];
   // eslint-disable-next-line no-underscore-dangle
-  const trainId = train.departure.train._id;
-  const pointA = capitalize(train.departure.from.city.name);
-  const pointB = capitalize(train.departure.to.city.name);
-  const trainName = train.departure.train.name;
+  const trainId = train0.departure.train._id;
+  const trainName = train0.departure.train.name;
+  const pointA = capitalize(train0.departure.from.city.name);
+  const pointB = capitalize(train0.departure.to.city.name);
+
+  const train1 = trains[1];
+
   return (
     <div className={cn(s.root, className)}>
       <div className={s.general}>
@@ -35,7 +40,13 @@ export const TrainCard = memo<Props>(({ className, train }) => {
           </div>
         </div>
       </div>
-      <div className={s.params}>PARAMS</div>;
+      <div className={s.params}>
+        <div className={s.params__schedule}>
+          <TrainRow train={train0} direction />
+          {train1 && <TrainRow train={train1} direction={false} />}
+        </div>
+        <div className={s.seats}>SEATS</div>
+      </div>
     </div>
   );
 });

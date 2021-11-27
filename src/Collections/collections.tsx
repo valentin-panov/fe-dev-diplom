@@ -11,6 +11,8 @@ import { ReactComponent as Forward } from '../svg/icon_dest_forward.svg';
 import { ReactComponent as Backward } from '../svg/icon_dest_back.svg';
 import { ReactComponent as ArrowRB } from '../svg/arrow_right_black.svg';
 import { ReactComponent as ArrowRG } from '../svg/arrow_right_grey.svg';
+import { ReactComponent as ArrowRY } from '../svg/arrow_right_yellow.svg';
+import { ReactComponent as ArrowLY } from '../svg/arrow_left_yellow.svg';
 
 export const serviceCollection = {
   express: <Express />,
@@ -28,4 +30,6 @@ export const iconsCollection = {
   backward: <Backward />,
   arrowRB: <ArrowRB />,
   arrowRG: <ArrowRG />,
+  arrowRY: <ArrowRY />,
+  arrowLY: <ArrowLY />,
 };

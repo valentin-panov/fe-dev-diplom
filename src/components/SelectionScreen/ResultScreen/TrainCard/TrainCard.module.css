@@ -114,8 +114,65 @@ main {
 .params {
   display: flex;
   width: 100%;
-  flex-direction: column;
+  flex-direction: row;
   flex-grow: 1;
+}
+.params .params__schedule {
+  padding: 55px 40px;
+  min-width: 480px;
+}
+.params .params__schedule .row {
+  margin-bottom: 45px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  color: #000000;
+}
+.params .params__schedule .row .col1 {
+  width: 40%;
+}
+.params .params__schedule .row .col2 {
+  display: flex;
+  width: 20%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+.params .params__schedule .row .time {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: bold;
+  font-style: normal;
+}
+.params .params__schedule .row .city {
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: 400;
+  font-style: normal;
+  text-align: left;
+  letter-spacing: 0;
+}
+.params .params__schedule .row .station {
+  font-size: 16px;
+  line-height: 19px;
+  font-weight: 400;
+  font-style: normal;
+  text-align: left;
+  letter-spacing: 0;
+  color: #928F94;
+}
+.params .params__schedule .row .duration {
+  font-size: 18px;
+  line-height: 21px;
+  font-weight: normal;
+  font-style: normal;
+  color: #C4C4C4;
+}
+.params .seats {
+  min-width: 280px;
+  border-left: 1px dashed #E5E5E5;
 }
 
 .btn {
