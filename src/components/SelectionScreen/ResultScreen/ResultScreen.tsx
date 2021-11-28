@@ -65,7 +65,9 @@ export const ResultScreen = memo<Props>(({ className }) => {
         })}
       </div>
       <div className={s.pagination}>
-        <PaginationOrigin data={{ current: currentPage, total: 150, pageSize: 5, onChange: setCurrentPage }} />
+        <PaginationOrigin
+          data={{ current: currentPage, total: found, pageSize: activeLimit, onChange: setCurrentPage }}
+        />
       </div>
     </section>
   );
