@@ -5,20 +5,41 @@
   display        : flex;
   box-sizing     : border-box;
   width          : 100%;
+  height         : 100%;
   flex-direction : column;
   background     : #FFFFFF;
+  
+  .upper_block {
+    display         : flex;
+    width           : 100%;
+    flex-direction  : column;
+    justify-content : stretch;
+    align-items     : flex-start;
+    flex-grow       : 1;
+  }
+  
+  .bottom_block {
+    display         : flex;
+    width           : 100%;
+    flex-direction  : column;
+    justify-content : stretch;
+    align-items     : flex-end;
+    flex-grow       : 0;
+  }
 }
 
 .row {
+  margin-bottom   : 35px;
   display         : flex;
+  width           : 100%;
   flex-direction  : row;
   flex-wrap       : nowrap;
   justify-content : space-between;
   align-items     : center;
-  margin-bottom : 35px;
 }
 
 .carriageClass {
+  min-width   : 70px;
   flex-grow   : 0;
   font-size   : 16px;
   line-height : 19px;
@@ -30,7 +51,9 @@
 
 .ticketsAmount {
   margin-right : 15px;
-  flex-grow    : 1;
+  margin-left  : 15px;
+  min-width    : 25px;
+  flex-grow    : 0;
   font-size    : 16px;
   line-height  : 19px;
   font-weight  : 500;
@@ -41,26 +64,26 @@
 }
 
 .ticketsPrice {
-  margin-right : 5px;
-  flex-grow    : 0;
-  font-size    : 24px;
-  line-height  : 28px;
+  margin-right    : 5px;
+  display         : flex;
+  flex-direction  : row;
+  justify-content : space-between;
   
-  font-weight  : bold;
-  font-style   : normal;
-  color        : #2D2B2F;
-  display : flex;
-  flex-direction: row;
-  justify-content : center;
-  align-items : center;
+  align-items     : center;
+  flex-grow       : 1;
+  font-size       : 24px;
+  line-height     : 28px;
+  font-weight     : bold;
+  font-style      : normal;
+  color           : #2D2B2F;
   
   span {
-    margin-right : 5px;
-    font-size    : 16px;
-    line-height  : 19px;
-    font-weight  : normal;
-    font-style   : normal;
-    color        : #928F94;
+    flex-grow   : 0;
+    font-size   : 16px;
+    line-height : 19px;
+    font-weight : normal;
+    font-style  : normal;
+    color       : #928F94;
   }
 }
 
@@ -70,4 +93,37 @@
   height        : 19px;
   flex-grow     : 0;
   color         : #928F94;
+}
+
+.btn {
+  width         : 228px;
+  height        : 39px;
+  
+  font-size     : 24px;
+  line-height   : 28px;
+  font-weight   : bold;
+  font-style    : normal;
+  text-align    : center;
+  color         : #FFFFFF;
+  background    : #FFA800;
+  
+  border        : 0;
+  border-radius : 5px;
+  
+  &:hover {
+    color         : #FFFFFF;
+    background    : #FFA800;
+    
+    border        : 0;
+    border-radius : 5px;;
+    filter        : drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  }
+  
+  &:active, &:focus {
+    box-sizing    : border-box;
+    color         : #FFA800;
+    background    : #FFFFFF;
+    border        : 1px solid #FFA800;
+    border-radius : 5px;
+  }
 }

@@ -55,19 +55,26 @@ export type Train = {
       datetime: number;
     };
     price_info: {
-      first?: PriceSpectre;
-      second?: PriceSpectre;
-      third?: PriceSpectre;
-      fourth?: PriceSpectre;
+      first?: {
+        price: number;
+        top_price: number;
+        bottom_price: number;
+      };
+      second?: {
+        top_price: number;
+        bottom_price: number;
+      };
+      third?: {
+        top_price: number;
+        bottom_price: number;
+        side_price: number;
+      };
+      fourth?: {
+        top_price: number;
+        bottom_price: number;
+      };
     };
   };
-};
-
-export type PriceSpectre = {
-  price?: number;
-  top_price: number;
-  bottom_price: number;
-  side_price?: number;
 };
 
 export type SeatsSpectre = {

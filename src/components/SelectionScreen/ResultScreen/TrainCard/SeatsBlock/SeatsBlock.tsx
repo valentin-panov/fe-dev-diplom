@@ -5,6 +5,7 @@ import s from './SeatsBlock.module.scss';
 import { Train } from '../../../../../global';
 import { SeatsBlockRow } from './SeatBlockRow';
 import { ServiceBlock } from '../../../ServicesBlock';
+import { minValue } from '../../../../../utils/minValue';
 
 export type Props = {
   className?: string;
@@ -33,27 +34,31 @@ export const SeatsBlock = memo<Props>(({ className, train }) => {
     },
   }: Train = train;
 
-  const seatPrice = price4 ? price4.bottom_price : undefined;
-  const platzPrice = price3 ? price3.bottom_price : undefined;
-  const coupePrice = price2 ? price2.bottom_price : undefined;
-  const luxPrice = price1 ? price1.bottom_price : undefined;
+  const seatPrice = price4 ? minValue(price4) : undefined;
+  const platzPrice = price3 ? minValue(price3) : undefined;
+  const coupePrice = price2 ? minValue(price2) : undefined;
+  const luxPrice = price1 ? minValue(price1) : undefined;
 
   return (
     <div className={cn(s.root, className)}>
-      {seat && seatCount && seatPrice && (
-        <SeatsBlockRow carriageClass={servicesName.seat} ticketsAmount={seatCount} ticketPrice={seatPrice} />
-      )}
-      {platz && platzCount && platzPrice && (
-        <SeatsBlockRow carriageClass={servicesName.platz} ticketsAmount={platzCount} ticketPrice={platzPrice} />
-      )}
-      {coupe && coupeCount && coupePrice && (
-        <SeatsBlockRow carriageClass={servicesName.coupe} ticketsAmount={coupeCount} ticketPrice={coupePrice} />
-      )}
-      {lux && luxCount && luxPrice && (
-        <SeatsBlockRow carriageClass={servicesName.lux} ticketsAmount={luxCount} ticketPrice={luxPrice} />
-      )}
-      <ServiceBlock services={{ wifi, express, ac }} className="ticketCard" />
-      <Button>Выбрать места</Button>
+      <div className={s.upper_block}>
+        {seat && seatCount && seatPrice && (
+          <SeatsBlockRow carriageClass={servicesName.seat} ticketsAmount={seatCount} ticketPrice={seatPrice} />
+        )}
+        {platz && platzCount && platzPrice && (
+          <SeatsBlockRow carriageClass={servicesName.platz} ticketsAmount={platzCount} ticketPrice={platzPrice} />
+        )}
+        {coupe && coupeCount && coupePrice && (
+          <SeatsBlockRow carriageClass={servicesName.coupe} ticketsAmount={coupeCount} ticketPrice={coupePrice} />
+        )}
+        {lux && luxCount && luxPrice && (
+          <SeatsBlockRow carriageClass={servicesName.lux} ticketsAmount={luxCount} ticketPrice={luxPrice} />
+        )}
+      </div>
+      <div className={s.bottom_block}>
+        <ServiceBlock services={{ wifi, express, ac }} className="ticketCard" />
+        <Button className={s.btn}>Выбрать места</Button>
+      </div>
     </div>
   );
 });
