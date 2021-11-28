@@ -31,6 +31,9 @@ export const SeatsBlockRow = memo<Props>(({ className, carriageClass, ticketsAmo
         case 'side_price':
           newArr.push(['боковые', el[1]]);
           break;
+        case 'price':
+          newArr.push(['СВ', el[1]]);
+          break;
         default:
           break;
       }
@@ -53,25 +56,40 @@ export const SeatsBlockRow = memo<Props>(({ className, carriageClass, ticketsAmo
   );
 
   return (
-    <Tooltip
-      placement="bottom"
-      title={tooltip}
-      mouseEnterDelay={0.3}
-      mouseLeaveDelay={0.3}
-      trigger="hover"
-      getPopupContainer={() => row.current as unknown as HTMLElement}
-      overlayClassName={s.tooltip}
-      destroyTooltipOnHide
-    >
-      <div className={cn(s.row, className)} ref={row}>
-        <div className={s.carriageClass}>{carriageClass}</div>
-        <div className={s.ticketsAmount}>{ticketsAmount}</div>
-        <div className={s.ticketsPrice}>
-          <span>от&nbsp;</span>
-          {lowPrice}
+    <>
+      {(carriageClass === 'Люкс' || carriageClass === 'Сидячий') && (
+        <div className={cn(s.row, className)} ref={row}>
+          <div className={s.carriageClass}>{carriageClass}</div>
+          <div className={s.ticketsAmount}>{ticketsAmount}</div>
+          <div className={s.ticketsPrice}>
+            <span>от&nbsp;</span>
+            {lowPrice}
+          </div>
+          <div className={s.moneySymbol}>{iconsCollection.rub}</div>
         </div>
-        <div className={s.moneySymbol}>{iconsCollection.rub}</div>
-      </div>
-    </Tooltip>
+      )}
+      {carriageClass !== 'Люкс' && carriageClass !== 'Сидячий' && (
+        <Tooltip
+          placement="bottom"
+          title={tooltip}
+          mouseEnterDelay={0.3}
+          mouseLeaveDelay={0.3}
+          trigger="hover"
+          getPopupContainer={() => row.current as unknown as HTMLElement}
+          overlayClassName={s.tooltip}
+          destroyTooltipOnHide
+        >
+          <div className={cn(s.row, className)} ref={row}>
+            <div className={s.carriageClass}>{carriageClass}</div>
+            <div className={s.ticketsAmount}>{ticketsAmount}</div>
+            <div className={s.ticketsPrice}>
+              <span>от&nbsp;</span>
+              {lowPrice}
+            </div>
+            <div className={s.moneySymbol}>{iconsCollection.rub}</div>
+          </div>
+        </Tooltip>
+      )}
+    </>
   );
 });
