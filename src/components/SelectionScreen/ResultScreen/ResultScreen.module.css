@@ -100,6 +100,14 @@ main {
   align-items: stretch;
 }
 
+.pagination {
+  margin-top: 140px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  width: 100%;
+}
+
 .pricePickerLabels {
   display: flex;
   width: 100%;

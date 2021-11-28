@@ -46,7 +46,7 @@ export const SeatsBlockRow = memo<Props>(({ className, carriageClass, ticketsAmo
   const tooltip = (
     <div className={s.tooltip__container}>
       {pricesArray.map((el) => (
-        <div className={s.tooltip__row}>
+        <div className={s.tooltip__row} key={el[0]}>
           <div className={s.tooltip__txt}>{el[0]}</div>
           <div className={s.tooltip__price}>{el[1]}</div>
           <div className={s.tooltip__rub}>{iconsCollection.rub}</div>
