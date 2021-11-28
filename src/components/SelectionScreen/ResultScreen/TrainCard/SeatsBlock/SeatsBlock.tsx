@@ -5,18 +5,17 @@ import s from './SeatsBlock.module.scss';
 import { Train } from '../../../../../global';
 import { SeatsBlockRow } from './SeatBlockRow';
 import { ServiceBlock } from '../../../ServicesBlock';
-import { minValue } from '../../../../../utils/minValue';
 
 export type Props = {
   className?: string;
   train: Train;
 };
 
-const servicesName = {
-  seat: 'Сидячий',
-  platz: 'Плацкарт',
-  coupe: 'Купе',
-  lux: 'Люкс',
+const carriageType = {
+  class4: 'Сидячий',
+  class3: 'Плацкарт',
+  class2: 'Купе',
+  class1: 'Люкс',
 };
 
 export const SeatsBlock = memo<Props>(({ className, train }) => {
@@ -25,34 +24,29 @@ export const SeatsBlock = memo<Props>(({ className, train }) => {
       have_wifi: wifi,
       have_air_conditioning: ac,
       is_express: express,
-      have_fourth_class: seat,
-      have_third_class: platz,
-      have_second_class: coupe,
-      have_first_class: lux,
-      available_seats_info: { fourth: seatCount, third: platzCount, second: coupeCount, first: luxCount },
+      have_fourth_class: class4,
+      have_third_class: class3,
+      have_second_class: class2,
+      have_first_class: class1,
+      available_seats_info: { fourth: count4, third: count3, second: count2, first: count1 },
       price_info: { fourth: price4, third: price3, second: price2, first: price1 },
     },
   }: Train = train;
 
-  const seatPrice = price4 ? minValue(price4) : undefined;
-  const platzPrice = price3 ? minValue(price3) : undefined;
-  const coupePrice = price2 ? minValue(price2) : undefined;
-  const luxPrice = price1 ? minValue(price1) : undefined;
-
   return (
     <div className={cn(s.root, className)}>
       <div className={s.upper_block}>
-        {seat && seatCount && seatPrice && (
-          <SeatsBlockRow carriageClass={servicesName.seat} ticketsAmount={seatCount} ticketPrice={seatPrice} />
+        {class4 && count4 && price4 && (
+          <SeatsBlockRow carriageClass={carriageType.class4} ticketsAmount={count4} ticketsPrice={price4} />
         )}
-        {platz && platzCount && platzPrice && (
-          <SeatsBlockRow carriageClass={servicesName.platz} ticketsAmount={platzCount} ticketPrice={platzPrice} />
+        {class3 && count3 && price3 && (
+          <SeatsBlockRow carriageClass={carriageType.class3} ticketsAmount={count3} ticketsPrice={price3} />
         )}
-        {coupe && coupeCount && coupePrice && (
-          <SeatsBlockRow carriageClass={servicesName.coupe} ticketsAmount={coupeCount} ticketPrice={coupePrice} />
+        {class2 && count2 && price2 && (
+          <SeatsBlockRow carriageClass={carriageType.class2} ticketsAmount={count2} ticketsPrice={price2} />
         )}
-        {lux && luxCount && luxPrice && (
-          <SeatsBlockRow carriageClass={servicesName.lux} ticketsAmount={luxCount} ticketPrice={luxPrice} />
+        {class1 && count1 && price1 && (
+          <SeatsBlockRow carriageClass={carriageType.class1} ticketsAmount={count1} ticketsPrice={price1} />
         )}
       </div>
       <div className={s.bottom_block}>

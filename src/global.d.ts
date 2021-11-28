@@ -57,8 +57,8 @@ export type Train = {
     price_info: {
       first?: {
         price: number;
-        top_price: number;
-        bottom_price: number;
+        top_price?: number;
+        bottom_price?: number;
       };
       second?: {
         top_price: number;
