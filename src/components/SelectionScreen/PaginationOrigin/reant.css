@@ -57,7 +57,7 @@
 .ant-pagination-item:focus-visible,
 .ant-pagination-item:hover {
   border: 2px solid #ffa800;
-  transition: all 0.3s;
+  transition: none;
 }
 
 .ant-pagination-item-active:focus-visible a,
@@ -82,7 +82,7 @@
   border: 2px solid #d9d9d9;
   border-radius: 5px;
   outline: none;
-  transition: all 0.3s;
+  transition: none;
 }
 
 .ant-pagination-prev,
@@ -98,7 +98,7 @@
   vertical-align: middle;
   list-style: none;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: none;
   border: 2px solid #c4c4c4;
   color: #928f94;
   border-radius: 5px;
@@ -117,7 +117,7 @@
   border: 0;
   box-sizing: border-box;
   outline: none;
-  transition: all 0.3s;
+  transition: none;
   color: inherit;
 }
 
@@ -170,7 +170,7 @@
   text-align: center;
   text-indent: 0.13em;
   opacity: 1;
-  transition: all 0.2s;
+  transition: none;
   vertical-align: middle;
   justify-content: center;
   align-items: center;
@@ -182,5 +182,5 @@
   font-size: 12px;
   letter-spacing: -1px;
   opacity: 0;
-  transition: all 0.2s;
+  transition: none;
 }

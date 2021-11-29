@@ -12,7 +12,6 @@ import headerMain from './img/header_main.png';
 import headerTrain from './img/header_train.png';
 import headerSuccess from './img/header_success.png';
 import { appURL } from '../../App';
-import { Progress } from './Progress';
 
 export type Props = {
   className?: string;
@@ -95,7 +94,6 @@ export const Header = memo<Props>(({ className }) => {
                 </div>
               </div>
             </div>
-            <Progress />
           </>
         )}
 

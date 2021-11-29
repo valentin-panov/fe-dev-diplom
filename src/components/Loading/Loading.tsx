@@ -1,10 +1,15 @@
-import React, { ReactElement } from 'react';
-import { TailSpin } from './TailSpin';
+import React, { memo } from 'react';
+import cn from 'clsx';
+import s from './Loading.module.scss';
+import loadingImg from './img/loading.gif';
 
-export default function Loading(): ReactElement {
-  return (
-    <div style={{ margin: '0.5vmin' }}>
-      <TailSpin />
-    </div>
-  );
-}
+export type Props = {
+  className?: string;
+};
+
+export const Loading = memo<Props>(({ className }) => (
+  <div className={cn(s.root, className)}>
+    <div className={s.bar} />
+    <img src={loadingImg} alt="loading..." />
+  </div>
+));

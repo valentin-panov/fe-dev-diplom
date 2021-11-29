@@ -31,3 +31,8 @@
 .ant-picker-header-view button:hover {
   color: rgba(255, 168, 0, 1);
 }
+
+.ant-picker:hover,
+.ant-picker-focused {
+  border-color: #ffa800;
+}

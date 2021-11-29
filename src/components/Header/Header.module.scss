@@ -37,8 +37,8 @@
 }
 
 .select {
-  margin-bottom : 100px;
-  height        : 600px;
+  //margin-bottom : 100px;
+  height : 600px;
 }
 
 .success {
@@ -74,12 +74,13 @@
 .picker_holder_main {
   position        : relative;
   z-index         : 1;
+  margin-bottom   : 9px;
   padding         : 60px 25px;
   display         : flex;
-  box-sizing      : border-box;
   
-  width           : 729px;
-  height          : 540px;
+  box-sizing      : border-box;
+  width           : 737px;
+  height          : 548px;
   flex-direction  : column;
   justify-content : flex-start;
   align-items     : flex-end;
@@ -87,12 +88,12 @@
   border          : 0;
   align-self      : flex-end;
   
-  @media not all and (min-resolution : .001dpcm) {
-    @supports (-webkit-appearance: none) {
-      /* Safari Only CSS here */
-      margin-bottom : 9px;
-    }
-  }
+  //@media not all and (min-resolution : .001dpcm) {
+  //  @supports (-webkit-appearance: none) {
+  //    /* Safari Only CSS here */
+  //    margin-bottom : 9px;
+  //  }
+  //}
   
   .picker_holder_main_destination_helper {
     margin-bottom : 60px;
