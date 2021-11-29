@@ -1,54 +1,36 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import cn from 'clsx';
+import { useDispatch, useSelector } from 'react-redux';
 import s from './LastTickets.module.scss';
 import { LastTicketCard } from './LastTicketCard';
-import { LastTicketData } from '../../../global';
+import { RootState } from '../../../store';
+import { asyncFetchData } from '../../../reducers/lastTickets';
 
 export type Props = {
   className?: string;
 };
 
-const data1: LastTicketData = {
-  id: 1,
-  pointA: { city: 'Санкт-Петербург', station: 'Курский вокзал' },
-  pointB: { city: 'Самара', station: 'Московский вокзал' },
-  price: 2500,
-  services: {
-    wifi: true,
-    express: true,
-    ac: true,
-  },
-};
-const data2: LastTicketData = {
-  id: 2,
-  pointA: { city: 'Москва', station: 'Курский вокзал' },
-  pointB: { city: 'Казань', station: 'Московский вокзал' },
-  price: 3500,
-  services: {
-    wifi: true,
-    express: true,
-    ac: true,
-  },
-};
-const data3: LastTicketData = {
-  id: 3,
-  pointA: { city: 'Казань', station: 'Курский вокзал' },
-  pointB: { city: 'Нижний новгород', station: 'Московский вокзал' },
-  price: 3800,
-  services: {
-    wifi: true,
-    express: true,
-    ac: true,
-  },
-};
+export const LastTickets = memo<Props>(({ className }) => {
+  const status = useSelector((store: RootState) => store.lastTickets.status);
+  const items = useSelector((store: RootState) => store.lastTickets.items);
 
-const ticketsArray: LastTicketData[] = [data1, data2, data3];
+  const dispatch = useDispatch();
 
-export const LastTickets = memo<Props>(({ className }) => (
-  <section className={cn(s.root, className)}>
-    <div className={s.lastTicketsTitle}>последние билеты</div>
-    {ticketsArray.map((el) => (
-      <LastTicketCard data={el} key={el.id} />
-    ))}
-  </section>
-));
+  useEffect(() => {
+    dispatch(asyncFetchData());
+  }, [dispatch]);
+
+  return (
+    <section className={cn(s.root, className)}>
+      {status === 'success' && (
+        <>
+          <div className={s.lastTicketsTitle}>последние билеты</div>
+          {items.map((el) => (
+            // eslint-disable-next-line no-underscore-dangle
+            <LastTicketCard train={el} key={el.departure._id} />
+          ))}
+        </>
+      )}
+    </section>
+  );
+});

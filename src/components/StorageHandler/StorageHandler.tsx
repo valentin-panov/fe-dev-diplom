@@ -2,7 +2,7 @@ import { memo, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { storageHandlerAdapter } from 'packages/storage/adapters/StorageHandlerAdapter';
-import { experienceSet } from 'store/experience';
+import { experienceSet } from '../../reducers/experience';
 
 export type Props = {
   className?: string;

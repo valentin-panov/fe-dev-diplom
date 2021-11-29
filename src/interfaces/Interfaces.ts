@@ -1,3 +1,5 @@
+import { Train } from '../global';
+
 export interface Status {
   status: 'idle' | 'pending' | 'success' | 'error';
   error: string;
@@ -7,6 +9,10 @@ export interface Menu {
   id: number;
   title: string;
   pathName: string;
+}
+
+export interface LastTickets extends Status {
+  items: Train[];
 }
 
 // LEGACY
