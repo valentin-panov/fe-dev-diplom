@@ -24,8 +24,7 @@ export const asyncFetchData = createAsyncThunk('lastTickets/FetchingData', async
   if (!response.ok) {
     throw new Error(`request error: ${reqURL}`);
   }
-  const items = await response.json();
-  return items;
+  return response.json();
 });
 
 export const lastTicketsSlice = createSlice({

@@ -1,7 +1,6 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic-ext');
-@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&subset=cyrillic-ext');
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic-ext");
+@import url("https://fonts.googleapis.com/css?family=Roboto+Condensed&subset=cyrillic-ext");
 @import '~antd/dist/antd.css';
-
 .root {
   margin: 0 auto;
   max-width: 1200px;
@@ -12,7 +11,7 @@ html,
 body {
   box-sizing: border-box;
   height: 100%;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 a {
@@ -72,8 +71,8 @@ main {
   box-sizing: border-box;
   width: 100%;
   flex-direction: row;
-  background: #ffffff;
-  border: 1px solid #c4c4c4;
+  background: #FFFFFF;
+  border: 1px solid #C4C4C4;
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
 }
 
@@ -82,13 +81,11 @@ main {
   width: 200px;
   flex-direction: column;
   flex-grow: 0;
-  background: #e4e0e9;
+  background: #E4E0E9;
 }
-
 .general .icon {
   padding: 58px 68px 17px 43px;
 }
-
 .general .general__txt {
   padding: 0 0 30px 25px;
   font-size: 16px;
@@ -97,7 +94,6 @@ main {
   font-style: normal;
   color: #292929;
 }
-
 .general .general__txt .textContainer {
   display: flex;
   flex-direction: row;
@@ -105,7 +101,6 @@ main {
   align-items: center;
   align-content: center;
 }
-
 .general .general__txt .trainId {
   padding: 0 48px 15px 0;
   font-size: 24px;
@@ -113,7 +108,7 @@ main {
   font-weight: bold;
   font-style: normal;
   text-align: center;
-  color: #3e3c41;
+  color: #3E3C41;
 }
 
 .params {
@@ -122,12 +117,10 @@ main {
   flex-direction: row;
   flex-grow: 1;
 }
-
 .params .params__schedule {
   padding: 55px 40px;
   min-width: 480px;
 }
-
 .params .params__schedule .row {
   margin-bottom: 45px;
   display: flex;
@@ -137,11 +130,9 @@ main {
   align-items: flex-start;
   color: #000000;
 }
-
 .params .params__schedule .row .col1 {
   width: 40%;
 }
-
 .params .params__schedule .row .col2 {
   display: flex;
   width: 20%;
@@ -149,14 +140,12 @@ main {
   justify-content: flex-start;
   align-items: center;
 }
-
 .params .params__schedule .row .time {
   font-size: 24px;
   line-height: 28px;
   font-weight: bold;
   font-style: normal;
 }
-
 .params .params__schedule .row .city {
   font-size: 18px;
   line-height: 21px;
@@ -164,8 +153,9 @@ main {
   font-style: normal;
   text-align: left;
   letter-spacing: 0;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
-
 .params .params__schedule .row .station {
   font-size: 16px;
   line-height: 19px;
@@ -173,20 +163,18 @@ main {
   font-style: normal;
   text-align: left;
   letter-spacing: 0;
-  color: #928f94;
+  color: #928F94;
 }
-
 .params .params__schedule .row .duration {
   font-size: 18px;
   line-height: 21px;
   font-weight: normal;
   font-style: normal;
-  color: #c4c4c4;
+  color: #C4C4C4;
 }
-
 .params .seats {
   min-width: 280px;
-  border-left: 1px dashed #e5e5e5;
+  border-left: 1px dashed #E5E5E5;
 }
 
 .btn {
@@ -194,7 +182,7 @@ main {
   line-height: 21px;
   font-weight: normal;
   font-style: normal;
-  color: #928f94;
+  color: #928F94;
 }
 
 .active {
