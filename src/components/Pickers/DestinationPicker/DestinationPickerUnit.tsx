@@ -11,11 +11,14 @@ export type Props = {
   className?: string;
   placeholder: string;
   options: Destination[];
+  value: string;
   onSelect: (value: string, option: unknown) => void;
+  onChange: (value: string, option: unknown) => void;
 };
 
-export const DestinationPickerUnit = memo<Props>(({ className, options, placeholder, onSelect }) => (
+export const DestinationPickerUnit = memo<Props>(({ className, value, options, placeholder, onSelect, onChange }) => (
   <AutoComplete
+    value={value}
     dropdownClassName={s.dropdown}
     dropdownMatchSelectWidth
     defaultOpen={false}
@@ -23,6 +26,7 @@ export const DestinationPickerUnit = memo<Props>(({ className, options, placehol
     options={options}
     filterOption={(inputValue, option) => option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
     onSelect={onSelect}
+    onChange={onChange}
     className={className}
   >
     <Input
