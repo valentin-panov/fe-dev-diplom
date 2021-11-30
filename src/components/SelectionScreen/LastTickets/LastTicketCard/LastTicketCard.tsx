@@ -4,7 +4,7 @@ import s from './LastTicketCard.module.scss';
 import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
 
 import { Train } from '../../../../global';
-import { iconsCollection } from '../../../../Collections/collections';
+import { iconsCollection } from '../../../../collections/collections';
 import { ServiceBlock } from '../../ServicesBlock';
 import { capitalize } from '../../../../utils/capitalize';
 
@@ -59,7 +59,7 @@ export const LastTicketCard = memo<Props>(({ className, train }) => {
         </div>
       </div>
       <div className={s.row}>
-        <ServiceBlock services={{ wifi, ac, express }} className="lastTickets" />
+        <ServiceBlock services={{ wifi, express, ac }} className="lastTickets" />
         <div className={s.price}>
           <div className={s.price__from}>от</div>
           <div className={s.price__number}>{getBeautifulNumber(price)}</div>

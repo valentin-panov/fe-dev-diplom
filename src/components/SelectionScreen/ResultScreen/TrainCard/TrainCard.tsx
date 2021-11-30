@@ -3,7 +3,7 @@ import cn from 'clsx';
 import s from './TrainCard.module.scss';
 import { Train } from '../../../../global';
 import { ReactComponent as Icon } from '../../../../svg/train_icon.svg';
-import { iconsCollection } from '../../../../Collections/collections';
+import { iconsCollection } from '../../../../collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
 import { TrainRow } from './TrainRow';
 import { SeatsBlock } from './SeatsBlock';

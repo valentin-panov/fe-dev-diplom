@@ -3,7 +3,7 @@ import { toDateTime } from 'utils/toDateTime';
 import cn from 'clsx';
 import s from './TrainCard.module.scss';
 import { Train } from '../../../../global';
-import { iconsCollection } from '../../../../Collections/collections';
+import { iconsCollection } from '../../../../collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
 import { sec2hhmm } from '../../../../utils/sec2hhmm';
 

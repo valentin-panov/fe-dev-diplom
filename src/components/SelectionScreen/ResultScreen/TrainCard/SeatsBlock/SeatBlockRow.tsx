@@ -2,7 +2,7 @@ import React, { memo, useRef } from 'react';
 import cn from 'clsx';
 import { Tooltip } from 'antd';
 import s from './SeatsBlock.module.scss';
-import { iconsCollection } from '../../../../../Collections/collections';
+import { iconsCollection } from '../../../../../collections/collections';
 import { minValue } from '../../../../../utils/minValue';
 
 export type Props = {

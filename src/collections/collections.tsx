@@ -1,9 +1,10 @@
 import React, { ReactElement } from 'react';
 import { ReactComponent as Rub } from '../svg/rub.svg';
-import { ReactComponent as Express } from '../svg/filter_express.svg';
-import { ReactComponent as WiFi } from '../svg/filter_wifi.svg';
+import { ReactComponent as Express } from '../svg/service_express.svg';
+import { ReactComponent as WiFi } from '../svg/service_wifi.svg';
 import { ReactComponent as Platz } from '../svg/filter_platz.svg';
-import { ReactComponent as AC } from '../svg/service_cup.svg';
+import { ReactComponent as AC } from '../svg/service_ac.svg';
+import { ReactComponent as Cup } from '../svg/service_cup.svg';
 import { ReactComponent as Coupe } from '../svg/filter_coupe.svg';
 import { ReactComponent as Seat } from '../svg/filter_seat.svg';
 import { ReactComponent as Lux } from '../svg/filter_lux.svg';
@@ -18,6 +19,7 @@ export const serviceCollection: Map<string, ReactElement> = new Map<string, Reac
   ['wifi', <WiFi />],
   ['express', <Express />],
   ['ac', <AC />],
+  ['cup', <Cup />],
 ]);
 
 export const carriageType = {

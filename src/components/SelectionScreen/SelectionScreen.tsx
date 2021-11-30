@@ -6,7 +6,7 @@ import { SelectionFilterItem } from './SelectionFilterItem';
 import { SelectionFilterPrice } from './SelectionFilterPrice';
 import { SelectionFilterTime } from './SelectionFilterTime';
 import { LastTickets } from './LastTickets';
-import { carriageType, iconsCollection, serviceCollection } from '../../Collections/collections';
+import { carriageType, iconsCollection, serviceCollection } from '../../collections/collections';
 import { ResultScreen } from './ResultScreen';
 import { Progress } from './Progress';
 

@@ -8,14 +8,14 @@ export type Props = {
 };
 
 export const DatePickerOrigin = memo<Props>(({ className }) => {
-  const dates: string[] = []; // temporary stub
   const onChange = (value: unknown, dateString: string) => {
-    dates[0] = dateString; // temporary stub
+    // eslint-disable-next-line no-console
+    console.log(value, dateString);
   };
 
   return (
     <div className={cn(s.root, className)}>
-      <span className={s.title}>Дата {dates[0]}</span>
+      <span className={s.title}>Дата</span>
       <div className={s.input_holder}>
         <DatePickerOriginUnit getDate={onChange} className="headerPicker" />
         <DatePickerOriginUnit getDate={onChange} className="headerPicker" />
