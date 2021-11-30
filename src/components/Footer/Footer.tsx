@@ -3,22 +3,20 @@ import cn from 'clsx';
 import { Button, Form, Input } from 'antd';
 import s from './Footer.module.scss';
 import { ContactItem } from './ContactItem';
-import { SocialIcon } from './SocialIcon';
 import { Logo } from '../Logo';
-import iconCall from './img/iconCall.svg';
-import iconMail from './img/iconMail.svg';
-import iconSkype from './img/iconSkype.svg';
-import iconGeo from './img/iconGeo.svg';
-import fb from './img/fb.svg';
-import youtube from './img/youtube.svg';
-import gPlus from './img/gPlus.svg';
-import twt from './img/twt.svg';
-import linkedIn from './img/linkedIn.svg';
-import btnUp from './img/btnUp.svg';
+import { ReactComponent as IconCall } from './img/iconCall.svg';
+import { ReactComponent as IconMail } from './img/iconMail.svg';
+import { ReactComponent as IconSkype } from './img/iconSkype.svg';
+import { ReactComponent as IconGeo } from './img/iconGeo.svg';
+import { ReactComponent as Fb } from './img/fb.svg';
+import { ReactComponent as Youtube } from './img/youtube.svg';
+import { ReactComponent as GPlus } from './img/gPlus.svg';
+import { ReactComponent as Twt } from './img/twt.svg';
+import { ReactComponent as LinkedIn } from './img/linkedIn.svg';
+import { ReactComponent as BtnUp } from './img/btnUp.svg';
+
 import { FooterTitle } from './FooterTitle';
 import { FooterSubtitle } from './FooterSubtitle';
-
-// TODO Consider refactoring svg img 2 svr as ReactComponent
 
 export type Props = {
   className?: string;
@@ -30,28 +28,12 @@ export const Footer = memo<Props>(({ className }) => (
       <section className={s.topSection}>
         <FooterTitle text="Свяжитесь с нами" />
         <ul className={s.connectBlockContainer}>
+          <ContactItem connectLink="/" connectIconSrc={<IconCall />} connectText="8 (800) 000 00 00" />
+          <ContactItem connectLink="/" connectIconSrc={<IconMail />} connectText="inbox@mail.ru" />
+          <ContactItem connectLink="/" connectIconSrc={<IconSkype />} connectText="tu.train.tickets" />
           <ContactItem
             connectLink="/"
-            connectIconSrc={iconCall}
-            connectIconAlt="iconCall"
-            connectText="8 (800) 000 00 00"
-          />
-          <ContactItem
-            connectLink="/"
-            connectIconSrc={iconMail}
-            connectIconAlt="iconMail"
-            connectText="inbox@mail.ru"
-          />
-          <ContactItem
-            connectLink="/"
-            connectIconSrc={iconSkype}
-            connectIconAlt="iconSkype"
-            connectText="tu.train.tickets"
-          />
-          <ContactItem
-            connectLink="/"
-            connectIconSrc={iconGeo}
-            connectIconAlt="iconGeo"
+            connectIconSrc={<IconGeo />}
             connectText="г. Москва<br>ул. Московская 27-35<br>555 555"
           />
         </ul>
@@ -67,11 +49,11 @@ export const Footer = memo<Props>(({ className }) => (
         </Form>
         <FooterTitle text="Подписывайтесь на нас" />
         <ul className={s.socials__imageContainer}>
-          <SocialIcon iconSrc={youtube} iconLink="/" iconAlt="youtube" />
-          <SocialIcon iconSrc={linkedIn} iconLink="/" iconAlt="linkedIn" />
-          <SocialIcon iconSrc={gPlus} iconLink="/" iconAlt="gPlus" />
-          <SocialIcon iconSrc={fb} iconLink="/" iconAlt="fb" />
-          <SocialIcon iconSrc={twt} iconLink="/" iconAlt="twt" />
+          <Youtube />
+          <LinkedIn />
+          <GPlus />
+          <Fb />
+          <Twt />
         </ul>
       </section>
     </div>
@@ -87,7 +69,7 @@ export const Footer = memo<Props>(({ className }) => (
           })
         }
       >
-        <img src={btnUp} alt={btnUp} />
+        <BtnUp />
       </Button>
       <span className={s.date}>2018 Web</span>
     </div>
