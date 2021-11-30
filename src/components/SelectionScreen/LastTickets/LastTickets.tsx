@@ -15,6 +15,7 @@ export const LastTickets = memo<Props>(({ className }) => {
   const items = useSelector((store: RootState) => store.lastTickets.items);
 
   const dispatch = useDispatch();
+  const cardsToShowCount = 3;
 
   useEffect(() => {
     dispatch(asyncFetchData());
@@ -25,7 +26,7 @@ export const LastTickets = memo<Props>(({ className }) => {
       {status === 'success' && (
         <>
           <div className={s.lastTicketsTitle}>последние билеты</div>
-          {items.map((el) => (
+          {items.slice(0, cardsToShowCount).map((el) => (
             // eslint-disable-next-line no-underscore-dangle
             <LastTicketCard train={el} key={el.departure._id} />
           ))}

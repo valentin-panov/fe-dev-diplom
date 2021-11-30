@@ -11,8 +11,6 @@ export type Props = {
 
 export const ServiceBlock = memo<Props>(({ className, services }) => {
   const services2render: [string, boolean][] = Object.entries(services).map((el) => [`${el[0]}`, el[1]]);
-  // .filter((el) => el[1])
-
   return (
     <div className={cn(s.root, s[className])}>
       {services2render.map((el) => (
