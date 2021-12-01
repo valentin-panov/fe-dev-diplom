@@ -13,7 +13,7 @@ export interface Menu {
 
 export interface City {
   _id: number;
-  name: string;
+  value: string;
 }
 
 export interface LastTickets extends Status {

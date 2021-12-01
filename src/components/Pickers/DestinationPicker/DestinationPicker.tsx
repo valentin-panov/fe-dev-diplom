@@ -10,14 +10,26 @@ import { RootState } from '../../../store';
 import { setArrival } from '../../../reducers/arrival';
 import { setDeparture } from '../../../reducers/departure';
 import { capitalize } from '../../../utils/capitalize';
+import { City } from '../../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;
 };
 
-export type Destination = {
-  value: string;
-};
+const response = [
+  {
+    _id: 1491,
+    name: 'москва',
+  },
+  {
+    _id: 1492,
+    name: 'санкт-петербург',
+  },
+  {
+    _id: 1493,
+    name: 'нижний новгород',
+  },
+];
 
 export const DestinationPicker = memo<Props>(({ className }) => {
   const departure = useSelector((store: RootState) => store.departure);
@@ -26,22 +38,33 @@ export const DestinationPicker = memo<Props>(({ className }) => {
   const [arrivalString, setArrivalString] = useState(arrival);
   const dispatch = useDispatch();
 
-  const response = [
-    {
-      _id: 1491,
-      name: 'москва',
-    },
-    {
-      _id: 1492,
-      name: 'санкт-петербург',
-    },
-    {
-      _id: 1493,
-      name: 'нижний новгород',
-    },
-  ];
+  const optionsRefined: City[] = response.map((el) =>
+    (({ name, _id }) => ({
+      _id,
+      value: capitalize(name),
+    }))(el)
+  );
 
-  const optionsRefined: Destination[] = response.map((el) => (({ name }) => ({ value: capitalize(name) }))(el));
+  const selectDeparture = (value: string) => {
+    const obj = optionsRefined.find((o) => o.value === value);
+    if (obj) {
+      dispatch(setDeparture(obj));
+    }
+  };
+  const selectArrival = (value: string) => {
+    const obj = optionsRefined.find((o) => o.value === value);
+    if (obj) {
+      dispatch(setArrival(obj));
+    }
+  };
+  const onChangeDep = (value: string) => {
+    const obj = { value, _id: 0 };
+    setDepartureString(obj);
+  };
+  const onChangeArr = (value: string) => {
+    const obj = { value, _id: 0 };
+    setArrivalString(obj);
+  };
 
   const swapPoints = () => {
     setArrivalString(departure);
@@ -54,29 +77,21 @@ export const DestinationPicker = memo<Props>(({ className }) => {
       <span className={s.title}>Направление</span>
       <div className={s.input_holder}>
         <DestinationPickerUnit
-          value={departureString}
+          value={departureString.value}
           options={optionsRefined}
           placeholder="Откуда"
-          onSelect={(value: string) => {
-            dispatch(setDeparture(value));
-          }}
-          onChange={(value: string) => {
-            setDepartureString(value);
-          }}
+          onSelect={selectDeparture}
+          onChange={onChangeDep}
         />
         <Button shape="circle" className={s.geoIcon} onClick={swapPoints}>
           <SwapBtn />
         </Button>
         <DestinationPickerUnit
-          value={arrivalString}
+          value={arrivalString.value}
           options={optionsRefined}
           placeholder="Куда"
-          onSelect={(value: string) => {
-            dispatch(setArrival(value));
-          }}
-          onChange={(value: string) => {
-            setArrivalString(value);
-          }}
+          onSelect={selectArrival}
+          onChange={onChangeArr}
         />
       </div>
     </div>

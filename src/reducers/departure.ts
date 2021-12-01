@@ -1,14 +1,15 @@
 /* eslint-disable no-param-reassign */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { City } from '../interfaces/Interfaces';
 
-const initialState = '';
+const initialState: City = { _id: 0, value: '' };
 
 export const departureSlice = createSlice({
   name: 'departure',
   initialState,
   reducers: {
-    setDeparture: (state: string, action: PayloadAction<string>) => action.payload,
+    setDeparture: (state: City, action: PayloadAction<City>) => action.payload,
   },
 });
 

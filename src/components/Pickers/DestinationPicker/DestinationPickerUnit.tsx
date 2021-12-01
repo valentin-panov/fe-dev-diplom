@@ -2,12 +2,12 @@ import { AutoComplete, Input } from 'antd';
 import React, { memo } from 'react';
 import s from './DestinationPicker.module.scss';
 import geoMark from '../../../svg/icon_geo.svg';
-import { Destination } from './DestinationPicker';
+import { City } from '../../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;
   placeholder: string;
-  options: Destination[];
+  options: City[];
   value: string;
   onSelect: (value: string, option: unknown) => void;
   onChange: (value: string, option: unknown) => void;
