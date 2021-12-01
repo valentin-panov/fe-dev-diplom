@@ -11,8 +11,17 @@ export interface Menu {
   pathName: string;
 }
 
+export interface City {
+  _id: number;
+  name: string;
+}
+
 export interface LastTickets extends Status {
   items: Train[];
+}
+
+export interface DestOptions extends Status {
+  items: City[];
 }
 
 // LEGACY

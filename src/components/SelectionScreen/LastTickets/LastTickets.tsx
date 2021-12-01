@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import s from './LastTickets.module.scss';
 import { LastTicketCard } from './LastTicketCard';
 import { RootState } from '../../../store';
-import { asyncFetchData } from '../../../reducers/lastTickets';
+import { lastTicketsFetchData } from '../../../reducers/lastTickets';
 
 export type Props = {
   className?: string;
@@ -18,7 +18,7 @@ export const LastTickets = memo<Props>(({ className }) => {
   const cardsToShowCount = 3;
 
   useEffect(() => {
-    dispatch(asyncFetchData());
+    dispatch(lastTicketsFetchData());
   }, [dispatch]);
 
   return (

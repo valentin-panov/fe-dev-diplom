@@ -9,9 +9,14 @@ import { DestinationPickerUnit } from './DestinationPickerUnit';
 import { RootState } from '../../../store';
 import { setArrival } from '../../../reducers/arrival';
 import { setDeparture } from '../../../reducers/departure';
+import { capitalize } from '../../../utils/capitalize';
 
 export type Props = {
   className?: string;
+};
+
+export type Destination = {
+  value: string;
 };
 
 export const DestinationPicker = memo<Props>(({ className }) => {
@@ -21,14 +26,22 @@ export const DestinationPicker = memo<Props>(({ className }) => {
   const [arrivalString, setArrivalString] = useState(arrival);
   const dispatch = useDispatch();
 
-  const options = [{ value: 'Москва' }, { value: 'Санкт-Петербург' }, { value: 'Владивосток' }];
+  const response = [
+    {
+      _id: 1491,
+      name: 'москва',
+    },
+    {
+      _id: 1492,
+      name: 'санкт-петербург',
+    },
+    {
+      _id: 1493,
+      name: 'нижний новгород',
+    },
+  ];
 
-  const getDeparture = (value: string) => {
-    dispatch(setDeparture(value));
-  };
-  const getArrival = (value: string) => {
-    dispatch(setArrival(value));
-  };
+  const optionsRefined: Destination[] = response.map((el) => (({ name }) => ({ value: capitalize(name) }))(el));
 
   const swapPoints = () => {
     setArrivalString(departure);
@@ -42,9 +55,11 @@ export const DestinationPicker = memo<Props>(({ className }) => {
       <div className={s.input_holder}>
         <DestinationPickerUnit
           value={departureString}
-          options={options}
+          options={optionsRefined}
           placeholder="Откуда"
-          onSelect={getDeparture}
+          onSelect={(value: string) => {
+            dispatch(setDeparture(value));
+          }}
           onChange={(value: string) => {
             setDepartureString(value);
           }}
@@ -54,9 +69,11 @@ export const DestinationPicker = memo<Props>(({ className }) => {
         </Button>
         <DestinationPickerUnit
           value={arrivalString}
-          options={options}
+          options={optionsRefined}
           placeholder="Куда"
-          onSelect={getArrival}
+          onSelect={(value: string) => {
+            dispatch(setArrival(value));
+          }}
           onChange={(value: string) => {
             setArrivalString(value);
           }}

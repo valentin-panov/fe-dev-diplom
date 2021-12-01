@@ -18,7 +18,7 @@ const initialState: LastTickets = {
 
 export type Params = { count?: string; category?: number; searchString?: string };
 
-export const asyncFetchData = createAsyncThunk('lastTickets/FetchingData', async () => {
+export const lastTicketsFetchData = createAsyncThunk('lastTickets/FetchingData', async () => {
   const reqURL = `${serverURL}/routes/last`;
   const response = await fetch(reqURL);
   if (!response.ok) {
@@ -39,15 +39,15 @@ export const lastTicketsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(asyncFetchData.pending, (state) => {
+    builder.addCase(lastTicketsFetchData.pending, (state) => {
       state.status = 'pending';
       state.error = '';
     });
-    builder.addCase(asyncFetchData.fulfilled, (state, action: PayloadAction<Train[]>) => {
+    builder.addCase(lastTicketsFetchData.fulfilled, (state, action: PayloadAction<Train[]>) => {
       state.items = [...action.payload];
       state.status = 'success';
     });
-    builder.addCase(asyncFetchData.rejected, (state, action) => {
+    builder.addCase(lastTicketsFetchData.rejected, (state, action) => {
       state.status = 'error';
       state.error = String(action.error.message);
     });
