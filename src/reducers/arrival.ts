@@ -10,8 +10,9 @@ export const arrivalSlice = createSlice({
   initialState,
   reducers: {
     setArrival: (state: City, action: PayloadAction<City>) => action.payload,
+    clearArrival: () => initialState,
   },
 });
 
 export const arrival = arrivalSlice.reducer;
-export const { setArrival } = arrivalSlice.actions;
+export const { setArrival, clearArrival } = arrivalSlice.actions;

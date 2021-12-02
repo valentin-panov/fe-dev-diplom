@@ -10,8 +10,9 @@ export const departureSlice = createSlice({
   initialState,
   reducers: {
     setDeparture: (state: City, action: PayloadAction<City>) => action.payload,
+    clearDeparture: () => initialState,
   },
 });
 
 export const departure = departureSlice.reducer;
-export const { setDeparture } = departureSlice.actions;
+export const { setDeparture, clearDeparture } = departureSlice.actions;

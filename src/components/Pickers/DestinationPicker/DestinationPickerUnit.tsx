@@ -11,29 +11,33 @@ export type Props = {
   value: string;
   onSelect: (value: string, option: unknown) => void;
   onChange: (value: string, option: unknown) => void;
+  onFocus: () => void;
 };
 
-export const DestinationPickerUnit = memo<Props>(({ className, value, options, placeholder, onSelect, onChange }) => (
-  <AutoComplete
-    value={value}
-    dropdownClassName={s.dropdown}
-    dropdownMatchSelectWidth
-    defaultOpen={false}
-    backfill
-    options={options}
-    filterOption={(inputValue, option) => option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
-    onSelect={onSelect}
-    onChange={onChange}
-    className={className}
-  >
-    <Input
-      className={s.autocomplete}
-      placeholder={placeholder}
-      suffix={
-        <div className={s.geoIcon}>
-          <img src={geoMark} alt="geo icon" />
-        </div>
-      }
-    />
-  </AutoComplete>
-));
+export const DestinationPickerUnit = memo<Props>(
+  ({ className, value, onFocus, options, placeholder, onSelect, onChange }) => (
+    <AutoComplete
+      value={value}
+      dropdownClassName={s.dropdown}
+      dropdownMatchSelectWidth
+      defaultOpen={false}
+      backfill
+      options={options}
+      filterOption={(inputValue, option) => option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
+      onSelect={onSelect}
+      onChange={onChange}
+      className={className}
+      onFocus={onFocus}
+    >
+      <Input
+        className={s.autocomplete}
+        placeholder={placeholder}
+        suffix={
+          <div className={s.geoIcon}>
+            <img src={geoMark} alt="geo icon" />
+          </div>
+        }
+      />
+    </AutoComplete>
+  )
+);
