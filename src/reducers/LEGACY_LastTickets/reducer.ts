@@ -4,7 +4,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Interfaces
-import { IInitialStateTopSales, ICard } from '../../interfaces/Interfaces';
+import { ICard, IInitialStateTopSales } from '../../interfaces/Interfaces';
 
 // Server
 import { serverURL } from '../../App';

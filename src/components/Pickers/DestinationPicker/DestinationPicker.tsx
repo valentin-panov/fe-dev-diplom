@@ -18,15 +18,27 @@ export type Props = {
 export const DestinationPicker = memo<Props>(({ className }) => {
   const departureStore = useSelector((store: RootState) => store.departure);
   const arrivalStore = useSelector((store: RootState) => store.arrival);
+  // const [points, setPoints] = useState({ departure: departureStore, arrival: arrivalStore });
   const dispatch = useDispatch();
 
-  const selectPoint = (value: City, param: boolean) => {
-    if (param) {
+  const selectPoint = (value: City, departureFlag: boolean) => {
+    if (departureFlag) {
       dispatch(setDeparture(value));
     } else {
       dispatch(setArrival(value));
     }
   };
+
+  // const onChangePoint = (value: string, departureFlag: boolean) => {
+  //   const obj = { value, _id: 0 };
+  //   if (departureFlag) {
+  //     setPoints({ ...points, departure: obj });
+  //     dispatch(clearDeparture());
+  //   } else {
+  //     setPoints({ ...points, arrival: obj });
+  //     dispatch(clearArrival());
+  //   }
+  // };
 
   const swapPoints = () => {
     dispatch(setArrival(departureStore));
@@ -37,12 +49,21 @@ export const DestinationPicker = memo<Props>(({ className }) => {
     <div className={cn(s.root, className)}>
       <span className={s.title}>Направление</span>
       <div className={s.input_holder}>
-        <DestinationPickerUnit param defaultValue={departureStore.value} placeholder="Откуда" onSelect={selectPoint} />
+        <DestinationPickerUnit
+          // onChangePoint={onChangePoint}
+          // givenValue={points.departure.value}
+          departureFlag
+          defaultValue={departureStore.value}
+          placeholder="Откуда"
+          onSelect={selectPoint}
+        />
         <Button shape="circle" className={s.geoIcon} onClick={swapPoints}>
           <SwapBtn />
         </Button>
         <DestinationPickerUnit
-          param={false}
+          // onChangePoint={onChangePoint}
+          // givenValue={points.arrival.value}
+          departureFlag={false}
           defaultValue={arrivalStore.value}
           placeholder="Куда"
           onSelect={selectPoint}
