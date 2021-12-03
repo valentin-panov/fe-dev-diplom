@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import cn from 'clsx';
 import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,15 +16,20 @@ export type Props = {
 };
 
 export const DestinationPicker = memo<Props>(({ className }) => {
+  const dispatch = useDispatch();
   const departureStore = useSelector((store: RootState) => store.departure);
   const arrivalStore = useSelector((store: RootState) => store.arrival);
-  // const [points, setPoints] = useState({ departure: departureStore, arrival: arrivalStore });
-  const dispatch = useDispatch();
+  const [points, setPoints] = useState({ departure: departureStore, arrival: arrivalStore });
+
+  // const unitDeparture = React.createRef();
+  // const unitArrival = React.createRef();
 
   const selectPoint = (value: City, departureFlag: boolean) => {
     if (departureFlag) {
+      setPoints({ ...points, departure: value });
       dispatch(setDeparture(value));
     } else {
+      setPoints({ ...points, arrival: value });
       dispatch(setArrival(value));
     }
   };
@@ -41,6 +46,7 @@ export const DestinationPicker = memo<Props>(({ className }) => {
   // };
 
   const swapPoints = () => {
+    setPoints({ departure: points.arrival, arrival: points.departure });
     dispatch(setArrival(departureStore));
     dispatch(setDeparture(arrivalStore));
   };
@@ -50,23 +56,21 @@ export const DestinationPicker = memo<Props>(({ className }) => {
       <span className={s.title}>Направление</span>
       <div className={s.input_holder}>
         <DestinationPickerUnit
-          // onChangePoint={onChangePoint}
-          // givenValue={points.departure.value}
           departureFlag
           defaultValue={departureStore.value}
           placeholder="Откуда"
           onSelect={selectPoint}
+          // ref={unitDeparture}
         />
         <Button shape="circle" className={s.geoIcon} onClick={swapPoints}>
           <SwapBtn />
         </Button>
         <DestinationPickerUnit
-          // onChangePoint={onChangePoint}
-          // givenValue={points.arrival.value}
           departureFlag={false}
           defaultValue={arrivalStore.value}
           placeholder="Куда"
           onSelect={selectPoint}
+          // ref={unitArrival}
         />
       </div>
     </div>

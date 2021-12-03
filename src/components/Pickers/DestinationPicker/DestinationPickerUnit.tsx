@@ -12,6 +12,7 @@ export type Props = {
   defaultValue: string;
   departureFlag: boolean;
   onSelect: (value: City, param: boolean) => void;
+
   // givenValue: string;
   // onChangePoint: (value: string, departureFlag: boolean) => void;
 };

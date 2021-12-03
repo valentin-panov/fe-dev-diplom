@@ -31,8 +31,6 @@ export const autocomplete =
 export const $fetch = (term: string): Observable<ResponseOptions> =>
   fromFetch(`${serverURL}/routes/cities?name=${term}`).pipe(
     switchMap((response) => {
-      // eslint-disable-next-line no-console
-      console.log('FETCH');
       if (response.ok) {
         // OK return data
         return response.json();
