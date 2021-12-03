@@ -108,6 +108,7 @@ export const DestinationPickerUnit = memo<Props>(({ className, placeholder, defa
       onSelect={returnSelectedCity}
       onChange={(value) => term$.next(value)}
       className={className}
+      notFoundContent="введите название города"
     >
       <Input
         className={s.autocomplete}

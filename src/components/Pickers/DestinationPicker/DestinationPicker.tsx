@@ -18,7 +18,6 @@ export type Props = {
 export const DestinationPicker = memo<Props>(({ className }) => {
   const departureStore = useSelector((store: RootState) => store.departure);
   const arrivalStore = useSelector((store: RootState) => store.arrival);
-
   const dispatch = useDispatch();
 
   const selectPoint = (value: City, param: boolean) => {
