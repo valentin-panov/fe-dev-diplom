@@ -26,18 +26,23 @@ export type Props = {
   onSelect: (value: City, param: boolean) => void;
 };
 
-export type ResponseOptions = { _id: number; name: string }[];
+export type ResponseOptions = { _id: number; name: string }[] | { error: boolean; message: string };
 
-export const refineResponseOptions = (responseArray: ResponseOptions): City[] =>
-  responseArray.map((el) =>
-    (({ name, _id }) => ({
-      _id,
-      value: capitalize(name),
-    }))(el)
-  );
+export const refineResponseOptions = (responseArray: ResponseOptions): City[] => {
+  if (Array.isArray(responseArray)) {
+    return responseArray.map((el) =>
+      (({ name, _id }) => ({
+        _id,
+        value: capitalize(name),
+      }))(el)
+    );
+  }
+  return [];
+};
 
 export const autocomplete =
-  (time: number, selector: (arg: string) => Observable<ResponseOptions>) => (source$: Observable<string>) =>
+  (time: number, selector: (arg: string) => Observable<ResponseOptions>) =>
+  (source$: Observable<string>): Observable<City[]> =>
     source$.pipe(
       debounceTime(time),
       filter((str) => str.trim() !== ''),
@@ -45,7 +50,7 @@ export const autocomplete =
       map(refineResponseOptions)
     );
 
-export const $fetch = (term: string) =>
+export const $fetch = (term: string): Observable<ResponseOptions> =>
   fromFetch(`https://fe-diplom.herokuapp.com/routes/cities?name=${term}`).pipe(
     switchMap((response) => {
       if (response.ok) {
@@ -57,6 +62,7 @@ export const $fetch = (term: string) =>
     }),
     catchError((err) => {
       // Network or other error, handle appropriately
+      // eslint-disable-next-line no-console
       console.error(err);
       return of({ error: true, message: err.message });
     })
@@ -79,11 +85,12 @@ export const DestinationPickerUnit = memo<Props>(({ className, placeholder, defa
       next: (term) => {
         // store new value in the state
         setOptions(term);
-        console.log(term);
       },
       error: (err) => {
         // handle error here
+        // eslint-disable-next-line no-console
         console.log(err);
+        return of(err);
       },
     });
     return () => subscription.unsubscribe();
