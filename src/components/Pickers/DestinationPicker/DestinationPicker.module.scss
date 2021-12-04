@@ -43,21 +43,15 @@
 
 .geoIcon {
   position         : relative;
+  display          : flex;
   width            : 30px;
   min-height       : 30px;
+  justify-content  : center;
+  align-items      : center;
   color            : #E5E5E5;
   background-color : transparent;
   border           : 0;
   cursor           : pointer;
-  
-  & img {
-    position   : absolute;
-    top        : 0;
-    left       : 0;
-    width      : 100%;
-    height     : 100%;
-    object-fit : scale-down;
-  }
   
   &:hover, &:focus {
     background-color : transparent;

@@ -21,9 +21,6 @@ export const DestinationPicker = memo<Props>(({ className }) => {
   const arrivalStore = useSelector((store: RootState) => store.arrival);
   const [points, setPoints] = useState({ departure: departureStore, arrival: arrivalStore });
 
-  // const unitDeparture = React.createRef();
-  // const unitArrival = React.createRef();
-
   const selectPoint = (value: City, departureFlag: boolean) => {
     if (departureFlag) {
       setPoints({ ...points, departure: value });
@@ -34,44 +31,38 @@ export const DestinationPicker = memo<Props>(({ className }) => {
     }
   };
 
-  // const onChangePoint = (value: string, departureFlag: boolean) => {
-  //   const obj = { value, _id: 0 };
-  //   if (departureFlag) {
-  //     setPoints({ ...points, departure: obj });
-  //     dispatch(clearDeparture());
-  //   } else {
-  //     setPoints({ ...points, arrival: obj });
-  //     dispatch(clearArrival());
-  //   }
-  // };
-
   const swapPoints = () => {
     setPoints({ departure: points.arrival, arrival: points.departure });
     dispatch(setArrival(departureStore));
     dispatch(setDeparture(arrivalStore));
   };
 
+  const unitDeparture = (
+    <DestinationPickerUnit
+      departureFlag
+      defaultValue={departureStore.value}
+      placeholder="Откуда"
+      onSelect={selectPoint}
+    />
+  );
+  const unitArrival = (
+    <DestinationPickerUnit
+      departureFlag={false}
+      defaultValue={arrivalStore.value}
+      placeholder="Куда"
+      onSelect={selectPoint}
+    />
+  );
+
   return (
     <div className={cn(s.root, className)}>
       <span className={s.title}>Направление</span>
       <div className={s.input_holder}>
-        <DestinationPickerUnit
-          departureFlag
-          defaultValue={departureStore.value}
-          placeholder="Откуда"
-          onSelect={selectPoint}
-          // ref={unitDeparture}
-        />
+        {unitDeparture}
         <Button shape="circle" className={s.geoIcon} onClick={swapPoints}>
           <SwapBtn />
         </Button>
-        <DestinationPickerUnit
-          departureFlag={false}
-          defaultValue={arrivalStore.value}
-          placeholder="Куда"
-          onSelect={selectPoint}
-          // ref={unitArrival}
-        />
+        {unitArrival}
       </div>
     </div>
   );
