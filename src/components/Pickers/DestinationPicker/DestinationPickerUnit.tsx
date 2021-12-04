@@ -106,7 +106,7 @@ export const DestinationPickerUnit = memo<Props>(
       //     inputField.current.value = defaultValue;
       //   },
       // }));
-    }, [defaultValue]);
+    }, [defaultValue, departureFlag]);
 
     // TODO !!! если здесь добавить какой-либо функционал, поток не отрабатывает.
     //  Была задумка реализовать через setLoading показ иконки загрузки в строке ввода
