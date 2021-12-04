@@ -66,7 +66,7 @@ export const DestinationPickerUnit = memo<Props>(
     const term$ = new BehaviorSubject<string>('');
 
     // This is a function for getting list of suggestions from the server
-    const $fetch = (term: string): Observable<ResponseOptions> =>
+    const fetch$ = (term: string): Observable<ResponseOptions> =>
       fromFetch(`${serverURL}/routes/cities?name=${term}`).pipe(
         switchMap((response) => {
           if (response.ok) {
@@ -84,7 +84,7 @@ export const DestinationPickerUnit = memo<Props>(
         })
       );
 
-    const results$ = term$.pipe(autocomplete(1000, (term: string): Observable<ResponseOptions> => $fetch(term)));
+    const results$ = term$.pipe(autocomplete(1000, (term: string): Observable<ResponseOptions> => fetch$(term)));
 
     // return selected option to parent component
     const returnSelectedCity = (value: string) => {
@@ -108,11 +108,9 @@ export const DestinationPickerUnit = memo<Props>(
       // }));
     }, [defaultValue, departureFlag]);
 
-    // TODO !!! если здесь добавить какой-либо функционал, поток не отрабатывает.
-    //  Была задумка реализовать через setLoading показ иконки загрузки в строке ввода
     const innerOnChange = (value: string) => {
-      // setLoading(true);
       term$.next(value);
+      setLoading(true);
     };
 
     // Subscription to the input stream
@@ -120,6 +118,7 @@ export const DestinationPickerUnit = memo<Props>(
       const subscription = results$.subscribe({
         next: (term) => {
           // store new value in the state
+          setLoading(false);
           setOptions(term);
         },
         error: (err) => {
@@ -144,7 +143,7 @@ export const DestinationPickerUnit = memo<Props>(
         onSelect={returnSelectedCity}
         onChange={innerOnChange}
         className={className}
-        notFoundContent="введите название города"
+        notFoundContent="начните вводить название города"
       >
         <Input
           ref={inputField}
