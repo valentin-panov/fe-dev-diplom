@@ -46,7 +46,8 @@ export const refineResponseOptions = (responseArray: ResponseOptions): City[] =>
 
 // It's a HOO, it receives time of debounce,function for getting
 // list of suggestions from server, and source stream. It denounces
-// function and returns result only if source stream really stops
+// function and returns result only if source stream really stops.
+// Feature: source stream must emit more than one char
 export const autocomplete =
   (time: number, selector: (arg: string) => Observable<ResponseOptions>) =>
   (source$: Observable<string>): Observable<City[]> =>
@@ -76,12 +77,10 @@ export const DestinationPickerUnit = memo<Props>(
           // Server is returning a status requiring the client to try something else.
           return of({ error: true, message: `Error ${response.status}` });
         }),
-        catchError((err) => {
+        catchError((err) =>
           // Network or other error, handle appropriately
-          // eslint-disable-next-line no-console
-          console.error(err);
-          return of({ error: true, message: err.message });
-        })
+          of({ error: true, message: err.message })
+        )
       );
 
     const results$ = term$.pipe(autocomplete(1000, (term: string): Observable<ResponseOptions> => fetch$(term)));
