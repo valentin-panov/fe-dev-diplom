@@ -63,7 +63,7 @@ export const DestinationPickerUnit = memo<Props>(
     const [loading, setLoading] = useState<boolean>(false);
     const [options, setOptions] = useState<City[]>([]);
     const term$ = useMemo(() => new BehaviorSubject<string>(''), []);
-    // const [valueString, setValueString] = useState<string>(defaultValue);
+    const [valueString, setValueString] = useState<string>(defaultValue);
 
     const inputField = useRef(null);
 
@@ -98,16 +98,10 @@ export const DestinationPickerUnit = memo<Props>(
     // Try to update strings in input components
     // TODO Реализовать ререндер значений в инпутах
     React.useEffect(() => {
+      setValueString(defaultValue);
       // eslint-disable-next-line no-console
-      console.log('DEFAULT UPDATED ', departureFlag, defaultValue);
-      // setValueString(defaultValue);
-
-      // useImperativeHandle(ref, () => ({
-      //   changeValue: () => {
-      //     inputField.current.value = defaultValue;
-      //   },
-      // }));
-    }, [defaultValue, departureFlag]);
+      // console.log(valueString);
+    }, [defaultValue]);
 
     const innerOnChange = (value: string) => {
       term$.next(value);
@@ -134,8 +128,9 @@ export const DestinationPickerUnit = memo<Props>(
     // subscription for triggering loading state
     React.useEffect(() => {
       const loadingSubscription = term$.subscribe({
-        next: () => {
+        next: (term) => {
           setLoading(true);
+          setValueString(term);
         },
       });
       return () => loadingSubscription.unsubscribe();
@@ -148,6 +143,7 @@ export const DestinationPickerUnit = memo<Props>(
         dropdownMatchSelectWidth
         defaultOpen={false}
         defaultValue={defaultValue}
+        value={valueString}
         options={options}
         filterOption={(inputValue, option) => option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
         onSelect={returnSelectedCity}
