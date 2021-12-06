@@ -47,7 +47,6 @@ export const refineResponseOptions = (responseArray: ResponseOptions): City[] =>
 // It's a HOO, it receives time of debounce,function for getting
 // list of suggestions from server, and source stream. It denounces
 // function and returns result only if source stream really stops.
-// Feature: source stream must emit more than one char
 export const autocomplete =
   (time: number, selector: (arg: string) => Observable<ResponseOptions>) =>
   (source$: Observable<string>): Observable<City[]> =>
@@ -63,8 +62,11 @@ export const DestinationPickerUnit = memo<Props>(
   ({ className, placeholder, defaultValue, onSelect, departureFlag }) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [options, setOptions] = useState<City[]>([]);
-    const inputField = useRef(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const term$ = new BehaviorSubject<string>('');
+    // const [valueString, setValueString] = useState<string>(defaultValue);
+
+    const inputField = useRef(null);
 
     // This is a function for getting list of suggestions from the server
     const fetch$ = (term: string): Observable<ResponseOptions> =>
@@ -95,10 +97,11 @@ export const DestinationPickerUnit = memo<Props>(
     };
 
     // Try to update strings in input components
+    // TODO Реализовать ререндер значений в инпутах
     React.useEffect(() => {
       // eslint-disable-next-line no-console
       console.log('DEFAULT UPDATED ', departureFlag, defaultValue);
-      // TODO Реализовать ререндер значений в инпутах
+      // setValueString(defaultValue);
 
       // useImperativeHandle(ref, () => ({
       //   changeValue: () => {
@@ -109,7 +112,6 @@ export const DestinationPickerUnit = memo<Props>(
 
     const innerOnChange = (value: string) => {
       term$.next(value);
-      setLoading(true);
     };
 
     // Subscription to the input stream
@@ -129,6 +131,16 @@ export const DestinationPickerUnit = memo<Props>(
       });
       return () => subscription.unsubscribe();
     }, [results$]);
+
+    // subscription for triggering loading state
+    React.useEffect(() => {
+      const loadingSubscription = term$.subscribe({
+        next: () => {
+          setLoading(true);
+        },
+      });
+      return () => loadingSubscription.unsubscribe();
+    }, [term$]);
 
     return (
       <AutoComplete
