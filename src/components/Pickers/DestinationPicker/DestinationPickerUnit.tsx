@@ -1,163 +1,93 @@
 import { AutoComplete, Input } from 'antd';
-import React, { memo, useMemo, useRef, useState } from 'react';
-import {
-  BehaviorSubject,
-  catchError,
-  debounceTime,
-  filter,
-  map,
-  Observable,
-  of,
-  skip,
-  switchMap,
-  takeUntil,
-} from 'rxjs';
-import { fromFetch } from 'rxjs/fetch';
+import React, { memo, useMemo, useState } from 'react';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { LoadingOutlined } from '@ant-design/icons';
 import s from './DestinationPicker.module.scss';
 import { ReactComponent as GeoMark } from '../../../svg/icon_geo.svg';
 import { City } from '../../../interfaces/Interfaces';
-import { capitalize } from '../../../utils/capitalize';
-import { serverURL } from '../../../App';
+import { autocomplete, fetch$, ResponseOptions } from '../../../utils/throttling';
 
 export type Props = {
   className?: string;
-  placeholder: string;
   defaultValue: string;
-  departureFlag: boolean;
-  onSelect: (value: City, param: boolean) => void;
+  point: Point;
+  onSelect: (value: City, point: Point) => void;
 };
 
-// THROTTLING
-export type ResponseOptions = { _id: number; name: string }[] | { error: boolean; message: string };
+export type Point = 'departure' | 'arrival';
 
-// Here we convert server response into antd-autocomplete-compatible array
-export const refineResponseOptions = (responseArray: ResponseOptions): City[] => {
-  if (Array.isArray(responseArray)) {
-    return responseArray.map((el) =>
-      (({ name, _id }) => ({
-        _id,
-        value: capitalize(name),
-      }))(el)
-    );
-  }
-  return [];
-};
+export const DestinationPickerUnit = memo<Props>(({ className, defaultValue, onSelect, point }) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const [options, setOptions] = useState<City[]>([]);
+  const [value, setValue] = useState<string>(defaultValue);
+  const term$ = useMemo(() => new BehaviorSubject<string>(defaultValue), [defaultValue]);
+  const results$ = useMemo(
+    () => term$.pipe(autocomplete(1000, (term: string): Observable<ResponseOptions> => fetch$(term))),
+    [term$]
+  );
 
-// It's a HOO, it receives time of debounce,function for getting
-// list of suggestions from server, and source stream. It denounces
-// function and returns result only if source stream really stops.
-export const autocomplete =
-  (time: number, selector: (arg: string) => Observable<ResponseOptions>) =>
-  (source$: Observable<string>): Observable<City[]> =>
-    source$.pipe(
-      debounceTime(time),
-      filter((str) => str.trim() !== ''),
-      switchMap((arg: string) => selector(arg).pipe(takeUntil(source$.pipe(skip(1))))),
-      map(refineResponseOptions)
-    );
-
-// COMPONENT ITSELF
-export const DestinationPickerUnit = memo<Props>(
-  ({ className, placeholder, defaultValue, onSelect, departureFlag }) => {
-    const [loading, setLoading] = useState<boolean>(false);
-    const [options, setOptions] = useState<City[]>([]);
-    const term$ = useMemo(() => new BehaviorSubject<string>(''), []);
-    const [valueString, setValueString] = useState<string>(defaultValue);
-
-    const inputField = useRef(null);
-
-    // This is a function for getting list of suggestions from the server
-    const fetch$ = (term: string): Observable<ResponseOptions> =>
-      fromFetch(`${serverURL}/routes/cities?name=${term}`).pipe(
-        switchMap((response) => {
-          if (response.ok) {
-            // OK return data
-            return response.json();
-          }
-          // Server is returning a status requiring the client to try something else.
-          return of({ error: true, message: `Error ${response.status}` });
-        }),
-        catchError((err) =>
-          // Network or other error, handle appropriately
-          of({ error: true, message: err.message })
-        )
-      );
-
-    const results$ = term$.pipe(autocomplete(1000, (term: string): Observable<ResponseOptions> => fetch$(term)));
-
-    // return selected option to parent component
-    const returnSelectedCity = (value: string) => {
-      const obj: City | undefined = options.find((el) => el.value === value);
-      if (obj) {
-        onSelect(obj, departureFlag);
-      }
-      setLoading(false);
-    };
-
-    // Try to update strings in input components
-    // TODO Реализовать ререндер значений в инпутах
-    React.useEffect(() => {
-      setValueString(defaultValue);
-      // eslint-disable-next-line no-console
-      // console.log(valueString);
-    }, [defaultValue]);
-
-    const innerOnChange = (value: string) => {
-      term$.next(value);
-    };
-
-    // Subscription to the input stream
-    React.useEffect(() => {
-      const subscription = results$.subscribe({
-        next: (term) => {
-          // store new value in the state
-          setLoading(false);
-          setOptions(term);
-        },
-        error: (err) => {
-          // handle error here
-          // eslint-disable-next-line no-console
-          console.log(err);
-          return of(err);
-        },
-      });
-      return () => subscription.unsubscribe();
-    }, [results$]);
-
-    // subscription for triggering loading state
-    React.useEffect(() => {
-      const loadingSubscription = term$.subscribe({
-        next: (term) => {
+  // subscription for triggering loading state
+  React.useEffect(() => {
+    const loadingSubscription = term$.subscribe({
+      next: (term) => {
+        if (term !== defaultValue) {
           setLoading(true);
-          setValueString(term);
-        },
-      });
-      return () => loadingSubscription.unsubscribe();
-    }, [term$]);
+        }
+        setValue(term);
+      },
+    });
+    return () => loadingSubscription.unsubscribe();
+  }, [term$, defaultValue]);
 
-    return (
-      <AutoComplete
-        backfill
-        dropdownClassName={s.dropdown}
-        dropdownMatchSelectWidth
-        defaultOpen={false}
-        defaultValue={defaultValue}
-        value={valueString}
-        options={options}
-        filterOption={(inputValue, option) => option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
-        onSelect={returnSelectedCity}
-        onChange={innerOnChange}
-        className={className}
-        notFoundContent="начните вводить название города"
-      >
-        <Input
-          ref={inputField}
-          className={s.autocomplete}
-          placeholder={placeholder}
-          suffix={<div className={s.geoIcon}>{loading ? <LoadingOutlined /> : <GeoMark />}</div>}
-        />
-      </AutoComplete>
-    );
-  }
-);
+  // Update value in input components
+  React.useEffect(() => {
+    setValue(defaultValue);
+  }, [defaultValue]);
+
+  // Subscription to the input stream
+  React.useEffect(() => {
+    const subscription = results$.subscribe({
+      next: (term) => {
+        // store new value in the state
+        setLoading(false);
+        setOptions(term);
+      },
+      error: (err) =>
+        // handle error here
+        of(err),
+    });
+    return () => subscription.unsubscribe();
+  }, [results$]);
+
+  // return selected option to parent component
+  const returnSelectedCity = (payload: string) => {
+    const selected: City | undefined = options.find((el) => el.value === payload);
+    if (selected) {
+      onSelect(selected, point);
+    }
+  };
+
+  return (
+    <AutoComplete
+      backfill
+      dropdownClassName={s.dropdown}
+      dropdownMatchSelectWidth
+      defaultOpen={false}
+      value={value}
+      options={options}
+      filterOption={(inputValue, option) => option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
+      onSelect={returnSelectedCity}
+      onChange={(payload: string) => {
+        term$.next(payload);
+      }}
+      className={className}
+      notFoundContent="начните вводить название города"
+    >
+      <Input
+        className={s.autocomplete}
+        placeholder={point === 'departure' ? 'Откуда' : 'Куда'}
+        suffix={<div className={s.geoIcon}>{loading ? <LoadingOutlined /> : <GeoMark />}</div>}
+      />
+    </AutoComplete>
+  );
+});
