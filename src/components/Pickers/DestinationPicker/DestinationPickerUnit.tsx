@@ -1,5 +1,5 @@
 import { AutoComplete, Input } from 'antd';
-import React, { memo, useRef, useState } from 'react';
+import React, { memo, useMemo, useRef, useState } from 'react';
 import {
   BehaviorSubject,
   catchError,
@@ -62,8 +62,7 @@ export const DestinationPickerUnit = memo<Props>(
   ({ className, placeholder, defaultValue, onSelect, departureFlag }) => {
     const [loading, setLoading] = useState<boolean>(false);
     const [options, setOptions] = useState<City[]>([]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    const term$ = new BehaviorSubject<string>('');
+    const term$ = useMemo(() => new BehaviorSubject<string>(''), []);
     // const [valueString, setValueString] = useState<string>(defaultValue);
 
     const inputField = useRef(null);
