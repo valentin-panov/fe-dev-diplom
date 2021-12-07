@@ -60,10 +60,10 @@ export const DestinationPickerUnit = memo<Props>(({ className, defaultValue, onS
   }, [results$]);
 
   // return selected option to parent component
-  const returnSelectedCity = (payload: string) => {
-    const selected: City | undefined = options.find((el) => el.value === payload);
+  const returnSelectedCity = (payload: string, array: City[], mode: Point) => {
+    const selected: City | undefined = array.find((el) => el.value === payload);
     if (selected) {
-      onSelect(selected, point);
+      onSelect(selected, mode);
     }
   };
 
@@ -76,7 +76,7 @@ export const DestinationPickerUnit = memo<Props>(({ className, defaultValue, onS
       value={value}
       options={options}
       filterOption={(inputValue, option) => option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
-      onSelect={returnSelectedCity}
+      onSelect={(payload) => returnSelectedCity(payload, options, point)}
       onChange={(payload: string) => {
         term$.next(payload);
       }}
