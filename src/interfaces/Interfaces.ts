@@ -20,6 +20,19 @@ export interface LastTickets extends Status {
   items: Train[];
 }
 
+export interface GetRouteData {
+  // eslint-disable-next-line camelcase
+  total_count: number;
+  items: Train[];
+}
+
+export interface GetRoute extends Status {
+  data: {
+    totalCount: number;
+    items: Train[][];
+  };
+}
+
 export interface DestOptions extends Status {
   items: City[];
 }
