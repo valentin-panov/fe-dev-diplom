@@ -20,19 +20,22 @@ function disabledDate(current: Moment) {
 const dateFormat = 'DD/MM/YY';
 const placeholder = 'ДД/ММ/ГГ';
 
+export type DateType = 'forward' | 'return';
+
 export type Props = {
   className: string;
   defaultValue?: moment.Moment;
-  getDate: (value: unknown, dateString: string) => void;
+  dateType: DateType;
+  getDate: (value: moment.Moment | null, dateType: DateType) => void;
 };
 
-export const DatePickerOriginUnit = memo<Props>(({ className, defaultValue, getDate }) => (
+export const DatePickerOriginUnit = memo<Props>(({ className, defaultValue, getDate, dateType }) => (
   // eslint-disable-next-line camelcase
   <ConfigProvider locale={ru_RU}>
     <DatePicker
       className={cn(s.inputItem, s[className])}
       dropdownClassName={s.dropDown}
-      onChange={getDate}
+      onChange={(value) => getDate(value, dateType)}
       defaultValue={defaultValue}
       format={dateFormat}
       placeholder={placeholder}

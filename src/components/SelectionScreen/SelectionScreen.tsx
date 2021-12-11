@@ -28,9 +28,9 @@ export const SelectionScreen = memo<Props>(({ className }) => {
           <section className={s.sideSelection}>
             <div className={s.datePicker}>
               <div className={s.sideSelection__title}>Дата поездки</div>
-              <DatePickerOriginUnit getDate={onChange} className="asidePicker" />
+              <DatePickerOriginUnit dateType="forward" getDate={onChange} className="asidePicker" />
               <div className={s.sideSelection__title}>Дата возвращения</div>
-              <DatePickerOriginUnit getDate={onChange} className="asidePicker" />
+              <DatePickerOriginUnit dateType="return" getDate={onChange} className="asidePicker" />
             </div>
             <div className={s.divider} />
             <ul className={s.filterList}>

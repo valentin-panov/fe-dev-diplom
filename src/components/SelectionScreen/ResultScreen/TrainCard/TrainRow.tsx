@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { toDateTime } from 'utils/toDateTime';
+import { secToDateTime } from 'utils/secToDateTime';
 import cn from 'clsx';
 import s from './TrainCard.module.scss';
 import { Train } from '../../../../global';
@@ -20,8 +20,8 @@ export const TrainRow = memo<Props>(({ className, train, direction }) => {
   const stationA = capitalize(train.departure.from.railway_station_name);
   const stationB = capitalize(train.departure.to.railway_station_name);
   const duration = sec2hhmm(train.departure.duration);
-  const timeA = toDateTime(train.departure.from.datetime);
-  const timeB = toDateTime(train.departure.to.datetime);
+  const timeA = secToDateTime(train.departure.from.datetime);
+  const timeB = secToDateTime(train.departure.to.datetime);
 
   return (
     <div className={cn(s.row, className)}>
