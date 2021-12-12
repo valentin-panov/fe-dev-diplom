@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState } from 'react';
+import React, { memo, useEffect, useMemo, useState } from 'react';
 import cn from 'clsx';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
@@ -24,36 +24,34 @@ export const DatePickerOrigin = memo<Props>(({ className }) => {
   const onChange = (value: moment.Moment | null, dateType: DateType) => {
     const date = value ? value.format('YYYY-MM-DD') : null;
     if (dateType === 'forward') {
-      // console.log('DATE TO STORE ', date);
       dispatch(setDateForward(date));
     } else if (dateType === 'return') {
       dispatch(setDateReturn(date));
     }
   };
 
+  useEffect(() => {
+    if (returnStore && forwardStore && returnStore < forwardStore) {
+      dispatch(setDateReturn(null));
+      // TODO make warning popup
+    }
+  }, [returnStore, forwardStore, dispatch]);
+
   useMemo(() => {
     if (forwardStore) {
       setForwardMoment(moment(forwardStore, 'YYYY-MM-DD'));
+    } else {
+      setForwardMoment(undefined);
     }
   }, [forwardStore]);
 
   useMemo(() => {
     if (returnStore) {
       setReturnMoment(moment(returnStore, 'YYYY-MM-DD'));
+    } else {
+      setReturnMoment(undefined);
     }
   }, [returnStore]);
-
-  useMemo(() => {
-    if (forwardStore && returnStore) {
-      // eslint-disable-next-line no-console
-      console.log('DATES SHOULD BE MINDED!');
-      // TODO CANT UPDATE THE STORE AND THE COMPONENT DUE TO UNCATCHABLE ERROR RENDERING
-      //  AND! DEPARTURE DATE CANNOT BE MORE THAN RETURN DATE
-      if (returnStore < forwardStore) {
-        // dispatch(setDateReturn(forwardStore));
-      }
-    }
-  }, [forwardStore, returnStore]);
 
   return (
     <div className={cn(s.root, className)}>

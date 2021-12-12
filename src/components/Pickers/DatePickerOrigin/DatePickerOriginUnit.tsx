@@ -37,7 +37,7 @@ export const DatePickerOriginUnit = memo<Props>(({ className, defaultValue, disa
         className={cn(s.inputItem, s[className])}
         dropdownClassName={s.dropDown}
         onChange={(value) => getDate(value, dateType)}
-        defaultValue={defaultValue}
+        value={defaultValue}
         format={dateFormat}
         placeholder={placeholder}
         disabledDate={disabledDate}
