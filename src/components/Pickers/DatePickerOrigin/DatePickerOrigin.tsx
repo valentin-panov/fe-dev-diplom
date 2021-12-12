@@ -22,14 +22,12 @@ export const DatePickerOrigin = memo<Props>(({ className }) => {
   const returnStore = useSelector((store: RootState) => store.dateReturn);
 
   const onChange = (value: moment.Moment | null, dateType: DateType) => {
-    if (value) {
-      const date = value.format('YYYY-MM-DD');
-
-      if (dateType === 'forward') {
-        dispatch(setDateForward(date));
-      } else if (dateType === 'return') {
-        dispatch(setDateReturn(date));
-      }
+    const date = value ? value.format('YYYY-MM-DD') : null;
+    if (dateType === 'forward') {
+      // console.log('DATE TO STORE ', date);
+      dispatch(setDateForward(date));
+    } else if (dateType === 'return') {
+      dispatch(setDateReturn(date));
     }
   };
 
@@ -38,11 +36,21 @@ export const DatePickerOrigin = memo<Props>(({ className }) => {
       setForwardMoment(moment(forwardStore, 'YYYY-MM-DD'));
     }
   }, [forwardStore]);
+
   useMemo(() => {
     if (returnStore) {
       setReturnMoment(moment(returnStore, 'YYYY-MM-DD'));
     }
   }, [returnStore]);
+
+  useMemo(() => {
+    if (forwardStore && returnStore && returnStore < forwardStore) {
+      // eslint-disable-next-line no-console
+      console.log('RETURN DATE SHOULD BE HANDLED!');
+      // TODO CANT UPDATE THE STORE AND THE COMPONENT DUE TO UNCATCHABLE ERROR RENDERING
+      // dispatch(setDateReturn(forwardStore));
+    }
+  }, [forwardStore, returnStore]);
 
   return (
     <div className={cn(s.root, className)}>
@@ -51,12 +59,14 @@ export const DatePickerOrigin = memo<Props>(({ className }) => {
         <DatePickerOriginUnit
           dateType="forward"
           defaultValue={forwardMoment}
+          disableDate={moment()}
           getDate={onChange}
           className="headerPicker"
         />
         <DatePickerOriginUnit
           dateType="return"
           defaultValue={returnMoment}
+          disableDate={forwardMoment || moment()}
           getDate={onChange}
           className="headerPicker"
         />

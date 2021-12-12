@@ -12,11 +12,6 @@ import './replaceAntd.css';
 
 moment.locale('ru');
 
-function disabledDate(current: Moment) {
-  // Restricts select days before today
-  return current && current < moment().startOf('day');
-}
-
 const dateFormat = 'DD/MM/YY';
 const placeholder = 'ДД/ММ/ГГ';
 
@@ -25,22 +20,29 @@ export type DateType = 'forward' | 'return';
 export type Props = {
   className: string;
   defaultValue?: moment.Moment;
+  disableDate: moment.Moment;
   dateType: DateType;
   getDate: (value: moment.Moment | null, dateType: DateType) => void;
 };
 
-export const DatePickerOriginUnit = memo<Props>(({ className, defaultValue, getDate, dateType }) => (
-  // eslint-disable-next-line camelcase
-  <ConfigProvider locale={ru_RU}>
-    <DatePicker
-      className={cn(s.inputItem, s[className])}
-      dropdownClassName={s.dropDown}
-      onChange={(value) => getDate(value, dateType)}
-      defaultValue={defaultValue}
-      format={dateFormat}
-      placeholder={placeholder}
-      disabledDate={disabledDate}
-      allowClear
-    />
-  </ConfigProvider>
-));
+export const DatePickerOriginUnit = memo<Props>(({ className, defaultValue, disableDate, getDate, dateType }) => {
+  const disabledDate = (current: Moment) =>
+    // Restricts select days before today
+    current && current < disableDate.startOf('day');
+
+  return (
+    // eslint-disable-next-line camelcase
+    <ConfigProvider locale={ru_RU}>
+      <DatePicker
+        className={cn(s.inputItem, s[className])}
+        dropdownClassName={s.dropDown}
+        onChange={(value) => getDate(value, dateType)}
+        defaultValue={defaultValue}
+        format={dateFormat}
+        placeholder={placeholder}
+        disabledDate={disabledDate}
+        allowClear
+      />
+    </ConfigProvider>
+  );
+});
