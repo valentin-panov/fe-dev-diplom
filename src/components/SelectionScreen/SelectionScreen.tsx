@@ -27,6 +27,8 @@ export const SelectionScreen = memo<Props>(({ className }) => {
   const departureId = useSelector((store: RootState) => store.departure._id);
   // eslint-disable-next-line no-underscore-dangle
   const arrivalId = useSelector((store: RootState) => store.arrival._id);
+  const dateForward = useSelector((store: RootState) => store.dateForward);
+  const dateReturn = useSelector((store: RootState) => store.dateReturn);
 
   const dates: string[] = []; // temporary stub
   const onChange = (value: unknown, dateString: string) => {
@@ -35,10 +37,12 @@ export const SelectionScreen = memo<Props>(({ className }) => {
 
   const params = useMemo(
     () => ({
-      departure: departureId,
-      arrival: arrivalId,
+      departureId,
+      arrivalId,
+      dateForward,
+      dateReturn,
     }),
-    [departureId, arrivalId]
+    [departureId, arrivalId, dateForward, dateReturn]
   );
 
   useEffect(() => {

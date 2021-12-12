@@ -18,11 +18,22 @@ const initialState: GetRoute = {
   },
 };
 
-export type optionsGetTrains = { departure: number; arrival: number };
+export type optionsGetTrains = {
+  departureId: number;
+  arrivalId: number;
+  dateForward: string | null;
+  dateReturn: string | null;
+};
 
 export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async (options: optionsGetTrains) => {
-  const { departure, arrival } = options;
-  const reqURL = `${serverURL}/routes?from_city_id=${departure}&to_city_id=${arrival}`;
+  const { departureId, arrivalId, dateForward, dateReturn } = options;
+  let reqURL = `${serverURL}/routes?from_city_id=${departureId}&to_city_id=${arrivalId}`;
+  if (dateForward) {
+    reqURL += `&date_start=${dateForward}`;
+    if (dateReturn) {
+      reqURL += `&date_end${dateReturn}`;
+    }
+  }
   const response = await fetch(reqURL);
   if (!response.ok) {
     throw new Error(`request error: ${reqURL}`);

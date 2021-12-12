@@ -44,11 +44,14 @@ export const DatePickerOrigin = memo<Props>(({ className }) => {
   }, [returnStore]);
 
   useMemo(() => {
-    if (forwardStore && returnStore && returnStore < forwardStore) {
+    if (forwardStore && returnStore) {
       // eslint-disable-next-line no-console
-      console.log('RETURN DATE SHOULD BE HANDLED!');
+      console.log('DATES SHOULD BE MINDED!');
       // TODO CANT UPDATE THE STORE AND THE COMPONENT DUE TO UNCATCHABLE ERROR RENDERING
-      // dispatch(setDateReturn(forwardStore));
+      //  AND! DEPARTURE DATE CANNOT BE MORE THAN RETURN DATE
+      if (returnStore < forwardStore) {
+        // dispatch(setDateReturn(forwardStore));
+      }
     }
   }, [forwardStore, returnStore]);
 
