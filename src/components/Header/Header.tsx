@@ -1,9 +1,10 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import cn from 'clsx';
 import { useHistory, useLocation } from 'react-router-dom';
 import { DestinationPicker } from 'components/Pickers/DestinationPicker';
 import { DatePickerOrigin } from 'components/Pickers/DatePickerOrigin';
 import { Button } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import s from './Header.module.scss';
 import { Logo } from '../Logo';
 import { HeaderMenu } from '../Menu';
@@ -12,16 +13,35 @@ import headerMain from './img/header_main.png';
 import headerTrain from './img/header_train.png';
 import headerSuccess from './img/header_success.png';
 import { appURL } from '../../App';
+import { RootState } from '../../store';
+import { getRouteFetchData } from '../../reducers/getRoute';
 
 export type Props = {
   className?: string;
 };
 
 export const Header = memo<Props>(({ className }) => {
+  const dispatch = useDispatch();
+  // eslint-disable-next-line no-underscore-dangle
+  const departureId = useSelector((store: RootState) => store.departure._id);
+  // eslint-disable-next-line no-underscore-dangle
+  const arrivalId = useSelector((store: RootState) => store.arrival._id);
+  const dateForward = useSelector((store: RootState) => store.dateForward);
+  const dateReturn = useSelector((store: RootState) => store.dateReturn);
   const location = useLocation();
   const history = useHistory();
   const { pathname } = location;
   const splitLocation: string = pathname.replace(appURL, '').split('/')[1];
+
+  const params = useMemo(
+    () => ({
+      departureId,
+      arrivalId,
+      dateForward,
+      dateReturn,
+    }),
+    [departureId, arrivalId, dateForward, dateReturn]
+  );
 
   const activePreset: {
     class: string;
@@ -42,6 +62,11 @@ export const Header = memo<Props>(({ className }) => {
       activePreset.back = headerMain;
       break;
   }
+
+  const findTickets = () => {
+    dispatch(getRouteFetchData(params));
+    history.push('/select');
+  };
 
   return (
     <header className={cn(s.root, className, s[activePreset.class])}>
@@ -67,12 +92,7 @@ export const Header = memo<Props>(({ className }) => {
                 </div>
                 <DatePickerOrigin />
                 <div className={s.search_btn_holder}>
-                  <Button
-                    className={s.searchBtn}
-                    onClick={() => {
-                      history.push('/select');
-                    }}
-                  >
+                  <Button className={s.searchBtn} onClick={findTickets}>
                     НАЙТИ БИЛЕТЫ
                   </Button>
                 </div>
@@ -90,7 +110,9 @@ export const Header = memo<Props>(({ className }) => {
                   <DatePickerOrigin />
                 </div>
                 <div className={s.search_btn_holder_select}>
-                  <Button className={s.searchBtn}>НАЙТИ БИЛЕТЫ</Button>
+                  <Button className={s.searchBtn} onClick={findTickets}>
+                    НАЙТИ БИЛЕТЫ
+                  </Button>
                 </div>
               </div>
             </div>

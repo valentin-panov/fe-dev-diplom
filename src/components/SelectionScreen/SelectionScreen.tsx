@@ -1,8 +1,8 @@
-import React, { memo, useEffect, useMemo } from 'react';
+import React, { memo } from 'react';
 import cn from 'clsx';
 import { DatePickerOriginUnit } from 'components/Pickers/DatePickerOrigin/DatePickerOriginUnit';
 import moment from 'moment';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import s from './SelectionScreen.module.scss';
 import { SelectionFilterItem } from './SelectionFilterItem';
 import { SelectionFilterPrice } from './SelectionFilterPrice';
@@ -14,40 +14,18 @@ import { Progress } from './Progress';
 import { Loading } from '../Loading';
 import { RootState } from '../../store';
 import Error404 from '../Error404/Error404';
-import { getRouteFetchData } from '../../reducers/getRoute';
 
 export type Props = {
   className?: string;
 };
 
 export const SelectionScreen = memo<Props>(({ className }) => {
-  const dispatch = useDispatch();
   const status = useSelector((store: RootState) => store.getRoute.status);
-  // eslint-disable-next-line no-underscore-dangle
-  const departureId = useSelector((store: RootState) => store.departure._id);
-  // eslint-disable-next-line no-underscore-dangle
-  const arrivalId = useSelector((store: RootState) => store.arrival._id);
-  const dateForward = useSelector((store: RootState) => store.dateForward);
-  const dateReturn = useSelector((store: RootState) => store.dateReturn);
 
   const dates: string[] = []; // temporary stub
   const onChange = (value: unknown, dateString: string) => {
     dates[0] = dateString; // temporary stub
   };
-
-  const params = useMemo(
-    () => ({
-      departureId,
-      arrivalId,
-      dateForward,
-      dateReturn,
-    }),
-    [departureId, arrivalId, dateForward, dateReturn]
-  );
-
-  useEffect(() => {
-    dispatch(getRouteFetchData(params));
-  }, [dispatch, params]);
 
   return (
     <div className={cn(s.root, className)}>
