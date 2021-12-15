@@ -35,7 +35,7 @@ export const DatePickerOrigin = memo<Props>(({ className }) => {
     if (returnStore && forwardStore && returnStore < forwardStore) {
       dispatch(setDateReturn(null));
       const warning = () => {
-        message.warning('Возвращение не должно быть до отправления. Выберите новую дату возвращения.');
+        message.warning('Нельзя вернуться раньше, чем отправиться. Выберите новую дату возвращения.');
       };
       warning();
     }
