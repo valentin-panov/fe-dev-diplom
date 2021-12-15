@@ -131,14 +131,17 @@ main {
   color: #000000;
 }
 .params .params__schedule .row .col1 {
-  width: 40%;
+  min-width: 160px;
+  max-width: 160px;
+  flex-grow: 0;
 }
 .params .params__schedule .row .col2 {
+  padding-right: 40px;
   display: flex;
-  width: 20%;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  flex-grow: 1;
 }
 .params .params__schedule .row .time {
   font-size: 24px;
@@ -147,14 +150,14 @@ main {
   font-style: normal;
 }
 .params .params__schedule .row .city {
+  margin-top: 5px;
+  margin-bottom: 5px;
   font-size: 18px;
   line-height: 21px;
   font-weight: 400;
   font-style: normal;
   text-align: left;
   letter-spacing: 0;
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 .params .params__schedule .row .station {
   font-size: 16px;

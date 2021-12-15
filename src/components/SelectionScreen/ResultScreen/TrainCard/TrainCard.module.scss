@@ -72,15 +72,18 @@
       color           : #000000;
       
       .col1 {
-        width : 40%;
+        min-width : 160px;
+        max-width : 160px;
+        flex-grow : 0;
       }
       
       .col2 {
+        padding-right   : 40px;
         display         : flex;
-        width           : 20%;
         flex-direction  : column;
         justify-content : flex-start;
         align-items     : center;
+        flex-grow       : 1;
       }
       
       .time {
@@ -91,14 +94,14 @@
       }
       
       .city {
+        margin-top     : 5px;
+        margin-bottom  : 5px;
         font-size      : 18px;
         line-height    : 21px;
         font-weight    : 400;
         font-style     : normal;
         text-align     : left;
         letter-spacing : 0;
-        margin-top : 5px;
-        margin-bottom : 5px;
       }
       
       .station {
