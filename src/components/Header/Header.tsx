@@ -1,4 +1,4 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useEffect, useMemo } from 'react';
 import cn from 'clsx';
 import { useHistory, useLocation } from 'react-router-dom';
 import { DestinationPicker } from 'components/Pickers/DestinationPicker';
@@ -15,8 +15,6 @@ import headerSuccess from './img/header_success.png';
 import { appURL } from '../../App';
 import { RootState } from '../../store';
 import { getRouteFetchData } from '../../reducers/getRoute';
-
-// TODO preload header img
 
 export type Props = {
   className?: string;
@@ -69,6 +67,16 @@ export const Header = memo<Props>(({ className }) => {
     dispatch(getRouteFetchData(params));
     history.push('/select');
   };
+
+  useEffect(() => {
+    // TODO make an array
+    const imgHeaderTrain = new Image();
+    imgHeaderTrain.src = headerTrain;
+    const imgHeaderSuccess = new Image();
+    imgHeaderSuccess.src = headerSuccess;
+    const loadingImg = new Image();
+    loadingImg.src = 'src/components/Loading/img/loading.gif';
+  }, []);
 
   return (
     <header className={cn(s.root, className, s[activePreset.class])}>

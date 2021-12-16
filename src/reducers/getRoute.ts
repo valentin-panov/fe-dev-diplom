@@ -31,9 +31,10 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
   if (dateForward) {
     reqURL += `&date_start=${dateForward}`;
     if (dateReturn) {
-      reqURL += `&date_end${dateReturn}`;
+      reqURL += `&date_end=${dateReturn}`;
     }
   }
+  // console.log(reqURL);
   const response = await fetch(reqURL);
   if (!response.ok) {
     throw new Error(`request error: ${reqURL}`);
@@ -57,7 +58,8 @@ export const getRouteSlice = createSlice({
     });
     builder.addCase(getRouteFetchData.fulfilled, (state, action: PayloadAction<GetRouteData>) => {
       state.data.totalCount = action.payload.total_count;
-      state.data.items = [...action.payload.items].map((el) => [el]);
+      // temporary stub for design purpose
+      state.data.items = [...action.payload.items].map((el) => [el, el]);
       state.status = 'success';
     });
     builder.addCase(getRouteFetchData.rejected, (state, action) => {
