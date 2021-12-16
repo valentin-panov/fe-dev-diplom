@@ -16,6 +16,8 @@ import { appURL } from '../../App';
 import { RootState } from '../../store';
 import { getRouteFetchData } from '../../reducers/getRoute';
 
+// TODO preload header img
+
 export type Props = {
   className?: string;
 };
