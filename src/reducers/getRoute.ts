@@ -23,18 +23,21 @@ export type optionsGetTrains = {
   arrivalId: number;
   dateForward: string | null;
   dateReturn: string | null;
+  limit?: number | null;
+  sort?: string | null;
 };
 
 export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async (options: optionsGetTrains) => {
-  const { departureId, arrivalId, dateForward, dateReturn } = options;
-  let reqURL = `${serverURL}/routes?from_city_id=${departureId}&to_city_id=${arrivalId}`;
+  const { departureId, arrivalId, dateForward, dateReturn, limit = 5, sort = 'price_min' } = options;
+  let reqURL = `${serverURL}/routes?from_city_id=${departureId}&to_city_id=${arrivalId}&limit=${limit}&sort=${sort}`;
   if (dateForward) {
     reqURL += `&date_start=${dateForward}`;
     if (dateReturn) {
       reqURL += `&date_end=${dateReturn}`;
     }
   }
-  // console.log(reqURL);
+  // eslint-disable-next-line no-console
+  console.log(reqURL);
   const response = await fetch(reqURL);
   if (!response.ok) {
     throw new Error(`request error: ${reqURL}`);

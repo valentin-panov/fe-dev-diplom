@@ -2,7 +2,7 @@ import { memo, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'store';
 import { storageHandlerAdapter } from 'packages/storage/adapters/StorageHandlerAdapter';
-import { experienceSet } from '../../reducers/experience';
+import { limitSet } from '../../reducers/limit';
 
 export type Props = {
   className?: string;
@@ -10,7 +10,7 @@ export type Props = {
 };
 
 export const StorageHandler = memo<Props>(() => {
-  const { experience } = useSelector((store: RootState) => store);
+  const { limit } = useSelector((store: RootState) => store);
   const dispatch = useDispatch();
 
   const mounted = useRef<boolean>(false);
@@ -23,12 +23,12 @@ export const StorageHandler = memo<Props>(() => {
       // данные из локального стора помещаем в стэйт менеджер
       storageHandlerAdapter.get().then((data) => {
         if (!data) return;
-        if (data.experience) dispatch(experienceSet(data.experience));
+        if (data.limit) dispatch(limitSet(data.limit));
       });
     } else {
-      storageHandlerAdapter.set({ experience });
+      storageHandlerAdapter.set({ limit });
     }
-  }, [dispatch, experience]);
+  }, [dispatch, limit]);
 
   return null;
 });

@@ -1,5 +1,5 @@
 export type Data = {
-  experience: number;
+  limit: number;
 };
 
 export interface StorageHandlerInterface {

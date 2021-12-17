@@ -83,3 +83,6 @@ export type SeatsSpectre = {
   third?: number;
   fourth?: number;
 };
+
+export type SortOption = { value: string; label: string };
+export type SortOptions = SortOption[];

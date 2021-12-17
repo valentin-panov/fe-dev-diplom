@@ -2,15 +2,15 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import { Cascader } from 'antd';
 import './reant.css';
-import { CascaderValueType, DataNode } from 'rc-cascader/lib/interface';
+import { CascaderValueType } from 'rc-cascader/lib/interface';
 import s from './SortFilter.module.scss';
-import { Options } from '../ResultScreen';
+import { SortOptions } from '../../../../global';
 
 export type Props = {
   className?: string;
   active: CascaderValueType;
-  options: Options;
-  onChange: (value: CascaderValueType, selectOptions?: DataNode[]) => void;
+  options: SortOptions;
+  onChange: (value: CascaderValueType) => void;
 };
 
 export const SortFilter = memo<Props>(({ className, onChange, active, options }) => (
@@ -21,8 +21,6 @@ export const SortFilter = memo<Props>(({ className, onChange, active, options })
     onChange={onChange}
     allowClear={false}
     bordered={false}
-    defaultValue={[active]}
-    multiple={false}
-    expandIcon={null}
+    defaultValue={active}
   />
 ));
