@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
-import { Cascader } from 'antd';
+import { Select } from 'antd';
 import './reant.css';
 import { CascaderValueType } from 'rc-cascader/lib/interface';
 import s from './SortFilter.module.scss';
@@ -14,9 +14,9 @@ export type Props = {
 };
 
 export const SortFilter = memo<Props>(({ className, onChange, active, options }) => (
-  <Cascader
+  <Select
     className={cn(s.root, className)}
-    dropdownClassName={s.dropdown}
+    dropdownClassName={cn(s.dropdown, 'sort')}
     options={options}
     onChange={onChange}
     allowClear={false}

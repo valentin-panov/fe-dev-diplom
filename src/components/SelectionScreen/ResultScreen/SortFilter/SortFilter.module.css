@@ -76,13 +76,8 @@ main {
 }
 
 .dropdown {
-  display: flex;
   height: 100%;
   min-height: 100px;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  align-items: stretch;
   font-size: 18px;
   line-height: 21px;
   font-weight: normal;
