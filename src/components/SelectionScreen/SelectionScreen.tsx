@@ -1,7 +1,5 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
-import { DatePickerOriginUnit } from 'components/Pickers/DatePickerOrigin/DatePickerOriginUnit';
-import moment from 'moment';
 import { useSelector } from 'react-redux';
 import s from './SelectionScreen.module.scss';
 import { SelectionFilterItem } from './SelectionFilterItem';
@@ -14,6 +12,7 @@ import { Progress } from './Progress';
 import { Loading } from '../Loading';
 import { RootState } from '../../store';
 import Error404 from '../Error404/Error404';
+import { DatePickerOrigin } from '../Pickers/DatePickerOrigin';
 
 export type Props = {
   className?: string;
@@ -21,11 +20,6 @@ export type Props = {
 
 export const SelectionScreen = memo<Props>(({ className }) => {
   const status = useSelector((store: RootState) => store.getRoute.status);
-
-  const dates: string[] = []; // temporary stub
-  const onChange = (value: unknown, dateString: string) => {
-    dates[0] = dateString; // temporary stub
-  };
 
   return (
     <div className={cn(s.root, className)}>
@@ -38,22 +32,7 @@ export const SelectionScreen = memo<Props>(({ className }) => {
           <div className={s.mainRow}>
             <div>
               <section className={s.sideSelection}>
-                <div className={s.datePicker}>
-                  <div className={s.sideSelection__title}>Дата поездки</div>
-                  <DatePickerOriginUnit
-                    disableDate={moment()}
-                    dateType="forward"
-                    getDate={onChange}
-                    className="asidePicker"
-                  />
-                  <div className={s.sideSelection__title}>Дата возвращения</div>
-                  <DatePickerOriginUnit
-                    disableDate={moment()}
-                    dateType="return"
-                    getDate={onChange}
-                    className="asidePicker"
-                  />
-                </div>
+                <DatePickerOrigin pickerPlace="asidePicker" />
                 <div className={s.divider} />
                 <ul className={s.filterList}>
                   <SelectionFilterItem icon={carriageType.coupe} text="Купе" />

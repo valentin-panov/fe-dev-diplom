@@ -83,5 +83,19 @@
   }
 }
 
+.datePicker {
+  display         : flex;
+  flex-direction  : column;
+  justify-content : center;
+  align-items     : center;
+  
+}
 
-
+.sideSelection__title {
+  padding-bottom : 10px;
+  font-size      : 30px;
+  line-height    : 35px;
+  font-weight    : normal;
+  color          : #FFFFFF;
+  align-self     : flex-start;
+}

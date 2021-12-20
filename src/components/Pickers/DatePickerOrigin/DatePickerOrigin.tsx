@@ -11,11 +11,12 @@ import { setDateReturn } from '../../../reducers/dateReturn';
 
 export type Props = {
   className?: string;
+  pickerPlace: 'headerPicker' | 'asidePicker';
 };
 
 export type TimeObj = moment.Moment | undefined;
 
-export const DatePickerOrigin = memo<Props>(({ className }) => {
+export const DatePickerOrigin = memo<Props>(({ className, pickerPlace }) => {
   const dispatch = useDispatch();
   const [forwardMoment, setForwardMoment] = useState<TimeObj>(undefined);
   const [returnMoment, setReturnMoment] = useState<TimeObj>(undefined);
@@ -57,25 +58,45 @@ export const DatePickerOrigin = memo<Props>(({ className }) => {
     }
   }, [returnStore]);
 
+  const outboundPicker = (givenClassName: string) => (
+    <DatePickerOriginUnit
+      dateType="forward"
+      defaultValue={forwardMoment}
+      disableDate={moment()}
+      getDate={onChange}
+      className={givenClassName}
+    />
+  );
+
+  const returnPicker = (givenClassName: string) => (
+    <DatePickerOriginUnit
+      dateType="return"
+      defaultValue={returnMoment}
+      disableDate={forwardMoment || moment()}
+      getDate={onChange}
+      className={givenClassName}
+    />
+  );
+
   return (
-    <div className={cn(s.root, className)}>
-      <span className={s.title}>Дата</span>
-      <div className={s.input_holder}>
-        <DatePickerOriginUnit
-          dateType="forward"
-          defaultValue={forwardMoment}
-          disableDate={moment()}
-          getDate={onChange}
-          className="headerPicker"
-        />
-        <DatePickerOriginUnit
-          dateType="return"
-          defaultValue={returnMoment}
-          disableDate={forwardMoment || moment()}
-          getDate={onChange}
-          className="headerPicker"
-        />
-      </div>
-    </div>
+    <>
+      {pickerPlace === 'headerPicker' && (
+        <div className={cn(s.root, className)}>
+          <span className={s.title}>Дата</span>
+          <div className={s.input_holder}>
+            {outboundPicker(pickerPlace)}
+            {returnPicker(pickerPlace)}
+          </div>
+        </div>
+      )}
+      {pickerPlace === 'asidePicker' && (
+        <div className={s.datePicker}>
+          <div className={s.sideSelection__title}>Дата поездки</div>
+          {outboundPicker(pickerPlace)}
+          <div className={s.sideSelection__title}>Дата возвращения</div>
+          {returnPicker(pickerPlace)}
+        </div>
+      )}
+    </>
   );
 });

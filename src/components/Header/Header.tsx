@@ -100,7 +100,7 @@ export const Header = memo<Props>(({ className }) => {
                 <div className={s.picker_holder_main_destination_helper}>
                   <DestinationPicker />
                 </div>
-                <DatePickerOrigin />
+                <DatePickerOrigin pickerPlace="headerPicker" />
                 <div className={s.search_btn_holder}>
                   <Button className={s.searchBtn} onClick={findTickets}>
                     НАЙТИ БИЛЕТЫ
@@ -117,7 +117,7 @@ export const Header = memo<Props>(({ className }) => {
               <div className={cn(s.picker_holder_select)}>
                 <div className={s.picker_holder_select_row}>
                   <DestinationPicker />
-                  <DatePickerOrigin />
+                  <DatePickerOrigin pickerPlace="headerPicker" />
                 </div>
                 <div className={s.search_btn_holder_select}>
                   <Button className={s.searchBtn} onClick={findTickets}>
