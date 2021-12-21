@@ -8,6 +8,7 @@ import { GetRoute, GetRouteData } from '../interfaces/Interfaces';
 
 // Server
 import { serverURL } from '../App';
+import { substractYY } from '../utils/substractYY';
 
 const initialState: GetRoute = {
   status: 'idle',
@@ -31,9 +32,9 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
   const { departureId, arrivalId, dateForward, dateReturn, limit = 5, sort = 'price_min' } = options;
   let reqURL = `${serverURL}/routes?from_city_id=${departureId}&to_city_id=${arrivalId}&limit=${limit}&sort=${sort}`;
   if (dateForward) {
-    reqURL += `&date_start=${dateForward}`;
+    reqURL += `&date_start=${substractYY(dateForward)}`;
     if (dateReturn) {
-      reqURL += `&date_end=${dateReturn}`;
+      reqURL += `&date_end=${substractYY(dateReturn)}`;
     }
   }
   // eslint-disable-next-line no-console

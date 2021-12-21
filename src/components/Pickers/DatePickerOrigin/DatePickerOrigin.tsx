@@ -2,7 +2,6 @@ import React, { memo, useEffect, useMemo, useState } from 'react';
 import cn from 'clsx';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
-import { message } from 'antd';
 import s from './DatePickerOrigin.module.scss';
 import { DatePickerOriginUnit, DateType } from './DatePickerOriginUnit';
 import { RootState } from '../../../store';
@@ -35,10 +34,11 @@ export const DatePickerOrigin = memo<Props>(({ className, pickerPlace }) => {
   useEffect(() => {
     if (returnStore && forwardStore && returnStore < forwardStore) {
       dispatch(setDateReturn(null));
-      const warning = () => {
-        message.warning('Нельзя вернуться раньше, чем отправиться. Выберите новую дату возвращения.');
-      };
-      warning();
+      // const warning = () => {
+      //   message.warning('Нельзя вернуться раньше, чем отправиться. Выберите новую дату возвращения.');
+      // };
+      // warning();
+      // TODO DOUBLE MESSAGE ARRIVES - FIX!
     }
   }, [returnStore, forwardStore, dispatch]);
 
