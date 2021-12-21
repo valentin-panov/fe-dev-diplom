@@ -20,6 +20,7 @@ export const SelectionFilterItem = memo<Props>(({ className, filter }) => {
         <Switch
           defaultChecked
           onChange={(e) => {
+            // eslint-disable-next-line no-console
             console.log(filter, e);
           }}
         />
