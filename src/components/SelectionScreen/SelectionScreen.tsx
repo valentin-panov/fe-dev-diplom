@@ -6,7 +6,7 @@ import { SelectionFilterItem } from './SelectionFilterItem';
 import { SelectionFilterPrice } from './SelectionFilterPrice';
 import { SelectionFilterTime } from './SelectionFilterTime';
 import { LastTickets } from './LastTickets';
-import { carriageType, iconsCollection, serviceCollection } from '../../collections/collections';
+import { iconsCollection } from '../../collections/collections';
 import { ResultScreen } from './ResultScreen';
 import { Progress } from './Progress';
 import { Loading } from '../Loading';
@@ -35,12 +35,12 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                 <DatePickerOrigin pickerPlace="asidePicker" />
                 <div className={s.divider} />
                 <ul className={s.filterList}>
-                  <SelectionFilterItem icon={carriageType.coupe} text="Купе" />
-                  <SelectionFilterItem icon={carriageType.platz} text="Плацкарт" />
-                  <SelectionFilterItem icon={carriageType.seat} text="Сидячий" />
-                  <SelectionFilterItem icon={carriageType.lux} text="Люкс" />
-                  <SelectionFilterItem icon={serviceCollection.get('wifi')} text="Wi-Fi" />
-                  <SelectionFilterItem icon={serviceCollection.get('express')} text="Экспресс" />
+                  <SelectionFilterItem filter="have_second_class" />
+                  <SelectionFilterItem filter="have_third_class" />
+                  <SelectionFilterItem filter="have_fourth_class" />
+                  <SelectionFilterItem filter="have_first_class" />
+                  <SelectionFilterItem filter="have_wifi" />
+                  <SelectionFilterItem filter="is_express" />
                 </ul>
                 <div className={s.divider} />
                 <div className={s.sideSelection__title}>Стоимость</div>

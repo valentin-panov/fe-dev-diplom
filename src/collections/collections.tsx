@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import { ReactComponent as Rub } from '../svg/rub.svg';
 import { ReactComponent as Express } from '../svg/service_express.svg';
 import { ReactComponent as WiFi } from '../svg/service_wifi.svg';
@@ -14,19 +14,24 @@ import { ReactComponent as ArrowRB } from '../svg/arrow_right_black.svg';
 import { ReactComponent as ArrowRG } from '../svg/arrow_right_grey.svg';
 import { ReactComponent as ArrowRY } from '../svg/arrow_right_yellow.svg';
 import { ReactComponent as ArrowLY } from '../svg/arrow_left_yellow.svg';
+import { FilterItem } from '../interfaces/Interfaces';
 
-export const serviceCollection: Map<string, ReactElement> = new Map<string, ReactElement>([
-  ['wifi', <WiFi />],
-  ['express', <Express />],
-  ['ac', <AC />],
-  ['cup', <Cup />],
-]);
+// export const carriageType = {
+//   have_third_class: <Platz />,
+//   have_second_class: <Coupe />,
+//   have_fourth_class: <Seat />,
+//   have_first_class: <Lux />,
+// };
 
-export const carriageType = {
-  platz: <Platz />,
-  coupe: <Coupe />,
-  seat: <Seat />,
-  lux: <Lux />,
+export const filtersCollection: FilterItem = {
+  have_wifi: { element: <WiFi />, title: 'Wi-Fi' },
+  is_express: { element: <Express />, title: 'Экспресс' },
+  have_air_conditioning: { element: <AC />, title: 'Кондиционер' },
+  cup: { element: <Cup />, title: 'Ресторан' },
+  have_third_class: { element: <Platz />, title: 'Плацкарт' },
+  have_second_class: { element: <Coupe />, title: 'Купе' },
+  have_fourth_class: { element: <Seat />, title: 'Сидячий' },
+  have_first_class: { element: <Lux />, title: 'Люкс' },
 };
 
 export const iconsCollection = {

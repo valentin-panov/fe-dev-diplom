@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+/* eslint-disable camelcase */
 
 // Core
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
@@ -26,10 +27,49 @@ export type optionsGetTrains = {
   dateReturn: string | null;
   limit?: number | null;
   sort?: string | null;
+  offset?: number;
+  date_start_arrival?: string;
+  date_end_arrival?: string;
+  have_first_class?: boolean;
+  have_second_class?: boolean;
+  have_third_class?: boolean;
+  have_fourth_class?: boolean;
+  have_wifi?: boolean;
+  have_air_conditioning?: boolean;
+  is_express?: boolean;
+  price_from?: number;
+  price_to?: number;
+  start_departure_hour_from?: number;
+  start_departure_hour_to?: number;
+  start_arrival_hour_from?: number;
+  start_arrival_hour_to?: number;
+  end_departure_hour_from?: number;
+  end_departure_hour_to?: number;
+  end_arrival_hour_from?: number;
+  end_arrival_hour_to?: number;
 };
 
 export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async (options: optionsGetTrains) => {
-  const { departureId, arrivalId, dateForward, dateReturn, limit = 5, sort = 'price_min' } = options;
+  const {
+    departureId,
+    arrivalId,
+    dateForward,
+    dateReturn,
+    limit = 5,
+    sort = 'price_min',
+    offset,
+    have_first_class = true,
+    have_second_class = true,
+    have_third_class = true,
+    have_fourth_class = true,
+    have_wifi = true,
+    is_express = false,
+  } = options;
+
+  if (!departureId || !arrivalId) {
+    throw new Error(`empty points`);
+  }
+
   let reqURL = `${serverURL}/routes?from_city_id=${departureId}&to_city_id=${arrivalId}&limit=${limit}&sort=${sort}`;
   if (dateForward) {
     reqURL += `&date_start=${substractYY(dateForward)}`;
@@ -37,6 +77,19 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
       reqURL += `&date_end=${substractYY(dateReturn)}`;
     }
   }
+  if (offset) {
+    reqURL += `&offset=${offset}`;
+  }
+
+  // FILTERS
+
+  reqURL += `&have_first_class=${have_first_class}`;
+  reqURL += `&have_second_class=${have_second_class}`;
+  reqURL += `&have_third_class=${have_third_class}`;
+  reqURL += `&have_fourth_class=${have_fourth_class}`;
+  reqURL += `&have_wifi=${have_wifi}`;
+  reqURL += `&is_express=${is_express}`;
+
   // eslint-disable-next-line no-console
   console.log(reqURL);
   const response = await fetch(reqURL);

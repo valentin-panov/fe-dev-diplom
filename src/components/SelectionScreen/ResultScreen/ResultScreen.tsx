@@ -11,9 +11,9 @@ import { PaginationOrigin } from '../PaginationOrigin';
 import { RootState } from '../../../store';
 import ZeroFound from '../../ZeroFound/ZeroFound';
 import { limitSet } from '../../../reducers/limit';
-import { SortOptions } from '../../../global';
 import { getRouteFetchData } from '../../../reducers/getRoute';
 import { sortSet } from '../../../reducers/sort';
+import { SortOptions } from '../../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;

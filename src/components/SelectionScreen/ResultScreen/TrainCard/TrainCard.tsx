@@ -1,12 +1,12 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import s from './TrainCard.module.scss';
-import { Train } from '../../../../global';
 import { ReactComponent as Icon } from '../../../../svg/train_icon.svg';
 import { iconsCollection } from '../../../../collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
 import { TrainRow } from './TrainRow';
 import { SeatsBlock } from './SeatsBlock';
+import { Train } from '../../../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;

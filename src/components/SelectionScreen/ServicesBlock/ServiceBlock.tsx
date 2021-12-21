@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import s from './ServiceBlock.module.scss';
-import { Services } from '../../../global';
-import { serviceCollection } from '../../../collections/collections';
+import { filtersCollection } from '../../../collections/collections';
+import { Services } from '../../../interfaces/Interfaces';
 
 export type Props = {
   className: string;
@@ -15,7 +15,7 @@ export const ServiceBlock = memo<Props>(({ className, services }) => {
     <div className={cn(s.root, s[className])}>
       {services2render.map((el) => (
         <div className={cn(s.service__icon, el[1] ? s.active : '')} key={el[0]}>
-          {serviceCollection.get(el[0])}
+          {filtersCollection[el[0]].element}
         </div>
       ))}
     </div>

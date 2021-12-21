@@ -1,12 +1,14 @@
+/* eslint-disable camelcase */
+
 import React, { memo } from 'react';
 import cn from 'clsx';
 import s from './LastTicketCard.module.scss';
 import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
 
-import { Train } from '../../../../global';
 import { iconsCollection } from '../../../../collections/collections';
 import { ServiceBlock } from '../../ServicesBlock';
 import { capitalize } from '../../../../utils/capitalize';
+import { Train } from '../../../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;
@@ -16,9 +18,9 @@ export type Props = {
 export const LastTicketCard = memo<Props>(({ className, train }) => {
   const {
     min_price: price,
-    have_wifi: wifi,
-    have_air_conditioning: ac,
-    is_express: express,
+    have_wifi,
+    have_air_conditioning,
+    is_express,
     departure: {
       from: {
         railway_station_name: stationAfull,
@@ -59,7 +61,7 @@ export const LastTicketCard = memo<Props>(({ className, train }) => {
         </div>
       </div>
       <div className={s.row}>
-        <ServiceBlock services={{ wifi, express, ac }} className="lastTickets" />
+        <ServiceBlock services={{ have_wifi, is_express, have_air_conditioning }} className="lastTickets" />
         <div className={s.price}>
           <div className={s.price__from}>от</div>
           <div className={s.price__number}>{getBeautifulNumber(price)}</div>

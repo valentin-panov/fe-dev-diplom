@@ -9,6 +9,7 @@ import { dateForward } from './dateForward';
 import { dateReturn } from './dateReturn';
 import { limit } from './limit';
 import { sort } from './sort';
+import { filters } from './filters';
 
 export const rootReducer = {
   menu,
@@ -20,5 +21,6 @@ export const rootReducer = {
   dateReturn,
   limit,
   sort,
+  filters,
   token,
 };

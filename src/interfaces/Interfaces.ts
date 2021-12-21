@@ -1,4 +1,6 @@
-import { Train } from '../global';
+/* eslint-disable camelcase */
+
+import { ReactElement } from 'react';
 
 export interface Status {
   status: 'idle' | 'pending' | 'success' | 'error';
@@ -21,7 +23,6 @@ export interface LastTickets extends Status {
 }
 
 export interface GetRouteData {
-  // eslint-disable-next-line camelcase
   total_count: number;
   items: Train[];
 }
@@ -36,6 +37,115 @@ export interface GetRoute extends Status {
 export interface DestOptions extends Status {
   items: City[];
 }
+
+export interface FilterItem {
+  [index: string]: {
+    element: ReactElement;
+    title: string;
+  };
+}
+
+export interface Filters {
+  have_first_class?: boolean;
+  have_second_class?: boolean;
+  have_third_class?: boolean;
+  have_fourth_class?: boolean;
+  have_wifi?: boolean;
+  is_express?: boolean;
+  have_air_conditioning?: boolean;
+}
+
+export interface Services {
+  have_wifi: boolean;
+  is_express: boolean;
+  have_air_conditioning: boolean;
+}
+
+export interface PointX {
+  city: string;
+  station: string;
+}
+
+export interface Train {
+  have_first_class: boolean;
+  have_second_class: boolean;
+  have_third_class: boolean;
+  have_fourth_class: boolean;
+  have_wifi: boolean;
+  have_air_conditioning: boolean;
+  is_express: boolean;
+  min_price: number;
+  available_seats: number;
+  available_seats_info: SeatsSpectre;
+  departure: {
+    _id: number;
+    have_first_class: boolean;
+    have_second_class: boolean;
+    have_third_class: boolean;
+    have_fourth_class: boolean;
+    have_wifi: boolean;
+    have_air_conditioning: boolean;
+    is_express: boolean;
+    min_price: number;
+    duration: number;
+    available_seats: number;
+    available_seats_info: SeatsSpectre;
+    train: {
+      _id: number;
+      name: string;
+    };
+    from: {
+      railway_station_name: string;
+      city: {
+        _id: number;
+        name: string;
+      };
+      datetime: number;
+    };
+    to: {
+      railway_station_name: string;
+      city: {
+        _id: number;
+        name: string;
+      };
+      datetime: number;
+    };
+    price_info: {
+      first?: {
+        price: number;
+        top_price?: number;
+        bottom_price?: number;
+      };
+      second?: {
+        top_price: number;
+        bottom_price: number;
+      };
+      third?: {
+        top_price: number;
+        bottom_price: number;
+        side_price: number;
+      };
+      fourth?: {
+        top_price: number;
+        bottom_price: number;
+      };
+    };
+  };
+}
+
+export interface SeatsSpectre {
+  first?: number;
+  second?: number;
+  third?: number;
+  fourth?: number;
+}
+
+export interface SortOption {
+  value: string;
+  label: string;
+}
+
+export type SortOptions = SortOption[];
 
 // LEGACY
 

@@ -4,8 +4,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Interfaces
-import { LastTickets } from '../interfaces/Interfaces';
-import { Train } from '../global';
+import { LastTickets, Train } from '../interfaces/Interfaces';
 
 // Server
 import { serverURL } from '../App';

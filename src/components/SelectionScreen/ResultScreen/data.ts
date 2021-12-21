@@ -1,4 +1,4 @@
-import { Train } from '../../../global';
+import { Train } from '../../../interfaces/Interfaces';
 
 export const trainsList: Train[][] = [
   [

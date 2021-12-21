@@ -1,10 +1,12 @@
+/* eslint-disable camelcase */
+
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { Button } from 'antd';
 import s from './SeatsBlock.module.scss';
-import { Train } from '../../../../../global';
 import { SeatsBlockRow } from './SeatBlockRow';
 import { ServiceBlock } from '../../../ServicesBlock';
+import { Train } from '../../../../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;
@@ -21,9 +23,9 @@ const carriageType = {
 export const SeatsBlock = memo<Props>(({ className, train }) => {
   const {
     departure: {
-      have_wifi: wifi,
-      have_air_conditioning: ac,
-      is_express: express,
+      have_wifi,
+      have_air_conditioning,
+      is_express,
       have_fourth_class: class4,
       have_third_class: class3,
       have_second_class: class2,
@@ -50,7 +52,7 @@ export const SeatsBlock = memo<Props>(({ className, train }) => {
         )}
       </div>
       <div className={s.bottom_block}>
-        <ServiceBlock services={{ wifi, express, ac }} className="ticketCard" />
+        <ServiceBlock services={{ have_wifi, is_express, have_air_conditioning }} className="ticketCard" />
         <Button className={s.btn}>Выбрать места</Button>
       </div>
     </div>

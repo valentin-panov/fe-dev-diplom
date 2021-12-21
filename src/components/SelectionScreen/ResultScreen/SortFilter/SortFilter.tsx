@@ -4,7 +4,7 @@ import { Select } from 'antd';
 import './reant.css';
 import { CascaderValueType } from 'rc-cascader/lib/interface';
 import s from './SortFilter.module.scss';
-import { SortOptions } from '../../../../global';
+import { SortOptions } from '../../../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;
