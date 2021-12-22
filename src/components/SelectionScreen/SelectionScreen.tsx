@@ -14,6 +14,7 @@ import { RootState } from '../../store';
 import Error404 from '../Error404/Error404';
 import { DatePickerOrigin } from '../Pickers/DatePickerOrigin';
 import { filtersSet } from '../../reducers/filters';
+import { getPriceRange } from '../../utils/getPriceRange';
 
 export type Props = {
   className?: string;
@@ -22,10 +23,18 @@ export type Props = {
 export const SelectionScreen = memo<Props>(({ className }) => {
   const dispatch = useDispatch();
   const status = useSelector((store: RootState) => store.getRoute.status);
+  const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
 
   const changeFilter = (filter: string, state: boolean) => {
     dispatch(filtersSet({ [filter]: state }));
   };
+
+  const priceRange = trainsList.length ? getPriceRange(trainsList) : { minPrice: 0, maxPrice: 10000 };
+
+  if (trainsList.length) {
+    // eslint-disable-next-line no-console
+    console.log(priceRange);
+  }
 
   return (
     <div className={cn(s.root, className)}>
@@ -54,7 +63,7 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                   <span>от</span>
                   <span>до</span>
                 </div>
-                <SelectionFilterPrice initialRange={[1500, 7000]} />
+                <SelectionFilterPrice initialRange={[priceRange.minPrice, priceRange.maxPrice]} />
                 <div className={s.divider} />
                 <SelectionFilterTime icon={iconsCollection.forward} text="Туда" />
                 <div className={s.divider} />
