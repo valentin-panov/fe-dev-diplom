@@ -8,9 +8,10 @@ import { filtersCollection } from '../../../collections/collections';
 export type Props = {
   className?: string;
   filter: string;
+  onChange: (filter: string, state: boolean) => void;
 };
 
-export const SelectionFilterItem = memo<Props>(({ className, filter }) => {
+export const SelectionFilterItem = memo<Props>(({ className, filter, onChange }) => {
   const filterItem = filtersCollection[filter];
   return (
     <li className={cn(s.root, className)}>
@@ -19,9 +20,8 @@ export const SelectionFilterItem = memo<Props>(({ className, filter }) => {
       <div className={s.switch}>
         <Switch
           defaultChecked
-          onChange={(e) => {
-            // eslint-disable-next-line no-console
-            console.log(filter, e);
+          onChange={(state) => {
+            onChange(filter, state);
           }}
         />
       </div>
