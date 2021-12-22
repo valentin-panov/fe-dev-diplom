@@ -20,7 +20,7 @@ const getMaxPrice = (train: Train) => {
 export const getPriceRange = (data: Train[][]): { minPrice: number; maxPrice: number } => {
   const minPrice = data.reduce((prev, curr) => (prev[0].min_price < curr[0].min_price ? prev : curr))[0].min_price;
   const maxPrice = getMaxPrice(
-    data.reduce((prev, curr) => (getMaxPrice(prev[0]) < getMaxPrice(curr[0]) ? prev : curr))[0]
+    data.reduce((prev, curr) => (getMaxPrice(prev[0]) > getMaxPrice(curr[0]) ? prev : curr))[0]
   );
 
   return { minPrice, maxPrice };

@@ -68,8 +68,10 @@ export const ResultScreen = memo<Props>(({ className }) => {
     };
   }, [departureId, arrivalId, dateForward, dateReturn, limit, sort]);
 
+  if (trainsList.length) {
   // eslint-disable-next-line no-console
-  console.log(getPriceRange(trainsList));
+    console.log(getPriceRange(trainsList));
+  }
 
   // useEffect(() => {
   //   // eslint-disable-next-line no-console
