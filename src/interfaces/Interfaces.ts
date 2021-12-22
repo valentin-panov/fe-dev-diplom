@@ -53,6 +53,8 @@ export interface Filters {
   have_wifi?: boolean;
   is_express?: boolean;
   have_air_conditioning?: boolean;
+  price_from?: number;
+  price_to?: number;
 }
 
 export interface Services {
@@ -110,26 +112,28 @@ export interface Train {
       };
       datetime: number;
     };
-    price_info: {
-      first?: {
-        price: number;
-        top_price?: number;
-        bottom_price?: number;
-      };
-      second?: {
-        top_price: number;
-        bottom_price: number;
-      };
-      third?: {
-        top_price: number;
-        bottom_price: number;
-        side_price: number;
-      };
-      fourth?: {
-        top_price: number;
-        bottom_price: number;
-      };
-    };
+    price_info: PriceInfo;
+  };
+}
+
+export interface PriceInfo {
+  first?: {
+    price: number;
+    top_price?: number;
+    bottom_price?: number;
+  };
+  second?: {
+    top_price: number;
+    bottom_price: number;
+  };
+  third?: {
+    top_price: number;
+    bottom_price: number;
+    side_price: number;
+  };
+  fourth?: {
+    top_price: number;
+    bottom_price: number;
   };
 }
 

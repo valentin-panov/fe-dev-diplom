@@ -14,6 +14,7 @@ import { limitSet } from '../../../reducers/limit';
 import { getRouteFetchData } from '../../../reducers/getRoute';
 import { sortSet } from '../../../reducers/sort';
 import { SortOptions } from '../../../interfaces/Interfaces';
+import { getPriceRange } from '../../../utils/getPriceRange';
 
 export type Props = {
   className?: string;
@@ -66,6 +67,9 @@ export const ResultScreen = memo<Props>(({ className }) => {
       sort,
     };
   }, [departureId, arrivalId, dateForward, dateReturn, limit, sort]);
+
+  // eslint-disable-next-line no-console
+  console.log(getPriceRange(trainsList));
 
   // useEffect(() => {
   //   // eslint-disable-next-line no-console

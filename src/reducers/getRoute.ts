@@ -64,6 +64,8 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
     have_fourth_class = true,
     have_wifi = true,
     is_express = false,
+    price_from,
+    price_to,
   } = options;
 
   if (!departureId || !arrivalId) {
@@ -89,6 +91,13 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
   reqURL += `&have_fourth_class=${have_fourth_class}`;
   reqURL += `&have_wifi=${have_wifi}`;
   reqURL += `&is_express=${is_express}`;
+
+  if (price_from) {
+    reqURL += `&price_from=${price_from}`;
+  }
+  if (price_to) {
+    reqURL += `&price_to=${price_to}`;
+  }
 
   // eslint-disable-next-line no-console
   console.log(reqURL);

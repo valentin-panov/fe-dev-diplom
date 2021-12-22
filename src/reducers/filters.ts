@@ -8,6 +8,8 @@ const initialState: Filters = {
   have_fourth_class: true,
   have_wifi: true,
   is_express: true,
+  price_from: Number.NEGATIVE_INFINITY,
+  price_to: Number.POSITIVE_INFINITY,
 };
 
 export const filtersSlice = createSlice({
