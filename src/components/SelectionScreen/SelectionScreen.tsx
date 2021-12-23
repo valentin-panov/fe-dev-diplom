@@ -24,6 +24,7 @@ export const SelectionScreen = memo<Props>(({ className }) => {
   const dispatch = useDispatch();
   const status = useSelector((store: RootState) => store.getRoute.status);
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
+  const filters = useSelector((store: RootState) => store.filters);
 
   const changeFilter = (filter: string, state: boolean) => {
     dispatch(filtersSet({ [filter]: state }));
@@ -45,12 +46,28 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                 <DatePickerOrigin pickerPlace="asidePicker" />
                 <div className={s.divider} />
                 <ul className={s.filterList}>
-                  <SelectionFilterItem onChange={changeFilter} filter="have_second_class" />
-                  <SelectionFilterItem onChange={changeFilter} filter="have_third_class" />
-                  <SelectionFilterItem onChange={changeFilter} filter="have_fourth_class" />
-                  <SelectionFilterItem onChange={changeFilter} filter="have_first_class" />
-                  <SelectionFilterItem onChange={changeFilter} filter="have_wifi" />
-                  <SelectionFilterItem onChange={changeFilter} filter="is_express" />
+                  <SelectionFilterItem
+                    onChange={changeFilter}
+                    filter="have_second_class"
+                    checked={filters.have_second_class}
+                  />
+                  <SelectionFilterItem
+                    onChange={changeFilter}
+                    filter="have_third_class"
+                    checked={filters.have_third_class}
+                  />
+                  <SelectionFilterItem
+                    onChange={changeFilter}
+                    filter="have_fourth_class"
+                    checked={filters.have_fourth_class}
+                  />
+                  <SelectionFilterItem
+                    onChange={changeFilter}
+                    filter="have_first_class"
+                    checked={filters.have_first_class}
+                  />
+                  <SelectionFilterItem onChange={changeFilter} filter="have_wifi" checked={filters.have_wifi} />
+                  <SelectionFilterItem onChange={changeFilter} filter="is_express" checked={filters.is_express} />
                 </ul>
                 <div className={s.divider} />
                 <div className={s.sideSelection__title}>Стоимость</div>

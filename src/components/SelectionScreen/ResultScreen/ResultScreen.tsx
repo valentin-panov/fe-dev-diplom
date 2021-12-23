@@ -50,9 +50,10 @@ export const ResultScreen = memo<Props>(({ className }) => {
   const dateReturn = useSelector((store: RootState) => store.dateReturn);
 
   const limit = useSelector((store: RootState) => store.limit);
-
   const sort = useSelector((store: RootState) => store.sort);
   const [activeSort, setActiveSort] = useState<CascaderValueType>([sort]);
+
+  const filters = useSelector((store: RootState) => store.filters);
 
   const params = useMemo(() => {
     // eslint-disable-next-line no-console
@@ -64,8 +65,9 @@ export const ResultScreen = memo<Props>(({ className }) => {
       dateReturn,
       limit,
       sort,
+      ...filters,
     };
-  }, [departureId, arrivalId, dateForward, dateReturn, limit, sort]);
+  }, [departureId, arrivalId, dateForward, dateReturn, limit, sort, filters]);
 
   // useEffect(() => {
   //   // eslint-disable-next-line no-console

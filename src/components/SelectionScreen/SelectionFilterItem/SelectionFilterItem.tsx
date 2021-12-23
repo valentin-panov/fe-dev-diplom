@@ -9,9 +9,10 @@ export type Props = {
   className?: string;
   filter: string;
   onChange: (filter: string, state: boolean) => void;
+  checked: boolean | undefined;
 };
 
-export const SelectionFilterItem = memo<Props>(({ className, filter, onChange }) => {
+export const SelectionFilterItem = memo<Props>(({ className, filter, onChange, checked = false }) => {
   const filterItem = filtersCollection[filter];
   return (
     <li className={cn(s.root, className)}>
@@ -19,7 +20,7 @@ export const SelectionFilterItem = memo<Props>(({ className, filter, onChange })
       <div className={s.txt}>{filterItem.title}</div>
       <div className={s.switch}>
         <Switch
-          defaultChecked
+          checked={checked}
           onChange={(state) => {
             onChange(filter, state);
           }}

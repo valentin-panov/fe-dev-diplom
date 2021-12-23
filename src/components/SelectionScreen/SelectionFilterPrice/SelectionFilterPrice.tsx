@@ -1,8 +1,10 @@
 import React, { memo, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import cn from 'clsx';
 import { Slider } from 'antd';
 import s from './SelectionFilterPrice.module.scss';
 import './rewrite.css';
+import { filtersSet } from '../../../reducers/filters';
 
 export type Range = [number, number];
 
@@ -12,6 +14,8 @@ export type Props = {
 };
 
 export const SelectionFilterPrice = memo<Props>(({ className, initialRange }) => {
+  const dispatch = useDispatch();
+
   const [range, setRange] = useState<Range>(initialRange);
   const min = initialRange[0];
   const max = initialRange[1];
@@ -28,6 +32,7 @@ export const SelectionFilterPrice = memo<Props>(({ className, initialRange }) =>
       const setValue: Range = [minValue, maxValue];
       setRange(setValue);
     }
+    dispatch(filtersSet({ price_from: range[0], price_to: range[1] }));
   };
 
   return (

@@ -16,13 +16,6 @@ import { ReactComponent as ArrowRY } from '../svg/arrow_right_yellow.svg';
 import { ReactComponent as ArrowLY } from '../svg/arrow_left_yellow.svg';
 import { FilterItem } from '../interfaces/Interfaces';
 
-// export const carriageType = {
-//   have_third_class: <Platz />,
-//   have_second_class: <Coupe />,
-//   have_fourth_class: <Seat />,
-//   have_first_class: <Lux />,
-// };
-
 export const filtersCollection: FilterItem = {
   have_wifi: { element: <WiFi />, title: 'Wi-Fi' },
   is_express: { element: <Express />, title: 'Экспресс' },
