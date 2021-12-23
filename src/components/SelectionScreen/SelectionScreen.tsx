@@ -31,11 +31,6 @@ export const SelectionScreen = memo<Props>(({ className }) => {
 
   const priceRange = trainsList.length ? getPriceRange(trainsList) : { minPrice: 0, maxPrice: 10000 };
 
-  if (trainsList.length) {
-    // eslint-disable-next-line no-console
-    console.log(priceRange);
-  }
-
   return (
     <div className={cn(s.root, className)}>
       {status === 'idle' && <Error404 />}
