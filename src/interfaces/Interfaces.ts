@@ -151,6 +151,14 @@ export interface SortOption {
 
 export type SortOptions = SortOption[];
 
+export interface SearchParams {
+  cityDeparture: City;
+  cityArrival: City;
+  dateOutbound: string | null;
+  dateReturn: string | null;
+  filters: Filters;
+}
+
 // LEGACY
 
 export interface ICard {

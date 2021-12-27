@@ -7,9 +7,8 @@ import { ReactComponent as SwapBtn } from '../../../svg/swapBtn.svg';
 
 import { DestinationPickerUnit, Point } from './DestinationPickerUnit';
 import { RootState } from '../../../store';
-import { setArrival } from '../../../reducers/arrival';
-import { setDeparture } from '../../../reducers/departure';
 import { City } from '../../../interfaces/Interfaces';
+import { searchParamsCityArrivalSet, searchParamsCityDepartureSet } from '../../../reducers/searchParams';
 
 export type Props = {
   className?: string;
@@ -17,20 +16,20 @@ export type Props = {
 
 export const DestinationPicker = memo<Props>(({ className }) => {
   const dispatch = useDispatch();
-  const departureStore = useSelector((store: RootState) => store.departure);
-  const arrivalStore = useSelector((store: RootState) => store.arrival);
+  const departureStore = useSelector((store: RootState) => store.searchParams.cityDeparture);
+  const arrivalStore = useSelector((store: RootState) => store.searchParams.cityArrival);
 
   const selectPoint = (value: City, point: Point) => {
     if (point === 'departure') {
-      dispatch(setDeparture(value));
+      dispatch(searchParamsCityDepartureSet(value));
     } else {
-      dispatch(setArrival(value));
+      dispatch(searchParamsCityArrivalSet(value));
     }
   };
 
   const swapPoints = () => {
-    dispatch(setArrival(departureStore));
-    dispatch(setDeparture(arrivalStore));
+    dispatch(searchParamsCityArrivalSet(departureStore));
+    dispatch(searchParamsCityDepartureSet(arrivalStore));
   };
 
   const unitDeparture = (

@@ -23,11 +23,11 @@ export type Props = {
 export const Header = memo<Props>(({ className }) => {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-underscore-dangle
-  const departureId = useSelector((store: RootState) => store.departure._id);
+  const departureId = useSelector((store: RootState) => store.searchParams.cityDeparture._id);
   // eslint-disable-next-line no-underscore-dangle
-  const arrivalId = useSelector((store: RootState) => store.arrival._id);
-  const dateForward = useSelector((store: RootState) => store.dateForward);
-  const dateReturn = useSelector((store: RootState) => store.dateReturn);
+  const arrivalId = useSelector((store: RootState) => store.searchParams.cityArrival._id);
+  const dateForward = useSelector((store: RootState) => store.searchParams.dateOutbound);
+  const dateReturn = useSelector((store: RootState) => store.searchParams.dateReturn);
   const location = useLocation();
   const history = useHistory();
   const { pathname } = location;

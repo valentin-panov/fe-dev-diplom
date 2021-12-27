@@ -4,7 +4,7 @@ import cn from 'clsx';
 import { Slider } from 'antd';
 import s from './SelectionFilterPrice.module.scss';
 import './rewrite.css';
-import { filtersSet } from '../../../reducers/filters';
+import { searchParamsFiltersSet } from '../../../reducers/searchParams';
 
 export type Range = [number, number];
 
@@ -32,7 +32,7 @@ export const SelectionFilterPrice = memo<Props>(({ className, initialRange }) =>
       const setValue: Range = [minValue, maxValue];
       setRange(setValue);
     }
-    dispatch(filtersSet({ price_from: range[0], price_to: range[1] }));
+    dispatch(searchParamsFiltersSet({ price_from: range[0], price_to: range[1] }));
   };
 
   return (

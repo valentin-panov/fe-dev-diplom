@@ -43,17 +43,17 @@ export const ResultScreen = memo<Props>(({ className }) => {
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
 
   // eslint-disable-next-line no-underscore-dangle
-  const departureId = useSelector((store: RootState) => store.departure._id);
+  const departureId = useSelector((store: RootState) => store.searchParams.cityDeparture._id);
   // eslint-disable-next-line no-underscore-dangle
-  const arrivalId = useSelector((store: RootState) => store.arrival._id);
-  const dateForward = useSelector((store: RootState) => store.dateForward);
-  const dateReturn = useSelector((store: RootState) => store.dateReturn);
+  const arrivalId = useSelector((store: RootState) => store.searchParams.cityArrival._id);
+  const dateForward = useSelector((store: RootState) => store.searchParams.dateOutbound);
+  const dateReturn = useSelector((store: RootState) => store.searchParams.dateReturn);
 
   const limit = useSelector((store: RootState) => store.limit);
   const sort = useSelector((store: RootState) => store.sort);
   const [activeSort, setActiveSort] = useState<CascaderValueType>([sort]);
 
-  const filters = useSelector((store: RootState) => store.filters);
+  const filters = useSelector((store: RootState) => store.searchParams.filters);
 
   const params = useMemo(() => {
     // eslint-disable-next-line no-console

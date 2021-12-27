@@ -13,8 +13,8 @@ import { Loading } from '../Loading';
 import { RootState } from '../../store';
 import Error404 from '../Error404/Error404';
 import { DatePickerOrigin } from '../Pickers/DatePickerOrigin';
-import { filtersSet } from '../../reducers/filters';
 import { getPriceRange } from '../../utils/getPriceRange';
+import { searchParamsFiltersSet } from '../../reducers/searchParams';
 
 export type Props = {
   className?: string;
@@ -24,10 +24,10 @@ export const SelectionScreen = memo<Props>(({ className }) => {
   const dispatch = useDispatch();
   const status = useSelector((store: RootState) => store.getRoute.status);
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
-  const filters = useSelector((store: RootState) => store.filters);
+  const filters = useSelector((store: RootState) => store.searchParams.filters);
 
   const changeFilter = (filter: string, state: boolean) => {
-    dispatch(filtersSet({ [filter]: state }));
+    dispatch(searchParamsFiltersSet({ [filter]: state }));
   };
 
   const priceRange = trainsList.length

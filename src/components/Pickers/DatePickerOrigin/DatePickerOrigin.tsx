@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import s from './DatePickerOrigin.module.scss';
 import { DatePickerOriginUnit, DateType } from './DatePickerOriginUnit';
 import { RootState } from '../../../store';
-import { setDateForward } from '../../../reducers/dateForward';
-import { setDateReturn } from '../../../reducers/dateReturn';
+import { searchParamsDateOutboundSet, searchParamsDateReturnSet } from '../../../reducers/searchParams';
 
 export type Props = {
   className?: string;
@@ -19,21 +18,21 @@ export const DatePickerOrigin = memo<Props>(({ className, pickerPlace }) => {
   const dispatch = useDispatch();
   const [forwardMoment, setForwardMoment] = useState<TimeObj>(undefined);
   const [returnMoment, setReturnMoment] = useState<TimeObj>(undefined);
-  const forwardStore = useSelector((store: RootState) => store.dateForward);
-  const returnStore = useSelector((store: RootState) => store.dateReturn);
+  const forwardStore = useSelector((store: RootState) => store.searchParams.dateOutbound);
+  const returnStore = useSelector((store: RootState) => store.searchParams.dateReturn);
 
   const onChange = (value: moment.Moment | null, dateType: DateType) => {
     const date = value ? value.format('YYYY-MM-DD') : null;
     if (dateType === 'forward') {
-      dispatch(setDateForward(date));
+      dispatch(searchParamsDateOutboundSet(date));
     } else if (dateType === 'return') {
-      dispatch(setDateReturn(date));
+      dispatch(searchParamsDateReturnSet(date));
     }
   };
 
   useEffect(() => {
     if (returnStore && forwardStore && returnStore < forwardStore) {
-      dispatch(setDateReturn(null));
+      dispatch(searchParamsDateReturnSet(null));
       // const warning = () => {
       //   message.warning('Нельзя вернуться раньше, чем отправиться. Выберите новую дату возвращения.');
       // };
