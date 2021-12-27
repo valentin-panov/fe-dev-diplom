@@ -30,7 +30,12 @@ export const SelectionScreen = memo<Props>(({ className }) => {
     dispatch(filtersSet({ [filter]: state }));
   };
 
-  const priceRange = trainsList.length ? getPriceRange(trainsList) : { minPrice: 0, maxPrice: 10000 };
+  const priceRange = trainsList.length
+    ? getPriceRange(trainsList)
+    : {
+        minPrice: 0,
+        maxPrice: 100000,
+      };
 
   return (
     <div className={cn(s.root, className)}>

@@ -5,7 +5,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import s from './DestinationPicker.module.scss';
 import { ReactComponent as GeoMark } from '../../../svg/icon_geo.svg';
 import { City } from '../../../interfaces/Interfaces';
-import { autocomplete, fetch$, ResponseOptions } from '../../../utils/inputThrottling';
+import { autocomplete, fetch$, ResponseOptions } from '../../../utils/throttlingInput';
 
 export type Props = {
   className?: string;
