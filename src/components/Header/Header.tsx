@@ -26,7 +26,7 @@ export const Header = memo<Props>(({ className }) => {
   const departureId = useSelector((store: RootState) => store.searchParams.cityDeparture._id);
   // eslint-disable-next-line no-underscore-dangle
   const arrivalId = useSelector((store: RootState) => store.searchParams.cityArrival._id);
-  const dateForward = useSelector((store: RootState) => store.searchParams.dateOutbound);
+  const dateOutbound = useSelector((store: RootState) => store.searchParams.dateOutbound);
   const dateReturn = useSelector((store: RootState) => store.searchParams.dateReturn);
   const location = useLocation();
   const history = useHistory();
@@ -37,10 +37,10 @@ export const Header = memo<Props>(({ className }) => {
     () => ({
       departureId,
       arrivalId,
-      dateForward,
+      dateOutbound,
       dateReturn,
     }),
-    [departureId, arrivalId, dateForward, dateReturn]
+    [departureId, arrivalId, dateOutbound, dateReturn]
   );
 
   const activePreset: {

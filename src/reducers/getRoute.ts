@@ -23,7 +23,7 @@ const initialState: GetRoute = {
 export type optionsGetTrains = {
   departureId: number;
   arrivalId: number;
-  dateForward: string | null;
+  dateOutbound: string | null;
   dateReturn: string | null;
   limit?: number | null;
   sort?: string | null;
@@ -53,7 +53,7 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
   const {
     departureId,
     arrivalId,
-    dateForward,
+    dateOutbound,
     dateReturn,
     limit = 5,
     sort = 'price_min',
@@ -73,8 +73,8 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
   }
 
   let reqURL = `${serverURL}/routes?from_city_id=${departureId}&to_city_id=${arrivalId}&limit=${limit}&sort=${sort}`;
-  if (dateForward) {
-    reqURL += `&date_start=${substractYY(dateForward)}`;
+  if (dateOutbound) {
+    reqURL += `&date_start=${substractYY(dateOutbound)}`;
     if (dateReturn) {
       reqURL += `&date_end=${substractYY(dateReturn)}`;
     }
