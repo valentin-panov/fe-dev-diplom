@@ -57,7 +57,6 @@ export const DatePickerOrigin = memo<Props>(({ className, pickerPlace }) => {
     }
   }, [returnStore]);
 
-
   const outboundPicker = (givenClassName: string) => (
     <DatePickerOriginUnit
       dateType="forward"
