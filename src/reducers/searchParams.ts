@@ -40,7 +40,7 @@ export const searchParamsSlice = createSlice({
     searchParamsDateOutboundClear: (state) => ({ ...state, dateOutbound: null }),
     searchParamsDateReturnSet: (state, action: PayloadAction<string | null>) => ({
       ...state,
-      dateOutbound: action.payload,
+      dateReturn: action.payload,
     }),
     searchParamsDateReturnClear: (state) => ({ ...state, dateReturn: null }),
     searchParamsFiltersSet: (state, action: PayloadAction<Filters>) => ({

@@ -38,6 +38,7 @@ export const DatePickerOrigin = memo<Props>(({ className, pickerPlace }) => {
       // };
       // warning();
       // TODO DOUBLE MESSAGE ARRIVES - FIX!
+      // IDEA - move messages error/success to upper component and handle them there
     }
   }, [returnStore, forwardStore, dispatch]);
 
