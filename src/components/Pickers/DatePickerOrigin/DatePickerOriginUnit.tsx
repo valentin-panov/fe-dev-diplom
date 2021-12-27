@@ -12,8 +12,8 @@ import './replaceAntd.css';
 
 moment.locale('ru');
 
-const dateFormat = 'DD/MM/YY';
-const placeholder = 'ДД/ММ/ГГ';
+const dateFormat: { [key: string]: string } = { headerPicker: 'DD/MM/YY', asidePicker: 'DD.MM.YY' };
+const placeholder: { [key: string]: string } = { headerPicker: 'ДД/ММ/ГГ', asidePicker: 'ДД.ММ.ГГ' };
 
 export type DateType = 'forward' | 'return';
 
@@ -38,8 +38,8 @@ export const DatePickerOriginUnit = memo<Props>(({ className, defaultValue, disa
         dropdownClassName={s.dropDown}
         onChange={(value) => getDate(value, dateType)}
         value={defaultValue}
-        format={dateFormat}
-        placeholder={placeholder}
+        format={dateFormat[className]}
+        placeholder={placeholder[className]}
         disabledDate={disabledDate}
         allowClear
       />

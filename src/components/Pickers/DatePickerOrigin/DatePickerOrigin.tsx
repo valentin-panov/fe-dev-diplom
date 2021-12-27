@@ -57,7 +57,6 @@ export const DatePickerOrigin = memo<Props>(({ className, pickerPlace }) => {
     }
   }, [returnStore]);
 
-  // TODO DD.MM.YYYY aside picker
 
   const outboundPicker = (givenClassName: string) => (
     <DatePickerOriginUnit
