@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo, useState } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import cn from 'clsx';
 import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
@@ -29,18 +29,6 @@ export const DatePickerOrigin = memo<Props>(({ className, pickerPlace }) => {
       dispatch(searchParamsDateReturnSet(date));
     }
   };
-
-  useEffect(() => {
-    if (returnStore && forwardStore && returnStore < forwardStore) {
-      dispatch(searchParamsDateReturnSet(null));
-      // const warning = () => {
-      //   message.warning('Нельзя вернуться раньше, чем отправиться. Выберите новую дату возвращения.');
-      // };
-      // warning();
-      // TODO DOUBLE MESSAGE ARRIVES - FIX!
-      // IDEA - move messages error/success to upper component and handle them there
-    }
-  }, [returnStore, forwardStore, dispatch]);
 
   useMemo(() => {
     if (forwardStore) {

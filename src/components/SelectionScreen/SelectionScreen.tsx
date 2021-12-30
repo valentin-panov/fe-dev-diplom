@@ -25,6 +25,8 @@ export const SelectionScreen = memo<Props>(({ className }) => {
   const status = useSelector((store: RootState) => store.getRoute.status);
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
   const filters = useSelector((store: RootState) => store.searchParams.filters);
+  // const filters$ = useMemo(() => new BehaviorSubject(filters), [filters]);
+  // const result$ = useMemo(() => filters$.pipe(throttling(1000, (arg: Filters): Observable<Filters> => arg)), [filters$]);
 
   const changeFilter = (filter: string, state: boolean) => {
     dispatch(searchParamsFiltersSet({ [filter]: state }));
