@@ -1,6 +1,7 @@
 .destinationDropdown {
   padding: 14px 0 15px 0;
   background-color: #f7f5f9;
+  text-transform: uppercase;
 }
 
 .destinationDropdown .ant-select-item,
