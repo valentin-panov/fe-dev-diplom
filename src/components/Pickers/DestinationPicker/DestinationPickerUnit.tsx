@@ -3,6 +3,7 @@ import React, { memo, useMemo, useState } from 'react';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { LoadingOutlined } from '@ant-design/icons';
 import s from './DestinationPicker.module.scss';
+import './reant.css';
 import { ReactComponent as GeoMark } from '../../../svg/icon_geo.svg';
 import { City } from '../../../interfaces/Interfaces';
 import { autocomplete, fetch$, ResponseOptions } from '../../../utils/throttlingInput';
@@ -70,7 +71,7 @@ export const DestinationPickerUnit = memo<Props>(({ className, defaultValue, onS
   return (
     <AutoComplete
       backfill
-      dropdownClassName={s.dropdown}
+      dropdownClassName="destinationDropdown"
       dropdownMatchSelectWidth
       defaultOpen={false}
       value={value}
