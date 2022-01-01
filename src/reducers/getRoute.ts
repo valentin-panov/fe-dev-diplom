@@ -5,7 +5,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Interfaces
-import { GetRoute, GetRouteData } from '../interfaces/Interfaces';
+import { City, GetRoute, GetRouteData } from '../interfaces/Interfaces';
 
 // Server
 import { serverURL } from '../App';
@@ -21,8 +21,8 @@ const initialState: GetRoute = {
 };
 
 export type optionsGetTrains = {
-  departureId: number;
-  arrivalId: number;
+  cityDeparture: City;
+  cityArrival: City;
   dateOutbound: string | null;
   dateReturn: string | null;
   limit?: number | null;
@@ -51,8 +51,8 @@ export type optionsGetTrains = {
 
 export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async (options: optionsGetTrains) => {
   const {
-    departureId,
-    arrivalId,
+    cityDeparture: { _id: departureId },
+    cityArrival: { _id: arrivalId },
     dateOutbound,
     dateReturn,
     limit = 5,

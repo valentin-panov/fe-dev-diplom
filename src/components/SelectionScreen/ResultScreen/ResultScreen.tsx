@@ -51,14 +51,8 @@ export const ResultScreen = memo<Props>(({ className }) => {
   const params = useMemo(() => {
     // eslint-disable-next-line no-console
     console.log('MEMO');
-    const {
-      cityDeparture: { _id: departureId },
-      cityArrival: { _id: arrivalId },
-      dateOutbound,
-      dateReturn,
-      filters,
-    } = searchParams;
-    return { departureId, arrivalId, dateOutbound, dateReturn, ...filters, sort, limit };
+    const { cityDeparture, cityArrival, dateOutbound, dateReturn, filters } = searchParams;
+    return { cityDeparture, cityArrival, dateOutbound, dateReturn, ...filters, sort, limit };
   }, [limit, searchParams, sort]);
 
   // useEffect(() => {

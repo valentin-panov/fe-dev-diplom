@@ -26,5 +26,16 @@ export const Wrapper = ({ className, children }: Props): ReactElement => {
     }
   }, [returnStore, forwardStore, dispatch]);
 
+  // useEffect(() => {
+  //   // eslint-disable-next-line no-console
+  //   // console.log(params);
+  //   // const timeoutId = setTimeout(() => {
+  //   dispatch(getRouteFetchData(params));
+  //   // }, 3000);
+  //   // return () => {
+  //   //   clearTimeout(timeoutId);
+  //   // };
+  // }, [dispatch, params]);
+
   return <div className={cn(s.root, className)}>{children}</div>;
 };

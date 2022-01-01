@@ -23,9 +23,9 @@ export type Props = {
 export const Header = memo<Props>(({ className }) => {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-underscore-dangle
-  const departureId = useSelector((store: RootState) => store.searchParams.cityDeparture._id);
+  const cityDeparture = useSelector((store: RootState) => store.searchParams.cityDeparture);
   // eslint-disable-next-line no-underscore-dangle
-  const arrivalId = useSelector((store: RootState) => store.searchParams.cityArrival._id);
+  const cityArrival = useSelector((store: RootState) => store.searchParams.cityArrival);
   const dateOutbound = useSelector((store: RootState) => store.searchParams.dateOutbound);
   const dateReturn = useSelector((store: RootState) => store.searchParams.dateReturn);
   const location = useLocation();
@@ -35,12 +35,12 @@ export const Header = memo<Props>(({ className }) => {
 
   const params = useMemo(
     () => ({
-      departureId,
-      arrivalId,
+      cityDeparture,
+      cityArrival,
       dateOutbound,
       dateReturn,
     }),
-    [departureId, arrivalId, dateOutbound, dateReturn]
+    [cityDeparture, cityArrival, dateOutbound, dateReturn]
   );
 
   const activePreset: {

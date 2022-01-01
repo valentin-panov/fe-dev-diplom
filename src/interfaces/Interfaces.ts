@@ -63,10 +63,10 @@ export interface Services {
   have_air_conditioning: boolean;
 }
 
-export interface PointX {
-  city: string;
-  station: string;
-}
+// export interface PointX {
+//   city: string;
+//   station: string;
+// }
 
 export interface Train {
   have_first_class: boolean;
