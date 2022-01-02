@@ -1,17 +1,3 @@
-/*.ant-select-arrow {*/
-/*  display: none;*/
-/*}*/
-
-/*.ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled),*/
-/*.ant-cascader-menu-item-active:not(.ant-cascader-menu-item-disabled):hover {*/
-/*  font-weight: normal;*/
-/*  background-color: transparent;*/
-/*}*/
-
-/*.ant-cascader-menu-item:not(:last-child) {*/
-/*  border-bottom: 1px solid #e5e5e5;*/
-/*}*/
-
 .ant-select-arrow {
   display: none;
 }
@@ -50,10 +36,11 @@
   line-height: 21px;
   cursor: pointer;
   background-color: #f7f5f9;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .sort .ant-select-item-option-selected:hover,
 .sort .ant-select-item-option:hover {
-  background-color: #e5e5e5;
+  background-color: #ffca62;
+  color: #ffffff;
 }

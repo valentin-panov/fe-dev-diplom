@@ -8,7 +8,3 @@ export function throttling<T>(time: number, selector: (arg: T) => Observable<T>)
       switchMap((arg: T) => selector(arg).pipe(takeUntil(source$.pipe(skip(1)))))
     );
 }
-
-// export function getFilteredContent<T>(arg: T): Observable<City[][]> {
-//   fromFetch().pipe();
-// }
