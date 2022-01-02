@@ -30,6 +30,7 @@ export const Wrapper = ({ className, children }: Props): ReactElement => {
   useEffect(() => {
     // TODO THROTTLING
     dispatch(getRouteFetchData(searchParams));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch, filters]);
 
   return <div className={cn(s.root, className)}>{children}</div>;
