@@ -48,22 +48,7 @@ export const ResultScreen = memo<Props>(({ className }) => {
   const sort = useSelector((store: RootState) => store.sort);
   const [activeSort, setActiveSort] = useState<CascaderValueType>([sort]);
 
-  const params = useMemo(() => {
-    // eslint-disable-next-line no-console
-    console.log('MEMO');
-    return { ...searchParams, sort, limit };
-  }, [searchParams, sort, limit]);
-
-  // useEffect(() => {
-  //   // eslint-disable-next-line no-console
-  //   // console.log(params);
-  //   // const timeoutId = setTimeout(() => {
-  //   dispatch(getRouteFetchData(params));
-  //   // }, 3000);
-  //   // return () => {
-  //   //   clearTimeout(timeoutId);
-  //   // };
-  // }, [dispatch, params]);
+  const params = useMemo(() => ({ ...searchParams, sort, limit }), [searchParams, sort, limit]);
 
   const onClickLimit = (el: number) => {
     dispatch(limitSet(el));

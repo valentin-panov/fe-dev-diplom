@@ -3,8 +3,9 @@ import cn from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { message } from 'antd';
 import s from './Wrapper.module.scss';
-import { searchParamsDateReturnSet } from '../../reducers/searchParams';
 import { RootState } from '../../store';
+import { getRouteFetchData } from '../../reducers/getRoute';
+import { searchParamsDateReturnSet } from '../../reducers/searchParams';
 
 export type Props = {
   className?: string;
@@ -13,29 +14,23 @@ export type Props = {
 
 export const Wrapper = ({ className, children }: Props): ReactElement => {
   const dispatch = useDispatch();
-  const forwardStore = useSelector((store: RootState) => store.searchParams.dateOutbound);
-  const returnStore = useSelector((store: RootState) => store.searchParams.dateReturn);
+  const searchParams = useSelector((store: RootState) => store.searchParams);
+  const { dateOutbound, dateReturn, filters } = searchParams;
 
   useEffect(() => {
-    if (returnStore && forwardStore && returnStore < forwardStore) {
+    if (dateReturn && dateOutbound && dateReturn < dateOutbound) {
       dispatch(searchParamsDateReturnSet(null));
       const warning = () => {
         message.warning('Нельзя вернуться раньше, чем отправиться. Выберите новую дату возвращения.').then();
       };
       warning();
     }
-  }, [returnStore, forwardStore, dispatch]);
+  }, [dateReturn, dateOutbound, dispatch]);
 
-  // useEffect(() => {
-  //   // eslint-disable-next-line no-console
-  //   // console.log(params);
-  //   // const timeoutId = setTimeout(() => {
-  //   dispatch(getRouteFetchData(params));
-  //   // }, 3000);
-  //   // return () => {
-  //   //   clearTimeout(timeoutId);
-  //   // };
-  // }, [dispatch, params]);
+  useEffect(() => {
+    // TODO THROTTLING
+    dispatch(getRouteFetchData(searchParams));
+  }, [dispatch, filters]);
 
   return <div className={cn(s.root, className)}>{children}</div>;
 };
