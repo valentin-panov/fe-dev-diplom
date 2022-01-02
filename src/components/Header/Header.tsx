@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useMemo } from 'react';
+import React, { memo, useEffect } from 'react';
 import cn from 'clsx';
 import { useHistory, useLocation } from 'react-router-dom';
 import { DestinationPicker } from 'components/Pickers/DestinationPicker';
@@ -22,26 +22,11 @@ export type Props = {
 
 export const Header = memo<Props>(({ className }) => {
   const dispatch = useDispatch();
-  // eslint-disable-next-line no-underscore-dangle
-  const cityDeparture = useSelector((store: RootState) => store.searchParams.cityDeparture);
-  // eslint-disable-next-line no-underscore-dangle
-  const cityArrival = useSelector((store: RootState) => store.searchParams.cityArrival);
-  const dateOutbound = useSelector((store: RootState) => store.searchParams.dateOutbound);
-  const dateReturn = useSelector((store: RootState) => store.searchParams.dateReturn);
+  const searchParams = useSelector((store: RootState) => store.searchParams);
   const location = useLocation();
   const history = useHistory();
   const { pathname } = location;
   const splitLocation: string = pathname.replace(appURL, '').split('/')[1];
-
-  const params = useMemo(
-    () => ({
-      cityDeparture,
-      cityArrival,
-      dateOutbound,
-      dateReturn,
-    }),
-    [cityDeparture, cityArrival, dateOutbound, dateReturn]
-  );
 
   const activePreset: {
     class: string;
@@ -64,7 +49,7 @@ export const Header = memo<Props>(({ className }) => {
   }
 
   const findTickets = () => {
-    dispatch(getRouteFetchData(params));
+    dispatch(getRouteFetchData(searchParams));
     history.push('/select');
   };
 

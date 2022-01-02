@@ -28,25 +28,27 @@ export type optionsGetTrains = {
   limit?: number | null;
   sort?: string | null;
   offset?: number;
-  date_start_arrival?: string;
-  date_end_arrival?: string;
-  have_first_class?: boolean;
-  have_second_class?: boolean;
-  have_third_class?: boolean;
-  have_fourth_class?: boolean;
-  have_wifi?: boolean;
-  have_air_conditioning?: boolean;
-  is_express?: boolean;
-  price_from?: number;
-  price_to?: number;
-  start_departure_hour_from?: number;
-  start_departure_hour_to?: number;
-  start_arrival_hour_from?: number;
-  start_arrival_hour_to?: number;
-  end_departure_hour_from?: number;
-  end_departure_hour_to?: number;
-  end_arrival_hour_from?: number;
-  end_arrival_hour_to?: number;
+  filters: {
+    date_start_arrival?: string;
+    date_end_arrival?: string;
+    have_first_class?: boolean;
+    have_second_class?: boolean;
+    have_third_class?: boolean;
+    have_fourth_class?: boolean;
+    have_wifi?: boolean;
+    have_air_conditioning?: boolean;
+    is_express?: boolean;
+    price_from?: number;
+    price_to?: number;
+    start_departure_hour_from?: number;
+    start_departure_hour_to?: number;
+    start_arrival_hour_from?: number;
+    start_arrival_hour_to?: number;
+    end_departure_hour_from?: number;
+    end_departure_hour_to?: number;
+    end_arrival_hour_from?: number;
+    end_arrival_hour_to?: number;
+  };
 };
 
 export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async (options: optionsGetTrains) => {
@@ -58,14 +60,16 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
     limit = 5,
     sort = 'price_min',
     offset,
-    have_first_class = false,
-    have_second_class = true,
-    have_third_class = true,
-    have_fourth_class = false,
-    have_wifi = false,
-    is_express = false,
-    price_from,
-    price_to,
+    filters: {
+      have_first_class = false,
+      have_second_class = true,
+      have_third_class = true,
+      have_fourth_class = false,
+      have_wifi = false,
+      is_express = false,
+      price_from,
+      price_to,
+    },
   } = options;
 
   if (!departureId || !arrivalId) {

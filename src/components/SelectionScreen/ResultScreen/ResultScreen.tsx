@@ -51,9 +51,8 @@ export const ResultScreen = memo<Props>(({ className }) => {
   const params = useMemo(() => {
     // eslint-disable-next-line no-console
     console.log('MEMO');
-    const { cityDeparture, cityArrival, dateOutbound, dateReturn, filters } = searchParams;
-    return { cityDeparture, cityArrival, dateOutbound, dateReturn, ...filters, sort, limit };
-  }, [limit, searchParams, sort]);
+    return { ...searchParams, sort, limit };
+  }, [searchParams, sort, limit]);
 
   // useEffect(() => {
   //   // eslint-disable-next-line no-console
@@ -65,8 +64,6 @@ export const ResultScreen = memo<Props>(({ className }) => {
   //   //   clearTimeout(timeoutId);
   //   // };
   // }, [dispatch, params]);
-
-  // console.log(searchParams);
 
   const onClickLimit = (el: number) => {
     dispatch(limitSet(el));
