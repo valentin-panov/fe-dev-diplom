@@ -101,6 +101,7 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
   }
   if (price_to) {
     reqURL += `&price_to=${price_to}`;
+    // price_to игнорируется сервером
   }
 
   // eslint-disable-next-line no-console

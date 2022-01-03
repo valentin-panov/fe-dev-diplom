@@ -11,9 +11,10 @@ export type Range = [number, number];
 export type Props = {
   className?: string;
   initialRange: Range;
+  stubRange: { min: number; max: number };
 };
 
-export const SelectionFilterPrice = memo<Props>(({ className, initialRange }) => {
+export const SelectionFilterPrice = memo<Props>(({ className, initialRange, stubRange }) => {
   const dispatch = useDispatch();
 
   const [range, setRange] = useState<Range>(initialRange);
@@ -38,8 +39,8 @@ export const SelectionFilterPrice = memo<Props>(({ className, initialRange }) =>
   return (
     <div className={cn(s.root, className)}>
       <Slider
-        max={max}
-        min={min}
+        min={stubRange.min}
+        max={stubRange.max}
         range={{ draggableTrack: true }}
         step={10}
         defaultValue={range}

@@ -26,6 +26,8 @@ export const SelectionScreen = memo<Props>(({ className }) => {
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
   const filters = useSelector((store: RootState) => store.searchParams.filters);
 
+  const stubRange = { min: 0, max: 10000 };
+
   const changeFilter = (filter: string, state: boolean) => {
     dispatch(searchParamsFiltersSet({ [filter]: state }));
   };
@@ -33,8 +35,8 @@ export const SelectionScreen = memo<Props>(({ className }) => {
   const priceRange = trainsList.length
     ? getPriceRange(trainsList)
     : {
-        minPrice: 0,
-        maxPrice: 100000,
+        minPrice: stubRange.min,
+        maxPrice: stubRange.max,
       };
 
   return (
@@ -80,7 +82,7 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                   <span>от</span>
                   <span>до</span>
                 </div>
-                <SelectionFilterPrice initialRange={[priceRange.minPrice, priceRange.maxPrice]} />
+                <SelectionFilterPrice initialRange={[priceRange.minPrice, priceRange.maxPrice]} stubRange={stubRange} />
                 <div className={s.divider} />
                 <SelectionFilterTime icon={iconsCollection.forward} text="Туда" />
                 <div className={s.divider} />

@@ -1,4 +1,5 @@
 import React, { ReactElement } from 'react';
+// TODO Beatiful page
 
 export default function Error404(): ReactElement {
   return (
