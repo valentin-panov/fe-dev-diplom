@@ -30,7 +30,9 @@ export const Wrapper = ({ className, children }: Props): ReactElement => {
     const subscription = result$.subscribe({
       next: () => {
         // fire update
-        dispatch(getRouteFetchData(searchParams));
+        if (searchParams.cityDeparture.value && searchParams.cityArrival.value) {
+          dispatch(getRouteFetchData(searchParams));
+        }
       },
       error: (err) =>
         // handle error here

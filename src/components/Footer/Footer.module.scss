@@ -61,12 +61,26 @@
   &:hover, &:focus {
     color            : #2D2B2F;
     background-color : #FFCA62;
-    border           : 0;
+    border           : #FFCA62;
   }
   
   &:active {
     color            : #2D2B2F;
     background-color : #FFFFFF;
+    border           : #FFFFFF;
+    
+  }
+  
+  &:disabled {
+    color            : #FFFFFF;
+    background-color : #928F94;
+    border           : #928F94;
+    
+    &:hover {
+      color            : #FFFFFF;
+      background-color : #928F94;
+      border           : #928F94;
+    }
   }
 }
 
@@ -123,11 +137,11 @@
   
   .upBtn {
     position         : relative;
+    padding          : 0;
     width            : 36px;
     height           : 36px;
     background-color : transparent;
     border           : 0;
-    padding : 0;
     cursor           : pointer;
     
     & img {
