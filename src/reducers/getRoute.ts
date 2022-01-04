@@ -87,6 +87,7 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
   // уверен, что можно улучшить, но пока не знаю, как
   let reqURL = `${serverURL}/routes?from_city_id=${departureId}&to_city_id=${arrivalId}&limit=${limit}&sort=${sort}`;
   if (dateOutbound) {
+    // temporary reduce YY by one
     reqURL += `&date_start=${substractYY(dateOutbound)}`;
     if (start_departure_hour_from) {
       reqURL += `&start_departure_hour_from=${start_departure_hour_from}`;
@@ -101,6 +102,7 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
       reqURL += `&start_arrival_hour_to=${start_arrival_hour_to}`;
     }
     if (dateReturn) {
+      // temporary reduce YY by one
       reqURL += `&date_end=${substractYY(dateReturn)}`;
       if (end_departure_hour_from) {
         reqURL += `&end_departure_hour_from=${end_departure_hour_from}`;
