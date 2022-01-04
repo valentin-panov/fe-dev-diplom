@@ -1,17 +1,24 @@
 /* eslint-disable no-param-reassign */
 
 // Core
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-// Interfaces
 // Server
 import { serverURL } from '../App';
 
+// Interfaces
+interface Response {
+  status: boolean;
+}
+
 // Initial state
+
 const initialState = {
   status: 'idle',
   error: '',
-  adr: '',
+  response: {
+    status: false,
+  },
 };
 
 export const postSubscription = createAsyncThunk('subscription', async (adr: string) => {
@@ -43,8 +50,9 @@ const subscriptionSlice = createSlice({
       state.status = 'pending';
       state.error = '';
     });
-    builder.addCase(postSubscription.fulfilled, (state) => {
+    builder.addCase(postSubscription.fulfilled, (state, action: PayloadAction<Response>) => {
       state.status = 'success';
+      state.response = action.payload;
     });
     builder.addCase(postSubscription.rejected, (state, action) => {
       state.status = 'error';

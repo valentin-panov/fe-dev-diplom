@@ -19,7 +19,7 @@ import { ReactComponent as BtnUp } from './img/btnUp.svg';
 
 import { FooterTitle } from './FooterTitle';
 import { FooterSubtitle } from './FooterSubtitle';
-import { postSubscription } from '../../reducers/subrcribe';
+import { postSubscription, subscriptionSetIdle } from '../../reducers/subrcribe';
 import { RootState } from '../../store';
 import { Icon } from '../Icon';
 
@@ -45,6 +45,7 @@ export const Footer = memo<Props>(({ className }) => {
     event.preventDefault();
     dispatch(postSubscription(subscriptionEmail));
     setSubscriptionEmail('');
+    dispatch(subscriptionSetIdle());
   };
 
   useEffect(() => {
@@ -97,6 +98,7 @@ export const Footer = memo<Props>(({ className }) => {
               placeholder="e-mail"
               className={s.emailInput}
               value={subscriptionEmail}
+              required
               onChange={(e) => checkSubmittable(e.target.value)}
             />
             <Button className={s.btn} htmlType="submit" disabled={!submitBtnActive}>
