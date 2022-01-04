@@ -36,6 +36,7 @@ export const SelectionFilterTime = memo<Props>(({ className, icon, text }) => {
       const setValue: Range = [minValue, maxValue];
       setRange(setValue);
     }
+    // console.log(range);
   };
 
   const formatterDuration = (value: number | undefined): string => {

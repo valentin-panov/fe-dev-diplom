@@ -31,9 +31,9 @@ export const SelectionFilterPrice = memo<Props>(({ className, initialRange, stub
       const minValue = min < value[0] ? value[0] : min;
       const maxValue = max > value[1] ? value[1] : max;
       const setValue: Range = [minValue, maxValue];
+      dispatch(searchParamsFiltersSet({ price_from: value[0], price_to: value[1] }));
       setRange(setValue);
     }
-    dispatch(searchParamsFiltersSet({ price_from: range[0], price_to: range[1] }));
   };
 
   return (

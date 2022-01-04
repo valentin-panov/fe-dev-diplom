@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import cn from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './SelectionScreen.module.scss';
@@ -32,12 +32,25 @@ export const SelectionScreen = memo<Props>(({ className }) => {
     dispatch(searchParamsFiltersSet({ [filter]: state }));
   };
 
-  const priceRange = trainsList.length
-    ? getPriceRange(trainsList)
-    : {
-        minPrice: stubRange.min,
-        maxPrice: stubRange.max,
-      };
+  const priceRange: {
+    minPrice?: number;
+    maxPrice?: number;
+  } = useMemo(() => {
+    switch (true) {
+      case !!trainsList.length:
+        return getPriceRange(trainsList);
+      case !!filters.price_from && !!filters.price_to:
+        return {
+          minPrice: filters.price_from,
+          maxPrice: filters.price_to,
+        };
+      default:
+        return {
+          minPrice: stubRange.min,
+          maxPrice: stubRange.max,
+        };
+    }
+  }, [filters.price_from, filters.price_to, trainsList, stubRange.min, stubRange.max]);
 
   return (
     <div className={cn(s.root, className)}>
@@ -82,7 +95,10 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                   <span>от</span>
                   <span>до</span>
                 </div>
-                <SelectionFilterPrice initialRange={[priceRange.minPrice, priceRange.maxPrice]} stubRange={stubRange} />
+                <SelectionFilterPrice
+                  initialRange={[priceRange.minPrice || stubRange.min, priceRange.maxPrice || stubRange.max]}
+                  stubRange={stubRange}
+                />
                 <div className={s.divider} />
                 <SelectionFilterTime icon={iconsCollection.forward} text="Туда" />
                 <div className={s.divider} />
