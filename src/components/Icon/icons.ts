@@ -20,6 +20,7 @@ export const icons = {
   'heart-outline': import('./regular/heart-outline'),
   graphic: import('./regular/graphic'),
   idea: import('./regular/idea'),
+  info: import('./regular/info'),
   lock: import('./regular/lock'),
   message: import('./regular/message'),
   notification: import('./regular/notification'),

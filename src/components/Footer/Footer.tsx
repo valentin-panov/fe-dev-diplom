@@ -1,7 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 import cn from 'clsx';
-import { Button, Form, Input, message } from 'antd';
-import { FieldData } from 'rc-field-form/lib/interface';
+import { Button, Input, message, Modal } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 import s from './Footer.module.scss';
@@ -22,6 +21,7 @@ import { FooterTitle } from './FooterTitle';
 import { FooterSubtitle } from './FooterSubtitle';
 import { postSubscription } from '../../reducers/subrcribe';
 import { RootState } from '../../store';
+import { Icon } from '../Icon';
 
 export type Props = {
   className?: string;
@@ -29,16 +29,21 @@ export type Props = {
 
 export const Footer = memo<Props>(({ className }) => {
   const [submitBtnActive, setSubmitBtnActive] = useState<boolean>(false);
+  const [subscriptionEmail, setSubscriptionEmail] = useState<string>('');
+  const [subscriptionModalVisible, setSubscriptionModalVisible] = useState<boolean>(false);
+
   const status = useSelector((store: RootState) => store.subscribe.status);
 
   const dispatch = useDispatch();
 
-  const checkSubmittable = (allFields: FieldData[]) => {
-    setSubmitBtnActive(allFields.every((i) => i.value));
+  const checkSubmittable = (arg: string) => {
+    setSubmitBtnActive(!!arg);
+    setSubscriptionEmail(arg);
   };
 
-  const onFinish = (values: { email: string }) => {
-    dispatch(postSubscription(values.email));
+  const onFinish = (arg: string) => {
+    dispatch(postSubscription(arg));
+    setSubscriptionEmail('');
   };
 
   useEffect(() => {
@@ -46,9 +51,6 @@ export const Footer = memo<Props>(({ className }) => {
       message
         .loading({
           content: 'ожидаем ответ сервера..',
-          style: {
-            marginTop: '40vh',
-          },
           key: 'pending',
           duration: 0,
         })
@@ -56,6 +58,9 @@ export const Footer = memo<Props>(({ className }) => {
     }
     if (status === 'success' || status === 'error') {
       message.destroy('pending');
+    }
+    if (status === 'success') {
+      setSubscriptionModalVisible(true);
     }
   }, [status]);
 
@@ -78,20 +83,25 @@ export const Footer = memo<Props>(({ className }) => {
         <section className={s.topSection}>
           <FooterTitle text="Подписка" />
           <FooterSubtitle text="Будьте в курсе событий" />
-          <Form
+          <form
             id="subscription"
             name="subscription"
             className={s.subscriptionForm}
-            onFieldsChange={checkSubmittable}
-            onFinish={onFinish}
+            onSubmit={() => onFinish(subscriptionEmail)}
           >
-            <Form.Item name="email">
-              <Input placeholder="e-mail" className={s.emailInput} type="email" inputMode="email" />
-            </Form.Item>
+            <Input
+              type="email"
+              name="email"
+              inputMode="email"
+              placeholder="e-mail"
+              className={s.emailInput}
+              value={subscriptionEmail}
+              onChange={(e) => checkSubmittable(e.target.value)}
+            />
             <Button className={s.btn} htmlType="submit" disabled={!submitBtnActive}>
               ОТПРАВИТЬ
             </Button>
-          </Form>
+          </form>
           <FooterTitle text="Подписывайтесь на нас" />
           <ul className={s.socials__imageContainer}>
             <Youtube />
@@ -118,6 +128,38 @@ export const Footer = memo<Props>(({ className }) => {
         </Button>
         <span className={s.date}>2018 Web</span>
       </div>
+      <Modal
+        closable={false}
+        centered
+        footer={null}
+        visible={subscriptionModalVisible}
+        bodyStyle={{
+          height: '418px',
+          width: '666px',
+          background: '#FBFBFB',
+          border: '1px solid #C4C4C4',
+          boxShadow: '0 2px 2px rgba(0, 0, 0, 0.25)',
+          padding: '0',
+        }}
+      >
+        <div className={s.subscModalWrapper}>
+          <div className={s.modalHeader}>
+            <Icon type="info" />
+          </div>
+          <div className={s.modalBody}>
+            <p>Ваш адрес email добавлен в базу новостной рассылки.</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum ducimus hic maiores odio qui sed vitae
+              voluptas. Atque eaque eius error et maxime modi necessitatibus quod reiciendis rerum sint? Expedita!
+            </p>
+          </div>
+          <div className={s.modalFooter}>
+            <Button onClick={() => setSubscriptionModalVisible(false)} className={s.modalBtn}>
+              понятно
+            </Button>
+          </div>
+        </div>
+      </Modal>
     </footer>
   );
 });
