@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { FormEvent, memo, useEffect, useState } from 'react';
 import cn from 'clsx';
 import { Button, Input, message, Modal } from 'antd';
 
@@ -41,8 +41,9 @@ export const Footer = memo<Props>(({ className }) => {
     setSubscriptionEmail(arg);
   };
 
-  const onFinish = (arg: string) => {
-    dispatch(postSubscription(arg));
+  const onFinish = (event: FormEvent) => {
+    event.preventDefault();
+    dispatch(postSubscription(subscriptionEmail));
     setSubscriptionEmail('');
   };
 
@@ -87,7 +88,7 @@ export const Footer = memo<Props>(({ className }) => {
             id="subscription"
             name="subscription"
             className={s.subscriptionForm}
-            onSubmit={() => onFinish(subscriptionEmail)}
+            onSubmit={(event) => onFinish(event)}
           >
             <Input
               type="email"
