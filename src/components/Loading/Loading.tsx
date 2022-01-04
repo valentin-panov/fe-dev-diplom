@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import s from './Loading.module.scss';
 import loadingImg from './img/loading.gif';
+// нужно как-то закешировать эту картинку до того момента, как она понадобится
 
 export type Props = {
   className?: string;
