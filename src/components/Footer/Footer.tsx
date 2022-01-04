@@ -45,7 +45,6 @@ export const Footer = memo<Props>(({ className }) => {
     event.preventDefault();
     dispatch(postSubscription(subscriptionEmail));
     setSubscriptionEmail('');
-    dispatch(subscriptionSetIdle());
   };
 
   useEffect(() => {
@@ -157,7 +156,13 @@ export const Footer = memo<Props>(({ className }) => {
             </p>
           </div>
           <div className={s.modalFooter}>
-            <Button onClick={() => setSubscriptionModalVisible(false)} className={s.modalBtn}>
+            <Button
+              onClick={() => {
+                setSubscriptionModalVisible(false);
+                dispatch(subscriptionSetIdle());
+              }}
+              className={s.modalBtn}
+            >
               понятно
             </Button>
           </div>
