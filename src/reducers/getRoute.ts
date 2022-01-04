@@ -69,6 +69,14 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
       is_express = false,
       price_from,
       price_to,
+      start_departure_hour_from = 0,
+      start_departure_hour_to = 0,
+      start_arrival_hour_from = 0,
+      start_arrival_hour_to = 0,
+      end_departure_hour_from = 0,
+      end_departure_hour_to = 0,
+      end_arrival_hour_from = 0,
+      end_arrival_hour_to = 0,
     },
   } = options;
 
@@ -76,11 +84,36 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
     throw new Error(`empty points`);
   }
 
+  // уверен, что можно улучшить, но пока не знаю, как
   let reqURL = `${serverURL}/routes?from_city_id=${departureId}&to_city_id=${arrivalId}&limit=${limit}&sort=${sort}`;
   if (dateOutbound) {
     reqURL += `&date_start=${substractYY(dateOutbound)}`;
+    if (start_departure_hour_from) {
+      reqURL += `&start_departure_hour_from=${start_departure_hour_from}`;
+    }
+    if (start_departure_hour_to) {
+      reqURL += `&start_departure_hour_to=${start_departure_hour_to}`;
+    }
+    if (start_arrival_hour_from) {
+      reqURL += `&start_arrival_hour_from=${start_arrival_hour_from}`;
+    }
+    if (start_arrival_hour_to) {
+      reqURL += `&start_arrival_hour_to=${start_arrival_hour_to}`;
+    }
     if (dateReturn) {
       reqURL += `&date_end=${substractYY(dateReturn)}`;
+      if (end_departure_hour_from) {
+        reqURL += `&end_departure_hour_from=${end_departure_hour_from}`;
+      }
+      if (end_departure_hour_to) {
+        reqURL += `&end_departure_hour_to=${end_departure_hour_to}`;
+      }
+      if (end_arrival_hour_from) {
+        reqURL += `&end_arrival_hour_from=${end_arrival_hour_from}`;
+      }
+      if (end_arrival_hour_to) {
+        reqURL += `&end_arrival_hour_to=${end_arrival_hour_to}`;
+      }
     }
   }
   if (offset) {

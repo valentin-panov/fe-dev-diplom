@@ -45,28 +45,11 @@ export interface FilterItem {
   };
 }
 
-export interface Filters {
-  have_first_class?: boolean;
-  have_second_class?: boolean;
-  have_third_class?: boolean;
-  have_fourth_class?: boolean;
-  have_wifi?: boolean;
-  is_express?: boolean;
-  have_air_conditioning?: boolean;
-  price_from?: number;
-  price_to?: number;
-}
-
 export interface Services {
   have_wifi: boolean;
   is_express: boolean;
   have_air_conditioning: boolean;
 }
-
-// export interface PointX {
-//   city: string;
-//   station: string;
-// }
 
 export interface Train {
   have_first_class: boolean;
@@ -157,6 +140,26 @@ export interface SearchParams {
   dateOutbound: string | null;
   dateReturn: string | null;
   filters: Filters;
+}
+
+export interface Filters {
+  have_first_class?: boolean;
+  have_second_class?: boolean;
+  have_third_class?: boolean;
+  have_fourth_class?: boolean;
+  have_wifi?: boolean;
+  is_express?: boolean;
+  have_air_conditioning?: boolean;
+  price_from?: number;
+  price_to?: number;
+  start_departure_hour_from?: number;
+  start_departure_hour_to?: number;
+  start_arrival_hour_from?: number;
+  start_arrival_hour_to?: number;
+  end_departure_hour_from?: number;
+  end_departure_hour_to?: number;
+  end_arrival_hour_from?: number;
+  end_arrival_hour_to?: number;
 }
 
 // LEGACY
