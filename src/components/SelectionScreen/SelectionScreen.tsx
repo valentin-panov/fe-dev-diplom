@@ -100,9 +100,9 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                   stubRange={stubRange}
                 />
                 <div className={s.divider} />
-                <SelectionFilterTime icon={iconsCollection.forward} text="Туда" />
+                <SelectionFilterTime icon={iconsCollection.forward} type="outbound" />
                 <div className={s.divider} />
-                <SelectionFilterTime icon={iconsCollection.backward} text="Обратно" />
+                <SelectionFilterTime icon={iconsCollection.backward} type="return" />
               </section>
               <LastTickets />
             </div>

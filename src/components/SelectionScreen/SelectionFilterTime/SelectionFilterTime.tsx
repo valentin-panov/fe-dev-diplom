@@ -1,52 +1,31 @@
-import React, { memo, ReactElement, useRef, useState } from 'react';
+import React, { memo, ReactElement, useRef } from 'react';
 import cn from 'clsx';
-import { Collapse, Slider } from 'antd';
+import { Collapse } from 'antd';
 
 import { ReactComponent as Plus } from '../../../svg/icon_dest_plus.svg';
 import { ReactComponent as Minus } from '../../../svg/icon_dest_minus.svg';
 
 import s from './SelectionFilterTime.module.scss';
 import './rewrite.css';
-import { Range } from '../SelectionFilterPrice';
+import { SelectionFilterTimeOrigin } from './SelectionFilterTimeOrigin';
 
 const { Panel } = Collapse;
 
 export type Props = {
   className?: string;
   icon: ReactElement;
-  text: string;
+  type: 'outbound' | 'return';
 };
 
-export const SelectionFilterTime = memo<Props>(({ className, icon, text }) => {
-  const [range, setRange] = useState<Range>([0, 1440]);
+const text = {
+  outbound: { title: 'Туда', first: 'start_departure', second: 'start_arrival' },
+  return: { title: 'Обратно', first: 'end_departure', second: 'end_arrival' },
+};
+
+export const SelectionFilterTime = memo<Props>(({ className, icon, type }) => {
   const forward = useRef(null);
 
-  const min = 0;
-  const max = 1440;
-
-  const onChangeRange = (value: number | Range): void => {
-    if (typeof value === 'number') {
-      const minValue = 0;
-      const maxValue = max > value ? value : max;
-      const setValue: Range = [minValue, maxValue];
-      setRange(setValue);
-    } else {
-      const minValue = min < value[0] ? value[0] : min;
-      const maxValue = max > value[1] ? value[1] : max;
-      const setValue: Range = [minValue, maxValue];
-      setRange(setValue);
-    }
-    // console.log(range);
-  };
-
-  const formatterDuration = (value: number | undefined): string => {
-    if (typeof value === 'undefined') {
-      return '';
-    }
-    const hour = Math.floor(value / 60);
-    const minutes = value - hour * 60;
-    return `${`0${hour}`.slice(-2)}:${`0${minutes}`.slice(-2)}`;
-  };
+  // TODO pluck ranges from store
 
   return (
     <div className={cn(s.root, className)}>
@@ -55,38 +34,16 @@ export const SelectionFilterTime = memo<Props>(({ className, icon, text }) => {
           header={
             <div className={s.header}>
               <div className={s.icon}>{icon}</div>
-              <div className={s.sideSelection__title}>{text}</div>
+              <div className={s.sideSelection__title}>{text[type].title}</div>
             </div>
           }
           key={1}
         >
           <div className={s.timePickerPanel} ref={forward}>
             <div className={cn(s.timePickerSubTitle, s.firstST)}>Время отбытия</div>
-            <Slider
-              max={max}
-              min={min}
-              range={{ draggableTrack: true }}
-              step={30}
-              defaultValue={range}
-              tooltipVisible
-              tooltipPlacement="bottom"
-              tipFormatter={(value) => formatterDuration(value)}
-              onChange={(value: number | Range) => onChangeRange(value)}
-              getTooltipPopupContainer={() => forward.current as unknown as HTMLElement}
-            />
+            <SelectionFilterTimeOrigin initialRange={[0, 1440]} type={text[type].first} />
             <div className={cn(s.timePickerSubTitle, s.secondST)}>Время прибытия</div>
-            <Slider
-              max={max}
-              min={min}
-              range={{ draggableTrack: true }}
-              step={30}
-              defaultValue={range}
-              tooltipVisible
-              tooltipPlacement="bottom"
-              tipFormatter={(value) => formatterDuration(value)}
-              onChange={(value: number | Range) => onChangeRange(value)}
-              getTooltipPopupContainer={() => forward.current as unknown as HTMLElement}
-            />
+            <SelectionFilterTimeOrigin initialRange={[0, 1440]} type={text[type].second} />
           </div>
         </Panel>
       </Collapse>

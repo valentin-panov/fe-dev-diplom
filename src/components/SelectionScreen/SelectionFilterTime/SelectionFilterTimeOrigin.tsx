@@ -1,25 +1,22 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import cn from 'clsx';
 import { Slider } from 'antd';
-import s from './SelectionFilterPrice.module.scss';
-import './rewrite.css';
 import { searchParamsFiltersSet } from '../../../reducers/searchParams';
 
 export type Range = [number, number];
 
 export type Props = {
-  className?: string;
   initialRange: Range;
-  stubRange: { min: number; max: number };
+  type: string;
 };
 
-export const SelectionFilterPrice = memo<Props>(({ className, initialRange, stubRange }) => {
+export const SelectionFilterTimeOrigin = memo<Props>(({ initialRange, type }) => {
   const dispatch = useDispatch();
+  const forward = useRef(null);
 
   const [range, setRange] = useState<Range>(initialRange);
-  const min = initialRange[0];
-  const max = initialRange[1];
+  const min = 0;
+  const max = 1440;
 
   const onChangeRange = (value: number | Range): void => {
     if (typeof value === 'number') {
@@ -31,24 +28,33 @@ export const SelectionFilterPrice = memo<Props>(({ className, initialRange, stub
       const minValue = min < value[0] ? value[0] : min;
       const maxValue = max > value[1] ? value[1] : max;
       const setValue: Range = [minValue, maxValue];
-      dispatch(searchParamsFiltersSet({ price_from: value[0], price_to: value[1] }));
+      dispatch(searchParamsFiltersSet({ [`${type}_hour_from`]: value[0], [`${type}_hour_to`]: value[1] }));
       setRange(setValue);
     }
   };
 
-  // ВАЖНО! подписи перекрывают друг друга, если сводить ползунки близко, посмотрите, как сделано на авиасэйлс
+  const formatterDuration = (value: number | undefined): string => {
+    if (typeof value === 'undefined') {
+      return '';
+    }
+    const hour = Math.floor(value / 60);
+    const minutes = value - hour * 60;
+    return `${`0${hour}`.slice(-2)}:${`0${minutes}`.slice(-2)}`;
+  };
 
   return (
-    <div className={cn(s.root, className)}>
+    <div ref={forward}>
       <Slider
-        min={stubRange.min}
-        max={stubRange.max}
+        max={max}
+        min={min}
         range={{ draggableTrack: true }}
-        step={10}
+        step={30}
         defaultValue={range}
         tooltipVisible
         tooltipPlacement="bottom"
+        tipFormatter={(value) => formatterDuration(value)}
         onChange={(value: number | Range) => onChangeRange(value)}
+        getTooltipPopupContainer={() => forward.current as unknown as HTMLElement}
       />
     </div>
   );
