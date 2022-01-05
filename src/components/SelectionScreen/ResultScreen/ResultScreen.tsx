@@ -34,16 +34,14 @@ export const sortOptions: SortOptions = [
 
 export const ResultScreen = memo<Props>(({ className }) => {
   const dispatch = useDispatch();
-
-  const [currentPage, setCurrentPage] = useState(1);
+  const searchParams = useSelector((store: RootState) => store.searchParams);
+  const { limit, sort } = searchParams;
 
   const totalCount = useSelector((store: RootState) => store.getRoute.data.totalCount);
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
 
-  const searchParams = useSelector((store: RootState) => store.searchParams);
-  const { limit, sort } = searchParams;
   const [activeSort, setActiveSort] = useState<CascaderValueType>([sort]);
-
+  const [currentPage, setCurrentPage] = useState(1);
 
   const onClickLimit = (el: number) => {
     dispatch(searchParamsLimitSet(el));
