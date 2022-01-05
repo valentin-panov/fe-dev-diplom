@@ -1,11 +1,12 @@
 import React, { ReactElement } from 'react';
-// TODO Beatiful page
+import cn from 'clsx';
+import s from './Error404.module.scss';
 
 export default function Error404(): ReactElement {
   return (
-    <section className="top-sales">
-      <h2 className="text-center">Страница не найдена</h2>
-      <p>Извините, такая страница не найдена!</p>
+    <section className={cn(s.root)}>
+      <h2>Ошибка 404: страница не найдена</h2>
+      <p>Извините, такая страница не найдена. Начните новый поиск направления.</p>
     </section>
   );
 }
