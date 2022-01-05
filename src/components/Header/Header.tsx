@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import cn from 'clsx';
 import { useHistory, useLocation } from 'react-router-dom';
 import { DestinationPicker } from 'components/Pickers/DestinationPicker';
@@ -22,6 +22,7 @@ export type Props = {
 
 export const Header = memo<Props>(({ className }) => {
   const dispatch = useDispatch();
+  const [findDisabled, setFindDisadled] = useState<boolean>(true);
   const searchParams = useSelector((store: RootState) => store.searchParams);
   const location = useLocation();
   const history = useHistory();
@@ -63,6 +64,14 @@ export const Header = memo<Props>(({ className }) => {
     loadingImg.src = 'src/components/Loading/img/loading.gif';
   }, []);
 
+  useEffect(() => {
+    if (searchParams.cityDeparture.value && searchParams.cityArrival.value) {
+      setFindDisadled(false);
+    } else {
+      setFindDisadled(true);
+    }
+  }, [searchParams.cityDeparture.value, searchParams.cityArrival.value]);
+
   return (
     <header className={cn(s.root, className, s[activePreset.class])}>
       <div className={s.content}>
@@ -87,7 +96,7 @@ export const Header = memo<Props>(({ className }) => {
                 </div>
                 <DatePickerOrigin pickerPlace="headerPicker" />
                 <div className={s.search_btn_holder}>
-                  <Button className={s.searchBtn} onClick={findTickets}>
+                  <Button className={s.searchBtn} onClick={findTickets} disabled={findDisabled}>
                     НАЙТИ БИЛЕТЫ
                   </Button>
                 </div>
@@ -105,7 +114,7 @@ export const Header = memo<Props>(({ className }) => {
                   <DatePickerOrigin pickerPlace="headerPicker" />
                 </div>
                 <div className={s.search_btn_holder_select}>
-                  <Button className={s.searchBtn} onClick={findTickets}>
+                  <Button className={s.searchBtn} onClick={findTickets} disabled={findDisabled}>
                     НАЙТИ БИЛЕТЫ
                   </Button>
                 </div>
