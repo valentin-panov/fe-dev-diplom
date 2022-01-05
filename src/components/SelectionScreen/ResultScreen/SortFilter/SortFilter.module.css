@@ -1,9 +1,9 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&subset=cyrillic-ext");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Condensed&subset=cyrillic-ext");
 @import '~antd/dist/antd.css';
-.root {
+#root {
   margin: 0 auto;
-  max-width: 1200px;
+  min-height: 100%;
   font: inherit;
 }
 
@@ -59,10 +59,6 @@ p {
   -moz-box-shadow: 0 5px 5px -5px rgba(34, 60, 80, 0.6);
   -webkit-box-shadow: 0 5px 5px -5px rgba(34, 60, 80, 0.6);
   box-shadow: 0 5px 5px -5px rgba(34, 60, 80, 0.6);
-}
-
-main {
-  flex: 1 1 auto;
 }
 
 .root {
