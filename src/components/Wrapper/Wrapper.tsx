@@ -21,7 +21,7 @@ export const Wrapper = ({ className, children }: Props): ReactElement => {
   const { dateOutbound, dateReturn, filters } = searchParams;
   const filters$ = useMemo(() => new BehaviorSubject<Filters>(filters), [filters]);
   const result$ = useMemo(
-    () => filters$.pipe(throttling<Filters>(1000, (arg) => new BehaviorSubject<Filters>(arg))),
+    () => filters$.pipe(throttling<Filters>(1500, (arg) => new BehaviorSubject<Filters>(arg))),
     [filters$]
   );
 
