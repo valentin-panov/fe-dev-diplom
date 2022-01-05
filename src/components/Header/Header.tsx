@@ -22,7 +22,7 @@ export type Props = {
 
 export const Header = memo<Props>(({ className }) => {
   const dispatch = useDispatch();
-  const [findDisabled, setFindDisadled] = useState<boolean>(true);
+  const [findDisabled, setFindDisabled] = useState<boolean>(true);
   const searchParams = useSelector((store: RootState) => store.searchParams);
   const location = useLocation();
   const history = useHistory();
@@ -66,9 +66,9 @@ export const Header = memo<Props>(({ className }) => {
 
   useEffect(() => {
     if (searchParams.cityDeparture.value && searchParams.cityArrival.value) {
-      setFindDisadled(false);
+      setFindDisabled(false);
     } else {
-      setFindDisadled(true);
+      setFindDisabled(true);
     }
   }, [searchParams.cityDeparture.value, searchParams.cityArrival.value]);
 
