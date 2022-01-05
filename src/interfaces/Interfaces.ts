@@ -134,12 +134,17 @@ export interface SortOption {
 
 export type SortOptions = SortOption[];
 
+// export type sortVariants = 'date' | 'price_min' | 'duration';
+
 export interface SearchParams {
   cityDeparture: City;
   cityArrival: City;
   dateOutbound: string | null;
   dateReturn: string | null;
   filters: Filters;
+  limit: number;
+  sort: string;
+  offset?: number;
 }
 
 export interface Filters {

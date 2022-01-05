@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState } from 'react';
+import React, { memo, useState } from 'react';
 import cn from 'clsx';
 import { CascaderValueType } from 'rc-cascader/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,10 +10,8 @@ import { PaginationOrigin } from '../PaginationOrigin';
 // import { trainsList } from './data';
 import { RootState } from '../../../store';
 import ZeroFound from '../../ZeroFound/ZeroFound';
-import { limitSet } from '../../../reducers/limit';
-import { getRouteFetchData } from '../../../reducers/getRoute';
-import { sortSet } from '../../../reducers/sort';
 import { SortOptions } from '../../../interfaces/Interfaces';
+import { searchParamsLimitSet, searchParamsSortSet } from '../../../reducers/searchParams';
 
 export type Props = {
   className?: string;
@@ -43,23 +41,18 @@ export const ResultScreen = memo<Props>(({ className }) => {
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
 
   const searchParams = useSelector((store: RootState) => store.searchParams);
-
-  const limit = useSelector((store: RootState) => store.limit);
-  const sort = useSelector((store: RootState) => store.sort);
+  const { limit, sort } = searchParams;
   const [activeSort, setActiveSort] = useState<CascaderValueType>([sort]);
 
-  const params = useMemo(() => ({ ...searchParams, sort, limit }), [searchParams, sort, limit]);
 
   const onClickLimit = (el: number) => {
-    dispatch(limitSet(el));
-    dispatch(getRouteFetchData({ ...params, limit: el }));
+    dispatch(searchParamsLimitSet(el));
   };
 
   const onChangeSort = (value: CascaderValueType) => {
     setActiveSort(value);
     const valueStr = `${value}`;
-    dispatch(sortSet(valueStr));
-    dispatch(getRouteFetchData({ ...params, sort: valueStr }));
+    dispatch(searchParamsSortSet(valueStr));
   };
 
   return (

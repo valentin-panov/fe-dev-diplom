@@ -1,5 +1,5 @@
 export type Data = {
-  limit: number;
+  token: string;
 };
 
 export interface StorageHandlerInterface {

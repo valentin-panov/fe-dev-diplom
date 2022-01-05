@@ -16,6 +16,8 @@ const initialState: SearchParams = {
     price_from: 0,
     price_to: 10000,
   },
+  limit: 5,
+  sort: 'date',
 };
 
 export const searchParamsSlice = createSlice({
@@ -48,6 +50,8 @@ export const searchParamsSlice = createSlice({
       filters: { ...state.filters, ...action.payload },
     }),
     searchParamsFiltersClear: (state) => ({ ...state, filters: initialState.filters }),
+    searchParamsLimitSet: (state, action: PayloadAction<number>) => ({ ...state, limit: action.payload }),
+    searchParamsSortSet: (state, action: PayloadAction<string>) => ({ ...state, sort: action.payload }),
   },
 });
 
@@ -63,6 +67,8 @@ export const {
   searchParamsDateReturnClear,
   searchParamsFiltersSet,
   searchParamsFiltersClear,
+  searchParamsLimitSet,
+  searchParamsSortSet,
 } = searchParamsSlice.actions;
 
 export const searchParams = searchParamsSlice.reducer;

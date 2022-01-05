@@ -55,7 +55,7 @@ export const Header = memo<Props>(({ className }) => {
   };
 
   useEffect(() => {
-    // TODO make an array
+    // TODO cache images
     const imgHeaderTrain = new Image();
     imgHeaderTrain.src = headerTrain;
     const imgHeaderSuccess = new Image();
