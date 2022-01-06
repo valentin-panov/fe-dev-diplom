@@ -26,7 +26,7 @@ export const Wrapper = ({ className, children }: Props): ReactElement => {
   );
 
   // Subscription to the input stream
-  React.useEffect(() => {
+  useEffect(() => {
     const subscription = result$.subscribe({
       next: () => {
         // fire update
@@ -51,6 +51,11 @@ export const Wrapper = ({ className, children }: Props): ReactElement => {
       warning();
     }
   }, [dateReturn, dateOutbound, dispatch]);
+
+  useEffect(() => {
+    dispatch(getRouteFetchData(searchParams));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams.sort, searchParams.offset, searchParams.limit]);
 
   return <div className={cn(s.root, className)}>{children}</div>;
 };

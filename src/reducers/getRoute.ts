@@ -27,7 +27,7 @@ export type optionsGetTrains = {
   dateReturn: string | null;
   limit?: number | null;
   sort?: string | null;
-  offset?: number;
+  offset: number;
   filters: {
     date_start_arrival?: string;
     date_end_arrival?: string;

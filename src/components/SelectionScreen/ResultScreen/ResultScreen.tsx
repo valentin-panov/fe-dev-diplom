@@ -11,7 +11,7 @@ import { PaginationOrigin } from '../PaginationOrigin';
 import { RootState } from '../../../store';
 import ZeroFound from '../../ZeroFound/ZeroFound';
 import { SortOptions } from '../../../interfaces/Interfaces';
-import { searchParamsLimitSet, searchParamsSortSet } from '../../../reducers/searchParams';
+import { searchParamsLimitSet, searchParamsOffsetSet, searchParamsSortSet } from '../../../reducers/searchParams';
 
 export type Props = {
   className?: string;
@@ -35,22 +35,30 @@ export const sortOptions: SortOptions = [
 export const ResultScreen = memo<Props>(({ className }) => {
   const dispatch = useDispatch();
   const searchParams = useSelector((store: RootState) => store.searchParams);
-  const { limit, sort } = searchParams;
+  const { limit, sort, offset } = searchParams;
 
   const totalCount = useSelector((store: RootState) => store.getRoute.data.totalCount);
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
 
   const [activeSort, setActiveSort] = useState<CascaderValueType>([sort]);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(offset / limit + 1);
+
+  // TODO limit / offset logic
 
   const onClickLimit = (el: number) => {
     dispatch(searchParamsLimitSet(el));
+    dispatch(searchParamsOffsetSet(0));
   };
 
   const onChangeSort = (value: CascaderValueType) => {
     setActiveSort(value);
     const valueStr = `${value}`;
     dispatch(searchParamsSortSet(valueStr));
+  };
+
+  const onChangePage = (value: number) => {
+    setCurrentPage(value);
+    dispatch(searchParamsOffsetSet(value * limit - limit));
   };
 
   return (
@@ -77,7 +85,7 @@ export const ResultScreen = memo<Props>(({ className }) => {
           </div>
           <div className={s.pagination}>
             <PaginationOrigin
-              data={{ current: currentPage, total: totalCount, pageSize: limit, onChange: setCurrentPage }}
+              data={{ current: currentPage, total: totalCount, pageSize: limit, onChange: onChangePage }}
             />
           </div>
         </>

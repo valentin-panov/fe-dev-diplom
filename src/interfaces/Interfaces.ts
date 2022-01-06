@@ -144,7 +144,7 @@ export interface SearchParams {
   filters: Filters;
   limit: number;
   sort: string;
-  offset?: number;
+  offset: number;
 }
 
 export interface Filters {

@@ -1,4 +1,4 @@
-import React, { Dispatch, memo, SetStateAction } from 'react';
+import React, { memo } from 'react';
 import cn from 'clsx';
 import { Pagination } from 'antd';
 import s from './PaginationOrigin.module.scss';
@@ -6,7 +6,7 @@ import './reant.css';
 
 export type Props = {
   className?: string;
-  data: { current: number; total: number; pageSize: number; onChange: Dispatch<SetStateAction<number>> };
+  data: { current: number; total: number; pageSize: number; onChange: (value: number) => void };
 };
 
 export const PaginationOrigin = memo<Props>(({ className, data }) => {
