@@ -5,6 +5,7 @@ import { token } from './token';
 import { getRoute } from './getRoute';
 import { searchParams } from './searchParams';
 import { subscribe } from './subrcribe';
+import { appState } from './appState';
 
 export const rootReducer = {
   menu,
@@ -12,5 +13,6 @@ export const rootReducer = {
   getRoute,
   searchParams,
   subscribe,
+  appState,
   token,
 };

@@ -43,8 +43,6 @@ export const ResultScreen = memo<Props>(({ className }) => {
   const [activeSort, setActiveSort] = useState<CascaderValueType>([sort]);
   const [currentPage, setCurrentPage] = useState(offset / limit + 1);
 
-  // TODO limit / offset logic
-
   const onClickLimit = (el: number) => {
     dispatch(searchParamsLimitSet(el));
     dispatch(searchParamsOffsetSet(0));
