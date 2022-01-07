@@ -15,6 +15,7 @@ import Error404 from '../Error404/Error404';
 import { DatePickerOrigin } from '../Pickers/DatePickerOrigin';
 import { getPriceRange } from '../../utils/getPriceRange';
 import { searchParamsFiltersSet } from '../../reducers/searchParams';
+import { TicketSelectionScreen } from './TicketSelectionScreen';
 
 export type Props = {
   className?: string;
@@ -109,7 +110,7 @@ export const SelectionScreen = memo<Props>(({ className }) => {
             </div>
             <div>
               {!selectedTrain && <ResultScreen />}
-              {selectedTrain && <Error404 />}
+              {selectedTrain && <TicketSelectionScreen />}
             </div>
           </div>
         </>

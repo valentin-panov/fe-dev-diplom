@@ -31,7 +31,7 @@ export const TrainRow = memo<Props>(({ className, train, direction }) => {
         <div className={s.station}>{stationA}</div>
       </div>
       <div className={s.col2}>
-        <div className={s.duration}>{duration}</div>
+        <div className={s.duration}>{`${duration.hh}:${duration.mm}`}</div>
         <div className={s.arrow}>{direction ? iconsCollection.arrowRY : iconsCollection.arrowLY}</div>
       </div>
       <div className={s.col1}>

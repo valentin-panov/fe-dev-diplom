@@ -10,10 +10,14 @@ import { ReactComponent as Seat } from '../svg/filter_seat.svg';
 import { ReactComponent as Lux } from '../svg/filter_lux.svg';
 import { ReactComponent as Forward } from '../svg/icon_dest_forward.svg';
 import { ReactComponent as Backward } from '../svg/icon_dest_back.svg';
+import { ReactComponent as BackwardBig } from '../svg/icon_dest_back_big.svg';
 import { ReactComponent as ArrowRB } from '../svg/arrow_right_black.svg';
 import { ReactComponent as ArrowRG } from '../svg/arrow_right_grey.svg';
 import { ReactComponent as ArrowRY } from '../svg/arrow_right_yellow.svg';
 import { ReactComponent as ArrowLY } from '../svg/arrow_left_yellow.svg';
+import { ReactComponent as ForwardBig } from '../svg/icon_dest_forward_big.svg';
+import { ReactComponent as TrainSmall } from '../svg/icon_train_small.svg';
+import { ReactComponent as Clock } from '../svg/icon_clock.svg';
 import { FilterItem } from '../interfaces/Interfaces';
 
 export const filtersCollection: FilterItem = {
@@ -35,4 +39,8 @@ export const iconsCollection = {
   arrowRG: <ArrowRG />,
   arrowRY: <ArrowRY />,
   arrowLY: <ArrowLY />,
+  forwardBig: <ForwardBig />,
+  backwardBig: <BackwardBig />,
+  trainSmall: <TrainSmall />,
+  clock: <Clock />,
 };
