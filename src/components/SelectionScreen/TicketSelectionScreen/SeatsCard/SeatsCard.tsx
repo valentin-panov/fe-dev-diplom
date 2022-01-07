@@ -18,6 +18,7 @@ export type Props = {
 
 export const SeatsCard = memo<Props>(({ className, type, data }) => {
   const dispatch = useDispatch();
+
   // eslint-disable-next-line no-underscore-dangle
   const trainId = data.departure.train._id;
   const pointA = capitalize(data.departure.from.city.name);
