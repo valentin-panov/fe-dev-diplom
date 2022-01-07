@@ -71,7 +71,10 @@
   }
   
   .icon {
-    padding : 45px 25px 45px 35px;
+    padding         : 45px 25px 45px 35px;
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
   }
   
   .textIndex {
@@ -127,6 +130,12 @@
     font-weight : 400;
     
     color       : #928F94;
+  }
+  
+  .col2 {
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
   }
 }
 

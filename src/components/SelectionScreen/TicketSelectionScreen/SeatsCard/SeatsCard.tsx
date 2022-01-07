@@ -1,12 +1,14 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { Button } from 'antd';
+import { useDispatch } from 'react-redux';
 import s from './SeatsCard.module.scss';
 import { Train } from '../../../../interfaces/Interfaces';
 import { iconsCollection } from '../../../../collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
 import { sec2hhmm } from '../../../../utils/sec2hhmm';
 import { secToDateTime } from '../../../../utils/secToDateTime';
+import { appStateResetTrainOutbound, appStateResetTrainReturn } from '../../../../reducers/appState';
 
 export type Props = {
   className?: string;
@@ -15,6 +17,7 @@ export type Props = {
 };
 
 export const SeatsCard = memo<Props>(({ className, type, data }) => {
+  const dispatch = useDispatch();
   // eslint-disable-next-line no-underscore-dangle
   const trainId = data.departure.train._id;
   const pointA = capitalize(data.departure.from.city.name);
@@ -25,12 +28,22 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
   const timeB = secToDateTime(data.departure.to.datetime);
   const duration = sec2hhmm(data.departure.duration);
 
+  const anotherTrain = (arg: string) => {
+    if (arg === 'outbound') {
+      dispatch(appStateResetTrainOutbound());
+    } else if (arg === 'return') {
+      dispatch(appStateResetTrainReturn());
+    }
+  };
+
   return (
     <div className={cn(s.root, className)}>
       <div className={s.header}>
         {type === 'outbound' && iconsCollection.forwardBig}
         {type === 'return' && iconsCollection.backwardBig}
-        <Button className={s.btnHeader}>Выбрать другой поезд</Button>
+        <Button className={s.btnHeader} onClick={() => anotherTrain(type)}>
+          Выбрать другой поезд
+        </Button>
       </div>
       <div className={s.trainData}>
         <div className={s.index}>
@@ -54,9 +67,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
             <div className={s.city}>{pointA}</div>
             <div className={s.station}>{stationA}</div>
           </div>
-          <div className={s.col2}>
-            <div className={s.arrow}>{type === 'outbound' ? iconsCollection.arrowRY : iconsCollection.arrowLY}</div>
-          </div>
+          <div className={s.col2}>{type === 'outbound' ? iconsCollection.arrowRY : iconsCollection.arrowLY}</div>
           <div className={s.col1}>
             <div className={s.time}>{timeB}</div>
             <div className={s.city}>{pointB}</div>
@@ -64,7 +75,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
           </div>
         </div>
         <div className={s.duration}>
-          <div>{iconsCollection.clock}</div>
+          {iconsCollection.clock}
           <div className={s.durationText}>
             <div>{duration.hours}</div>
             <div>{duration.minutes}</div>
@@ -78,7 +89,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
       <div>ICONS CARRIAGE TYPES</div>
       <div>Вагоны 0709</div>
       <div>Selected Carriage</div>
-      <div>DIVIDER - 11 человек выбирают метса в этом поезде</div>
+      <div>DIVIDER - 11 человек выбирают места в этом поезде</div>
       <div>CARRIAGE SCHEME</div>
       <div>Total Price</div>
     </div>
