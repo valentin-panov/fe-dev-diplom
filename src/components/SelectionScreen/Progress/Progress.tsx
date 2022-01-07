@@ -14,7 +14,7 @@ export type Props = {
 };
 
 export const Progress = memo<Props>(({ className }) => {
-  const stage = useSelector((store: RootState) => store.appState.stage);
+  const progress = useSelector((store: RootState) => store.appState.progress);
 
   return (
     <div className={cn(s.root, className)}>
@@ -27,7 +27,7 @@ export const Progress = memo<Props>(({ className }) => {
         </Link>
       </div>
 
-      <div className={cn(s.progress__item, `${stage >= 1 ? s.progress__item_active : ''}`)}>
+      <div className={cn(s.progress__item, `${progress >= 1 ? s.progress__item_active : ''}`)}>
         <Link to="/">
           <div className={cn(s.container)}>
             <Circle2 />
@@ -36,7 +36,7 @@ export const Progress = memo<Props>(({ className }) => {
         </Link>
       </div>
 
-      <div className={cn(s.progress__item, `${stage >= 2 ? s.progress__item_active : ''}`)}>
+      <div className={cn(s.progress__item, `${progress >= 2 ? s.progress__item_active : ''}`)}>
         <Link to="/">
           <div className={cn(s.container)}>
             <Circle3 />
@@ -45,7 +45,7 @@ export const Progress = memo<Props>(({ className }) => {
         </Link>
       </div>
 
-      <div className={cn(s.progress__item, `${stage >= 3 ? s.progress__item_active : ''}`)}>
+      <div className={cn(s.progress__item, `${progress >= 3 ? s.progress__item_active : ''}`)}>
         <Link to="/">
           <div className={cn(s.container)}>
             <Circle4 />

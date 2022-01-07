@@ -167,6 +167,48 @@ export interface Filters {
   end_arrival_hour_to?: number;
 }
 
+export interface SeatsQuery {
+  id: number;
+  have_first_class?: boolean;
+  have_second_class?: boolean;
+  have_third_class?: boolean;
+  have_fourth_class?: boolean;
+  have_wifi?: boolean;
+  have_air_conditioning?: boolean;
+  have_express?: boolean;
+}
+
+export interface SeatAvailability {
+  index: number;
+  available: boolean;
+}
+
+export interface SeatsResponse {
+  _id: number;
+  name: string;
+  class_type: string;
+  have_first_class: boolean;
+  have_second_class: boolean;
+  have_third_class: boolean;
+  have_fourth_class: boolean;
+  have_wifi: boolean;
+  have_air_conditioning: boolean;
+  have_express: boolean;
+  price?: number; // Цена за место (Люкс)
+  top_price?: number; // Цена верхнего места
+  bottom_price?: number; // Цена нижнего места
+  side_price?: number; // Цена бокового места
+  linens_price?: number; // Цена постельного белья
+  wifi_price?: number; // Цена услуги Wi-Fi
+  avaliable_seats?: number; // Количество свободных мест в вагоне
+  is_linens_included?: number; // Стоимость белья включена в стоимость билета и не может быть исключена (true/false)
+  seats: SeatAvailability[];
+}
+
+export interface SeatsState extends Status {
+  data: SeatsResponse;
+}
+
 // LEGACY
 
 export interface ICard {

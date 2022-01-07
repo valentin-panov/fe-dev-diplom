@@ -1,21 +1,46 @@
 /* eslint-disable no-param-reassign */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Train } from '../interfaces/Interfaces';
 
-const initialState = {
-  stage: 0,
+type InitialState = {
+  progress: number;
+  trainOutbound?: Train;
+  trainReturn?: Train;
+};
+
+const initialState: InitialState = {
+  progress: 0,
 };
 
 export const appStateSlice = createSlice({
   name: 'appState',
   initialState,
   reducers: {
-    appStateSetStage: (state, action: PayloadAction<number>) => {
-      state.stage = action.payload;
+    appStateSetProgress: (state, action: PayloadAction<number>) => {
+      state.progress = action.payload;
+    },
+    appStateSetTrainOutbound: (state, action: PayloadAction<Train>) => {
+      state.trainOutbound = action.payload;
+    },
+    appStateResetTrainOutbound: (state) => {
+      state.trainOutbound = undefined;
+    },
+    appStateSetTrainReturn: (state, action: PayloadAction<Train>) => {
+      state.trainReturn = action.payload;
+    },
+    appStateResetTrainReturn: (state) => {
+      state.trainReturn = undefined;
     },
   },
 });
 
-export const { appStateSetStage } = appStateSlice.actions;
+export const {
+  appStateSetProgress,
+  appStateSetTrainOutbound,
+  appStateResetTrainOutbound,
+  appStateSetTrainReturn,
+  appStateResetTrainReturn,
+} = appStateSlice.actions;
 
 export const appState = appStateSlice.reducer;

@@ -25,6 +25,7 @@ export const SelectionScreen = memo<Props>(({ className }) => {
   const status = useSelector((store: RootState) => store.getRoute.status);
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
   const filters = useSelector((store: RootState) => store.searchParams.filters);
+  const selectedTrain = useSelector((store: RootState) => store.appState.trainOutbound);
 
   const stubRange = { min: 0, max: 10000 };
 
@@ -107,7 +108,8 @@ export const SelectionScreen = memo<Props>(({ className }) => {
               <LastTickets />
             </div>
             <div>
-              <ResultScreen />
+              {!selectedTrain && <ResultScreen />}
+              {selectedTrain && <Error404 />}
             </div>
           </div>
         </>

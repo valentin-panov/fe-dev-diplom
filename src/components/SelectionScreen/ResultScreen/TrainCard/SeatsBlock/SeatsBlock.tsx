@@ -3,10 +3,12 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { Button } from 'antd';
+import { useDispatch } from 'react-redux';
 import s from './SeatsBlock.module.scss';
 import { SeatsBlockRow } from './SeatBlockRow';
 import { ServiceBlock } from '../../../ServicesBlock';
 import { Train } from '../../../../../interfaces/Interfaces';
+import { appStateSetTrainOutbound } from '../../../../../reducers/appState';
 
 export type Props = {
   className?: string;
@@ -21,6 +23,7 @@ const carriageType = {
 };
 
 export const SeatsBlock = memo<Props>(({ className, train }) => {
+  const dispatch = useDispatch();
   const {
     departure: {
       have_wifi,
@@ -34,6 +37,10 @@ export const SeatsBlock = memo<Props>(({ className, train }) => {
       price_info: { fourth: price4, third: price3, second: price2, first: price1 },
     },
   }: Train = train;
+
+  const selectTrain = (payload: Train) => {
+    dispatch(appStateSetTrainOutbound(payload));
+  };
 
   return (
     <div className={cn(s.root, className)}>
@@ -53,7 +60,9 @@ export const SeatsBlock = memo<Props>(({ className, train }) => {
       </div>
       <div className={s.bottom_block}>
         <ServiceBlock services={{ have_wifi, is_express, have_air_conditioning }} className="ticketCard" />
-        <Button className={s.btn}>Выбрать места</Button>
+        <Button className={s.btn} onClick={() => selectTrain(train)}>
+          Выбрать места
+        </Button>
       </div>
     </div>
   );
