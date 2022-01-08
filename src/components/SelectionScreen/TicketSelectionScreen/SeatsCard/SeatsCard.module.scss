@@ -222,3 +222,39 @@
   min-height    : 50px;
   border-bottom : 1px dashed #C4C4C4;
 }
+
+.carriageTypeTitle {
+  padding     : 25px 20px;
+  font-size   : 30px;
+  line-height : 35px;
+  font-weight : bold;
+  font-style  : normal;
+  color       : #292929;
+}
+
+.carriageTypeIcons {
+  display               : grid;
+  min-height            : 170px;
+  grid-template-columns : 1fr 1fr 1fr 1fr;
+  
+  & .carriageTypeIcon {
+    display         : flex;
+    flex-direction  : column;
+    justify-content : center;
+    align-items     : center;
+    text-transform  : uppercase;
+    color           : #C4C4C4;
+    
+    & .carriageTypeSubtitle {
+      margin-top : 25px;
+    }
+  }
+}
+
+.carriageList {
+  padding        : 0 30px;
+  display        : flex;
+  height         : 37px;
+  flex-direction : row;
+  background     : rgba(255, 168, 0, 0.44);
+}

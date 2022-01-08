@@ -18,6 +18,10 @@ import { ReactComponent as ArrowLY } from '../svg/arrow_left_yellow.svg';
 import { ReactComponent as ForwardBig } from '../svg/icon_dest_forward_big.svg';
 import { ReactComponent as TrainSmall } from '../svg/icon_train_small.svg';
 import { ReactComponent as Clock } from '../svg/icon_clock.svg';
+import { ReactComponent as BigSeat } from '../svg/big_seat.svg';
+import { ReactComponent as BigPlatz } from '../svg/big_platz.svg';
+import { ReactComponent as BigCoupe } from '../svg/big_coupe.svg';
+import { ReactComponent as BigLux } from '../svg/big_lux.svg';
 import { FilterItem } from '../interfaces/Interfaces';
 
 export const filtersCollection: FilterItem = {
@@ -43,4 +47,8 @@ export const iconsCollection = {
   backwardBig: <BackwardBig />,
   trainSmall: <TrainSmall />,
   clock: <Clock />,
+  bigSeat: <BigSeat />,
+  bigPlatz: <BigPlatz />,
+  bigCoupe: <BigCoupe />,
+  bigLux: <BigLux />,
 };

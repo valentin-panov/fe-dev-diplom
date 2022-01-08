@@ -102,9 +102,30 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
       </Form>
       <div className={s.divider} />
 
-      <div>Тип вагона</div>
-      <div>ICONS CARRIAGE TYPES</div>
-      <div>Вагоны 0709</div>
+      <div className={s.carriageTypeTitle}>Тип вагона</div>
+      <div className={s.carriageTypeIcons}>
+        <div className={s.carriageTypeIcon}>
+          {iconsCollection.bigSeat}
+          <div className={s.carriageTypeSubtitle}>сидячий</div>
+        </div>
+        <div className={s.carriageTypeIcon}>
+          {iconsCollection.bigPlatz}
+          <div className={s.carriageTypeSubtitle}>плацкарт</div>
+        </div>
+        <div className={s.carriageTypeIcon}>
+          {iconsCollection.bigCoupe}
+          <div className={s.carriageTypeSubtitle}>купе</div>
+        </div>
+        <div className={s.carriageTypeIcon}>
+          {iconsCollection.bigLux}
+          <div className={s.carriageTypeSubtitle}>люкс</div>
+        </div>
+      </div>
+      <div className={s.carriageList}>
+        <div>Вагоны</div>
+        <div>07 09</div>
+        <div>Нумерация вагонов начинается с головы поезда</div>
+      </div>
       <div>Selected Carriage</div>
       <div>DIVIDER - 11 человек выбирают места в этом поезде</div>
       <div>CARRIAGE SCHEME</div>
