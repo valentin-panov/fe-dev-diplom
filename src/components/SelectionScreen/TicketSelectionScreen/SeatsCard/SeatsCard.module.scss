@@ -252,9 +252,136 @@
 }
 
 .carriageList {
-  padding        : 0 30px;
+  padding         : 0 30px;
+  display         : flex;
+  height          : 37px;
+  flex-direction  : row;
+  justify-content : space-between;
+  align-items     : center;
+  background      : #FFD98F;
+  
+  .carriages {
+    flex-grow   : 0;
+    font-size   : 16px;
+    line-height : 19px;
+    font-weight : 400;
+    font-style  : normal;
+    color       : #292929;
+  }
+  
+  .carriagesNumbers {
+    padding     : 0 10px;
+    flex-grow   : 1;
+    font-size   : 24px;
+    line-height : 28px;
+    font-weight : 700;
+    font-style  : normal;
+    color       : #2D2B2F;
+  }
+}
+
+.selectedCarriage {
   display        : flex;
-  height         : 37px;
+  height         : 160px;
   flex-direction : row;
-  background     : rgba(255, 168, 0, 0.44);
+  
+  .selectedCarriageNumber {
+    display         : flex;
+    width           : 190px;
+    height          : 100%;
+    flex-direction  : column;
+    justify-content : center;
+    align-items     : center;
+    color           : #292929;
+    background      : #FFD98F;
+    
+    .number {
+      font-size   : 72px;
+      line-height : 84px;
+      font-weight : bold;
+      font-style  : normal;
+    }
+    
+    .subNumber {
+      font-size   : 24px;
+      line-height : 28px;
+      font-weight : normal;
+      font-style  : normal;
+    }
+  }
+  
+  .selectedCarriageInfoBox {
+    flex-grow : 1;
+  }
+  
+  .selectedCarriageInfo {
+    padding-top           : 35px;
+    display               : grid;
+    grid-template-columns : 1fr 1fr 1fr;
+    
+    & .sciBlock {
+      display         : flex;
+      flex-direction  : column;
+      justify-content : flex-start;
+      align-items     : center;
+      font-size       : 18px;
+      line-height     : 21px;
+      font-weight     : normal;
+      font-style      : normal;
+      
+      color           : #928F94;
+      
+      .seatsCount {
+        color : #292929;
+      }
+      
+      .price {
+        margin-top      : 20px;
+        display         : flex;
+        flex-direction  : row;
+        justify-content : center;
+        font-size       : 24px;
+        line-height     : 28px;
+        font-weight     : bold;
+        font-style      : normal;
+        
+        color           : #000000;
+      }
+      
+      .rub {
+        margin-left : 10px;
+        width       : 14px;
+        height      : 17px;
+        color       : #928F94;
+      }
+      
+      .sciBlockServices {
+        margin-top     : 15px;
+        display        : flex;
+        flex-direction : row;
+        
+        & div {
+          display         : flex;
+          
+          box-sizing      : border-box;
+          width           : 36px;
+          height          : 34.11px;
+          justify-content : center;
+          align-items     : center;
+          color           : #292929;
+          border          : 1px solid #292929;
+          border-radius   : 5px;
+          
+          &:not(:last-child) {
+            margin-right : 15px;
+          }
+          
+          &:hover {
+            background-color : #FFA800;
+            cursor           : pointer;
+          }
+        }
+      }
+    }
+  }
 }

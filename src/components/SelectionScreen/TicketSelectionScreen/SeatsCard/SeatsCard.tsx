@@ -5,11 +5,12 @@ import { useDispatch } from 'react-redux';
 import s from './SeatsCard.module.scss';
 import './reant.css';
 import { Train } from '../../../../interfaces/Interfaces';
-import { iconsCollection } from '../../../../collections/collections';
+import { filtersCollection, iconsCollection } from '../../../../collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
 import { sec2hhmm } from '../../../../utils/sec2hhmm';
 import { secToDateTime } from '../../../../utils/secToDateTime';
 import { appStateResetTrainOutbound, appStateResetTrainReturn } from '../../../../reducers/appState';
+import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
 
 export type Props = {
   className?: string;
@@ -122,11 +123,40 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
         </div>
       </div>
       <div className={s.carriageList}>
-        <div>Вагоны</div>
-        <div>07 09</div>
-        <div>Нумерация вагонов начинается с головы поезда</div>
+        <div className={s.carriages}>Вагоны</div>
+        <div className={s.carriagesNumbers}>07 22</div>
+        <div className={s.carriages}>Нумерация вагонов начинается с головы поезда</div>
       </div>
-      <div>Selected Carriage</div>
+      <div className={s.selectedCarriage}>
+        <div className={s.selectedCarriageNumber}>
+          <div className={s.number}>22</div>
+          <div className={s.subNumber}>вагон</div>
+        </div>
+        <div className={s.selectedCarriageInfoBox}>
+          <div className={s.selectedCarriageInfo}>
+            <div className={s.sciBlock}>
+              <div>
+                Места <span className={s.seatsCount}>{35}</span>
+              </div>
+            </div>
+            <div className={s.sciBlock}>
+              <div>Стоимость</div>
+              <div className={s.price}>
+                {getBeautifulNumber(1920)}
+                <div className={s.rub}>{iconsCollection.rub}</div>
+              </div>
+            </div>
+            <div className={s.sciBlock}>
+              <div>Обслуживание ФПК</div>
+              <div className={s.sciBlockServices}>
+                <div>{filtersCollection.have_air_conditioning.element}</div>
+                <div>{filtersCollection.have_wifi.element}</div>
+                <div>{filtersCollection.cup.element}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div>DIVIDER - 11 человек выбирают места в этом поезде</div>
       <div>CARRIAGE SCHEME</div>
       <div>Total Price</div>
