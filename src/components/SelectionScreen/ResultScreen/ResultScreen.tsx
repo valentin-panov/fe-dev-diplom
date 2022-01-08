@@ -52,6 +52,7 @@ export const ResultScreen = memo<Props>(({ className }) => {
     setActiveSort(value);
     const valueStr = `${value}`;
     dispatch(searchParamsSortSet(valueStr));
+    dispatch(searchParamsOffsetSet(0));
   };
 
   const onChangePage = (value: number) => {
