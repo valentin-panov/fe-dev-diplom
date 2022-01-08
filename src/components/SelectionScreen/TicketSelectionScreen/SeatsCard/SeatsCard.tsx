@@ -1,8 +1,9 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
-import { Button } from 'antd';
+import { Button, Form, Input } from 'antd';
 import { useDispatch } from 'react-redux';
 import s from './SeatsCard.module.scss';
+import './reant.css';
 import { Train } from '../../../../interfaces/Interfaces';
 import { iconsCollection } from '../../../../collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
@@ -38,7 +39,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
   };
 
   return (
-    <div className={cn(s.root, className)}>
+    <section className={cn(s.root, className)}>
       <div className={s.header}>
         {type === 'outbound' && iconsCollection.forwardBig}
         {type === 'return' && iconsCollection.backwardBig}
@@ -84,8 +85,23 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
         </div>
       </div>
       <div className={s.ticketsCountTitle}>Количество билетов</div>
-      <div>Tickets types</div>
-      <div>Divider</div>
+      <Form className={s.ticketsTypeRow}>
+        <Form.Item className={s.inputCard}>
+          <Input type="number" prefix="Взрослых — " defaultValue={0} min={0} max={5} className={s.input} />
+          <div>Можно добавить еще 3 пассажиров</div>
+        </Form.Item>
+        <Form.Item className={s.inputCard}>
+          <Input type="number" prefix="Детских — " defaultValue={0} min={0} className={s.input} id="kids" />
+          <div>
+            Можно добавить еще 3 детей до 10 лет. Свое место в вагоне, как у взрослых, но дешевле в среднем на 50-65%
+          </div>
+        </Form.Item>
+        <Form.Item className={s.inputCard}>
+          <Input type="number" prefix="Детских «без места» — " defaultValue={0} min={0} className={s.input} />
+        </Form.Item>
+      </Form>
+      <div className={s.divider} />
+
       <div>Тип вагона</div>
       <div>ICONS CARRIAGE TYPES</div>
       <div>Вагоны 0709</div>
@@ -93,6 +109,6 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
       <div>DIVIDER - 11 человек выбирают места в этом поезде</div>
       <div>CARRIAGE SCHEME</div>
       <div>Total Price</div>
-    </div>
+    </section>
   );
 });
