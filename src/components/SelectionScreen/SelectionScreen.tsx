@@ -57,6 +57,7 @@ export const SelectionScreen = memo<Props>(({ className }) => {
   return (
     <div className={cn(s.root, className)}>
       {status === 'idle' && <Error404 />}
+      {/* {status === 'error' && <TicketSelectionScreen />} */}
       {status === 'error' && <Error404 />}
       {status === 'pending' && <Loading />}
       {status === 'success' && (

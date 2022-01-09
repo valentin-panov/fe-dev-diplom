@@ -5,6 +5,7 @@ import { Button } from 'antd';
 import s from './TicketSelectionScreen.module.scss';
 import { RootState } from '../../../store';
 import { SeatsCard } from './SeatsCard';
+// import { trainsList } from '../ResultScreen/data';
 
 export type Props = {
   className?: string;
@@ -13,6 +14,7 @@ export type Props = {
 export const TicketSelectionScreen = memo<Props>(({ className }) => {
   const title = useRef<HTMLDivElement>(document.createElement('div'));
   const selectedTrain = useSelector((store: RootState) => store.appState.trainOutbound);
+  // const selectedTrain = trainsList[0][0];
   const selectedTrainReturn = useSelector((store: RootState) => store.appState.trainReturn);
 
   useEffect(() => {

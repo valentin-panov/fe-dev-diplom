@@ -62,8 +62,8 @@ export const getRouteFetchData = createAsyncThunk('getRoute/FetchingData', async
     offset,
     filters: {
       have_first_class = false,
-      have_second_class = true,
-      have_third_class = true,
+      have_second_class = false,
+      have_third_class = false,
       have_fourth_class = false,
       have_wifi = false,
       is_express = false,

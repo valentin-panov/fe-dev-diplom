@@ -138,6 +138,12 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
               <div>
                 Места <span className={s.seatsCount}>{35}</span>
               </div>
+              <div className={s.seatsType}>
+                Верхние <span className={s.seatsTypeNumber}>{10}</span>
+              </div>
+              <div className={s.seatsType}>
+                Нижние <span className={s.seatsTypeNumber}>{11}</span>
+              </div>
             </div>
             <div className={s.sciBlock}>
               <div>Стоимость</div>
@@ -151,6 +157,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
               <div className={s.sciBlockServices}>
                 <div>{filtersCollection.have_air_conditioning.element}</div>
                 <div>{filtersCollection.have_wifi.element}</div>
+                <div>{filtersCollection.linen.element}</div>
                 <div>{filtersCollection.cup.element}</div>
               </div>
             </div>

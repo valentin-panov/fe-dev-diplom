@@ -7,11 +7,11 @@ const initialState: SearchParams = {
   dateOutbound: null,
   dateReturn: null,
   filters: {
-    have_first_class: false,
+    have_first_class: true,
     have_second_class: true,
     have_third_class: true,
     have_fourth_class: false,
-    have_wifi: false,
+    have_wifi: true,
     is_express: false,
     price_from: 0,
     price_to: 10000,

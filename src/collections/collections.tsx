@@ -5,6 +5,7 @@ import { ReactComponent as WiFi } from '../svg/service_wifi.svg';
 import { ReactComponent as Platz } from '../svg/filter_platz.svg';
 import { ReactComponent as AC } from '../svg/service_ac.svg';
 import { ReactComponent as Cup } from '../svg/service_cup.svg';
+import { ReactComponent as Linen } from '../svg/service_linen.svg';
 import { ReactComponent as Coupe } from '../svg/filter_coupe.svg';
 import { ReactComponent as Seat } from '../svg/filter_seat.svg';
 import { ReactComponent as Lux } from '../svg/filter_lux.svg';
@@ -29,6 +30,7 @@ export const filtersCollection: FilterItem = {
   is_express: { element: <Express />, title: 'Экспресс' },
   have_air_conditioning: { element: <AC />, title: 'Кондиционер' },
   cup: { element: <Cup />, title: 'Ресторан' },
+  linen: { element: <Linen />, title: 'Бельё' },
   have_third_class: { element: <Platz />, title: 'Плацкарт' },
   have_second_class: { element: <Coupe />, title: 'Купе' },
   have_fourth_class: { element: <Seat />, title: 'Сидячий' },
