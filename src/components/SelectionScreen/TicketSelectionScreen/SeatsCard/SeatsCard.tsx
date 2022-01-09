@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { memo, useState } from 'react';
 import cn from 'clsx';
 import { Button, Form, Input } from 'antd';
 import { useDispatch } from 'react-redux';
@@ -11,12 +11,17 @@ import { sec2hhmm } from '../../../../utils/sec2hhmm';
 import { secToDateTime } from '../../../../utils/secToDateTime';
 import { appStateResetTrainOutbound, appStateResetTrainReturn } from '../../../../reducers/appState';
 import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
+import { CarriageTypeButton } from './CarriageTypeButton';
+import { CarriageScheme } from './CarriageScheme';
+import { CarriageNumberButton } from './CarriageNumberButton';
 
 export type Props = {
   className?: string;
   type: 'outbound' | 'return';
   data: Train;
 };
+
+export type CarriageType = undefined | 'first' | 'second' | 'third' | 'fourth';
 
 export const SeatsCard = memo<Props>(({ className, type, data }) => {
   const dispatch = useDispatch();
@@ -31,12 +36,21 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
   const timeB = secToDateTime(data.departure.to.datetime);
   const duration = sec2hhmm(data.departure.duration);
 
+  const [carriageType, setCarriageType] = useState<CarriageType>(undefined);
+  const [totalPrice, setTotalPrice] = useState<number>(8080);
+  const [carriageNumber, setCarriageNumber] = useState<number>(22);
+
   const anotherTrain = (arg: string) => {
     if (arg === 'outbound') {
       dispatch(appStateResetTrainOutbound());
     } else if (arg === 'return') {
       dispatch(appStateResetTrainReturn());
     }
+  };
+
+  const chooseCarriageType = (value: CarriageType) => {
+    setCarriageType(value);
+    setTotalPrice(7000);
   };
 
   return (
@@ -105,68 +119,83 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
       <div className={s.carriageTypeTitle}>Тип вагона</div>
       <div className={s.carriageTypeIcons}>
-        <div className={s.carriageTypeIcon}>
-          {iconsCollection.bigSeat}
-          <div className={s.carriageTypeSubtitle}>сидячий</div>
-        </div>
-        <div className={s.carriageTypeIcon}>
-          {iconsCollection.bigPlatz}
-          <div className={s.carriageTypeSubtitle}>плацкарт</div>
-        </div>
-        <div className={s.carriageTypeIcon}>
-          {iconsCollection.bigCoupe}
-          <div className={s.carriageTypeSubtitle}>купе</div>
-        </div>
-        <div className={s.carriageTypeIcon}>
-          {iconsCollection.bigLux}
-          <div className={s.carriageTypeSubtitle}>люкс</div>
-        </div>
+        <CarriageTypeButton carriageType="fourth" toggleType={chooseCarriageType} available />
+        <CarriageTypeButton carriageType="third" toggleType={chooseCarriageType} available />
+        <CarriageTypeButton carriageType="second" toggleType={chooseCarriageType} available />
+        <CarriageTypeButton carriageType="first" toggleType={chooseCarriageType} available />
       </div>
-      <div className={s.carriageList}>
-        <div className={s.carriages}>Вагоны</div>
-        <div className={s.carriagesNumbers}>07 22</div>
-        <div className={s.carriages}>Нумерация вагонов начинается с головы поезда</div>
-      </div>
-      <div className={s.selectedCarriage}>
-        <div className={s.selectedCarriageNumber}>
-          <div className={s.number}>22</div>
-          <div className={s.subNumber}>вагон</div>
-        </div>
-        <div className={s.selectedCarriageInfoBox}>
-          <div className={s.selectedCarriageInfo}>
-            <div className={s.sciBlock}>
-              <div>
-                Места <span className={s.seatsCount}>{35}</span>
-              </div>
-              <div className={s.seatsType}>
-                Верхние <span className={s.seatsTypeNumber}>{10}</span>
-              </div>
-              <div className={s.seatsType}>
-                Нижние <span className={s.seatsTypeNumber}>{11}</span>
-              </div>
+      {carriageType !== undefined && (
+        <>
+          <div className={s.carriageList}>
+            <div className={s.carriages}>Вагоны</div>
+            <div className={s.carriagesNumbers}>
+              <CarriageNumberButton
+                buttonNumber={7}
+                toggleCarriage={setCarriageNumber}
+                activeCarriage={carriageNumber}
+              />
+              <CarriageNumberButton
+                buttonNumber={22}
+                toggleCarriage={setCarriageNumber}
+                activeCarriage={carriageNumber}
+              />
             </div>
-            <div className={s.sciBlock}>
-              <div>Стоимость</div>
-              <div className={s.price}>
-                {getBeautifulNumber(1920)}
-                <div className={s.rub}>{iconsCollection.rub}</div>
-              </div>
+            <div className={s.carriages}>Нумерация вагонов начинается с головы поезда</div>
+          </div>
+          <div className={s.selectedCarriage}>
+            <div className={s.selectedCarriageNumber}>
+              <div className={s.number}>{carriageNumber}</div>
+              <div className={s.subNumber}>вагон</div>
             </div>
-            <div className={s.sciBlock}>
-              <div>Обслуживание ФПК</div>
-              <div className={s.sciBlockServices}>
-                <div>{filtersCollection.have_air_conditioning.element}</div>
-                <div>{filtersCollection.have_wifi.element}</div>
-                <div>{filtersCollection.linen.element}</div>
-                <div>{filtersCollection.cup.element}</div>
+            <div className={s.selectedCarriageInfoBox}>
+              <div className={s.selectedCarriageInfo}>
+                <div className={s.sciBlock}>
+                  <div>
+                    Места <span className={s.seatsCount}>{35}</span>
+                  </div>
+                  <div className={s.seatsType}>
+                    Верхние <span className={s.seatsTypeNumber}>{10}</span>
+                  </div>
+                  <div className={s.seatsType}>
+                    Нижние <span className={s.seatsTypeNumber}>{11}</span>
+                  </div>
+                </div>
+                <div className={s.sciBlock}>
+                  <div>Стоимость</div>
+                  <div className={s.price}>
+                    {getBeautifulNumber(1920)}
+                    <div className={s.rub}>{iconsCollection.rub}</div>
+                  </div>
+                </div>
+                <div className={s.sciBlock}>
+                  <div>Обслуживание ФПК</div>
+                  <div className={s.sciBlockServices}>
+                    <div>{filtersCollection.have_air_conditioning.element}</div>
+                    <div>{filtersCollection.have_wifi.element}</div>
+                    <div>{filtersCollection.linen.element}</div>
+                    <div>{filtersCollection.cup.element}</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div>DIVIDER - 11 человек выбирают места в этом поезде</div>
-      <div>CARRIAGE SCHEME</div>
-      <div>Total Price</div>
+          <div className={s.preSchemeDivider}>
+            <div className={s.preSchemeDividerTooltip}>{11} человек выбирают места в этом поезде</div>
+          </div>
+          <div className={s.carriageScheme}>
+            <CarriageScheme carriageType={carriageType} />
+          </div>
+
+          {totalPrice !== 0 && (
+            <>
+              <div className={s.totalPrice}>
+                <div className={s.totalPriceNumbers}>{getBeautifulNumber(totalPrice)}</div>
+                <div className={s.totalPriceSymbol}>{iconsCollection.rub}</div>
+              </div>
+            </>
+          )}
+        </>
+      )}
     </section>
   );
 });

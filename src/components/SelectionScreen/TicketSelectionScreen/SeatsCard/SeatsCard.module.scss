@@ -237,32 +237,15 @@
   min-height            : 170px;
   grid-template-columns : 1fr 1fr 1fr 1fr;
   
-  & .carriageTypeIcon {
-    display         : flex;
-    flex-direction  : column;
-    justify-content : center;
-    align-items     : center;
-    text-transform  : uppercase;
-    color           : #C4C4C4;
-    
-    &:hover {
-      color  : #FFA800;
-      cursor : pointer;
-    }
-    
-    & .carriageTypeSubtitle {
-      margin-top : 25px;
-    }
-  }
 }
 
 .carriageList {
-  padding         : 0 30px;
+  padding         : 5px 30px 5px;
   display         : flex;
   height          : 37px;
   flex-direction  : row;
   justify-content : space-between;
-  align-items     : center;
+  align-items     : baseline;
   background      : #FFD98F;
   
   .carriages {
@@ -322,6 +305,7 @@
   
   .selectedCarriageInfo {
     padding-top           : 35px;
+    padding-left          : 85px;
     display               : grid;
     grid-template-columns : 1fr 1fr 1fr;
     
@@ -329,7 +313,7 @@
       display         : flex;
       flex-direction  : column;
       justify-content : flex-start;
-      align-items     : center;
+      align-items     : flex-start;
       font-size       : 18px;
       line-height     : 21px;
       font-weight     : normal;
@@ -342,11 +326,12 @@
       }
       
       .seatsType {
+        padding-top : 20px;
         font-size   : 24px;
         line-height : 28px;
         font-weight : 400;
-        font-style  : normal;
         
+        font-style  : normal;
         color       : #000000;
         
         .seatsTypeNumber {
@@ -403,5 +388,64 @@
         }
       }
     }
+  }
+  
+}
+
+.preSchemeDivider {
+  display         : flex;
+  height          : 70px;
+  justify-content : flex-end;
+  
+  .preSchemeDividerTooltip {
+    margin-right    : 40px;
+    padding         : 15px;
+    
+    display         : flex;
+    width           : 200px;
+    justify-content : center;
+    align-items     : center;
+    font-size       : 16px;
+    line-height     : 19px;
+    
+    font-weight     : normal;
+    font-style      : normal;
+    color           : #292929;
+    background      : #F3F3F3;
+    
+    border-radius   : 5px;
+  }
+}
+
+.carriageScheme {
+  margin-bottom   : 12px;
+  display         : flex;
+  justify-content : center;
+  align-items     : center;
+}
+
+.totalPrice {
+  padding         : 12px;
+  display         : flex;
+  justify-content : flex-end;
+  align-items     : center;
+  
+  .totalPriceNumbers {
+    font-size   : 24px;
+    line-height : 28px;
+    font-weight : bold;
+    font-style  : normal;
+    
+    color       : #FFA800;
+    
+  }
+  
+  .totalPriceSymbol {
+    margin-top   : -4px;
+    margin-right : 24px;
+    margin-left  : 15px;
+    width        : 14px;
+    height       : 17px;
+    color        : #928F94;
   }
 }

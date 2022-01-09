@@ -513,7 +513,7 @@
 
 /* } */
 
-/* .form_radio_btn input[type='radio'] { */
+/* .form_radio_btn input[carriageType='radio'] { */
 
 /*	display: none; */
 
@@ -549,7 +549,7 @@
 
 /* !* Checked *! */
 
-/* .form_radio_btn input[type='radio']:checked + label { */
+/* .form_radio_btn input[carriageType='radio']:checked + label { */
 
 /*	background: #727e86; */
 
@@ -561,7 +561,7 @@
 
 /* !* Disabled *! */
 
-/* .form_radio_btn input[type='radio']:disabled + label { */
+/* .form_radio_btn input[carriageType='radio']:disabled + label { */
 
 /*	background: #efefef; */
 

@@ -134,7 +134,7 @@ export interface SortOption {
 
 export type SortOptions = SortOption[];
 
-// export type sortVariants = 'date' | 'price_min' | 'duration';
+// export carriageType sortVariants = 'date' | 'price_min' | 'duration';
 
 export interface SearchParams {
   cityDeparture: City;

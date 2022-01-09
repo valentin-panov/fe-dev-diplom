@@ -1,0 +1,26 @@
+@import 'src/styles/common';
+
+.carriageTypeIcon {
+  display         : flex;
+  flex-direction  : column;
+  justify-content : center;
+  align-items     : center;
+  text-transform  : uppercase;
+  color           : #C4C4C4;
+  background      : transparent;
+  border          : 0;
+  
+  &:hover {
+    color  : #FFA800;
+    cursor : pointer;
+  }
+  
+  &:disabled {
+    color  : #C4C4C4;
+    cursor : not-allowed;
+  }
+  
+  & .carriageTypeSubtitle {
+    margin-top : 25px;
+  }
+}
