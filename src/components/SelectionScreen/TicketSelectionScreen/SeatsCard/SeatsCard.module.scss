@@ -255,6 +255,9 @@
     font-weight : 400;
     font-style  : normal;
     color       : #292929;
+    &:last-child {
+      align-self : center;
+    }
   }
   
   .carriagesNumbers {
