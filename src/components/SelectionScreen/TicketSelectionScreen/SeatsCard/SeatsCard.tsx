@@ -166,23 +166,32 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
             <div className={s.selectedCarriageInfoBox}>
               <div className={s.selectedCarriageInfo}>
                 <div className={s.sciBlock}>
-                  <div>
-                    Места <span className={s.seatsCount}>{35}</span>
-                  </div>
-                  <div className={s.seatsType}>
-                    Верхние <span className={s.seatsTypeNumber}>{10}</span>
-                  </div>
-                  <div className={s.seatsType}>
-                    Нижние <span className={s.seatsTypeNumber}>{11}</span>
+                  <div className={s.seatsPrice}>
+                    <div>
+                      <div>
+                        Места <span className={s.seatsCount}>{data.available_seats_info[carriageType]}</span>
+                      </div>
+                      <div className={s.seatsType}>
+                        Верхние <span className={s.seatsTypeNumber}>{10}</span>
+                      </div>
+                      <div className={s.seatsType}>
+                        Нижние <span className={s.seatsTypeNumber}>{11}</span>
+                      </div>
+                    </div>
+                    <div>
+                      <div>Стоимость</div>
+                      <div className={s.price}>
+                        {getBeautifulNumber(1920)}
+                        <div className={s.rub}>{iconsCollection.rub}</div>
+                      </div>
+                      <div className={s.price}>
+                        {getBeautifulNumber(1920)}
+                        <div className={s.rub}>{iconsCollection.rub}</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-                <div className={s.sciBlock}>
-                  <div>Стоимость</div>
-                  <div className={s.price}>
-                    {getBeautifulNumber(1920)}
-                    <div className={s.rub}>{iconsCollection.rub}</div>
-                  </div>
-                </div>
+
                 <div className={s.sciBlock}>
                   <div>Обслуживание ФПК</div>
                   <div className={s.sciBlockServices}>
