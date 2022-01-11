@@ -119,10 +119,26 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
       <div className={s.carriageTypeTitle}>Тип вагона</div>
       <div className={s.carriageTypeIcons}>
-        <CarriageTypeButton carriageType="fourth" toggleType={chooseCarriageType} available />
-        <CarriageTypeButton carriageType="third" toggleType={chooseCarriageType} available />
-        <CarriageTypeButton carriageType="second" toggleType={chooseCarriageType} available />
-        <CarriageTypeButton carriageType="first" toggleType={chooseCarriageType} available />
+        <CarriageTypeButton
+          carriageType="fourth"
+          toggleType={chooseCarriageType}
+          available={data.departure.have_fourth_class}
+        />
+        <CarriageTypeButton
+          carriageType="third"
+          toggleType={chooseCarriageType}
+          available={data.departure.have_third_class}
+        />
+        <CarriageTypeButton
+          carriageType="second"
+          toggleType={chooseCarriageType}
+          available={data.departure.have_second_class}
+        />
+        <CarriageTypeButton
+          carriageType="first"
+          toggleType={chooseCarriageType}
+          available={data.departure.have_first_class}
+        />
       </div>
       {carriageType !== undefined && (
         <>
@@ -170,8 +186,10 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
                 <div className={s.sciBlock}>
                   <div>Обслуживание ФПК</div>
                   <div className={s.sciBlockServices}>
-                    <div>{filtersCollection.have_air_conditioning.element}</div>
-                    <div>{filtersCollection.have_wifi.element}</div>
+                    {data.departure.have_air_conditioning && (
+                      <div>{filtersCollection.have_air_conditioning.element}</div>
+                    )}
+                    {data.departure.have_wifi && <div>{filtersCollection.have_wifi.element}</div>}
                     <div>{filtersCollection.linen.element}</div>
                     <div>{filtersCollection.cup.element}</div>
                   </div>
