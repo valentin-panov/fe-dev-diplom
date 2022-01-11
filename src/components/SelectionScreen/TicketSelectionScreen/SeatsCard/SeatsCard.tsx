@@ -171,23 +171,79 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
                       <div>
                         Места <span className={s.seatsCount}>{data.available_seats_info[carriageType]}</span>
                       </div>
-                      <div className={s.seatsType}>
-                        Верхние <span className={s.seatsTypeNumber}>{10}</span>
-                      </div>
-                      <div className={s.seatsType}>
-                        Нижние <span className={s.seatsTypeNumber}>{11}</span>
-                      </div>
+                      {carriageType === 'first' && <></>}
+                      {carriageType === 'second' && (
+                        <>
+                          <div className={s.seatsType}>
+                            Верхние{' '}
+                            <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.second}</span>
+                          </div>
+                          <div className={s.seatsType}>
+                            Нижние{' '}
+                            <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.second}</span>
+                          </div>
+                        </>
+                      )}
+                      {carriageType === 'third' && (
+                        <>
+                          <div className={s.seatsType}>
+                            Верхние{' '}
+                            <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.third}</span>
+                          </div>
+                          <div className={s.seatsType}>
+                            Нижние{' '}
+                            <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.third}</span>
+                          </div>
+                          <div className={s.seatsType}>
+                            Боковые{' '}
+                            <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.third}</span>
+                          </div>
+                        </>
+                      )}
+                      {carriageType === 'fourth' && <></>}
                     </div>
                     <div>
                       <div>Стоимость</div>
-                      <div className={s.price}>
-                        {getBeautifulNumber(1920)}
-                        <div className={s.rub}>{iconsCollection.rub}</div>
-                      </div>
-                      <div className={s.price}>
-                        {getBeautifulNumber(1920)}
-                        <div className={s.rub}>{iconsCollection.rub}</div>
-                      </div>
+                      {carriageType === 'first' && data.departure.price_info.first && (
+                        <div className={s.price}>
+                          {getBeautifulNumber(data.departure.price_info.first.price)}
+                          <div className={s.rub}>{iconsCollection.rub}</div>
+                        </div>
+                      )}
+                      {carriageType === 'second' && data.departure.price_info.second && (
+                        <>
+                          <div className={s.price}>
+                            {getBeautifulNumber(data.departure.price_info.second.top_price)}
+                            <div className={s.rub}>{iconsCollection.rub}</div>
+                          </div>
+                          <div className={s.price}>
+                            {getBeautifulNumber(data.departure.price_info.second.bottom_price)}
+                            <div className={s.rub}>{iconsCollection.rub}</div>
+                          </div>
+                        </>
+                      )}
+                      {carriageType === 'third' && data.departure.price_info.third && (
+                        <>
+                          <div className={s.price}>
+                            {getBeautifulNumber(data.departure.price_info.third.top_price)}
+                            <div className={s.rub}>{iconsCollection.rub}</div>
+                          </div>
+                          <div className={s.price}>
+                            {getBeautifulNumber(data.departure.price_info.third.bottom_price)}
+                            <div className={s.rub}>{iconsCollection.rub}</div>
+                          </div>
+                          <div className={s.price}>
+                            {getBeautifulNumber(data.departure.price_info.third.side_price)}
+                            <div className={s.rub}>{iconsCollection.rub}</div>
+                          </div>
+                        </>
+                      )}
+                      {carriageType === 'fourth' && data.departure.price_info.fourth && (
+                        <div className={s.price}>
+                          {getBeautifulNumber(data.departure.price_info.fourth.top_price)}
+                          <div className={s.rub}>{iconsCollection.rub}</div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
