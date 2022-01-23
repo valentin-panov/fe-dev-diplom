@@ -256,8 +256,9 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
           <div className={s.preSchemeDivider}>
             <div className={s.preSchemeDividerTooltip}>{11} человек выбирают места в этом поезде</div>
           </div>
+
           <div className={s.carriageScheme}>
-            <CarriageScheme carriageType={carriageType} />
+            <CarriageScheme activeCarriage={activeCarriage} />
           </div>
 
           {totalPrice !== 0 && (
