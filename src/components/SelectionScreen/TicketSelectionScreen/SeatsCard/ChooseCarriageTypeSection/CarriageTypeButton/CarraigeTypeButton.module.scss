@@ -1,6 +1,7 @@
-@import 'src/styles/common';
+@import '../../../../../../styles/common';
 
 .carriageTypeIcon {
+  margin-bottom   : 5px;
   display         : flex;
   flex-direction  : column;
   justify-content : center;
@@ -11,16 +12,24 @@
   border          : 0;
   
   &:hover {
-    color  : #FFA800;
-    cursor : pointer;
+    color         : #FFA800;
+    border        : 1px solid #FFA800;
+    border-radius : 30px;
+    cursor        : pointer;
   }
   
   &:disabled {
     color  : #C4C4C4;
+    border : 0;
     cursor : not-allowed;
   }
   
   & .carriageTypeSubtitle {
     margin-top : 25px;
   }
+}
+
+.active {
+  color : #FFA800;
+  
 }

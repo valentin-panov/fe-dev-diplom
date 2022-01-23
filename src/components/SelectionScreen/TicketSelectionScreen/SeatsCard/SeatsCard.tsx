@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useState } from 'react';
 import cn from 'clsx';
 import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,13 +12,13 @@ import { sec2hhmm } from '../../../../utils/sec2hhmm';
 import { secToDateTime } from '../../../../utils/secToDateTime';
 import { appStateResetTrainOutbound, appStateResetTrainReturn } from '../../../../reducers/appState';
 import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
-import { CarriageTypeButton } from './CarriageTypeButton';
 import { CarriageScheme } from './CarriageScheme';
 import { CarriageNumberButton } from './CarriageNumberButton';
 import { trainSeatsReset } from '../../../../reducers/getSeats';
 import { TrainData } from './TrainData';
 import { TicketsCount } from './TicketsCount';
 import { RootState } from '../../../../store';
+import { ChooseCarriageTypeSection } from './ChooseCarriageTypeSection';
 
 export type Props = {
   className?: string;
@@ -71,11 +71,15 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
     }
   }, [carriageType, trainSeats]);
 
-  const getTicketsCount = (adultCount: number, childrenCount: number, toddlerCount: number) => {
-    setTicketsCount({ adultCount, childrenCount, toddlerCount });
-    // eslint-disable-next-line no-console
-    console.log(trainSeats, ticketsCount.adultCount + ticketsCount.childrenCount);
-  };
+  const getTicketsCount = useCallback(
+    (adultCount: number, childrenCount: number, toddlerCount: number) => {
+      setTicketsCount({ adultCount, childrenCount, toddlerCount });
+
+      // eslint-disable-next-line no-console
+      console.log(trainSeats, ticketsCount.adultCount + ticketsCount.childrenCount);
+    },
+    [ticketsCount.adultCount, ticketsCount.childrenCount, trainSeats]
+  );
 
   return (
     <section className={cn(s.root, className)}>
@@ -93,29 +97,16 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
       <div className={s.divider} />
 
-      <div className={s.carriageTypeTitle}>Тип вагона</div>
-      <div className={s.carriageTypeIcons}>
-        <CarriageTypeButton
-          carriageType="fourth"
-          toggleType={chooseCarriageType}
-          available={data.departure.have_fourth_class}
-        />
-        <CarriageTypeButton
-          carriageType="third"
-          toggleType={chooseCarriageType}
-          available={data.departure.have_third_class}
-        />
-        <CarriageTypeButton
-          carriageType="second"
-          toggleType={chooseCarriageType}
-          available={data.departure.have_second_class}
-        />
-        <CarriageTypeButton
-          carriageType="first"
-          toggleType={chooseCarriageType}
-          available={data.departure.have_first_class}
-        />
-      </div>
+      <ChooseCarriageTypeSection
+        data={{
+          have_first_class: data.departure.have_first_class,
+          have_second_class: data.departure.have_second_class,
+          have_third_class: data.departure.have_third_class,
+          have_fourth_class: data.departure.have_fourth_class,
+        }}
+        chooseCarriageType={chooseCarriageType}
+        activeType={carriageType}
+      />
 
       {carriageType !== undefined && (
         <>
