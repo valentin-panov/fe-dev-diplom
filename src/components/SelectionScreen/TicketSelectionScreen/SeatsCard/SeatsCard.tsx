@@ -5,8 +5,8 @@ import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './SeatsCard.module.scss';
 import './reant.css';
-import { Train } from '../../../../interfaces/Interfaces';
-import { filtersCollection, iconsCollection } from '../../../../collections/collections';
+import { Coach, Train } from '../../../../interfaces/Interfaces';
+import { iconsCollection } from '../../../../collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
 import { sec2hhmm } from '../../../../utils/sec2hhmm';
 import { secToDateTime } from '../../../../utils/secToDateTime';
@@ -19,11 +19,36 @@ import { TrainData } from './TrainData';
 import { TicketsCount } from './TicketsCount';
 import { RootState } from '../../../../store';
 import { ChooseCarriageTypeSection } from './ChooseCarriageTypeSection';
+import { ServicesBlock } from './ServicesBlock';
 
 export type Props = {
   className?: string;
   type: 'outbound' | 'return';
   data: Train;
+};
+const clearCarriage: Coach = {
+  coach: {
+    _id: 0,
+    name: '',
+    class_type: 'first',
+    have_wifi: false,
+    have_air_conditioning: false,
+    price: 0,
+    top_price: 0,
+    bottom_price: 0,
+    side_price: 0,
+    linens_price: 0,
+    wifi_price: 0,
+    is_linens_included: false,
+    available_seats: 0,
+    train: 0,
+  },
+  seats: [
+    {
+      index: 1,
+      available: false,
+    },
+  ],
 };
 
 export type CarriageType = undefined | 'first' | 'second' | 'third' | 'fourth';
@@ -42,7 +67,8 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
   const [carriageType, setCarriageType] = useState<CarriageType>(undefined);
   const [totalPrice, setTotalPrice] = useState<number>(8080);
-  const [carriageNumber, setCarriageNumber] = useState<number>(0);
+  // const [carriageNumber, setCarriageNumber] = useState<number>(0);
+  const [activeCarriage, setActiveCarriage] = useState<Coach>(clearCarriage);
   const [ticketsCount, setTicketsCount] = useState({ adultCount: 0, childrenCount: 0, toddlerCount: 0 });
 
   const trainSeats = useSelector((store: RootState) => store.trainSeats.items);
@@ -62,12 +88,19 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
     setTotalPrice(7000);
   };
 
+  const toggleCarriage = (e: number): void => {
+    const newCarriage = trainSeats.find((coach) => coach.coach._id === e);
+    if (newCarriage) {
+      setActiveCarriage(newCarriage);
+    }
+  };
+
   useEffect(() => {
     const firstCoach = trainSeats
       .filter((coach) => coach.coach.class_type === carriageType)
       .find((coach) => coach.coach._id);
     if (firstCoach) {
-      setCarriageNumber(firstCoach.coach._id);
+      setActiveCarriage(firstCoach);
     }
   }, [carriageType, trainSeats]);
 
@@ -76,7 +109,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
       setTicketsCount({ adultCount, childrenCount, toddlerCount });
 
       // eslint-disable-next-line no-console
-      console.log(trainSeats, ticketsCount.adultCount + ticketsCount.childrenCount);
+      console.log('SEATS CARD RERENDER', trainSeats, ticketsCount.adultCount + ticketsCount.childrenCount);
     },
     [ticketsCount.adultCount, ticketsCount.childrenCount, trainSeats]
   );
@@ -118,8 +151,8 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
                 .map((coach) => (
                   <CarriageNumberButton
                     buttonNumber={coach.coach._id}
-                    toggleCarriage={setCarriageNumber}
-                    activeCarriage={carriageNumber}
+                    toggleCarriage={(e) => toggleCarriage(e)}
+                    activeCarriage={activeCarriage.coach._id}
                   />
                 ))}
             </div>
@@ -128,7 +161,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
           <div className={s.selectedCarriage}>
             <div className={s.selectedCarriageNumber}>
-              <div className={s.number}>{carriageNumber}</div>
+              <div className={s.number}>{activeCarriage.coach._id}</div>
               <div className={s.subNumber}>вагон</div>
             </div>
             <div className={s.selectedCarriageInfoBox}>
@@ -137,18 +170,18 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
                   <div className={s.seatsPrice}>
                     <div>
                       <div>
-                        Места <span className={s.seatsCount}>{data.available_seats_info[carriageType]}</span>
+                        Места <span className={s.seatsCount}>{activeCarriage.seats.length}</span>
                       </div>
                       {carriageType === 'first' && <></>}
                       {carriageType === 'second' && (
                         <>
                           <div className={s.seatsType}>
                             Верхние
-                            <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.second}</span>
+                            <span className={s.seatsTypeNumber}>{activeCarriage.seats.length}</span>
                           </div>
                           <div className={s.seatsType}>
                             Нижние
-                            <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.second}</span>
+                            <span className={s.seatsTypeNumber}>{activeCarriage.seats.length}</span>
                           </div>
                         </>
                       )}
@@ -156,15 +189,15 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
                         <>
                           <div className={s.seatsType}>
                             Верхние
-                            <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.third}</span>
+                            <span className={s.seatsTypeNumber}>{activeCarriage.seats.length}</span>
                           </div>
                           <div className={s.seatsType}>
                             Нижние
-                            <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.third}</span>
+                            <span className={s.seatsTypeNumber}>{activeCarriage.seats.length}</span>
                           </div>
                           <div className={s.seatsType}>
                             Боковые
-                            <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.third}</span>
+                            <span className={s.seatsTypeNumber}>{activeCarriage.seats.length}</span>
                           </div>
                         </>
                       )}
@@ -216,17 +249,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
                   </div>
                 </div>
 
-                <div className={s.sciBlock}>
-                  <div>Обслуживание ФПК</div>
-                  <div className={s.sciBlockServices}>
-                    {data.departure.have_air_conditioning && (
-                      <div>{filtersCollection.have_air_conditioning.element}</div>
-                    )}
-                    {data.departure.have_wifi && <div>{filtersCollection.have_wifi.element}</div>}
-                    <div>{filtersCollection.linen.element}</div>
-                    <div>{filtersCollection.cup.element}</div>
-                  </div>
-                </div>
+                <ServicesBlock data={activeCarriage} />
               </div>
             </div>
           </div>

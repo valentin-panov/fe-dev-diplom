@@ -1,0 +1,55 @@
+@import 'src/styles/common';
+
+.sciBlock {
+  display         : flex;
+  flex-direction  : column;
+  justify-content : flex-start;
+  align-items     : flex-start;
+  font-size       : 18px;
+  line-height     : 21px;
+  font-weight     : normal;
+  font-style      : normal;
+  
+  color           : #928F94;
+  
+  .sciBlockServices {
+    margin-top     : 15px;
+    display        : flex;
+    flex-direction : row;
+    
+    & .serviceIcon {
+      display         : flex;
+      
+      box-sizing      : border-box;
+      width           : 36px;
+      height          : 34.11px;
+      justify-content : center;
+      align-items     : center;
+      color           : #292929;
+      border          : 1px solid #292929;
+      border-radius   : 5px;
+      
+      &:not(:last-child) {
+        margin-right : 15px;
+      }
+      
+      &:hover {
+        background-color : #FFA800;
+        cursor           : pointer;
+      }
+    }
+    
+    & .included {
+      color            : #928F94;
+      background-color : #FCDC9D;
+      border           : 1px solid #FCDC9D;
+      
+      &:hover {
+        background-color : #FCDC9D;
+        border           : 1px solid #FCDC9D;
+      }
+    }
+  }
+  
+}
+
