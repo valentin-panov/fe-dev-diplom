@@ -1,7 +1,8 @@
-import React, { memo, useState } from 'react';
+/* eslint-disable no-underscore-dangle */
+import React, { memo, useEffect, useState } from 'react';
 import cn from 'clsx';
-import { Button, Form, Input } from 'antd';
-import { useDispatch } from 'react-redux';
+import { Button } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
 import s from './SeatsCard.module.scss';
 import './reant.css';
 import { Train } from '../../../../interfaces/Interfaces';
@@ -16,6 +17,8 @@ import { CarriageScheme } from './CarriageScheme';
 import { CarriageNumberButton } from './CarriageNumberButton';
 import { trainSeatsReset } from '../../../../reducers/getSeats';
 import { TrainData } from './TrainData';
+import { TicketsCount } from './TicketsCount';
+import { RootState } from '../../../../store';
 
 export type Props = {
   className?: string;
@@ -28,7 +31,6 @@ export type CarriageType = undefined | 'first' | 'second' | 'third' | 'fourth';
 export const SeatsCard = memo<Props>(({ className, type, data }) => {
   const dispatch = useDispatch();
 
-  // eslint-disable-next-line no-underscore-dangle
   const trainId = data.departure.train._id;
   const pointA = capitalize(data.departure.from.city.name);
   const pointB = capitalize(data.departure.to.city.name);
@@ -40,7 +42,10 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
   const [carriageType, setCarriageType] = useState<CarriageType>(undefined);
   const [totalPrice, setTotalPrice] = useState<number>(8080);
-  const [carriageNumber, setCarriageNumber] = useState<number>(22);
+  const [carriageNumber, setCarriageNumber] = useState<number>(0);
+  const [ticketsCount, setTicketsCount] = useState({ adultCount: 0, childrenCount: 0, toddlerCount: 0 });
+
+  const trainSeats = useSelector((store: RootState) => store.trainSeats.items);
 
   const anotherTrain = (arg: string) => {
     if (arg === 'outbound') {
@@ -53,7 +58,23 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
   const chooseCarriageType = (value: CarriageType) => {
     setCarriageType(value);
+
     setTotalPrice(7000);
+  };
+
+  useEffect(() => {
+    const firstCoach = trainSeats
+      .filter((coach) => coach.coach.class_type === carriageType)
+      .find((coach) => coach.coach._id);
+    if (firstCoach) {
+      setCarriageNumber(firstCoach.coach._id);
+    }
+  }, [carriageType, trainSeats]);
+
+  const getTicketsCount = (adultCount: number, childrenCount: number, toddlerCount: number) => {
+    setTicketsCount({ adultCount, childrenCount, toddlerCount });
+    // eslint-disable-next-line no-console
+    console.log(trainSeats, ticketsCount.adultCount + ticketsCount.childrenCount);
   };
 
   return (
@@ -68,22 +89,8 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
       <TrainData data={{ type, trainId, pointA, stationA, timeA, pointB, stationB, timeB, duration }} />
 
-      <div className={s.ticketsCountTitle}>Количество билетов</div>
-      <Form className={s.ticketsTypeRow}>
-        <Form.Item className={s.inputCard}>
-          <Input type="number" prefix="Взрослых — " defaultValue={0} min={0} max={5} className={s.input} />
-          <div>Можно добавить еще 3 пассажиров</div>
-        </Form.Item>
-        <Form.Item className={s.inputCard}>
-          <Input type="number" prefix="Детских — " defaultValue={0} min={0} className={s.input} id="kids" />
-          <div>
-            Можно добавить еще 3 детей до 10 лет. Свое место в вагоне, как у взрослых, но дешевле в среднем на 50-65%
-          </div>
-        </Form.Item>
-        <Form.Item className={s.inputCard}>
-          <Input type="number" prefix="Детских «без места» — " defaultValue={0} min={0} className={s.input} />
-        </Form.Item>
-      </Form>
+      <TicketsCount getTicketsCount={getTicketsCount} />
+
       <div className={s.divider} />
 
       <div className={s.carriageTypeTitle}>Тип вагона</div>
@@ -109,24 +116,25 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
           available={data.departure.have_first_class}
         />
       </div>
+
       {carriageType !== undefined && (
         <>
           <div className={s.carriageList}>
             <div className={s.carriages}>Вагоны</div>
             <div className={s.carriagesNumbers}>
-              <CarriageNumberButton
-                buttonNumber={7}
-                toggleCarriage={setCarriageNumber}
-                activeCarriage={carriageNumber}
-              />
-              <CarriageNumberButton
-                buttonNumber={22}
-                toggleCarriage={setCarriageNumber}
-                activeCarriage={carriageNumber}
-              />
+              {trainSeats
+                .filter((coach) => coach.coach.class_type === carriageType)
+                .map((coach) => (
+                  <CarriageNumberButton
+                    buttonNumber={coach.coach._id}
+                    toggleCarriage={setCarriageNumber}
+                    activeCarriage={carriageNumber}
+                  />
+                ))}
             </div>
             <div className={s.carriages}>Нумерация вагонов начинается с головы поезда</div>
           </div>
+
           <div className={s.selectedCarriage}>
             <div className={s.selectedCarriageNumber}>
               <div className={s.number}>{carriageNumber}</div>
@@ -144,11 +152,11 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
                       {carriageType === 'second' && (
                         <>
                           <div className={s.seatsType}>
-                            Верхние{' '}
+                            Верхние
                             <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.second}</span>
                           </div>
                           <div className={s.seatsType}>
-                            Нижние{' '}
+                            Нижние
                             <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.second}</span>
                           </div>
                         </>
@@ -156,15 +164,15 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
                       {carriageType === 'third' && (
                         <>
                           <div className={s.seatsType}>
-                            Верхние{' '}
+                            Верхние
                             <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.third}</span>
                           </div>
                           <div className={s.seatsType}>
-                            Нижние{' '}
+                            Нижние
                             <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.third}</span>
                           </div>
                           <div className={s.seatsType}>
-                            Боковые{' '}
+                            Боковые
                             <span className={s.seatsTypeNumber}>{data.departure.available_seats_info.third}</span>
                           </div>
                         </>
