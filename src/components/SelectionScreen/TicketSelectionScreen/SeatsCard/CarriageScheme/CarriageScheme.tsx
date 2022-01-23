@@ -7,6 +7,8 @@ import second from './img/2.png';
 import third from './img/3.png';
 import fourth from './img/4.png';
 import { Coach } from '../../../../../interfaces/Interfaces';
+import { ThirdClassScheme } from './ThirdClassScheme';
+import { FourthClassScheme } from './FourthClassScheme';
 
 export type Props = HTMLAttributes<HTMLElement> & {
   children?: never;
@@ -30,7 +32,10 @@ export const CarriageScheme = memo<Props>(({ activeCarriage }) => {
     <div className={s.root}>
       <img src={schemas[carriageType]} className={cn(s.schemeImg)} alt="carriage scheme" />
       <div className={s.schemeLayout}>
-        <div className={s.scheme}>123</div>
+        <div className={s.scheme}>
+          {carriageType === 'third' && <ThirdClassScheme activeCarriage={activeCarriage} />}
+          {carriageType === 'fourth' && <FourthClassScheme activeCarriage={activeCarriage} />}
+        </div>
       </div>
     </div>
   );

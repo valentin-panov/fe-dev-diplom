@@ -49,3 +49,10 @@
     }
   }
 }
+
+.third {
+  display               : grid;
+  grid-template-columns : repeat(16, 46px);
+  grid-template-rows    : 35px 34px 25px 25px;
+  
+}
