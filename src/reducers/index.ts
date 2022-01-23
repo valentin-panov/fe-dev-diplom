@@ -7,6 +7,7 @@ import { searchParams } from './searchParams';
 import { subscribe } from './subrcribe';
 import { appState } from './appState';
 import { getTickets } from './getTickets';
+import { trainSeats } from './getSeats';
 
 export const rootReducer = {
   menu,
@@ -16,5 +17,6 @@ export const rootReducer = {
   subscribe,
   appState,
   getTickets,
+  trainSeats,
   token,
 };

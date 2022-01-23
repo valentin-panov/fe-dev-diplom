@@ -1,10 +1,11 @@
 import React, { memo, useEffect, useRef } from 'react';
 import cn from 'clsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import s from './TicketSelectionScreen.module.scss';
 import { RootState } from '../../../store';
 import { SeatsCard } from './SeatsCard';
+import { trainSeatsFetchData } from '../../../reducers/getSeats';
 // import { trainsList } from '../ResultScreen/data';
 
 export type Props = {
@@ -13,9 +14,16 @@ export type Props = {
 
 export const TicketSelectionScreen = memo<Props>(({ className }) => {
   const title = useRef<HTMLDivElement>(document.createElement('div'));
+  const dispatch = useDispatch();
   const selectedTrain = useSelector((store: RootState) => store.appState.trainOutbound);
   // const selectedTrain = trainsList[0][0];
   const selectedTrainReturn = useSelector((store: RootState) => store.appState.trainReturn);
+
+  // eslint-disable-next-line no-underscore-dangle
+  const trainId = selectedTrain ? selectedTrain.departure._id : 0;
+  if (trainId !== 0) {
+    dispatch(trainSeatsFetchData(trainId));
+  }
 
   useEffect(() => {
     title.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
