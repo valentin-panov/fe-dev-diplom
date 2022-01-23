@@ -14,6 +14,8 @@ import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
 import { CarriageTypeButton } from './CarriageTypeButton';
 import { CarriageScheme } from './CarriageScheme';
 import { CarriageNumberButton } from './CarriageNumberButton';
+import { trainSeatsReset } from '../../../../reducers/getSeats';
+import { TrainData } from './TrainData';
 
 export type Props = {
   className?: string;
@@ -46,6 +48,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
     } else if (arg === 'return') {
       dispatch(appStateResetTrainReturn());
     }
+    dispatch(trainSeatsReset());
   };
 
   const chooseCarriageType = (value: CarriageType) => {
@@ -62,43 +65,9 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
           Выбрать другой поезд
         </Button>
       </div>
-      <div className={s.trainData}>
-        <div className={s.index}>
-          <div className={s.icon}>{iconsCollection.trainSmall}</div>
 
-          <div className={s.textIndex}>
-            <div className={s.trainId}>{trainId}</div>
-            <div>
-              <div className={s.textContainer}>
-                {pointA}&nbsp;
-                {iconsCollection.arrowRB}
-              </div>
-              <div className={s.textContainer}>{pointB}</div>
-            </div>
-          </div>
-        </div>
+      <TrainData data={{ type, trainId, pointA, stationA, timeA, pointB, stationB, timeB, duration }} />
 
-        <div className={s.points}>
-          <div className={s.col1}>
-            <div className={s.time}>{timeA}</div>
-            <div className={s.city}>{pointA}</div>
-            <div className={s.station}>{stationA}</div>
-          </div>
-          <div className={s.col2}>{type === 'outbound' ? iconsCollection.arrowRY : iconsCollection.arrowLY}</div>
-          <div className={s.col1}>
-            <div className={s.time}>{timeB}</div>
-            <div className={s.city}>{pointB}</div>
-            <div className={s.station}>{stationB}</div>
-          </div>
-        </div>
-        <div className={s.duration}>
-          {iconsCollection.clock}
-          <div className={s.durationText}>
-            <div>{duration.hours}</div>
-            <div>{duration.minutes}</div>
-          </div>
-        </div>
-      </div>
       <div className={s.ticketsCountTitle}>Количество билетов</div>
       <Form className={s.ticketsTypeRow}>
         <Form.Item className={s.inputCard}>
