@@ -100,7 +100,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
   const selectSeats = (arg: selectSeatsArgs): void => {
     // eslint-disable-next-line no-console
-    console.log('SELECT SEATS', arg);
+    console.log('SELECT SEATS', arg, ticketsCount);
   };
 
   useEffect(() => {
@@ -112,12 +112,9 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
     }
   }, [carriageType, trainSeats]);
 
-  const getTicketsCount = useCallback(
-    (adultCount: number, childrenCount: number, toddlerCount: number) => {
-      setTicketsCount({ adultCount, childrenCount, toddlerCount });
-    },
-    [ticketsCount.adultCount, ticketsCount.childrenCount]
-  );
+  const getTicketsCount = useCallback((adultCount: number, childrenCount: number, toddlerCount: number) => {
+    setTicketsCount({ adultCount, childrenCount, toddlerCount });
+  }, []);
 
   return (
     <section className={cn(s.root, className)}>
