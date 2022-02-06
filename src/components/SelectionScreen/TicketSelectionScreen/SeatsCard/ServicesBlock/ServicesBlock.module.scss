@@ -18,22 +18,23 @@
     flex-direction : row;
     
     & .serviceIcon {
-      display         : flex;
+      display          : flex;
       
-      box-sizing      : border-box;
-      width           : 36px;
-      height          : 34.11px;
-      justify-content : center;
-      align-items     : center;
-      color           : #292929;
-      border          : 1px solid #292929;
-      border-radius   : 5px;
+      box-sizing       : border-box;
+      width            : 36px;
+      height           : 34.11px;
+      justify-content  : center;
+      align-items      : center;
+      color            : #292929;
+      background-color : transparent;
+      border           : 1px solid #292929;
+      border-radius    : 5px;
       
       &:not(:last-child) {
         margin-right : 15px;
       }
       
-      &:hover {
+      &:hover:not(:disabled) {
         background-color : #FFA800;
         cursor           : pointer;
       }
