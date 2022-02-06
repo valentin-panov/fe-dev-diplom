@@ -1,5 +1,5 @@
 /* eslint-disable no-underscore-dangle */
-import React, { Dispatch, memo, SetStateAction, useRef } from 'react';
+import React, { Dispatch, memo, SetStateAction, useCallback, useEffect, useRef } from 'react';
 import cn from 'clsx';
 import { message, Tooltip } from 'antd';
 import s from './ServicesBlock.module.scss';
@@ -32,6 +32,27 @@ export const ServicesBlock = memo<Props>(({ data, selectedServices, setSelectedS
   const wifiSelected = activeCarriageSelectedServices ? activeCarriageSelectedServices.wifi.isSelected : false;
   const linenSelected = activeCarriageSelectedServices ? activeCarriageSelectedServices.linen.isSelected : false;
 
+  const clearServices = useCallback(() => {
+    const servicesObj = {
+      coachId,
+      wifi: { isSelected: false, price: 0 },
+      linen: { isSelected: false, price: 0 },
+    };
+    const existId = selectedServices.findIndex((el) => el.coachId === coachId);
+    if (existId === -1) {
+      selectedServices.push(servicesObj);
+    } else {
+      selectedServices.splice(existId, 1, servicesObj);
+    }
+    setSelectedServices(selectedServices);
+  }, [coachId, selectedServices, setSelectedServices]);
+
+  useEffect(() => {
+    if (!hasSelectedSeats) {
+      clearServices();
+    }
+  }, [clearServices, hasSelectedSeats]);
+
   const toggleService = (service: string) => {
     if (!hasSelectedSeats) {
       const warning = () => {
@@ -50,13 +71,13 @@ export const ServicesBlock = memo<Props>(({ data, selectedServices, setSelectedS
       if (service === 'wifi') {
         servicesObj = {
           ...servicesObj,
-          wifi: { isSelected: !wifiSelected, price: wifiSelected ? wifiPrice : 0 },
+          wifi: { isSelected: !wifiSelected, price: wifiSelected ? 0 : wifiPrice },
         };
       }
       if (service === 'linen') {
         servicesObj = {
           ...servicesObj,
-          linen: { isSelected: !linenSelected, price: linenSelected ? linenPrice : 0 },
+          linen: { isSelected: !linenSelected, price: linenSelected ? 0 : linenPrice },
         };
       }
       const existId = selectedServices.findIndex((el) => el.coachId === coachId);

@@ -147,10 +147,12 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
   useEffect(() => {
     const seatsSummaryPrice = selectedSeats.reduce((sum, current) => sum + current.price, 0);
-    // const servicesSummaryPrice = selectedServices.reduce((sum, current) => sum + current.price, 0);
-
-    setTotalPrice(seatsSummaryPrice);
-  }, [selectedSeats]);
+    const servicesSummaryPrice = selectedServices.reduce(
+      (sum, current) => sum + current.wifi.price + current.linen.price,
+      0
+    );
+    setTotalPrice(seatsSummaryPrice + servicesSummaryPrice);
+  }, [selectedSeats, selectedServices]);
 
   return (
     <section className={cn(s.root, className)}>
