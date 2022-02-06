@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { memo, useCallback, useEffect, useState } from 'react';
 import cn from 'clsx';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './SeatsCard.module.scss';
 import './reant.css';
@@ -112,6 +112,11 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
       const availableToAdd = ticketsCount.adultCount + ticketsCount.childrenCount - selectedSeats.length;
       if (availableToAdd > 0) {
         setSelectedSeats([...selectedSeats, arg]);
+      } else {
+        const warning = () => {
+          message.warning('Нельзя выбрать больше мест, чем выбрано билетов').then();
+        };
+        warning();
       }
     } else {
       setSelectedSeats(selectedSeats.filter((el, idx) => idx !== existId));
