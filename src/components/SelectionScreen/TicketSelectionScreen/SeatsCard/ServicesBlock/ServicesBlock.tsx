@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import React, { Dispatch, memo, SetStateAction, useRef } from 'react';
 import cn from 'clsx';
-import { Tooltip } from 'antd';
+import { message, Tooltip } from 'antd';
 import s from './ServicesBlock.module.scss';
 import { Coach } from '../../../../../interfaces/Interfaces';
 import { filtersCollection, iconsCollection } from '../../../../../collections/collections';
@@ -33,32 +33,40 @@ export const ServicesBlock = memo<Props>(({ data, selectedServices, setSelectedS
   const linenSelected = activeCarriageSelectedServices ? activeCarriageSelectedServices.linen.isSelected : false;
 
   const toggleService = (service: string) => {
-    const newArr = [...selectedServices];
-    let servicesObj = {
-      coachId,
-      wifi: { isSelected: wifiSelected, price: wifiSelected ? wifiPrice : 0 },
-      linen: { isSelected: linenSelected, price: linenSelected ? linenPrice : 0 },
-    };
+    if (!hasSelectedSeats) {
+      const warning = () => {
+        message.warning('Сначала выберите места.').then();
+      };
+      warning();
+    }
+    if (hasSelectedSeats) {
+      const newArr = [...selectedServices];
+      let servicesObj = {
+        coachId,
+        wifi: { isSelected: wifiSelected, price: wifiSelected ? wifiPrice : 0 },
+        linen: { isSelected: linenSelected, price: linenSelected ? linenPrice : 0 },
+      };
 
-    if (service === 'wifi') {
-      servicesObj = {
-        ...servicesObj,
-        wifi: { isSelected: !wifiSelected, price: wifiSelected ? wifiPrice : 0 },
-      };
+      if (service === 'wifi') {
+        servicesObj = {
+          ...servicesObj,
+          wifi: { isSelected: !wifiSelected, price: wifiSelected ? wifiPrice : 0 },
+        };
+      }
+      if (service === 'linen') {
+        servicesObj = {
+          ...servicesObj,
+          linen: { isSelected: !linenSelected, price: linenSelected ? linenPrice : 0 },
+        };
+      }
+      const existId = selectedServices.findIndex((el) => el.coachId === coachId);
+      if (existId === -1) {
+        newArr.push(servicesObj);
+      } else {
+        newArr.splice(existId, 1, servicesObj);
+      }
+      setSelectedServices(newArr);
     }
-    if (service === 'linen') {
-      servicesObj = {
-        ...servicesObj,
-        linen: { isSelected: !linenSelected, price: linenSelected ? linenPrice : 0 },
-      };
-    }
-    const existId = selectedServices.findIndex((el) => el.coachId === coachId);
-    if (existId === -1) {
-      newArr.push(servicesObj);
-    } else {
-      newArr.splice(existId, 1, servicesObj);
-    }
-    setSelectedServices(newArr);
   };
 
   const tooltipWifi = (
@@ -99,7 +107,7 @@ export const ServicesBlock = memo<Props>(({ data, selectedServices, setSelectedS
               className={cn(s.serviceIcon, wifiSelected ? s.selected : '')}
               ref={wifiElement}
               onClick={() => toggleService('wifi')}
-              disabled={!hasSelectedSeats}
+              // disabled={!hasSelectedSeats}
             >
               {filtersCollection.have_wifi.element}
             </button>
@@ -125,7 +133,7 @@ export const ServicesBlock = memo<Props>(({ data, selectedServices, setSelectedS
               className={cn(s.serviceIcon, linenSelected ? s.selected : '')}
               ref={linenElement}
               onClick={() => toggleService('linen')}
-              disabled={!hasSelectedSeats}
+              // disabled={!hasSelectedSeats}
             >
               {filtersCollection.linen.element}
             </button>
