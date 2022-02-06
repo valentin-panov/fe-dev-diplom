@@ -8,16 +8,19 @@ import third from './img/3.png';
 import fourth from './img/4.png';
 import { Coach } from '../../../../../interfaces/Interfaces';
 import './seatsGridAreas.css';
+import { SelectedSeatsArray } from '../SeatsCard';
 
-export type selectSeatsArgs = {
+export type SelectSeatsArgs = {
   coachId: number;
   seatId: number;
+  price: number;
 };
 
 export type Props = HTMLAttributes<HTMLElement> & {
   children?: never;
   activeCarriage: Coach;
-  selectSeats: (args: selectSeatsArgs) => void;
+  selectedSeats: SelectedSeatsArray;
+  selectSeats: (args: SelectSeatsArgs) => void;
 };
 
 type Schemas = { [key: string]: string };
@@ -29,14 +32,34 @@ const schemas: Schemas = {
   fourth,
 };
 
-export const CarriageScheme = memo<Props>(({ activeCarriage, selectSeats }) => {
+export const CarriageScheme = memo<Props>(({ activeCarriage, selectSeats, selectedSeats }) => {
   const {
     seats,
     coach: { class_type: carriageType, _id: coachId },
   } = activeCarriage;
 
+  const selected = selectedSeats.filter((el) => el.coachId === coachId).map((el) => el.seatId);
+
   const onSeatSelect = (idx: number) => {
-    selectSeats({ coachId, seatId: idx });
+    let price: number | undefined;
+    if (carriageType === 'first') {
+      price = activeCarriage.coach.price; // данные в запросах по разным ручкам различаются
+    }
+    if (carriageType === 'fourth') {
+      price = activeCarriage.coach.top_price; // сервер отдаёт top_price, не price
+    }
+    if (carriageType === 'second') {
+      price = idx % 2 ? activeCarriage.coach.bottom_price : activeCarriage.coach.top_price;
+    }
+    if (carriageType === 'third') {
+      if (idx < 33) {
+        price = idx % 2 ? activeCarriage.coach.bottom_price : activeCarriage.coach.top_price;
+      }
+      if (idx >= 33) {
+        price = activeCarriage.coach.side_price;
+      }
+    }
+    selectSeats({ coachId, seatId: idx, price: price || 0 });
   };
 
   return (
@@ -50,7 +73,7 @@ export const CarriageScheme = memo<Props>(({ activeCarriage, selectSeats }) => {
               <button
                 type="button"
                 key={seat.index}
-                className={cn(s.seat, `seat${seat.index}`, s.selected)}
+                className={cn(s.seat, `seat${seat.index}`, selected.some((el) => el === seat.index) ? s.selected : '')}
                 disabled={!seat.available}
                 onClick={() => onSeatSelect(seat.index)}
               >

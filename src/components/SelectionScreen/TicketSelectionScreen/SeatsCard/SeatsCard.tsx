@@ -12,7 +12,7 @@ import { sec2hhmm } from '../../../../utils/sec2hhmm';
 import { secToDateTime } from '../../../../utils/secToDateTime';
 import { appStateResetTrainOutbound, appStateResetTrainReturn } from '../../../../reducers/appState';
 import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
-import { CarriageScheme, selectSeatsArgs } from './CarriageScheme';
+import { CarriageScheme, SelectSeatsArgs } from './CarriageScheme';
 import { CarriageNumberButton } from './CarriageNumberButton';
 import { trainSeatsReset } from '../../../../reducers/getSeats';
 import { TrainData } from './TrainData';
@@ -51,6 +51,8 @@ const clearCarriage: Coach = {
   ],
 };
 
+export type SelectedSeatsArray = SelectSeatsArgs[];
+
 export type CarriageType = undefined | 'first' | 'second' | 'third' | 'fourth';
 
 export const SeatsCard = memo<Props>(({ className, type, data }) => {
@@ -70,6 +72,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [activeCarriage, setActiveCarriage] = useState<Coach>(clearCarriage);
   const [ticketsCount, setTicketsCount] = useState({ adultCount: 0, childrenCount: 0, toddlerCount: 0 });
+  const [selectedSeats, setSelectedSeats] = useState<SelectedSeatsArray>([]);
   // const [selectedTicketsCount, setSelectedTicketsCount] = useState({
   //   adultCount: 0,
   //   childrenCount: 0,
@@ -87,8 +90,6 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
   const chooseCarriageType = (value: CarriageType) => {
     setCarriageType(value);
-
-    setTotalPrice(7000);
   };
 
   const toggleCarriage = (e: number): void => {
@@ -98,9 +99,18 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
     }
   };
 
-  const selectSeats = (arg: selectSeatsArgs): void => {
+  const selectSeats = (arg: SelectSeatsArgs): void => {
     // eslint-disable-next-line no-console
-    console.log('SELECT SEATS', arg, ticketsCount);
+    // console.log('SELECT SEATS', selectedSeats, ticketsCount);
+    const existId = selectedSeats.findIndex((el) => el.coachId === arg.coachId && el.seatId === arg.seatId);
+    if (existId === -1) {
+      const availableToAdd = ticketsCount.adultCount + ticketsCount.childrenCount - selectedSeats.length;
+      if (availableToAdd > 0) {
+        setSelectedSeats([...selectedSeats, arg]);
+      }
+    } else {
+      setSelectedSeats(selectedSeats.filter((el, idx) => idx !== existId));
+    }
   };
 
   useEffect(() => {
@@ -115,6 +125,20 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
   const getTicketsCount = useCallback((adultCount: number, childrenCount: number, toddlerCount: number) => {
     setTicketsCount({ adultCount, childrenCount, toddlerCount });
   }, []);
+
+  useEffect(() => {
+    const canGetSeats = ticketsCount.adultCount + ticketsCount.childrenCount;
+    if (canGetSeats < selectedSeats.length) {
+      const tempArr = [...selectedSeats];
+      tempArr.length = canGetSeats;
+      setSelectedSeats(tempArr);
+    }
+  }, [selectedSeats, ticketsCount]);
+
+  useEffect(() => {
+    const seatsSummaryPrice = selectedSeats.reduce((sum, current) => sum + current.price, 0);
+    setTotalPrice(seatsSummaryPrice);
+  }, [selectedSeats]);
 
   return (
     <section className={cn(s.root, className)}>
@@ -261,7 +285,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
           </div>
 
           <div className={s.carriageScheme}>
-            <CarriageScheme activeCarriage={activeCarriage} selectSeats={selectSeats} />
+            <CarriageScheme activeCarriage={activeCarriage} selectedSeats={selectedSeats} selectSeats={selectSeats} />
           </div>
 
           {totalPrice !== 0 && (
