@@ -55,6 +55,12 @@ export type SelectedSeatsArray = SelectSeatsArgs[];
 
 export type CarriageType = undefined | 'first' | 'second' | 'third' | 'fourth';
 
+export type SelectedServices = {
+  coachId: number;
+  wifi: { isSelected: boolean; price: number };
+  linen: { isSelected: boolean; price: number };
+}[];
+
 export const SeatsCard = memo<Props>(({ className, type, data }) => {
   const dispatch = useDispatch();
   const trainSeats = useSelector((store: RootState) => store.trainSeats.items);
@@ -73,6 +79,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
   const [activeCarriage, setActiveCarriage] = useState<Coach>(clearCarriage);
   const [ticketsCount, setTicketsCount] = useState({ adultCount: 0, childrenCount: 0, toddlerCount: 0 });
   const [selectedSeats, setSelectedSeats] = useState<SelectedSeatsArray>([]);
+  const [selectedServices, setSelectedServices] = useState<SelectedServices>([]);
   // const [selectedTicketsCount, setSelectedTicketsCount] = useState({
   //   adultCount: 0,
   //   childrenCount: 0,
@@ -100,8 +107,6 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
   };
 
   const selectSeats = (arg: SelectSeatsArgs): void => {
-    // eslint-disable-next-line no-console
-    // console.log('SELECT SEATS', selectedSeats, ticketsCount);
     const existId = selectedSeats.findIndex((el) => el.coachId === arg.coachId && el.seatId === arg.seatId);
     if (existId === -1) {
       const availableToAdd = ticketsCount.adultCount + ticketsCount.childrenCount - selectedSeats.length;
@@ -137,6 +142,8 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
   useEffect(() => {
     const seatsSummaryPrice = selectedSeats.reduce((sum, current) => sum + current.price, 0);
+    // const servicesSummaryPrice = selectedServices.reduce((sum, current) => sum + current.price, 0);
+
     setTotalPrice(seatsSummaryPrice);
   }, [selectedSeats]);
 
@@ -276,7 +283,12 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
                   </div>
                 </div>
 
-                <ServicesBlock data={activeCarriage} />
+                <ServicesBlock
+                  data={activeCarriage}
+                  selectedServices={selectedServices}
+                  setSelectedServices={setSelectedServices}
+                  selectedSeats={selectedSeats}
+                />
               </div>
             </div>
           </div>
