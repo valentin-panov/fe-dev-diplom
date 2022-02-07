@@ -146,12 +146,16 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
   }, [selectedSeats, ticketsCount]);
 
   useEffect(() => {
-    const seatsSummaryPrice = selectedSeats.reduce((sum, current) => sum + current.price, 0);
-    const servicesSummaryPrice = selectedServices.reduce(
-      (sum, current) => sum + current.wifi.price + current.linen.price,
+    const seatsSummaryPrice = selectedSeats.reduce(
+      (sum, current) =>
+        sum +
+        current.price +
+        Number(
+          selectedServices.filter((el) => el.coachId === current.coachId).map((el) => el.linen.price + el.wifi.price)
+        ),
       0
     );
-    setTotalPrice(seatsSummaryPrice + servicesSummaryPrice);
+    setTotalPrice(seatsSummaryPrice);
   }, [selectedSeats, selectedServices]);
 
   return (
