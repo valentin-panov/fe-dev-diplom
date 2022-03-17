@@ -8,6 +8,8 @@ import { subscribe } from './subrcribe';
 import { appState } from './appState';
 import { getTickets } from './getTickets';
 import { trainSeats } from './getSeats';
+import { order } from './order';
+import { selectedSeats } from './selectedSeats';
 
 export const rootReducer = {
   menu,
@@ -18,5 +20,7 @@ export const rootReducer = {
   appState,
   getTickets,
   trainSeats,
+  selectedSeats,
+  order,
   token,
 };

@@ -237,3 +237,52 @@ export interface Coach {
 export interface TrainSeatsData extends Status {
   items: Coach[];
 }
+
+export interface Service {
+  isSelected: boolean;
+  price: number;
+}
+
+export interface SelectedSeat {
+  route_direction_id: string;
+  price: string;
+  coach_id: string;
+  seat_number: string;
+}
+
+export interface Order {
+  user?: {
+    first_name: string;
+    last_name: string;
+    patronymic: string;
+    phone: string;
+    email: string;
+    payment_method: 'cash' | 'online';
+  };
+  departure: {
+    route_direction_id: string;
+    seats: [
+      {
+        price: string;
+        coach_id: string;
+        seat_number: string;
+        person_info?: {
+          is_adult: boolean;
+          first_name: string;
+          last_name: string;
+          patronymic: string;
+          gender: boolean;
+          birthday: string;
+          document_type: 'паспорт' | 'свидетельство о рождениии';
+          document_data: string;
+        };
+        is_child?: boolean;
+        include_children_seat?: boolean;
+      }
+    ];
+  };
+}
+
+export interface Orders {
+  items: Order[] | [];
+}

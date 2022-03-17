@@ -6,7 +6,6 @@ import s from './TicketSelectionScreen.module.scss';
 import { RootState } from '../../../store';
 import { SeatsCard } from './SeatsCard';
 import { trainSeatsFetchData } from '../../../reducers/getSeats';
-// import { trainsList } from '../ResultScreen/data';
 
 export type Props = {
   className?: string;
@@ -16,8 +15,8 @@ export const TicketSelectionScreen = memo<Props>(({ className }) => {
   const title = useRef<HTMLDivElement>(document.createElement('div'));
   const dispatch = useDispatch();
   const selectedTrain = useSelector((store: RootState) => store.appState.trainOutbound);
-  // const selectedTrain = trainsList[0][0];
   const selectedTrainReturn = useSelector((store: RootState) => store.appState.trainReturn);
+  const selectedSeats = useSelector((store: RootState) => store.selectedSeats);
 
   // eslint-disable-next-line no-underscore-dangle
   const trainId = selectedTrain ? selectedTrain.departure._id : 0;
@@ -36,7 +35,16 @@ export const TicketSelectionScreen = memo<Props>(({ className }) => {
       </h2>
       {selectedTrain && <SeatsCard type="outbound" data={selectedTrain} />}
       {selectedTrain && selectedTrainReturn && <SeatsCard type="return" data={selectedTrainReturn} />}
-      <Button className={s.btn}>ДАЛЕЕ</Button>
+      <Button
+        className={s.btn}
+        disabled={selectedSeats.length === 0}
+        onClick={() => {
+          // eslint-disable-next-line no-console
+          console.log('dalee');
+        }}
+      >
+        ДАЛЕЕ
+      </Button>
     </div>
   );
 });

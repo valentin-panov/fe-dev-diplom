@@ -5,7 +5,7 @@ import { Button, message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './SeatsCard.module.scss';
 import './reant.css';
-import { Coach, Train } from '../../../../interfaces/Interfaces';
+import { Coach, SelectedSeat, Service, Train } from '../../../../interfaces/Interfaces';
 import { iconsCollection } from '../../../../collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
 import { sec2hhmm } from '../../../../utils/sec2hhmm';
@@ -20,6 +20,7 @@ import { TicketsCount } from './TicketsCount';
 import { RootState } from '../../../../store';
 import { ChooseCarriageTypeSection } from './ChooseCarriageTypeSection';
 import { ServicesBlock } from './ServicesBlock';
+import { selectedSeatsSet } from '../../../../reducers/selectedSeats';
 
 export type Props = {
   className?: string;
@@ -57,8 +58,8 @@ export type CarriageType = undefined | 'first' | 'second' | 'third' | 'fourth';
 
 export type SelectedServices = {
   coachId: number;
-  wifi: { isSelected: boolean; price: number };
-  linen: { isSelected: boolean; price: number };
+  wifi: Service;
+  linen: Service;
 }[];
 
 export const SeatsCard = memo<Props>(({ className, type, data }) => {
@@ -80,11 +81,6 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
   const [ticketsCount, setTicketsCount] = useState({ adultCount: 0, childrenCount: 0, toddlerCount: 0 });
   const [selectedSeats, setSelectedSeats] = useState<SelectedSeatsArray>([]);
   const [selectedServices, setSelectedServices] = useState<SelectedServices>([]);
-  // const [selectedTicketsCount, setSelectedTicketsCount] = useState({
-  //   adultCount: 0,
-  //   childrenCount: 0,
-  //   toddlerCount: 0,
-  // });
 
   const anotherTrain = (arg: string) => {
     if (arg === 'outbound') {
@@ -156,7 +152,24 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
       0
     );
     setTotalPrice(seatsSummaryPrice);
-  }, [selectedSeats, selectedServices]);
+    dispatch(
+      selectedSeatsSet(
+        selectedSeats.map(
+          (el): SelectedSeat => ({
+            route_direction_id: `${trainId}`,
+            price: `${
+              el.price +
+              Number(
+                selectedServices.filter((ser) => ser.coachId === el.coachId).map((i) => i.linen.price + i.wifi.price)
+              )
+            }`,
+            coach_id: `${el.coachId}`,
+            seat_number: `${el.seatId}`,
+          })
+        )
+      )
+    );
+  }, [dispatch, selectedSeats, selectedServices, trainId]);
 
   return (
     <section className={cn(s.root, className)}>
