@@ -6,6 +6,7 @@ import s from './TicketSelectionScreen.module.scss';
 import { RootState } from '../../../store';
 import { SeatsCard } from './SeatsCard';
 import { trainSeatsFetchData } from '../../../reducers/getSeats';
+import { appStateSetProgress } from '../../../reducers/appState';
 
 export type Props = {
   className?: string;
@@ -39,8 +40,7 @@ export const TicketSelectionScreen = memo<Props>(({ className }) => {
         className={s.btn}
         disabled={selectedSeats.length === 0}
         onClick={() => {
-          // eslint-disable-next-line no-console
-          console.log('dalee');
+          dispatch(appStateSetProgress(1));
         }}
       >
         ДАЛЕЕ

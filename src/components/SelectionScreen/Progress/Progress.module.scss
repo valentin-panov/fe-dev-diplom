@@ -14,7 +14,7 @@
   justify-content : stretch;
   align-items     : center;
   background      : #3E3C41;
-
+  
 }
 
 .progress__item {
@@ -27,6 +27,16 @@
   flex-grow      : 0;
   border         : 0;
   border-right   : 1px #FFFFFF solid;
+  
+  &_button {
+    background-color : transparent;
+    border           : 0;
+    cursor           : pointer;
+    
+    &:disabled {
+      cursor           : not-allowed;
+    }
+  }
   
   &:first-child {
     justify-content : flex-end;

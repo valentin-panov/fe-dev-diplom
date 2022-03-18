@@ -27,6 +27,7 @@ export const SelectionScreen = memo<Props>(({ className }) => {
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
   const filters = useSelector((store: RootState) => store.searchParams.filters);
   const selectedTrain = useSelector((store: RootState) => store.appState.trainOutbound);
+  const progress = useSelector((store: RootState) => store.appState.progress);
 
   const stubRange = { min: 0, max: 10000 };
 
@@ -64,55 +65,67 @@ export const SelectionScreen = memo<Props>(({ className }) => {
         <>
           <Progress />
           <div className={s.mainRow}>
-            <div>
-              <section className={s.sideSelection}>
-                <DatePickerOrigin pickerPlace="asidePicker" />
-                <div className={s.divider} />
-                <ul className={s.filterList}>
-                  <SelectionFilterItem
-                    onChange={changeFilter}
-                    filter="have_second_class"
-                    checked={filters.have_second_class}
-                  />
-                  <SelectionFilterItem
-                    onChange={changeFilter}
-                    filter="have_third_class"
-                    checked={filters.have_third_class}
-                  />
-                  <SelectionFilterItem
-                    onChange={changeFilter}
-                    filter="have_fourth_class"
-                    checked={filters.have_fourth_class}
-                  />
-                  <SelectionFilterItem
-                    onChange={changeFilter}
-                    filter="have_first_class"
-                    checked={filters.have_first_class}
-                  />
-                  <SelectionFilterItem onChange={changeFilter} filter="have_wifi" checked={filters.have_wifi} />
-                  <SelectionFilterItem onChange={changeFilter} filter="is_express" checked={filters.is_express} />
-                </ul>
-                <div className={s.divider} />
-                <div className={s.sideSelection__title}>Стоимость</div>
-                <div className={s.pricePickerLabels}>
-                  <span>от</span>
-                  <span>до</span>
+            {progress === 0 && (
+              <>
+                <div>
+                  <section className={s.sideSelection}>
+                    <DatePickerOrigin pickerPlace="asidePicker" />
+                    <div className={s.divider} />
+                    <ul className={s.filterList}>
+                      <SelectionFilterItem
+                        onChange={changeFilter}
+                        filter="have_second_class"
+                        checked={filters.have_second_class}
+                      />
+                      <SelectionFilterItem
+                        onChange={changeFilter}
+                        filter="have_third_class"
+                        checked={filters.have_third_class}
+                      />
+                      <SelectionFilterItem
+                        onChange={changeFilter}
+                        filter="have_fourth_class"
+                        checked={filters.have_fourth_class}
+                      />
+                      <SelectionFilterItem
+                        onChange={changeFilter}
+                        filter="have_first_class"
+                        checked={filters.have_first_class}
+                      />
+                      <SelectionFilterItem onChange={changeFilter} filter="have_wifi" checked={filters.have_wifi} />
+                      <SelectionFilterItem onChange={changeFilter} filter="is_express" checked={filters.is_express} />
+                    </ul>
+                    <div className={s.divider} />
+                    <div className={s.sideSelection__title}>Стоимость</div>
+                    <div className={s.pricePickerLabels}>
+                      <span>от</span>
+                      <span>до</span>
+                    </div>
+                    <SelectionFilterPrice
+                      initialRange={[priceRange.minPrice || stubRange.min, priceRange.maxPrice || stubRange.max]}
+                      stubRange={stubRange}
+                    />
+                    <div className={s.divider} />
+                    <SelectionFilterTime icon={iconsCollection.forward} type="outbound" />
+                    <div className={s.divider} />
+                    <SelectionFilterTime icon={iconsCollection.backward} type="return" />
+                  </section>
+                  <LastTickets />
                 </div>
-                <SelectionFilterPrice
-                  initialRange={[priceRange.minPrice || stubRange.min, priceRange.maxPrice || stubRange.max]}
-                  stubRange={stubRange}
-                />
-                <div className={s.divider} />
-                <SelectionFilterTime icon={iconsCollection.forward} type="outbound" />
-                <div className={s.divider} />
-                <SelectionFilterTime icon={iconsCollection.backward} type="return" />
-              </section>
-              <LastTickets />
-            </div>
-            <div>
-              {!selectedTrain && <ResultScreen />}
-              {selectedTrain && <TicketSelectionScreen />}
-            </div>
+                <div>
+                  {!selectedTrain && <ResultScreen />}
+                  {selectedTrain && <TicketSelectionScreen />}
+                </div>
+              </>
+            )}
+            {progress === 1 && (
+              <>
+                <div>
+                  <section className={s.sideSelection}>TRIPDATA</section>
+                </div>
+                <div>PASSENGERS</div>
+              </>
+            )}
           </div>
         </>
       )}

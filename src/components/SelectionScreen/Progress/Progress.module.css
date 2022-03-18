@@ -83,6 +83,14 @@ p {
   border: 0;
   border-right: 1px #FFFFFF solid;
 }
+.progress__item_button {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.progress__item_button:disabled {
+  cursor: not-allowed;
+}
 .progress__item:first-child {
   justify-content: flex-end;
   flex-grow: 1;
