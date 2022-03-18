@@ -23,6 +23,7 @@ import { ReactComponent as BigSeat } from '../svg/big_seat.svg';
 import { ReactComponent as BigPlatz } from '../svg/big_platz.svg';
 import { ReactComponent as BigCoupe } from '../svg/big_coupe.svg';
 import { ReactComponent as BigLux } from '../svg/big_lux.svg';
+import { ReactComponent as Passenger } from '../svg/icon_passenger.svg';
 import { FilterItem } from '../interfaces/Interfaces';
 
 export const filtersCollection: FilterItem = {
@@ -53,4 +54,5 @@ export const iconsCollection = {
   bigPlatz: <BigPlatz />,
   bigCoupe: <BigCoupe />,
   bigLux: <BigLux />,
+  passenger: <Passenger />,
 };

@@ -16,6 +16,10 @@ import { DatePickerOrigin } from '../Pickers/DatePickerOrigin';
 import { getPriceRange } from '../../utils/getPriceRange';
 import { searchParamsFiltersSet } from '../../reducers/searchParams';
 import { TicketSelectionScreen } from './TicketSelectionScreen';
+import { OrderSummary } from './PassengerScreen/OrderSummary';
+import { OrderTitle } from './PassengerScreen/OrderTitle';
+import { OrderPassengers } from './PassengerScreen/OrderPassengers';
+import { OrderTrainData } from './PassengerScreen/OrderTrainData';
 
 export type Props = {
   className?: string;
@@ -121,7 +125,17 @@ export const SelectionScreen = memo<Props>(({ className }) => {
             {progress === 1 && (
               <>
                 <div>
-                  <section className={s.sideSelection}>TRIPDATA</section>
+                  <section className={s.sideSelection}>
+                    <OrderTitle />
+                    <div className={s.divider} />
+                    <OrderTrainData icon={iconsCollection.forward} type="outbound" />
+                    <div className={s.divider} />
+                    <OrderTrainData icon={iconsCollection.backward} type="return" />
+                    <div className={s.divider} />
+                    <OrderPassengers />
+                    <div className={s.divider} />
+                    <OrderSummary />
+                  </section>
                 </div>
                 <div>PASSENGERS</div>
               </>
