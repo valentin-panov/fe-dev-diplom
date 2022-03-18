@@ -7,6 +7,7 @@ import { RootState } from '../../../store';
 import { SeatsCard } from './SeatsCard';
 import { trainSeatsFetchData } from '../../../reducers/getSeats';
 import { appStateSetProgress } from '../../../reducers/appState';
+import { orderAddRoute } from '../../../reducers/order';
 
 export type Props = {
   className?: string;
@@ -40,6 +41,7 @@ export const TicketSelectionScreen = memo<Props>(({ className }) => {
         className={s.btn}
         disabled={selectedSeats.length === 0}
         onClick={() => {
+          dispatch(orderAddRoute(`${trainId}`));
           dispatch(appStateSetProgress(1));
         }}
       >

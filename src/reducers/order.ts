@@ -40,10 +40,17 @@ export const orderSlice = createSlice({
   reducers: {
     orderReset: () => initialState,
     orderSet: (_, action: PayloadAction<Order>) => action.payload,
-    orderAdd: (state, action: PayloadAction<SelectedSeat>) => ({
+    orderAddRoute: (state, action: PayloadAction<string>) => ({
       ...state,
       departure: {
-        route_direction_id: action.payload.route_direction_id,
+        ...state.departure,
+        route_direction_id: action.payload,
+      },
+    }),
+    orderAddSeat: (state, action: PayloadAction<SelectedSeat>) => ({
+      ...state,
+      departure: {
+        ...state.departure,
         seats: [
           ...state.departure.seats,
           {
@@ -57,6 +64,6 @@ export const orderSlice = createSlice({
   },
 });
 
-export const { orderReset, orderSet, orderAdd } = orderSlice.actions;
+export const { orderReset, orderSet, orderAddRoute, orderAddSeat } = orderSlice.actions;
 
 export const order = orderSlice.reducer;

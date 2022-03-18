@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import s from './OrderSummary.module.scss';
 import { RootState } from '../../../../store';
 import { iconsCollection } from '../../../../collections/collections';
+import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
 
 export type Props = {
   className?: string;
@@ -15,7 +16,7 @@ export const OrderSummary = memo<Props>(({ className }) => {
   return (
     <div className={cn(s.root, className)}>
       <div className={s.title}>Итого</div>
-      <div className={s.amount}>{orderSummary}</div>
+      <div className={s.amount}>{getBeautifulNumber(orderSummary)}</div>
       <div className={s.currency}>{iconsCollection.rub}</div>
     </div>
   );

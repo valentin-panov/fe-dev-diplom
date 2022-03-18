@@ -17,7 +17,7 @@
 }
 
 .sideSelection__title {
-  margin-left : 12px;
+  margin      : 0 12px;
   flex-grow   : 1;
   font-size   : 30px;
   line-height : 35px;
@@ -25,29 +25,144 @@
   color       : #FFFFFF;
 }
 
+.sideSelection__timestamp {
+  font-size   : 18px;
+  line-height : 21px;
+  font-weight : 400;
+  font-style  : normal;
+  color       : #FFFFFF;
+}
+
 .timePickerPanel {
-  position       : relative;
-  padding-left   : 10px;
-  display        : flex;
-  width          : 290px;
-  flex-direction : column;
+  position              : relative;
+  padding               : 0 10px;
+  display               : grid;
+  width                 : 100%;
+  align-items           : flex-start;
+  grid-template-rows    : repeat(7, min-content);
+  grid-template-columns : 1fr min-content min-content 1fr;
+  gap                   : 5px;
+  grid-template-areas   :
+          'trainIdTitle trainIdTitle trainIdNumber trainIdNumber'
+          'trainNameTitle trainNameTitle trainName trainName'
+          ' . duration duration .'
+          'departureDateTime direction direction arrivalDateTime'
+          'departureDate departureDate arrivalDate arrivalDate'
+          'departureCity departureCity arrivalCity arrivalCity'
+          'departureStation departureStation arrivalStation arrivalStation';
 }
 
 .timePickerSubTitle {
-  font-size   : 24px;
-  line-height : 28px;
-  font-weight : normal;
+  font-size   : 18px;
+  line-height : 21px;
+  font-weight : 400;
   font-style  : normal;
   
   color       : #E5E5E5;
 }
 
-.firstST {
-  align-self : flex-start;
+.trainIdTitle {
+  grid-area    : trainIdTitle;
+  justify-self : flex-start;
+}
+
+.trainNameTitle {
+  grid-area    : trainNameTitle;
+  justify-self : flex-start;
+}
+
+.trainName {
+  font-size    : 16px;
+  line-height  : 19px;
+  font-weight  : 700;
+  font-style   : normal;
+  text-align   : right;
+  color        : #FFFFFF;
+  grid-area    : trainName;
+  
+  justify-self : flex-end;
+}
+
+.trainIdNumber {
+  font-size    : 24px;
+  line-height  : 28px;
+  font-weight  : 700;
+  font-style   : normal;
+  text-align   : right;
+  color        : #FFFFFF;
+  grid-area    : trainIdNumber;
+  
+  justify-self : flex-end;
+}
+
+.duration {
+  grid-area    : duration;
+  justify-self : center;
+}
+
+.departureDateTime {
+  font-size    : 24px;
+  line-height  : 28px;
+  font-weight  : 700;
+  font-style   : normal;
+  color        : #FFFFFF;
+  grid-area    : departureDateTime;
+  
+  justify-self : flex-start;
+}
+
+.departureDate {
+  grid-area    : departureDate;
+  justify-self : flex-start;
+}
+
+.direction {
+  grid-area    : direction;
+  justify-self : center;
+}
+
+.arrivalDateTime {
+  font-size    : 24px;
+  line-height  : 28px;
+  font-weight  : 700;
+  font-style   : normal;
+  color        : #FFFFFF;
+  grid-area    : arrivalDateTime;
+  
+  justify-self : flex-end;
+}
+
+.arrivalDate {
+  grid-area    : arrivalDate;
+  justify-self : flex-end;
+}
+
+.departureStation {
+  grid-area    : departureStation;
+  justify-self : flex-start;
+}
+
+.departureCity {
+  grid-area    : departureCity;
+  justify-self : flex-start;
+}
+
+.arrivalCity {
+  grid-area    : arrivalCity;
+  justify-self : flex-end;
+}
+
+.arrivalStation {
+  grid-area    : arrivalStation;
+  justify-self : flex-end;
   
 }
 
-.secondST {
-  margin-top : 45px;
-  align-self : flex-end;
+.subText {
+  font-size   : 18px;
+  line-height : 21px;
+  font-weight : 400;
+  font-style  : normal;
+  
+  color       : #928F94;
 }
