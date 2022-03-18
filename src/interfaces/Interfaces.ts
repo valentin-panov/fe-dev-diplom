@@ -250,6 +250,24 @@ export interface SelectedSeat {
   seat_number: string;
 }
 
+export interface OrderSeat {
+  price: string;
+  coach_id: string;
+  seat_number: string;
+  person_info?: {
+    is_adult: boolean;
+    first_name: string;
+    last_name: string;
+    patronymic: string;
+    gender: boolean;
+    birthday: string;
+    document_type: 'паспорт' | 'свидетельство о рождениии';
+    document_data: string;
+  };
+  is_child?: boolean;
+  include_children_seat?: boolean;
+}
+
 export interface Order {
   user?: {
     first_name: string;
@@ -261,25 +279,7 @@ export interface Order {
   };
   departure: {
     route_direction_id: string;
-    seats: [
-      {
-        price: string;
-        coach_id: string;
-        seat_number: string;
-        person_info?: {
-          is_adult: boolean;
-          first_name: string;
-          last_name: string;
-          patronymic: string;
-          gender: boolean;
-          birthday: string;
-          document_type: 'паспорт' | 'свидетельство о рождениии';
-          document_data: string;
-        };
-        is_child?: boolean;
-        include_children_seat?: boolean;
-      }
-    ];
+    seats: OrderSeat[];
   };
 }
 

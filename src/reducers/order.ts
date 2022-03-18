@@ -46,11 +46,11 @@ export const orderSlice = createSlice({
         route_direction_id: action.payload.route_direction_id,
         seats: [
           ...state.departure.seats,
-          // {
-          //   price: action.payload.price,
-          //   coach_id: action.payload.coach_id,
-          //   seat_number: action.payload.seat_number,
-          // },
+          {
+            price: action.payload.price,
+            coach_id: action.payload.coach_id,
+            seat_number: action.payload.seat_number,
+          },
         ],
       },
     }),
