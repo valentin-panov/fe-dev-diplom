@@ -37,8 +37,6 @@ export const OrderPassengers = memo<Props>(({ className }) => {
     { adult: 0, child: 0, adultCost: 0, childCost: 0, toddler: 0 }
   );
 
-  // console.log();
-
   return (
     <div className={cn(s.root, className)}>
       <Collapse ghost expandIconPosition="right" expandIcon={({ isActive }) => (isActive ? <Minus /> : <Plus />)}>
