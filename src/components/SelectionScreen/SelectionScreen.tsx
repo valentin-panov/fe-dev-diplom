@@ -20,6 +20,7 @@ import { OrderSummary } from './PassengerScreen/OrderSummary';
 import { OrderTitle } from './PassengerScreen/OrderTitle';
 import { OrderPassengers } from './PassengerScreen/OrderPassengers';
 import { OrderTrainData } from './PassengerScreen/OrderTrainData';
+import { PassengerCards } from './PassengerScreen/PassengerCards';
 
 export type Props = {
   className?: string;
@@ -137,7 +138,7 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                     <OrderSummary />
                   </section>
                 </div>
-                <div>PASSENGERS</div>
+                <PassengerCards />
               </>
             )}
           </div>

@@ -15,6 +15,8 @@ import headerSuccess from './img/header_success.png';
 import { appURL } from '../../App';
 import { RootState } from '../../store';
 import { getRouteFetchData } from '../../reducers/getRoute';
+import { orderReset } from '../../reducers/order';
+import { selectedSeatsReset } from '../../reducers/selectedSeats';
 
 export type Props = {
   className?: string;
@@ -50,6 +52,8 @@ export const Header = memo<Props>(({ className }) => {
   }
 
   const findTickets = () => {
+    dispatch(orderReset());
+    dispatch(selectedSeatsReset());
     dispatch(getRouteFetchData(searchParams));
     history.push('/select');
   };
