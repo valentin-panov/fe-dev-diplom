@@ -7,7 +7,7 @@ import { RootState } from '../../../store';
 import { SeatsCard } from './SeatsCard';
 import { trainSeatsFetchData } from '../../../reducers/getSeats';
 import { appStateSetProgress } from '../../../reducers/appState';
-import { orderAddRoute } from '../../../reducers/order';
+import { orderAddRoute, orderAddSeat } from '../../../reducers/order';
 
 export type Props = {
   className?: string;
@@ -19,6 +19,7 @@ export const TicketSelectionScreen = memo<Props>(({ className }) => {
   const selectedTrain = useSelector((store: RootState) => store.appState.trainOutbound);
   const selectedTrainReturn = useSelector((store: RootState) => store.appState.trainReturn);
   const selectedSeats = useSelector((store: RootState) => store.selectedSeats);
+  // const orderSeats = useSelector((store: RootState) => store.order.departure.seats);
 
   // eslint-disable-next-line no-underscore-dangle
   const trainId = selectedTrain ? selectedTrain.departure._id : 0;
@@ -42,6 +43,7 @@ export const TicketSelectionScreen = memo<Props>(({ className }) => {
         disabled={selectedSeats.length === 0}
         onClick={() => {
           dispatch(orderAddRoute(`${trainId}`));
+          selectedSeats.forEach((el) => dispatch(orderAddSeat(el)));
           dispatch(appStateSetProgress(1));
         }}
       >

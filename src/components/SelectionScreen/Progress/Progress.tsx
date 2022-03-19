@@ -8,6 +8,7 @@ import { ReactComponent as Circle3 } from './svg/3.svg';
 import { ReactComponent as Circle4 } from './svg/4.svg';
 import { RootState } from '../../../store';
 import { appStateSetProgress } from '../../../reducers/appState';
+import { orderReset } from '../../../reducers/order';
 
 export type Props = {
   className?: string;
@@ -19,6 +20,9 @@ export const Progress = memo<Props>(({ className }) => {
   const setProgress = (stage: number) => {
     if (stage >= progress) {
       return;
+    }
+    if (stage === 0) {
+      dispatch(orderReset());
     }
     dispatch(appStateSetProgress(stage));
   };

@@ -36,10 +36,33 @@
 }
 
 .timePickerSubTitle {
-  font-size   : 24px;
-  line-height : 28px;
-  font-weight : normal;
-  font-style  : normal;
+  display               : grid;
+  font-size             : 24px;
+  line-height           : 28px;
+  font-weight           : normal;
+  font-style            : normal;
+  color                 : #E5E5E5;
+  grid-template-rows    : min-content;
+  grid-template-columns : min-content min-content 1fr min-content;
+  gap                   : 10px;
   
-  color       : #E5E5E5;
+  .title {
+    //margin-left : 10px;
+  }
+  
+  .price {
+    font-size   : 24px;
+    line-height : 28px;
+    font-weight : 700;
+    font-style  : normal;
+    text-align  : right;
+    
+    color       : #FFFFFF;
+  }
+  
+  .currency {
+    width  : 14px;
+    height : 17px;
+    color  : #928F94;
+  }
 }

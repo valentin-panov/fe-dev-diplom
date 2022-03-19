@@ -12,25 +12,7 @@ const initialState: Order = {
   },
   departure: {
     route_direction_id: '',
-    seats: [
-      {
-        price: '',
-        coach_id: '',
-        seat_number: '',
-        person_info: {
-          is_adult: true,
-          first_name: '',
-          last_name: '',
-          patronymic: '',
-          gender: true,
-          birthday: '',
-          document_type: 'паспорт',
-          document_data: '',
-        },
-        is_child: false,
-        include_children_seat: false,
-      },
-    ],
+    seats: [],
   },
 };
 
@@ -54,9 +36,11 @@ export const orderSlice = createSlice({
         seats: [
           ...state.departure.seats,
           {
-            price: action.payload.price,
-            coach_id: action.payload.coach_id,
-            seat_number: action.payload.seat_number,
+            price: action.payload.price || '',
+            coach_id: action.payload.coach_id || '',
+            seat_number: action.payload.seat_number || '',
+            is_child: action.payload.is_child,
+            include_children_seat: action.payload.include_children_seat,
           },
         ],
       },

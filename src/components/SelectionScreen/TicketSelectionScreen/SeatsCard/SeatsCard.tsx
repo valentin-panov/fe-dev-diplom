@@ -152,24 +152,45 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
       0
     );
     setTotalPrice(seatsSummaryPrice);
-    dispatch(
-      selectedSeatsSet(
-        selectedSeats.map(
-          (el): SelectedSeat => ({
-            route_direction_id: `${trainId}`,
-            price: `${
-              el.price +
-              Number(
-                selectedServices.filter((ser) => ser.coachId === el.coachId).map((i) => i.linen.price + i.wifi.price)
-              )
-            }`,
-            coach_id: `${el.coachId}`,
-            seat_number: `${el.seatId}`,
-          })
-        )
-      )
+    const selected = selectedSeats.map(
+      (el): SelectedSeat => ({
+        route_direction_id: `${trainId}`,
+        price: `${
+          el.price +
+          Number(selectedServices.filter((ser) => ser.coachId === el.coachId).map((i) => i.linen.price + i.wifi.price))
+        }`,
+        coach_id: `${el.coachId}`,
+        seat_number: `${el.seatId}`,
+        is_child: false,
+        include_children_seat: false,
+      })
     );
-  }, [dispatch, selectedSeats, selectedServices, trainId]);
+    if (selected.length === ticketsCount.adultCount + ticketsCount.childrenCount) {
+      if (ticketsCount.toddlerCount > 0) {
+        const childSeat: SelectedSeat[] = [];
+        for (let i = 0; i < ticketsCount.toddlerCount; i += 1) {
+          childSeat.push({
+            route_direction_id: `${trainId}`,
+            price: '0',
+            coach_id: `0`,
+            seat_number: '0',
+            is_child: false,
+            include_children_seat: true,
+          });
+        }
+        dispatch(selectedSeatsSet([...selected, ...childSeat]));
+      }
+      dispatch(selectedSeatsSet(selected));
+    }
+  }, [
+    dispatch,
+    selectedSeats,
+    selectedServices,
+    ticketsCount.adultCount,
+    ticketsCount.childrenCount,
+    ticketsCount.toddlerCount,
+    trainId,
+  ]);
 
   return (
     <section className={cn(s.root, className)}>

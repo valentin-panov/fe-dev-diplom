@@ -248,6 +248,8 @@ export interface SelectedSeat {
   price: string;
   coach_id: string;
   seat_number: string;
+  is_child: boolean;
+  include_children_seat: boolean;
 }
 
 export interface OrderSeat {
