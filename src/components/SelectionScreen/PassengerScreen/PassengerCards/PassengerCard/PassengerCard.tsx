@@ -1,6 +1,9 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import cn from 'clsx';
-import { Button, Checkbox, DatePicker, Form, Input, Radio, Select } from 'antd';
+import { Button, Checkbox, ConfigProvider, DatePicker, Form, Input, Radio, Select } from 'antd';
+// eslint-disable-next-line camelcase
+import ru_RU from 'antd/lib/locale/ru_RU';
+import moment, { Moment } from 'moment';
 import s from './PassengerCard.module.scss';
 import { OrderSeat } from '../../../../../interfaces/Interfaces';
 
@@ -28,7 +31,11 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
       setAgeGroup('toddler');
     }
   }, [element]);
+
   // ANTD
+  const disabledDate = (current: Moment) =>
+    // Restricts select days after today
+    current && current > moment().endOf('day');
 
   // const layout = {
   //   labelCol: { span: 8 },
@@ -76,14 +83,17 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
             </Form.Item>
           </div>
           <div className={cn(s.row_gender, s.row_padding)}>
-            <Form.Item label="Пол" name="gender">
+            <Form.Item label="Пол" name="gender" rules={[{ required: true }]}>
               <Radio.Group>
                 <Radio.Button value="male">М</Radio.Button>
                 <Radio.Button value="female">Ж</Radio.Button>
               </Radio.Group>
             </Form.Item>
-            <Form.Item label="Дата рождения">
-              <DatePicker />
+            <Form.Item label="Дата рождения" name="birthday" rules={[{ required: true }]}>
+              {/* eslint-disable-next-line camelcase */}
+              <ConfigProvider locale={ru_RU}>
+                <DatePicker placeholder="ДД/ММ/ГГ" format="DD/MM/YY" disabledDate={disabledDate} />
+              </ConfigProvider>
             </Form.Item>
           </div>
           <div className={cn(s.row_padding, s.row_limited)}>
@@ -92,13 +102,13 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
             </Form.Item>
           </div>
           <div className={cn(s.row_paper, s.row_padding)}>
-            <Form.Item label="Документ">
-              <Select>
-                <Select.Option value="passport">паспорт</Select.Option>
-                <Select.Option value="passport">свидетельство о рождениии</Select.Option>
+            <Form.Item label="Документ" name="document_type" rules={[{ required: true }]}>
+              <Select defaultActiveFirstOption showArrow defaultValue="pass" allowClear={false}>
+                <Select.Option value="pass">паспорт</Select.Option>
+                <Select.Option value="birth">свидетельство о рождениии</Select.Option>
               </Select>
             </Form.Item>
-            <Form.Item label="Номер">
+            <Form.Item label="Номер" name="document_data" rules={[{ required: true }]}>
               <Input placeholder="Номер" />
             </Form.Item>
           </div>
