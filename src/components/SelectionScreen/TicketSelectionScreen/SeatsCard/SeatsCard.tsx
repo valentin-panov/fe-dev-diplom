@@ -165,12 +165,12 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
           }`,
           coach_id: `${el.coachId}`,
           seat_number: `${el.seatId}`,
-          is_child: false,
+          is_child: true,
           include_children_seat: false,
         })
       );
-      for (let i = 0; i < ticketsCount.childrenCount; i += 1) {
-        selected[i].is_child = true;
+      for (let i = 0; i < ticketsCount.adultCount; i += 1) {
+        selected[i].is_child = false;
       }
 
       if (ticketsCount.toddlerCount > 0) {

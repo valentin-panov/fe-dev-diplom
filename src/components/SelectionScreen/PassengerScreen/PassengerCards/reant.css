@@ -1,0 +1,50 @@
+.PassengerCard .ant-collapse > .ant-collapse-item > .ant-collapse-header {
+  background-color: #f9f9f9;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100px;
+  margin: 0;
+  padding: 25px 30px;
+  width: 100%;
+  border: 1px solid #c4c4c4;
+}
+
+.PassengerCard .ant-collapse-ghost > .ant-collapse-item {
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
+  margin-bottom: 45px;
+}
+
+.PassengerCard .ant-collapse > .ant-collapse-item > .ant-collapse-header div {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.PassengerCard .ant-collapse-ghost > .ant-collapse-item > .ant-collapse-content > .ant-collapse-content-box {
+  padding: 30px;
+  border: 1px solid #c4c4c4;
+  border-top: 1px #928f94 dashed;
+  background: #ffffff;
+}
+
+.PassengerCard .ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+  height: 100%;
+}
+
+.PassengerCard
+  .ant-select-single:not(.ant-select-customize-input)
+  .ant-select-selector
+  .ant-select-selection-search-input {
+  height: 100%;
+}
+
+.PassengerCard .ant-select-single.ant-select-show-arrow .ant-select-selection-item,
+.ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  color: #c4c4c4;
+}
