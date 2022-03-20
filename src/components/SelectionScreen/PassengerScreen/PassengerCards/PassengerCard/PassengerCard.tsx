@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import cn from 'clsx';
-import { Button, Select } from 'antd';
+import { Button, Checkbox, DatePicker, Form, Input, Radio, Select } from 'antd';
 import s from './PassengerCard.module.scss';
 import { OrderSeat } from '../../../../../interfaces/Interfaces';
 
@@ -28,27 +28,87 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
       setAgeGroup('toddler');
     }
   }, [element]);
+  // ANTD
+
+  // const layout = {
+  //   labelCol: { span: 8 },
+  //   wrapperCol: { span: 16 },
+  // };
+
+  /* eslint-disable no-template-curly-in-string */
+  const validateMessages = {
+    required: 'Поле ${label} обязательно',
+    types: {
+      email: '${label} не валидный адрес',
+      number: '${label} не валидное значение',
+    },
+    number: {
+      range: '${label} must be between ${min} and ${max}',
+    },
+  };
+  /* eslint-enable no-template-curly-in-string */
+
+  const onFinish = (values: unknown) => {
+    // eslint-disable-next-line no-console
+    console.log(values);
+  };
 
   return (
     <div className={s.cardBody} ref={forward}>
-      <div className={cn(s.row)}>
-        <div className={cn(s.row_age, s.row_padding)}>
-          <Select className={s.ageGroupSelect} value={ageGroup} disabled onChange={() => {}}>
-            <Option value="adult">Взрослый</Option>
-            <Option value="child">Детский</Option>
-            <Option value="toddler">Младенец</Option>
-          </Select>
+      <Form layout="vertical" name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
+        <div className={cn(s.row)}>
+          <div className={cn(s.row_age, s.row_padding)}>
+            <Select className={s.ageGroupSelect} value={ageGroup} disabled onChange={() => {}}>
+              <Option value="adult">Взрослый</Option>
+              <Option value="child">Детский</Option>
+              <Option value="toddler">Младенец</Option>
+            </Select>
+          </div>
+          <div className={cn(s.row_padding, s.row_personal)}>
+            <Form.Item name={['user', 'last_name']} label="Фамилия" rules={[{ required: true }]}>
+              <Input className={s.inputField} placeholder="Фамилия" />
+            </Form.Item>
+            <Form.Item name={['user', 'first_name']} label="Имя" rules={[{ required: true }]}>
+              <Input className={s.inputField} placeholder="Имя" />
+            </Form.Item>
+            <Form.Item name={['user', 'patronymic']} label="Отчество" rules={[{ required: true }]}>
+              <Input className={s.inputField} placeholder="Отчество" />
+            </Form.Item>
+          </div>
+          <div className={cn(s.row_gender, s.row_padding)}>
+            <Form.Item label="Пол" name="gender">
+              <Radio.Group>
+                <Radio.Button value="male">М</Radio.Button>
+                <Radio.Button value="female">Ж</Radio.Button>
+              </Radio.Group>
+            </Form.Item>
+            <Form.Item label="Дата рождения">
+              <DatePicker />
+            </Form.Item>
+          </div>
+          <div className={cn(s.row_padding, s.row_limited)}>
+            <Form.Item name="invalid" valuePropName="checked">
+              <Checkbox>ограниченная подвижность</Checkbox>
+            </Form.Item>
+          </div>
+          <div className={cn(s.row_paper, s.row_padding)}>
+            <Form.Item label="Документ">
+              <Select>
+                <Select.Option value="passport">паспорт</Select.Option>
+                <Select.Option value="passport">свидетельство о рождениии</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item label="Номер">
+              <Input placeholder="Номер" />
+            </Form.Item>
+          </div>
+          <div className={cn(s.row_btn, s.row_padding)}>
+            <Button className={s.btn} onClick={() => nextPassengerHandler(data, nextKey)}>
+              Следующий пассажир
+            </Button>
+          </div>
         </div>
-        <div className={cn(s.row_personal, s.row_padding)}>personal data</div>
-        <div className={cn(s.row_gender, s.row_padding)}>gender</div>
-        <div className={cn(s.row_limited, s.row_padding)}>limited</div>
-        <div className={cn(s.row_paper, s.row_padding)}>paper</div>
-        <div className={cn(s.row_btn, s.row_padding)}>
-          <Button className={s.btn} onClick={() => nextPassengerHandler(data, nextKey)}>
-            Следующий пассажир
-          </Button>
-        </div>
-      </div>
+      </Form>
     </div>
   );
 });

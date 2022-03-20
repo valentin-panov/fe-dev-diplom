@@ -35,7 +35,6 @@ export const PassengerCards = memo<Props>(({ className }) => {
     <div className={cn(s.root, className, 'PassengerCard')} ref={title}>
       <Collapse
         accordion
-        // defaultActiveKey={activeKey}
         activeKey={activeKey}
         ghost
         destroyInactivePanel={false}
