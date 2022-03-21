@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useRef, useState } from 'react';
 import cn from 'clsx';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Button, Collapse } from 'antd';
 import s from './PassengerCards.module.scss';
 import { RootState } from '../../../../store';
@@ -9,6 +9,7 @@ import { ReactComponent as Minus } from '../../../../svg/passCardMinus.svg';
 import { ReactComponent as Plus } from '../../../../svg/passCardPlus.svg';
 import './reant.css';
 import { OrderSeat } from '../../../../interfaces/Interfaces';
+import { orderSetSeats } from '../../../../reducers/order';
 
 const { Panel } = Collapse;
 
@@ -17,14 +18,15 @@ export type Props = {
 };
 
 export const PassengerCards = memo<Props>(({ className }) => {
+  const dispatch = useDispatch();
   const order = useSelector((store: RootState) => store.order);
   const title = useRef<HTMLDivElement>(document.createElement('div'));
   const [activeKey, setActiveKey] = useState<string>('0');
+  const [newOrder, setNewOrder] = useState<OrderSeat[]>([]);
 
   const nextPassengerHandler = (data: OrderSeat, nextKey: string) => {
     setActiveKey(nextKey);
-    // eslint-disable-next-line no-console
-    console.log(data);
+    setNewOrder([...newOrder, data]); // TODO реализовать проверку на введение откорректированных данных
   };
 
   useEffect(() => {
@@ -61,7 +63,13 @@ export const PassengerCards = memo<Props>(({ className }) => {
           </Panel>
         ))}
       </Collapse>
-      <Button className={s.btn} disabled onClick={() => {}}>
+      <Button
+        className={s.btn}
+        disabled={newOrder.length !== order.departure.seats.length}
+        onClick={() => {
+          dispatch(orderSetSeats(newOrder));
+        }}
+      >
         ДАЛЕЕ
       </Button>
     </div>

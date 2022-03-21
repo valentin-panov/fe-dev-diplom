@@ -19,7 +19,7 @@ type AgeGroup = 'child' | 'toddler' | 'adult';
 export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activeKey }) => {
   const forward = useRef(null);
   const [ageGroup, setAgeGroup] = useState<AgeGroup>('adult');
-  const [docType, setDocType] = useState<string>('pass');
+  const [docType, setDocType] = useState<string>('паспорт');
   const nextKey = (Number(activeKey) + 1).toString();
   const data: OrderSeat = { ...element };
 
@@ -27,11 +27,11 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
     const { is_child: child, include_children_seat: toddler } = element;
     if (child) {
       setAgeGroup('child');
-      setDocType('birth');
+      setDocType('свидетельство о рождениии');
     }
     if (toddler) {
       setAgeGroup('toddler');
-      setDocType('birth');
+      setDocType('свидетельство о рождениии');
     }
   }, [element]);
 
@@ -116,8 +116,8 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
           <div className={cn(s.row_paper, s.row_padding)}>
             <Form.Item label="Документ" name="document_type" initialValue={docType} rules={[{ required: true }]}>
               <Select className={s.docType} showArrow allowClear={false}>
-                <Option value="pass">паспорт</Option>
-                <Option value="birth">свидетельство о рождениии</Option>
+                <Option value="паспорт">паспорт</Option>
+                <Option value="свидетельство о рождениии">свидетельство о рождениии</Option>
               </Select>
             </Form.Item>
             <Form.Item label="Номер документа" name="document_data" rules={[{ required: true }]}>

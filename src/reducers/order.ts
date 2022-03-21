@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Order, SelectedSeat } from '../interfaces/Interfaces';
+import { Order, OrderSeat, SelectedSeat } from '../interfaces/Interfaces';
 
 const initialState: Order = {
   user: {
@@ -45,9 +45,16 @@ export const orderSlice = createSlice({
         ],
       },
     }),
+    orderSetSeats: (state, action: PayloadAction<OrderSeat[]>) => ({
+      ...state,
+      departure: {
+        ...state.departure,
+        seats: action.payload,
+      },
+    }),
   },
 });
 
-export const { orderReset, orderSet, orderAddRoute, orderAddSeat } = orderSlice.actions;
+export const { orderReset, orderSet, orderAddRoute, orderAddSeat, orderSetSeats } = orderSlice.actions;
 
 export const order = orderSlice.reducer;
