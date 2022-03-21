@@ -84,8 +84,10 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
           </div>
           <div className={cn(s.row_gender, s.row_padding)}>
             <Form.Item label="Пол" name="gender" rules={[{ required: true }]}>
-              <Radio.Group>
-                <Radio.Button value="male">М</Radio.Button>
+              <Radio.Group optionType="button" buttonStyle="solid" className={s.genderSwitcher}>
+                <Radio.Button value="male" defaultChecked>
+                  М
+                </Radio.Button>
                 <Radio.Button value="female">Ж</Radio.Button>
               </Radio.Group>
             </Form.Item>
@@ -103,7 +105,7 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
           </div>
           <div className={cn(s.row_paper, s.row_padding)}>
             <Form.Item label="Документ" name="document_type" rules={[{ required: true }]}>
-              <Select defaultActiveFirstOption showArrow defaultValue="pass" allowClear={false}>
+              <Select showArrow defaultValue={ageGroup === 'adult' ? 'pass' : 'birth'} allowClear={false}>
                 <Select.Option value="pass">паспорт</Select.Option>
                 <Select.Option value="birth">свидетельство о рождениии</Select.Option>
               </Select>

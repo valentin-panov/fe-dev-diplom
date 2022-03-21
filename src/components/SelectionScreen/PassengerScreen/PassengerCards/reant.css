@@ -66,3 +66,62 @@
 
   color: #292929;
 }
+
+.PassengerCard .ant-form-item {
+  margin-bottom: 0;
+  font-size: 18px;
+}
+
+.PassengerCard .ant-radio-button-wrapper:first-child {
+  border: 1px solid #928f94;
+  border-radius: 5px 0 0 5px;
+}
+
+.PassengerCard .ant-radio-button-wrapper:last-child {
+  border: 1px solid #928f94;
+  border-radius: 0 5px 5px 0;
+}
+
+.PassengerCard .ant-radio-button-wrapper {
+  width: 100px;
+  height: 50px;
+  font-weight: 900;
+  font-size: 30px;
+  line-height: 35px;
+  text-transform: uppercase;
+  color: #000000;
+}
+
+.PassengerCard .ant-radio-button-wrapper span {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  height: 100%;
+}
+
+.PassengerCard .ant-radio-group-solid .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+  background: #ffa800;
+  border: 1px solid #928f94;
+  color: #000000;
+}
+
+.PassengerCard
+  .ant-radio-group-solid
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):focus-within {
+  border: 1px solid #928f94;
+  box-shadow: 0 0 0 0 transparent;
+}
+
+.PassengerCard .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled)::before {
+  background-color: transparent;
+}
+
+.PassengerCard .ant-radio-button-wrapper:focus-within {
+  box-shadow: 0 0 0 0 transparent;
+}
+
+.PassengerCard .ant-radio-button-wrapper:not(:first-child)::before {
+  background-color: #928f94;
+}
