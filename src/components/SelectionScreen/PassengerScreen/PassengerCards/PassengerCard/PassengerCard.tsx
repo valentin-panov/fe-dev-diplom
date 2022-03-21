@@ -5,7 +5,7 @@ import { Button, Checkbox, ConfigProvider, DatePicker, Form, Input, Radio, Selec
 import ru_RU from 'antd/lib/locale/ru_RU';
 import moment, { Moment } from 'moment';
 import s from './PassengerCard.module.scss';
-import { OrderSeat } from '../../../../../interfaces/Interfaces';
+import { OrderSeat, PersonInfo } from '../../../../../interfaces/Interfaces';
 
 const { Option } = Select;
 
@@ -19,6 +19,7 @@ type AgeGroup = 'child' | 'toddler' | 'adult';
 export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activeKey }) => {
   const forward = useRef(null);
   const [ageGroup, setAgeGroup] = useState<AgeGroup>('adult');
+  const [docType, setDocType] = useState<string>('pass');
   const nextKey = (Number(activeKey) + 1).toString();
   const data: OrderSeat = { ...element };
 
@@ -26,9 +27,11 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
     const { is_child: child, include_children_seat: toddler } = element;
     if (child) {
       setAgeGroup('child');
+      setDocType('birth');
     }
     if (toddler) {
       setAgeGroup('toddler');
+      setDocType('birth');
     }
   }, [element]);
 
@@ -55,9 +58,11 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
   };
   /* eslint-enable no-template-curly-in-string */
 
-  const onFinish = (values: unknown) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+  const onFinish = (values: PersonInfo) => {
+    nextPassengerHandler(
+      { ...data, person_info: { ...values, birthday: moment(values.birthday).format('YYYY-MM-DD') } },
+      nextKey
+    );
   };
 
   return (
@@ -72,31 +77,36 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
             </Select>
           </div>
           <div className={cn(s.row_padding, s.row_personal)}>
-            <Form.Item name={['user', 'last_name']} label="Фамилия" rules={[{ required: true }]}>
+            <Form.Item name="last_name" label="Фамилия" rules={[{ required: true }]}>
               <Input className={s.inputField} placeholder="Фамилия" />
             </Form.Item>
-            <Form.Item name={['user', 'first_name']} label="Имя" rules={[{ required: true }]}>
+            <Form.Item name="first_name" label="Имя" rules={[{ required: true }]}>
               <Input className={s.inputField} placeholder="Имя" />
             </Form.Item>
-            <Form.Item name={['user', 'patronymic']} label="Отчество" rules={[{ required: true }]}>
+            <Form.Item name="patronymic" label="Отчество" rules={[{ required: true }]}>
               <Input className={s.inputField} placeholder="Отчество" />
             </Form.Item>
           </div>
           <div className={cn(s.row_gender, s.row_padding)}>
             <Form.Item label="Пол" name="gender" rules={[{ required: true }]}>
               <Radio.Group optionType="button" buttonStyle="solid" className={s.genderSwitcher}>
-                <Radio.Button value="male" defaultChecked>
+                <Radio.Button value="true" defaultChecked>
                   М
                 </Radio.Button>
-                <Radio.Button value="female">Ж</Radio.Button>
+                <Radio.Button value="false">Ж</Radio.Button>
               </Radio.Group>
             </Form.Item>
-            <Form.Item label="Дата рождения" name="birthday" rules={[{ required: true }]}>
-              {/* eslint-disable-next-line camelcase */}
-              <ConfigProvider locale={ru_RU}>
-                <DatePicker placeholder="ДД/ММ/ГГ" format="DD/MM/YY" disabledDate={disabledDate} />
-              </ConfigProvider>
-            </Form.Item>
+            {/* eslint-disable-next-line camelcase */}
+            <ConfigProvider locale={ru_RU}>
+              <Form.Item label="Дата рождения" name="birthday" rules={[{ required: true }]}>
+                <DatePicker
+                  className={s.datePicker}
+                  placeholder="ДД/ММ/ГГ"
+                  format="DD/MM/YY"
+                  disabledDate={disabledDate}
+                />
+              </Form.Item>
+            </ConfigProvider>
           </div>
           <div className={cn(s.row_padding, s.row_limited)}>
             <Form.Item name="invalid" valuePropName="checked">
@@ -104,18 +114,18 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
             </Form.Item>
           </div>
           <div className={cn(s.row_paper, s.row_padding)}>
-            <Form.Item label="Документ" name="document_type" rules={[{ required: true }]}>
-              <Select showArrow defaultValue={ageGroup === 'adult' ? 'pass' : 'birth'} allowClear={false}>
-                <Select.Option value="pass">паспорт</Select.Option>
-                <Select.Option value="birth">свидетельство о рождениии</Select.Option>
+            <Form.Item label="Документ" name="document_type" initialValue={docType} rules={[{ required: true }]}>
+              <Select className={s.docType} showArrow allowClear={false}>
+                <Option value="pass">паспорт</Option>
+                <Option value="birth">свидетельство о рождениии</Option>
               </Select>
             </Form.Item>
-            <Form.Item label="Номер" name="document_data" rules={[{ required: true }]}>
-              <Input placeholder="Номер" />
+            <Form.Item label="Номер документа" name="document_data" rules={[{ required: true }]}>
+              <Input className={s.docData} placeholder="Номер" />
             </Form.Item>
           </div>
           <div className={cn(s.row_btn, s.row_padding)}>
-            <Button className={s.btn} onClick={() => nextPassengerHandler(data, nextKey)}>
+            <Button className={s.btn} htmlType="submit">
               Следующий пассажир
             </Button>
           </div>

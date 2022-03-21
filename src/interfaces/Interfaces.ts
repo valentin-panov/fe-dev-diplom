@@ -252,20 +252,22 @@ export interface SelectedSeat {
   include_children_seat: boolean;
 }
 
+export interface PersonInfo {
+  is_adult: boolean;
+  first_name: string;
+  last_name: string;
+  patronymic: string;
+  gender: boolean;
+  birthday: string;
+  document_type: 'паспорт' | 'свидетельство о рождениии';
+  document_data: string;
+}
+
 export interface OrderSeat {
   price: string;
   coach_id: string;
   seat_number: string;
-  person_info?: {
-    is_adult: boolean;
-    first_name: string;
-    last_name: string;
-    patronymic: string;
-    gender: boolean;
-    birthday: string;
-    document_type: 'паспорт' | 'свидетельство о рождениии';
-    document_data: string;
-  };
+  person_info?: PersonInfo;
   is_child?: boolean;
   include_children_seat?: boolean;
 }
