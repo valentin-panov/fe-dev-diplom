@@ -26,7 +26,13 @@ export const PassengerCards = memo<Props>(({ className }) => {
 
   const nextPassengerHandler = (data: OrderSeat, nextKey: string) => {
     setActiveKey(nextKey);
-    setNewOrder([...newOrder, data]); // TODO реализовать проверку на введение откорректированных данных
+    if (newOrder.length < Number(nextKey)) {
+      setNewOrder([...newOrder, data]);
+    } else {
+      const temp = [...newOrder];
+      temp.splice(Number(nextKey) - 1, 1, data);
+      setNewOrder(temp);
+    }
   };
 
   useEffect(() => {
