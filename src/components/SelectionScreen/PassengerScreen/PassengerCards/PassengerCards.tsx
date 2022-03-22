@@ -10,6 +10,7 @@ import { ReactComponent as Plus } from '../../../../svg/passCardPlus.svg';
 import './reant.css';
 import { OrderSeat } from '../../../../interfaces/Interfaces';
 import { orderSetSeats } from '../../../../reducers/order';
+import { appStateSetProgress } from '../../../../reducers/appState';
 
 const { Panel } = Collapse;
 
@@ -74,6 +75,7 @@ export const PassengerCards = memo<Props>(({ className }) => {
         disabled={newOrder.length !== order.departure.seats.length}
         onClick={() => {
           dispatch(orderSetSeats(newOrder));
+          dispatch(appStateSetProgress(2));
         }}
       >
         ДАЛЕЕ

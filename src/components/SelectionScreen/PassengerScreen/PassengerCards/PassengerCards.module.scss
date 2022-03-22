@@ -30,7 +30,7 @@
 
 .btn {
   width         : 228px;
-  height        : 39px;
+  height        : 60px;
   
   font-size     : 24px;
   line-height   : 28px;
@@ -45,10 +45,13 @@
   align-self    : flex-end;
   
   &:disabled {
+    color      : #FFFFFF;
     background : #928F94;
     
     &:hover {
-      color : #FFFFFF;
+      color      : #FFFFFF;
+      background : #928F94;
+      
     }
   }
   

@@ -40,7 +40,7 @@ export const TicketSelectionScreen = memo<Props>(({ className }) => {
       {selectedTrain && selectedTrainReturn && <SeatsCard type="return" data={selectedTrainReturn} />}
       <Button
         className={s.btn}
-        disabled={selectedSeats.length === 0}
+        disabled={selectedSeats.length === 0} // TODO more reliable logic - if user deselect seats, it should disable again
         onClick={() => {
           dispatch(orderAddRoute(`${trainId}`));
           selectedSeats.forEach((el) => dispatch(orderAddSeat(el)));

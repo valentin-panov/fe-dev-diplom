@@ -123,7 +123,7 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                 </div>
               </>
             )}
-            {progress === 1 && (
+            {progress >= 1 && (
               <>
                 <div>
                   <section className={s.sideSelection}>
@@ -138,7 +138,9 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                     <OrderSummary />
                   </section>
                 </div>
-                <PassengerCards />
+                {progress === 1 && <PassengerCards />}
+                {progress === 2 && <div>PAY</div>}
+                {progress === 3 && <div>CHECK</div>}
               </>
             )}
           </div>
