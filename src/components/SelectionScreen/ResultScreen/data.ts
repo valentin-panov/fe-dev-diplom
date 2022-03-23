@@ -1,6 +1,6 @@
-import { Train } from '../../../interfaces/Interfaces';
+import { ITrain } from '../../../interfaces/Interfaces';
 
-export const trainsList: Train[][] = [
+export const trainsList: ITrain[][] = [
   [
     {
       have_first_class: false,

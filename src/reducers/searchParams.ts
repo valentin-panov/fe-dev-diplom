@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { City, Filters, SearchParams } from '../interfaces/Interfaces';
+import { ICity, IFilters, ISearchParams } from '../interfaces/Interfaces';
 
-const initialState: SearchParams = {
+const initialState: ISearchParams = {
   cityDeparture: { _id: 0, value: '' },
   cityArrival: { _id: 0, value: '' },
   dateOutbound: null,
@@ -26,12 +26,12 @@ export const searchParamsSlice = createSlice({
   initialState,
   reducers: {
     searchParamsReset: () => initialState,
-    searchParamsCityDepartureSet: (state, action: PayloadAction<City>) => ({
+    searchParamsCityDepartureSet: (state, action: PayloadAction<ICity>) => ({
       ...state,
       cityDeparture: action.payload,
     }),
     searchParamsCityDepartureClear: (state) => ({ ...state, cityDeparture: initialState.cityDeparture }),
-    searchParamsCityArrivalSet: (state, action: PayloadAction<City>) => ({
+    searchParamsCityArrivalSet: (state, action: PayloadAction<ICity>) => ({
       ...state,
       cityArrival: action.payload,
     }),
@@ -46,7 +46,7 @@ export const searchParamsSlice = createSlice({
       dateReturn: action.payload,
     }),
     searchParamsDateReturnClear: (state) => ({ ...state, dateReturn: null }),
-    searchParamsFiltersSet: (state, action: PayloadAction<Filters>) => ({
+    searchParamsFiltersSet: (state, action: PayloadAction<IFilters>) => ({
       ...state,
       filters: { ...state.filters, ...action.payload },
     }),

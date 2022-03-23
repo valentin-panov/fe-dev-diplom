@@ -7,7 +7,7 @@ import { ReactComponent as SwapBtn } from '../../../svg/swapBtn.svg';
 
 import { DestinationPickerUnit, Point } from './DestinationPickerUnit';
 import { RootState } from '../../../store';
-import { City } from '../../../interfaces/Interfaces';
+import { ICity } from '../../../interfaces/Interfaces';
 import { searchParamsCityArrivalSet, searchParamsCityDepartureSet } from '../../../reducers/searchParams';
 
 export type Props = {
@@ -19,7 +19,7 @@ export const DestinationPicker = memo<Props>(({ className }) => {
   const departureStore = useSelector((store: RootState) => store.searchParams.cityDeparture);
   const arrivalStore = useSelector((store: RootState) => store.searchParams.cityArrival);
 
-  const selectPoint = (value: City, point: Point) => {
+  const selectPoint = (value: ICity, point: Point) => {
     if (point === 'departure') {
       dispatch(searchParamsCityDepartureSet(value));
     } else {

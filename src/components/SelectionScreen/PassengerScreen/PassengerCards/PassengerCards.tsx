@@ -8,7 +8,7 @@ import { PassengerCard } from './PassengerCard';
 import { ReactComponent as Minus } from '../../../../svg/passCardMinus.svg';
 import { ReactComponent as Plus } from '../../../../svg/passCardPlus.svg';
 import './reant.css';
-import { OrderSeat } from '../../../../interfaces/Interfaces';
+import { IOrderSeat } from '../../../../interfaces/Interfaces';
 import { orderSetSeats } from '../../../../reducers/order';
 import { appStateSetProgress } from '../../../../reducers/appState';
 
@@ -23,9 +23,9 @@ export const PassengerCards = memo<Props>(({ className }) => {
   const order = useSelector((store: RootState) => store.order);
   const title = useRef<HTMLDivElement>(document.createElement('div'));
   const [activeKey, setActiveKey] = useState<string>('0');
-  const [newOrder, setNewOrder] = useState<OrderSeat[]>([]);
+  const [newOrder, setNewOrder] = useState<IOrderSeat[]>([]);
 
-  const nextPassengerHandler = (data: OrderSeat, nextKey: string) => {
+  const nextPassengerHandler = (data: IOrderSeat, nextKey: string) => {
     setActiveKey(nextKey);
     if (newOrder.length < Number(nextKey)) {
       setNewOrder([...newOrder, data]);

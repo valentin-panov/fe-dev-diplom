@@ -129,6 +129,49 @@
   }
 }
 
+.btn_summary {
+  box-sizing       : border-box;
+  width            : 180px;
+  height           : 39px;
+  font-size        : 24px;
+  line-height      : 28px;
+  font-weight      : 700;
+  font-style       : normal;
+  text-align       : center;
+  
+  color            : #292929;
+  background-color : transparent;
+  border           : 1px solid #292929;
+  border-radius    : 5px;
+  
+  &:hover, &:focus {
+    color            : #FFA800;
+    background-color : #FFFFFF;
+    border           : 1px solid #292929;
+    filter           : drop-shadow(0 4px 4px rgba(0, 0, 0, 0.25));
+  }
+  
+  &:active {
+    color            : #292929;
+    background-color : #FFA800;
+    border           : 1px solid #FFA800;
+    
+  }
+  
+  &:disabled {
+    color            : #FFFFFF;
+    background-color : #928F94;
+    border           : #928F94;
+    
+    &:hover {
+      color            : #FFFFFF;
+      background-color : #928F94;
+      border           : #928F94;
+      filter           : none;
+    }
+  }
+}
+
 .tooltip {
   box-sizing    : border-box;
   width         : 276px;

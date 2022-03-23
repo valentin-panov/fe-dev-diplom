@@ -3,12 +3,12 @@ import React, { Dispatch, memo, SetStateAction, useCallback, useEffect, useRef }
 import cn from 'clsx';
 import { message, Tooltip } from 'antd';
 import s from './ServicesBlock.module.scss';
-import { Coach } from '../../../../../interfaces/Interfaces';
+import { ICoach } from '../../../../../interfaces/Interfaces';
 import { filtersCollection, iconsCollection } from '../../../../../collections/collections';
 import { SelectedSeatsArray, SelectedServices } from '../SeatsCard';
 
 export type Props = {
-  data: Coach;
+  data: ICoach;
   selectedServices: SelectedServices;
   setSelectedServices: Dispatch<SetStateAction<SelectedServices>>;
   selectedSeats: SelectedSeatsArray;

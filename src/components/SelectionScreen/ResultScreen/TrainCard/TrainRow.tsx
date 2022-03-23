@@ -5,11 +5,11 @@ import s from './TrainCard.module.scss';
 import { iconsCollection } from '../../../../collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
 import { sec2hhmm } from '../../../../utils/sec2hhmm';
-import { Train } from '../../../../interfaces/Interfaces';
+import { ITrain } from '../../../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;
-  train: Train;
+  train: ITrain;
   direction: boolean;
 };
 

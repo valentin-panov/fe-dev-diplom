@@ -2,56 +2,56 @@
 
 import { ReactElement } from 'react';
 
-export interface Status {
+export interface IStatus {
   status: 'idle' | 'pending' | 'success' | 'error';
   error: string;
 }
 
-export interface Menu {
+export interface IMenu {
   id: number;
   title: string;
   pathName: string;
 }
 
-export interface City {
+export interface ICity {
   _id: number;
   value: string;
 }
 
-export interface LastTickets extends Status {
-  items: Train[];
+export interface LastTickets extends IStatus {
+  items: ITrain[];
 }
 
-export interface GetRouteData {
+export interface IGetRouteData {
   total_count: number;
-  items: Train[];
+  items: ITrain[];
 }
 
-export interface GetRoute extends Status {
+export interface IGetRoute extends IStatus {
   data: {
     totalCount: number;
-    items: Train[][];
+    items: ITrain[][];
   };
 }
 
-export interface DestOptions extends Status {
-  items: City[];
+export interface DestOptions extends IStatus {
+  items: ICity[];
 }
 
-export interface FilterItem {
+export interface IFilterItem {
   [index: string]: {
     element: ReactElement;
     title: string;
   };
 }
 
-export interface Services {
+export interface IServices {
   have_wifi: boolean;
   is_express: boolean;
   have_air_conditioning: boolean;
 }
 
-export interface Train {
+export interface ITrain {
   have_first_class: boolean;
   have_second_class: boolean;
   have_third_class: boolean;
@@ -61,7 +61,7 @@ export interface Train {
   is_express: boolean;
   min_price: number;
   available_seats: number;
-  available_seats_info: SeatsSpectre;
+  available_seats_info: ISeatsSpectre;
   departure: {
     _id: number;
     have_first_class: boolean;
@@ -74,7 +74,7 @@ export interface Train {
     min_price: number;
     duration: number;
     available_seats: number;
-    available_seats_info: SeatsSpectre;
+    available_seats_info: ISeatsSpectre;
     train: {
       _id: number;
       name: string;
@@ -95,11 +95,11 @@ export interface Train {
       };
       datetime: number;
     };
-    price_info: PriceInfo;
+    price_info: IPriceInfo;
   };
 }
 
-export interface PriceInfo {
+export interface IPriceInfo {
   first?: {
     price: number;
     top_price?: number;
@@ -120,34 +120,34 @@ export interface PriceInfo {
   };
 }
 
-export interface SeatsSpectre {
+export interface ISeatsSpectre {
   first?: number;
   second?: number;
   third?: number;
   fourth?: number;
 }
 
-export interface SortOption {
+export interface ISortOption {
   value: string;
   label: string;
 }
 
-export type SortOptions = SortOption[];
+export type ISortOptions = ISortOption[];
 
 // export carriageType sortVariants = 'date' | 'price_min' | 'duration';
 
-export interface SearchParams {
-  cityDeparture: City;
-  cityArrival: City;
+export interface ISearchParams {
+  cityDeparture: ICity;
+  cityArrival: ICity;
   dateOutbound: string | null;
   dateReturn: string | null;
-  filters: Filters;
+  filters: IFilters;
   limit: number;
   sort: string;
   offset: number;
 }
 
-export interface Filters {
+export interface IFilters {
   have_first_class?: boolean;
   have_second_class?: boolean;
   have_third_class?: boolean;
@@ -167,7 +167,7 @@ export interface Filters {
   end_arrival_hour_to?: number;
 }
 
-export interface SeatsQuery {
+export interface ISeatsQuery {
   id: number;
   have_first_class?: boolean;
   have_second_class?: boolean;
@@ -178,12 +178,12 @@ export interface SeatsQuery {
   have_express?: boolean;
 }
 
-export interface SeatAvailability {
+export interface ISeatAvailability {
   index: number;
   available: boolean;
 }
 
-export interface SeatsResponse {
+export interface ISeatsResponse {
   _id: number;
   name: string;
   class_type: string;
@@ -202,19 +202,19 @@ export interface SeatsResponse {
   wifi_price?: number; // Цена услуги Wi-Fi
   avaliable_seats?: number; // Количество свободных мест в вагоне
   is_linens_included?: number; // Стоимость белья включена в стоимость билета и не может быть исключена (true/false)
-  seats: SeatAvailability[];
+  seats: ISeatAvailability[];
 }
 
-export interface SeatsState extends Status {
-  data: SeatsResponse;
+export interface ISeatsState extends IStatus {
+  data: ISeatsResponse;
 }
 
-export interface Seat {
+export interface ISeat {
   index: number;
   available: boolean;
 }
 
-export interface Coach {
+export interface ICoach {
   coach: {
     _id: number;
     name: string;
@@ -231,19 +231,19 @@ export interface Coach {
     available_seats: number;
     train: number;
   };
-  seats: Seat[];
+  seats: ISeat[];
 }
 
-export interface TrainSeatsData extends Status {
-  items: Coach[];
+export interface ITrainSeatsData extends IStatus {
+  items: ICoach[];
 }
 
-export interface Service {
+export interface IService {
   isSelected: boolean;
   price: number;
 }
 
-export interface SelectedSeat {
+export interface ISelectedSeat {
   route_direction_id: string;
   price: string;
   coach_id: string;
@@ -252,7 +252,7 @@ export interface SelectedSeat {
   include_children_seat: boolean;
 }
 
-export interface PersonInfo {
+export interface IPersonInfo {
   is_adult: boolean;
   first_name: string;
   last_name: string;
@@ -263,16 +263,16 @@ export interface PersonInfo {
   document_data: string;
 }
 
-export interface OrderSeat {
+export interface IOrderSeat {
   price: string;
   coach_id: string;
   seat_number: string;
-  person_info?: PersonInfo;
+  person_info?: IPersonInfo;
   is_child?: boolean;
   include_children_seat?: boolean;
 }
 
-export interface PersonalData {
+export interface IPersonalData {
   first_name: string;
   last_name: string;
   patronymic: string;
@@ -281,14 +281,10 @@ export interface PersonalData {
   payment_method: 'cash' | 'online';
 }
 
-export interface Order {
-  user?: PersonalData;
+export interface IOrder {
+  user?: IPersonalData;
   departure: {
     route_direction_id: string;
-    seats: OrderSeat[];
+    seats: IOrderSeat[];
   };
-}
-
-export interface Orders {
-  items: Order[] | [];
 }

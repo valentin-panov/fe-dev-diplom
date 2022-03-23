@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { SelectedSeat } from '../interfaces/Interfaces';
+import { ISelectedSeat } from '../interfaces/Interfaces';
 
-const initialState: SelectedSeat[] = [];
+const initialState: ISelectedSeat[] = [];
 
 export const selectedSeatsSlice = createSlice({
   name: 'selectedSeats',
   initialState,
   reducers: {
     selectedSeatsReset: () => initialState,
-    selectedSeatsSet: (_, action: PayloadAction<SelectedSeat[]>) => action.payload,
-    selectedSeatsAdd: (state, action: PayloadAction<SelectedSeat>) => [...state, action.payload],
+    selectedSeatsSet: (_, action: PayloadAction<ISelectedSeat[]>) => action.payload,
+    selectedSeatsAdd: (state, action: PayloadAction<ISelectedSeat>) => [...state, action.payload],
   },
 });
 

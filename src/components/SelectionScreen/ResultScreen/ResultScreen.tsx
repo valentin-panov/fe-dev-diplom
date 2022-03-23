@@ -10,14 +10,14 @@ import { PaginationOrigin } from '../PaginationOrigin';
 // import { trainsList } from './data';
 import { RootState } from '../../../store';
 import ZeroFound from '../../ZeroFound/ZeroFound';
-import { SortOptions } from '../../../interfaces/Interfaces';
+import { ISortOptions } from '../../../interfaces/Interfaces';
 import { searchParamsLimitSet, searchParamsOffsetSet, searchParamsSortSet } from '../../../reducers/searchParams';
 
 export type Props = {
   className?: string;
 };
 
-export const sortOptions: SortOptions = [
+export const sortOptions: ISortOptions = [
   {
     value: 'date',
     label: 'времени',
@@ -79,7 +79,7 @@ export const ResultScreen = memo<Props>(({ className }) => {
             {trainsList.map((trainsPair) => {
               // eslint-disable-next-line no-underscore-dangle
               const key = trainsPair[0].departure.train._id;
-              return <TrainCard trains={trainsPair} key={key} />;
+              return <TrainCard trains={trainsPair} key={key} place="select" />;
             })}
           </div>
           <div className={s.pagination}>

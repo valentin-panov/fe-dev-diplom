@@ -7,7 +7,7 @@ import s from './Wrapper.module.scss';
 import { RootState } from '../../store';
 import { getRouteFetchData } from '../../reducers/getRoute';
 import { searchParamsDateReturnSet } from '../../reducers/searchParams';
-import { Filters } from '../../interfaces/Interfaces';
+import { IFilters } from '../../interfaces/Interfaces';
 import { throttling } from '../../utils/throttling';
 
 export type Props = {
@@ -19,9 +19,9 @@ export const Wrapper = ({ className, children }: Props): ReactElement => {
   const dispatch = useDispatch();
   const searchParams = useSelector((store: RootState) => store.searchParams);
   const { dateOutbound, dateReturn, filters } = searchParams;
-  const filters$ = useMemo(() => new BehaviorSubject<Filters>(filters), [filters]);
+  const filters$ = useMemo(() => new BehaviorSubject<IFilters>(filters), [filters]);
   const result$ = useMemo(
-    () => filters$.pipe(throttling<Filters>(1500, (arg) => new BehaviorSubject<Filters>(arg))),
+    () => filters$.pipe(throttling<IFilters>(1500, (arg) => new BehaviorSubject<IFilters>(arg))),
     [filters$]
   );
 

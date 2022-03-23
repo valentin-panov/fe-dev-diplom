@@ -7,12 +7,14 @@ import { useDispatch } from 'react-redux';
 import s from './SeatsBlock.module.scss';
 import { SeatsBlockRow } from './SeatBlockRow';
 import { ServiceBlock } from '../../../ServicesBlock';
-import { Train } from '../../../../../interfaces/Interfaces';
-import { appStateSetTrainOutbound } from '../../../../../reducers/appState';
+import { ITrain } from '../../../../../interfaces/Interfaces';
+import { appStateSetProgress, appStateSetTrainOutbound } from '../../../../../reducers/appState';
+import { orderReset } from '../../../../../reducers/order';
 
 export type Props = {
   className?: string;
-  train: Train;
+  train: ITrain;
+  place: 'select' | 'summary';
 };
 
 const carriageType = {
@@ -22,7 +24,7 @@ const carriageType = {
   class1: 'Люкс',
 };
 
-export const SeatsBlock = memo<Props>(({ className, train }) => {
+export const SeatsBlock = memo<Props>(({ className, train, place }) => {
   const dispatch = useDispatch();
   const {
     departure: {
@@ -36,9 +38,9 @@ export const SeatsBlock = memo<Props>(({ className, train }) => {
       available_seats_info: { fourth: count4, third: count3, second: count2, first: count1 },
       price_info: { fourth: price4, third: price3, second: price2, first: price1 },
     },
-  }: Train = train;
+  }: ITrain = train;
 
-  const selectTrain = (payload: Train) => {
+  const selectTrain = (payload: ITrain) => {
     dispatch(appStateSetTrainOutbound(payload));
   };
 
@@ -60,9 +62,22 @@ export const SeatsBlock = memo<Props>(({ className, train }) => {
       </div>
       <div className={s.bottom_block}>
         <ServiceBlock services={{ have_wifi, is_express, have_air_conditioning }} className="ticketCard" />
-        <Button className={s.btn} onClick={() => selectTrain(train)}>
-          Выбрать места
-        </Button>
+        {place === 'select' && (
+          <Button className={s.btn} onClick={() => selectTrain(train)}>
+            Выбрать места
+          </Button>
+        )}
+        {place === 'summary' && (
+          <Button
+            className={s.btn_summary}
+            onClick={() => {
+              dispatch(orderReset());
+              dispatch(appStateSetProgress(0));
+            }}
+          >
+            Изменить
+          </Button>
+        )}
       </div>
     </div>
   );

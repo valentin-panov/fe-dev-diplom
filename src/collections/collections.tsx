@@ -24,9 +24,9 @@ import { ReactComponent as BigPlatz } from '../svg/big_platz.svg';
 import { ReactComponent as BigCoupe } from '../svg/big_coupe.svg';
 import { ReactComponent as BigLux } from '../svg/big_lux.svg';
 import { ReactComponent as Passenger } from '../svg/icon_passenger.svg';
-import { FilterItem } from '../interfaces/Interfaces';
+import { IFilterItem } from '../interfaces/Interfaces';
 
-export const filtersCollection: FilterItem = {
+export const filtersCollection: IFilterItem = {
   have_wifi: { element: <WiFi />, title: 'Wi-Fi' },
   is_express: { element: <Express />, title: 'Экспресс' },
   have_air_conditioning: { element: <AC />, title: 'Кондиционер' },

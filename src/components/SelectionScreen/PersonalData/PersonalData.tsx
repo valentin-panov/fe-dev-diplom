@@ -1,10 +1,16 @@
 import React, { memo } from 'react';
 import cn from 'clsx';
 import { Button, Form, Input, Radio, Space } from 'antd';
-import s from './PersonalData.module.scss';
 import './reant.css';
+import { useDispatch } from 'react-redux';
+import s from './PersonalData.module.scss';
+import { orderSetPD } from '../../../reducers/order';
+import { appStateSetProgress } from '../../../reducers/appState';
+import { IPersonalData } from '../../../interfaces/Interfaces';
 
 export const PersonalData = memo(() => {
+  const dispatch = useDispatch();
+
   /* eslint-disable no-template-curly-in-string */
   const validateMessages = {
     required: 'Поле "${label}" обязательно',
@@ -18,9 +24,9 @@ export const PersonalData = memo(() => {
   };
   /* eslint-enable no-template-curly-in-string */
 
-  const onFinish = (values: unknown) => {
-    // eslint-disable-next-line no-console
-    console.log(values);
+  const onFinish = (values: IPersonalData) => {
+    dispatch(orderSetPD(values));
+    dispatch(appStateSetProgress(3));
   };
 
   return (
@@ -67,7 +73,6 @@ export const PersonalData = memo(() => {
                     <span>Visa QIWI Wallet</span>
                   </div>
                 </Radio>
-
                 <Radio value="cash" className={cn(s.row_padding, 'payments')}>
                   Наличными
                 </Radio>

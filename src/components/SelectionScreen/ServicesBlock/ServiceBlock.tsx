@@ -2,11 +2,11 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import s from './ServiceBlock.module.scss';
 import { filtersCollection } from '../../../collections/collections';
-import { Services } from '../../../interfaces/Interfaces';
+import { IServices } from '../../../interfaces/Interfaces';
 
 export type Props = {
   className: string;
-  services: Services;
+  services: IServices;
 };
 
 export const ServiceBlock = memo<Props>(({ className, services }) => {

@@ -7,7 +7,7 @@ import { RootState } from '../../../../store';
 import { ReactComponent as Minus } from '../../../../svg/icon_dest_minus.svg';
 import { ReactComponent as Plus } from '../../../../svg/icon_dest_plus.svg';
 import { iconsCollection } from '../../../../collections/collections';
-import { OrderSeat } from '../../../../interfaces/Interfaces';
+import { IOrderSeat } from '../../../../interfaces/Interfaces';
 import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
 
 const { Panel } = Collapse;
@@ -25,7 +25,7 @@ export const OrderPassengers = memo<Props>(({ className }) => {
   } = useSelector((store: RootState) => store.order);
 
   const ticketTypes = seats.reduce(
-    (acc: Accumulator, el: OrderSeat): Accumulator => {
+    (acc: Accumulator, el: IOrderSeat): Accumulator => {
       if (el.is_child) {
         return { ...acc, child: acc.child + 1, childCost: acc.childCost + Number(el.price) };
       }

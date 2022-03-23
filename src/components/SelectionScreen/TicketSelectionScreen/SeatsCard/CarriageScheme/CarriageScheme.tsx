@@ -6,7 +6,7 @@ import first from './img/1.png';
 import second from './img/2.png';
 import third from './img/3.png';
 import fourth from './img/4.png';
-import { Coach } from '../../../../../interfaces/Interfaces';
+import { ICoach } from '../../../../../interfaces/Interfaces';
 import './seatsGridAreas.css';
 import { SelectedSeatsArray } from '../SeatsCard';
 
@@ -18,7 +18,7 @@ export type SelectSeatsArgs = {
 
 export type Props = HTMLAttributes<HTMLElement> & {
   children?: never;
-  activeCarriage: Coach;
+  activeCarriage: ICoach;
   selectedSeats: SelectedSeatsArray;
   selectSeats: (args: SelectSeatsArgs) => void;
 };

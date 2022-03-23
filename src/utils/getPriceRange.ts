@@ -1,6 +1,6 @@
-import { PriceInfo, Train } from '../interfaces/Interfaces';
+import { IPriceInfo, ITrain } from '../interfaces/Interfaces';
 
-const toArray = (obj: PriceInfo): Array<number> => {
+const toArray = (obj: IPriceInfo): Array<number> => {
   const result: [number] = [0];
   const values = Object.values(obj);
   values.forEach((value) => {
@@ -11,13 +11,13 @@ const toArray = (obj: PriceInfo): Array<number> => {
   return result;
 };
 
-const getMaxPrice = (train: Train) => {
+const getMaxPrice = (train: ITrain) => {
   const prices = train.departure.price_info;
   const pricesArray = toArray(prices);
   return Math.max.apply(null, pricesArray);
 };
 
-export const getPriceRange = (data: Train[][]): { minPrice: number; maxPrice: number } => {
+export const getPriceRange = (data: ITrain[][]): { minPrice: number; maxPrice: number } => {
   const minPrice =
     Math.floor(data.reduce((prev, curr) => (prev[0].min_price < curr[0].min_price ? prev : curr))[0].min_price / 100) *
     100;

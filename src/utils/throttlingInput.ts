@@ -1,14 +1,14 @@
 // THROTTLING
 import { catchError, debounceTime, filter, map, Observable, of, skip, switchMap, takeUntil } from 'rxjs';
 import { fromFetch } from 'rxjs/fetch';
-import { City } from '../interfaces/Interfaces';
+import { ICity } from '../interfaces/Interfaces';
 import { capitalize } from './capitalize';
 import { serverURL } from '../App';
 
 export type ResponseOptions = { _id: number; name: string }[] | { error: boolean; message: string };
 
 // Here we convert server response into antd-autocomplete-compatible array
-export const refineResponseOptions = (responseArray: ResponseOptions): City[] => {
+export const refineResponseOptions = (responseArray: ResponseOptions): ICity[] => {
   if (Array.isArray(responseArray)) {
     return responseArray.map((el) =>
       (({ name, _id }) => ({
@@ -25,7 +25,7 @@ export const refineResponseOptions = (responseArray: ResponseOptions): City[] =>
 // function and returns result only if source stream really stops.
 export const autocomplete =
   (time: number, selector: (arg: string) => Observable<ResponseOptions>) =>
-  (source$: Observable<string>): Observable<City[]> =>
+  (source$: Observable<string>): Observable<ICity[]> =>
     source$.pipe(
       debounceTime(time),
       filter((str) => str.trim() !== ''),

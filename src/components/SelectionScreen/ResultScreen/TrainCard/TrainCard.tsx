@@ -6,14 +6,15 @@ import { iconsCollection } from '../../../../collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
 import { TrainRow } from './TrainRow';
 import { SeatsBlock } from './SeatsBlock';
-import { Train } from '../../../../interfaces/Interfaces';
+import { ITrain } from '../../../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;
-  trains: Train[];
+  trains: ITrain[];
+  place: 'select' | 'summary';
 };
 
-export const TrainCard = memo<Props>(({ className, trains }) => {
+export const TrainCard = memo<Props>(({ className, trains, place }) => {
   const train0 = trains[0];
   // eslint-disable-next-line no-underscore-dangle
   const trainId = train0.departure.train._id;
@@ -47,7 +48,7 @@ export const TrainCard = memo<Props>(({ className, trains }) => {
           {train1 && <TrainRow train={train1} direction={false} />}
         </div>
         <div className={s.seats}>
-          <SeatsBlock train={train0} />
+          <SeatsBlock train={train0} place={place} />
         </div>
       </div>
     </div>

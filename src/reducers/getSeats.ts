@@ -4,12 +4,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Interfaces
-import { Coach, TrainSeatsData } from '../interfaces/Interfaces';
+import { ICoach, ITrainSeatsData } from '../interfaces/Interfaces';
 
 // Server
 import { serverURL } from '../App';
 
-const initialState: TrainSeatsData = {
+const initialState: ITrainSeatsData = {
   status: 'idle',
   error: '',
   items: [],
@@ -42,7 +42,7 @@ export const trainSeatsSlice = createSlice({
       state.status = 'pending';
       state.error = '';
     });
-    builder.addCase(trainSeatsFetchData.fulfilled, (state, action: PayloadAction<Coach[]>) => {
+    builder.addCase(trainSeatsFetchData.fulfilled, (state, action: PayloadAction<ICoach[]>) => {
       state.items = [...action.payload];
       state.status = 'success';
     });

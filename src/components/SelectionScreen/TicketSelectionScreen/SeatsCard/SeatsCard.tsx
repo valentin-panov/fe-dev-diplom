@@ -5,7 +5,7 @@ import { Button, message } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './SeatsCard.module.scss';
 import './reant.css';
-import { Coach, SelectedSeat, Service, Train } from '../../../../interfaces/Interfaces';
+import { ICoach, ISelectedSeat, IService, ITrain } from '../../../../interfaces/Interfaces';
 import { iconsCollection } from '../../../../collections/collections';
 import { capitalize } from '../../../../utils/capitalize';
 import { sec2hhmm } from '../../../../utils/sec2hhmm';
@@ -25,9 +25,9 @@ import { selectedSeatsSet } from '../../../../reducers/selectedSeats';
 export type Props = {
   className?: string;
   type: 'outbound' | 'return';
-  data: Train;
+  data: ITrain;
 };
-const clearCarriage: Coach = {
+const clearCarriage: ICoach = {
   coach: {
     _id: 0,
     name: '',
@@ -58,8 +58,8 @@ export type CarriageType = undefined | 'first' | 'second' | 'third' | 'fourth';
 
 export type SelectedServices = {
   coachId: number;
-  wifi: Service;
-  linen: Service;
+  wifi: IService;
+  linen: IService;
 }[];
 
 export const SeatsCard = memo<Props>(({ className, type, data }) => {
@@ -77,7 +77,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
   const [carriageType, setCarriageType] = useState<CarriageType>(undefined);
   const [totalPrice, setTotalPrice] = useState<number>(0);
-  const [activeCarriage, setActiveCarriage] = useState<Coach>(clearCarriage);
+  const [activeCarriage, setActiveCarriage] = useState<ICoach>(clearCarriage);
   const [ticketsCount, setTicketsCount] = useState({ adultCount: 0, childrenCount: 0, toddlerCount: 0 });
   const [selectedSeats, setSelectedSeats] = useState<SelectedSeatsArray>([]);
   const [selectedServices, setSelectedServices] = useState<SelectedServices>([]);
@@ -155,7 +155,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
 
     if (selectedSeats.length === ticketsCount.adultCount + ticketsCount.childrenCount) {
       const selected = selectedSeats.map(
-        (el): SelectedSeat => ({
+        (el): ISelectedSeat => ({
           route_direction_id: `${trainId}`,
           price: `${
             el.price +
@@ -174,7 +174,7 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
       }
 
       if (ticketsCount.toddlerCount > 0) {
-        const childSeat: SelectedSeat[] = [];
+        const childSeat: ISelectedSeat[] = [];
         for (let i = 0; i < ticketsCount.toddlerCount; i += 1) {
           childSeat.push({
             route_direction_id: `${trainId}`,

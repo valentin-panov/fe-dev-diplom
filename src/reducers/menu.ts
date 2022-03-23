@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Menu } from 'interfaces/Interfaces';
+import { IMenu } from 'interfaces/Interfaces';
 
-const initialState: Menu[] = [
+const initialState: IMenu[] = [
   {
     id: 0,
     title: 'О нас',

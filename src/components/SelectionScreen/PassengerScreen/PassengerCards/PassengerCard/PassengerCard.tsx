@@ -5,13 +5,13 @@ import { Button, Checkbox, ConfigProvider, DatePicker, Form, Input, Radio, Selec
 import ru_RU from 'antd/lib/locale/ru_RU';
 import moment, { Moment } from 'moment';
 import s from './PassengerCard.module.scss';
-import { OrderSeat, PersonInfo } from '../../../../../interfaces/Interfaces';
+import { IOrderSeat, IPersonInfo } from '../../../../../interfaces/Interfaces';
 
 const { Option } = Select;
 
 export type Props = {
-  element: OrderSeat;
-  nextPassengerHandler: (data: OrderSeat, nextKey: string) => void;
+  element: IOrderSeat;
+  nextPassengerHandler: (data: IOrderSeat, nextKey: string) => void;
   activeKey: string;
 };
 type AgeGroup = 'child' | 'toddler' | 'adult';
@@ -21,7 +21,7 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
   const [ageGroup, setAgeGroup] = useState<AgeGroup>('adult');
   const [docType, setDocType] = useState<string>('паспорт');
   const nextKey = (Number(activeKey) + 1).toString();
-  const data: OrderSeat = { ...element };
+  const data: IOrderSeat = { ...element };
 
   useEffect(() => {
     const { is_child: child, include_children_seat: toddler } = element;
@@ -58,7 +58,7 @@ export const PassengerCard = memo<Props>(({ element, nextPassengerHandler, activ
   };
   /* eslint-enable no-template-curly-in-string */
 
-  const onFinish = (values: PersonInfo) => {
+  const onFinish = (values: IPersonInfo) => {
     nextPassengerHandler(
       { ...data, person_info: { ...values, birthday: moment(values.birthday).format('YYYY-MM-DD') } },
       nextKey

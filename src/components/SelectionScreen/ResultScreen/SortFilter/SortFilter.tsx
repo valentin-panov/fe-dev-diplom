@@ -4,12 +4,12 @@ import { Select } from 'antd';
 import './reant.css';
 import { CascaderValueType } from 'rc-cascader/lib/interface';
 import s from './SortFilter.module.scss';
-import { SortOptions } from '../../../../interfaces/Interfaces';
+import { ISortOptions } from '../../../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;
   active: CascaderValueType;
-  options: SortOptions;
+  options: ISortOptions;
   onChange: (value: CascaderValueType) => void;
 };
 

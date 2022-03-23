@@ -8,11 +8,11 @@ import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
 import { iconsCollection } from '../../../../collections/collections';
 import { ServiceBlock } from '../../ServicesBlock';
 import { capitalize } from '../../../../utils/capitalize';
-import { Train } from '../../../../interfaces/Interfaces';
+import { ITrain } from '../../../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;
-  train: Train;
+  train: ITrain;
 };
 
 export const LastTicketCard = memo<Props>(({ className, train }) => {
@@ -31,7 +31,7 @@ export const LastTicketCard = memo<Props>(({ className, train }) => {
         city: { name: cityB },
       },
     },
-  }: Train = train;
+  }: ITrain = train;
 
   const stationA = stationAfull.split(' ');
   const stationB = stationBfull.split(' ');

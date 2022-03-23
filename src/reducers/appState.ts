@@ -1,12 +1,12 @@
 /* eslint-disable no-param-reassign */
 
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Train } from '../interfaces/Interfaces';
+import { ITrain } from '../interfaces/Interfaces';
 
 type InitialState = {
   progress: number;
-  trainOutbound?: Train;
-  trainReturn?: Train;
+  trainOutbound?: ITrain;
+  trainReturn?: ITrain;
 };
 
 const initialState: InitialState = {
@@ -20,13 +20,13 @@ export const appStateSlice = createSlice({
     appStateSetProgress: (state, action: PayloadAction<number>) => {
       state.progress = action.payload;
     },
-    appStateSetTrainOutbound: (state, action: PayloadAction<Train>) => {
+    appStateSetTrainOutbound: (state, action: PayloadAction<ITrain>) => {
       state.trainOutbound = action.payload;
     },
     appStateResetTrainOutbound: (state) => {
       state.trainOutbound = undefined;
     },
-    appStateSetTrainReturn: (state, action: PayloadAction<Train>) => {
+    appStateSetTrainReturn: (state, action: PayloadAction<ITrain>) => {
       state.trainReturn = action.payload;
     },
     appStateResetTrainReturn: (state) => {

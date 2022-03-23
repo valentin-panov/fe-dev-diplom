@@ -5,13 +5,13 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Interfaces
-import { City, GetRoute, GetRouteData } from '../interfaces/Interfaces';
+import { ICity, IGetRoute, IGetRouteData } from '../interfaces/Interfaces';
 
 // Server
 import { serverURL } from '../App';
 import { substractYY } from '../utils/substractYY';
 
-const initialState: GetRoute = {
+const initialState: IGetRoute = {
   status: 'idle',
   error: '',
   data: {
@@ -21,8 +21,8 @@ const initialState: GetRoute = {
 };
 
 export type optionsGetTrains = {
-  cityDeparture: City;
-  cityArrival: City;
+  cityDeparture: ICity;
+  cityArrival: ICity;
   dateOutbound: string | null;
   dateReturn: string | null;
   limit?: number | null;
@@ -162,7 +162,7 @@ export const getRouteSlice = createSlice({
       state.status = 'pending';
       state.error = '';
     });
-    builder.addCase(getRouteFetchData.fulfilled, (state, action: PayloadAction<GetRouteData>) => {
+    builder.addCase(getRouteFetchData.fulfilled, (state, action: PayloadAction<IGetRouteData>) => {
       state.data.totalCount = action.payload.total_count;
       // temporary stub for design purpose
       state.data.items = [...action.payload.items].map((el) => [el, el]);

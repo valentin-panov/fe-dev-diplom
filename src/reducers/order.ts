@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Order, OrderSeat, SelectedSeat } from '../interfaces/Interfaces';
+import { IPersonalData, IOrder, IOrderSeat, ISelectedSeat } from '../interfaces/Interfaces';
 
-const initialState: Order = {
+const initialState: IOrder = {
   user: {
     first_name: '',
     last_name: '',
@@ -21,7 +21,7 @@ export const orderSlice = createSlice({
   initialState,
   reducers: {
     orderReset: () => initialState,
-    orderSet: (_, action: PayloadAction<Order>) => action.payload,
+    orderSet: (_, action: PayloadAction<IOrder>) => action.payload,
     orderAddRoute: (state, action: PayloadAction<string>) => ({
       ...state,
       departure: {
@@ -29,7 +29,7 @@ export const orderSlice = createSlice({
         route_direction_id: action.payload,
       },
     }),
-    orderAddSeat: (state, action: PayloadAction<SelectedSeat>) => ({
+    orderAddSeat: (state, action: PayloadAction<ISelectedSeat>) => ({
       ...state,
       departure: {
         ...state.departure,
@@ -45,16 +45,20 @@ export const orderSlice = createSlice({
         ],
       },
     }),
-    orderSetSeats: (state, action: PayloadAction<OrderSeat[]>) => ({
+    orderSetSeats: (state, action: PayloadAction<IOrderSeat[]>) => ({
       ...state,
       departure: {
         ...state.departure,
         seats: action.payload,
       },
     }),
+    orderSetPD: (state, action: PayloadAction<IPersonalData>) => ({
+      ...state,
+      user: action.payload,
+    }),
   },
 });
 
-export const { orderReset, orderSet, orderAddRoute, orderAddSeat, orderSetSeats } = orderSlice.actions;
+export const { orderReset, orderSet, orderAddRoute, orderAddSeat, orderSetSeats, orderSetPD } = orderSlice.actions;
 
 export const order = orderSlice.reducer;

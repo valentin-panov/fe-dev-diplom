@@ -5,21 +5,21 @@ import { LoadingOutlined } from '@ant-design/icons';
 import s from './DestinationPicker.module.scss';
 import './reant.css';
 import { ReactComponent as GeoMark } from '../../../svg/icon_geo.svg';
-import { City } from '../../../interfaces/Interfaces';
+import { ICity } from '../../../interfaces/Interfaces';
 import { autocomplete, fetch$, ResponseOptions } from '../../../utils/throttlingInput';
 
 export type Props = {
   className?: string;
   defaultValue: string;
   point: Point;
-  onSelect: (value: City, point: Point) => void;
+  onSelect: (value: ICity, point: Point) => void;
 };
 
 export type Point = 'departure' | 'arrival';
 
 export const DestinationPickerUnit = memo<Props>(({ className, defaultValue, onSelect, point }) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [options, setOptions] = useState<City[]>([]);
+  const [options, setOptions] = useState<ICity[]>([]);
   const [value, setValue] = useState<string>(defaultValue);
   const term$ = useMemo(() => new BehaviorSubject<string>(defaultValue), [defaultValue]);
   const results$ = useMemo(
@@ -61,8 +61,8 @@ export const DestinationPickerUnit = memo<Props>(({ className, defaultValue, onS
   }, [results$]);
 
   // return selected option to parent component
-  const returnSelectedCity = (payload: string, array: City[], mode: Point) => {
-    const selected: City | undefined = array.find((el) => el.value === payload);
+  const returnSelectedCity = (payload: string, array: ICity[], mode: Point) => {
+    const selected: ICity | undefined = array.find((el) => el.value === payload);
     if (selected) {
       onSelect(selected, mode);
     }

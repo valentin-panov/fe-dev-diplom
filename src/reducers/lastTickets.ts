@@ -4,7 +4,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Interfaces
-import { LastTickets, Train } from '../interfaces/Interfaces';
+import { LastTickets, ITrain } from '../interfaces/Interfaces';
 
 // Server
 import { serverURL } from '../App';
@@ -42,7 +42,7 @@ export const lastTicketsSlice = createSlice({
       state.status = 'pending';
       state.error = '';
     });
-    builder.addCase(lastTicketsFetchData.fulfilled, (state, action: PayloadAction<Train[]>) => {
+    builder.addCase(lastTicketsFetchData.fulfilled, (state, action: PayloadAction<ITrain[]>) => {
       state.items = [...action.payload];
       state.status = 'success';
     });

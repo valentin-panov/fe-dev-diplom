@@ -5,12 +5,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 // Interfaces
-import { SeatsQuery, SeatsResponse, SeatsState } from '../interfaces/Interfaces';
+import { ISeatsQuery, ISeatsResponse, ISeatsState } from '../interfaces/Interfaces';
 
 // Server
 import { serverURL } from '../App';
 
-const initialState: SeatsState = {
+const initialState: ISeatsState = {
   status: 'idle',
   error: '',
   data: {
@@ -28,7 +28,7 @@ const initialState: SeatsState = {
   },
 };
 
-export const getTicketsFetchData = createAsyncThunk('getRoute/FetchingData', async (options: SeatsQuery) => {
+export const getTicketsFetchData = createAsyncThunk('getRoute/FetchingData', async (options: ISeatsQuery) => {
   const {
     id,
     have_first_class = false,
@@ -75,7 +75,7 @@ export const getTicketsSlice = createSlice({
       state.status = 'pending';
       state.error = '';
     });
-    builder.addCase(getTicketsFetchData.fulfilled, (state, action: PayloadAction<SeatsResponse>) => {
+    builder.addCase(getTicketsFetchData.fulfilled, (state, action: PayloadAction<ISeatsResponse>) => {
       state.data = action.payload;
       state.status = 'success';
     });

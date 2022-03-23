@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import s from './HeaderMenu.module.scss';
 import { RootState } from '../../store';
 import { HeaderMenuItem } from './HeaderMenuItem';
-import { Menu } from '../../interfaces/Interfaces';
+import { IMenu } from '../../interfaces/Interfaces';
 
 export type Props = {
   className?: string;
@@ -18,7 +18,7 @@ export const HeaderMenu = memo<Props>(({ className, location }) => {
     <div className={cn(s.root, className)}>
       <nav className={s.navBar}>
         <ul className={s.navBar}>
-          {menu.map((item: Menu) => {
+          {menu.map((item: IMenu) => {
             const active = location === item.pathName ? s.active : '';
             return <HeaderMenuItem key={item.id} {...item} className={cn(s.navLink, active)} />;
           })}
