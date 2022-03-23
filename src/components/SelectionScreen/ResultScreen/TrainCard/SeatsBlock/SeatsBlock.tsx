@@ -8,7 +8,11 @@ import s from './SeatsBlock.module.scss';
 import { SeatsBlockRow } from './SeatBlockRow';
 import { ServiceBlock } from '../../../ServicesBlock';
 import { ITrain } from '../../../../../interfaces/Interfaces';
-import { appStateSetProgress, appStateSetTrainOutbound } from '../../../../../reducers/appState';
+import {
+  appStateResetTrainOutbound,
+  appStateSetProgress,
+  appStateSetTrainOutbound,
+} from '../../../../../reducers/appState';
 import { orderReset } from '../../../../../reducers/order';
 
 export type Props = {
@@ -72,6 +76,7 @@ export const SeatsBlock = memo<Props>(({ className, train, place }) => {
             className={s.btn_summary}
             onClick={() => {
               dispatch(orderReset());
+              dispatch(appStateResetTrainOutbound());
               dispatch(appStateSetProgress(0));
             }}
           >
