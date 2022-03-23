@@ -272,15 +272,17 @@ export interface OrderSeat {
   include_children_seat?: boolean;
 }
 
+export interface PersonalData {
+  first_name: string;
+  last_name: string;
+  patronymic: string;
+  phone: string;
+  email: string;
+  payment_method: 'cash' | 'online';
+}
+
 export interface Order {
-  user?: {
-    first_name: string;
-    last_name: string;
-    patronymic: string;
-    phone: string;
-    email: string;
-    payment_method: 'cash' | 'online';
-  };
+  user?: PersonalData;
   departure: {
     route_direction_id: string;
     seats: OrderSeat[];

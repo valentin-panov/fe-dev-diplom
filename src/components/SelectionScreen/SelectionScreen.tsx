@@ -21,6 +21,7 @@ import { OrderTitle } from './PassengerScreen/OrderTitle';
 import { OrderPassengers } from './PassengerScreen/OrderPassengers';
 import { OrderTrainData } from './PassengerScreen/OrderTrainData';
 import { PassengerCards } from './PassengerScreen/PassengerCards';
+import { PersonalData } from './PersonalData';
 
 export type Props = {
   className?: string;
@@ -139,7 +140,11 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                   </section>
                 </div>
                 {progress === 1 && <PassengerCards />}
-                {progress === 2 && <div>PAY</div>}
+                {progress === 2 && (
+                  <div>
+                    <PersonalData />
+                  </div>
+                )}
                 {progress === 3 && <div>CHECK</div>}
               </>
             )}

@@ -189,6 +189,8 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
       } else {
         dispatch(selectedSeatsSet(selected));
       }
+    } else {
+      dispatch(selectedSeatsSet([]));
     }
   }, [
     dispatch,
