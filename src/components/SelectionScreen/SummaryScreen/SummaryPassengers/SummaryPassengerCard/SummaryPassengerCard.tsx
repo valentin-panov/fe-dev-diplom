@@ -23,12 +23,16 @@ export const SummaryPassengerCard = memo<Props>(({ element }) => {
     document_data: docData,
   } = element.person_info;
   const isChild = element.is_child;
+  const isTodder = element.include_children_seat;
 
   return (
     <div className={s.root}>
       <div className={s.iconArea}>
         <div className={s.iconArea_icon}>{iconsCollection.bigPassenger}</div>
-        <div>{!isChild ? 'Взрослый' : 'Детский'}</div>
+        <div className={s.iconArea_text}>
+          {(isChild || isTodder) && 'Детский'}
+          {!isChild && !isTodder && 'Взрослый'}
+        </div>
       </div>
       <div className={s.person}>
         <div>{lastName}</div>

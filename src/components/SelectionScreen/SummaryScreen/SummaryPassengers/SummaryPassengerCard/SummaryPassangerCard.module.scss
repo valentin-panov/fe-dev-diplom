@@ -1,7 +1,7 @@
 @import 'src/styles/common';
 
 .root {
-  padding               : 45px 10px 30px 60px;
+  padding               : 45px 10px 30px 0;
   display               : grid;
   width                 : 100%;
   border-bottom         : 1px dashed #928F94;
@@ -16,12 +16,22 @@
 }
 
 .iconArea {
-  grid-area : iconArea;
+  display         : flex;
+  flex-direction  : column;
+  justify-content : center;
+  align-items     : center;
+  grid-area       : iconArea;
+  justify-self    : center;
+  align-self      : flex-start;
   
   &_icon {
-    width  : 68px;
-    height : 68px;
     margin-bottom : 20px;
+    width         : 68px;
+    height        : 68px;
+  }
+  
+  &_text {
+  
   }
 }
 

@@ -7,6 +7,7 @@ import { appStateSetProgress } from '../../../reducers/appState';
 import { TrainCard } from '../ResultScreen/TrainCard';
 import { RootState } from '../../../store';
 import { SummaryPassengers } from './SummaryPassengers';
+import { SummaryPayment } from './SummaryPayment';
 
 export const SummaryScreen = memo(() => {
   const dispatch = useDispatch();
@@ -31,6 +32,12 @@ export const SummaryScreen = memo(() => {
         <div className={cn(s.row_subheading, s.row_padding)}>Пассажиры</div>
         <div>
           <SummaryPassengers />
+        </div>
+      </div>
+      <div className={s.card}>
+        <div className={cn(s.row_subheading, s.row_padding)}>Способ оплаты</div>
+        <div>
+          <SummaryPayment />
         </div>
       </div>
       <Button className={s.btn} onClick={onFinish}>
