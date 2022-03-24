@@ -259,7 +259,7 @@ export interface IPersonInfo {
   patronymic: string;
   gender: boolean;
   birthday: string;
-  document_type: 'паспорт' | 'свидетельство о рождениии';
+  document_type: 'Паспорт' | 'Свидетельство о рождениии';
   document_data: string;
 }
 

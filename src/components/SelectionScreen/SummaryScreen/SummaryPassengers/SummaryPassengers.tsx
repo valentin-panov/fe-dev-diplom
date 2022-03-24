@@ -6,11 +6,15 @@ import { IOrderSeat } from '../../../../interfaces/Interfaces';
 import { RootState } from '../../../../store';
 import { appStateSetProgress } from '../../../../reducers/appState';
 import { orderReset } from '../../../../reducers/order';
+import { SummaryPassengerCard } from './SummaryPassengerCard';
+import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
+import { iconsCollection } from '../../../../collections/collections';
 
 export const SummaryPassengers = memo(() => {
   const dispatch = useDispatch();
   const seats = useSelector((store: RootState) => store.order.departure.seats);
-  // eslint-disable-next-line no-underscore-dangle
+  const selectedSeats = useSelector((store: RootState) => store.selectedSeats);
+  const orderSummary = selectedSeats.reduce((sum, el): number => sum + Number(el.price), 0);
 
   const onClick = () => {
     dispatch(orderReset());
@@ -19,12 +23,21 @@ export const SummaryPassengers = memo(() => {
 
   return (
     <div className={s.root}>
-      {seats.map((el: IOrderSeat) => (
-        <div>{el?.person_info?.first_name}</div>
-      ))}
-      <Button className={s.btn} onClick={onClick}>
-        Изменить
-      </Button>
+      <div className={s.cardsContainer}>
+        {seats.map((el: IOrderSeat) => (
+          <SummaryPassengerCard element={el} />
+        ))}
+      </div>
+      <div className={s.buttonContainer}>
+        <div className={s.summary}>
+          <div className={s.title}>Всего</div>
+          <div className={s.amount}>{getBeautifulNumber(orderSummary)}</div>
+          <div className={s.currency}>{iconsCollection.rub}</div>
+        </div>
+        <Button className={s.btn} onClick={onClick}>
+          Изменить
+        </Button>
+      </div>
     </div>
   );
 });
