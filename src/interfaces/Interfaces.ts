@@ -281,7 +281,7 @@ export interface IPersonalData {
   payment_method: 'cash' | 'online';
 }
 
-export interface IOrder {
+export interface IOrder extends IStatus {
   user?: IPersonalData;
   departure: {
     route_direction_id: string;

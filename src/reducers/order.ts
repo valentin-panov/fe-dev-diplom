@@ -1,7 +1,12 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IPersonalData, IOrder, IOrderSeat, ISelectedSeat } from '../interfaces/Interfaces';
+/* eslint-disable no-param-reassign */
+
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { IOrder, IOrderSeat, IPersonalData, ISelectedSeat } from '../interfaces/Interfaces';
+import { serverURL } from '../App';
 
 const initialState: IOrder = {
+  status: 'idle',
+  error: '',
   user: {
     first_name: '',
     last_name: '',
@@ -15,6 +20,20 @@ const initialState: IOrder = {
     seats: [],
   },
 };
+export const asyncPostOrder = createAsyncThunk('postOrder', async (order: IOrder) => {
+  const response = await fetch(`${serverURL}/order`, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ...order.departure, ...order.user }),
+  });
+
+  if (!response.ok) {
+    throw new Error('request error');
+  }
+});
 
 export const orderSlice = createSlice({
   name: 'order',
@@ -56,6 +75,19 @@ export const orderSlice = createSlice({
       ...state,
       user: action.payload,
     }),
+  },
+  extraReducers: (builder) => {
+    builder.addCase(asyncPostOrder.pending, (state) => {
+      state.status = 'pending';
+      state.error = '';
+    });
+    builder.addCase(asyncPostOrder.fulfilled, (state) => {
+      state.status = 'success';
+    });
+    builder.addCase(asyncPostOrder.rejected, (state, action) => {
+      state.status = 'error';
+      state.error = String(action.error.message);
+    });
   },
 });
 

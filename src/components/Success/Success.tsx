@@ -3,11 +3,14 @@ import cn from 'clsx';
 import { Button, Rate } from 'antd';
 import { StarOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import s from './Success.module.scss';
 import { ReactComponent as Icon1 } from './svg/Group1.svg';
 import { ReactComponent as Icon2 } from './svg/Group2.svg';
 import { ReactComponent as Icon3 } from './svg/Group3.svg';
-import { ReactComponent as Rub } from '../../svg/rub.svg';
+import { RootState } from '../../store';
+import { getBeautifulNumber } from '../../utils/getBeatifulNumber';
+import { iconsCollection } from '../../collections/collections';
 
 export type Props = {
   className?: string;
@@ -15,6 +18,11 @@ export type Props = {
 
 export const Success = memo<Props>(({ className }) => {
   const history = useHistory();
+  const user = useSelector((store: RootState) => store.order.user);
+  const selectedSeats = useSelector((store: RootState) => store.selectedSeats);
+  const orderSummary = selectedSeats.reduce((sum, el): number => sum + Number(el.price), 0);
+  const firstName = user?.first_name;
+  const patronymic = user?.patronymic;
 
   return (
     <div className={cn(s.root, className)}>
@@ -25,10 +33,9 @@ export const Success = memo<Props>(({ className }) => {
             <div>285АА</div>
           </div>
           <div className={s.header__price}>
-            <div>сумма&nbsp;</div>
-            <div className={s.price}>7 760</div>
-            <div>&nbsp;</div>
-            <Rub color="#928F94" />
+            <div>сумма</div>
+            <div className={s.price}>{getBeautifulNumber(orderSummary)}</div>
+            <div className={s.currency}>{iconsCollection.rub}</div>
           </div>
         </div>
         <div className={s.icons}>
@@ -61,7 +68,7 @@ export const Success = memo<Props>(({ className }) => {
           </div>
         </div>
         <div className={s.msg}>
-          <div className={s.msg__title}>Ирина Эдуардовна!</div>
+          <div className={s.msg__title}>{`${firstName} ${patronymic}!`}</div>
           <div className={s.msg__stub}>
             Ваш заказ успешно оформлен.
             <br />В ближайшее время с вами свяжется наш оператор для подтверждения.

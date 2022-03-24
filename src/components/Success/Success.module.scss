@@ -47,15 +47,15 @@
     }
     
     .header__price {
-      display         : flex;
-      flex-direction  : row;
-      justify-content : space-between;
+      display        : flex;
+      flex-direction : row;
+      align-items    : center;
       
-      align-items     : center;
-      font-size       : 36px;
-      line-height     : 42px;
-      font-weight     : normal;
-      color           : #928F94;
+      font-size      : 36px;
+      line-height    : 42px;
+      font-weight    : normal;
+      color          : #928F94;
+      gap            : 7px;
       
       .price {
         font-size   : 36px;
@@ -63,6 +63,14 @@
         font-weight : bold;
         
         color       : #3E3C41;
+      }
+      
+      .currency {
+        margin-bottom : 14px;
+        width         : 21px;
+        height        : 27px;
+        
+        color         : #928F94;
       }
     }
   }

@@ -1,24 +1,32 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import cn from 'clsx';
 import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import s from './SummaryScreen.module.scss';
-import { appStateSetProgress } from '../../../reducers/appState';
 import { TrainCard } from '../ResultScreen/TrainCard';
 import { RootState } from '../../../store';
 import { SummaryPassengers } from './SummaryPassengers';
 import { SummaryPayment } from './SummaryPayment';
+import { asyncPostOrder } from '../../../reducers/order';
 
 export const SummaryScreen = memo(() => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
   const order = useSelector((store: RootState) => store.order);
   // eslint-disable-next-line no-underscore-dangle
   const train = trainsList.filter((el) => el[0].departure._id === Number(order.departure.route_direction_id));
 
   const onFinish = () => {
-    dispatch(appStateSetProgress(3));
+    dispatch(asyncPostOrder(order));
   };
+
+  useEffect(() => {
+    if (order.status === 'success') {
+      history.push('/success');
+    }
+  }, [history, order]);
 
   return (
     <div className={s.root}>
