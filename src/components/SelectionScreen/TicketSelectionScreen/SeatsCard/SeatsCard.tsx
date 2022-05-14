@@ -17,7 +17,7 @@ import { CarriageNumberButton } from './CarriageNumberButton';
 import { trainSeatsReset } from '../../../../reducers/getSeats';
 import { TrainData } from './TrainData';
 import { TicketsCount } from './TicketsCount';
-import { RootState } from '../../../../store';
+import { AppDispatch, RootState } from '../../../../store';
 import { ChooseCarriageTypeSection } from './ChooseCarriageTypeSection';
 import { ServicesBlock } from './ServicesBlock';
 import { selectedSeatsSet } from '../../../../reducers/selectedSeats';
@@ -63,7 +63,7 @@ export type SelectedServices = {
 }[];
 
 export const SeatsCard = memo<Props>(({ className, type, data }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const trainSeats = useSelector((store: RootState) => store.trainSeats.items);
 
   const trainId = data.departure.train._id;
@@ -147,9 +147,9 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
         sum +
         current.price +
         Number(
-          selectedServices.filter((el) => el.coachId === current.coachId).map((el) => el.linen.price + el.wifi.price)
+          selectedServices.filter((el) => el.coachId === current.coachId).map((el) => el.linen.price + el.wifi.price),
         ),
-      0
+      0,
     );
     setTotalPrice(seatsSummaryPrice);
 
@@ -160,14 +160,14 @@ export const SeatsCard = memo<Props>(({ className, type, data }) => {
           price: `${
             el.price +
             Number(
-              selectedServices.filter((ser) => ser.coachId === el.coachId).map((i) => i.linen.price + i.wifi.price)
+              selectedServices.filter((ser) => ser.coachId === el.coachId).map((i) => i.linen.price + i.wifi.price),
             )
           }`,
           coach_id: `${el.coachId}`,
           seat_number: `${el.seatId}`,
           is_child: true,
           include_children_seat: false,
-        })
+        }),
       );
       for (let i = 0; i < ticketsCount.adultCount; i += 1) {
         selected[i].is_child = false;

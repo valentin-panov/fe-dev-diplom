@@ -20,7 +20,7 @@ import { ReactComponent as BtnUp } from './img/btnUp.svg';
 import { FooterTitle } from './FooterTitle';
 import { FooterSubtitle } from './FooterSubtitle';
 import { postSubscription, subscriptionSetIdle } from '../../reducers/subrcribe';
-import { RootState } from '../../store';
+import { AppDispatch, RootState } from '../../store';
 import { Icon } from '../Icon';
 
 export type Props = {
@@ -34,7 +34,7 @@ export const Footer = memo<Props>(({ className }) => {
 
   const status = useSelector((store: RootState) => store.subscribe.status);
 
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
 
   const checkSubmittable = (arg: string) => {
     setSubmitBtnActive(!!arg);

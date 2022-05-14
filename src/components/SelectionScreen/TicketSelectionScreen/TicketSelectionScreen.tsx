@@ -3,7 +3,7 @@ import cn from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button } from 'antd';
 import s from './TicketSelectionScreen.module.scss';
-import { RootState } from '../../../store';
+import { AppDispatch, RootState } from '../../../store';
 import { SeatsCard } from './SeatsCard';
 import { trainSeatsFetchData } from '../../../reducers/getSeats';
 import { appStateSetProgress } from '../../../reducers/appState';
@@ -15,7 +15,7 @@ export type Props = {
 
 export const TicketSelectionScreen = memo<Props>(({ className }) => {
   const title = useRef<HTMLDivElement>(document.createElement('div'));
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const selectedTrain = useSelector((store: RootState) => store.appState.trainOutbound);
   const selectedTrainReturn = useSelector((store: RootState) => store.appState.trainReturn);
   const selectedSeats = useSelector((store: RootState) => store.selectedSeats);
@@ -36,8 +36,8 @@ export const TicketSelectionScreen = memo<Props>(({ className }) => {
       <h2 className={s.title} ref={title}>
         Выбор мест
       </h2>
-      {selectedTrain && <SeatsCard type="outbound" data={selectedTrain} />}
-      {selectedTrain && selectedTrainReturn && <SeatsCard type="return" data={selectedTrainReturn} />}
+      {selectedTrain && <SeatsCard type='outbound' data={selectedTrain} />}
+      {selectedTrain && selectedTrainReturn && <SeatsCard type='return' data={selectedTrainReturn} />}
       <Button
         className={s.btn}
         disabled={selectedSeats.length === 0}

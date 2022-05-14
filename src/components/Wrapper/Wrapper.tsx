@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { message } from 'antd';
 import { BehaviorSubject, of } from 'rxjs';
 import s from './Wrapper.module.scss';
-import { RootState } from '../../store';
+import { AppDispatch, RootState } from '../../store';
 import { getRouteFetchData } from '../../reducers/getRoute';
 import { searchParamsDateReturnSet } from '../../reducers/searchParams';
 import { IFilters } from '../../interfaces/Interfaces';
@@ -12,17 +12,17 @@ import { throttling } from '../../utils/throttling';
 
 export type Props = {
   className?: string;
-  children: React.ReactChildren | React.ReactNode;
+  children: React.ReactNode;
 };
 
 export const Wrapper = ({ className, children }: Props): ReactElement => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const searchParams = useSelector((store: RootState) => store.searchParams);
   const { dateOutbound, dateReturn, filters } = searchParams;
   const filters$ = useMemo(() => new BehaviorSubject<IFilters>(filters), [filters]);
   const result$ = useMemo(
     () => filters$.pipe(throttling<IFilters>(1500, (arg) => new BehaviorSubject<IFilters>(arg))),
-    [filters$]
+    [filters$],
   );
 
   // Subscription to the input stream

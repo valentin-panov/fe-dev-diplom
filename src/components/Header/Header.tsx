@@ -1,6 +1,6 @@
 import React, { memo, useEffect, useState } from 'react';
 import cn from 'clsx';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { DestinationPicker } from 'components/Pickers/DestinationPicker';
 import { DatePickerOrigin } from 'components/Pickers/DatePickerOrigin';
 import { Button } from 'antd';
@@ -13,7 +13,7 @@ import headerMain from './img/header_main.png';
 import headerTrain from './img/header_train.png';
 import headerSuccess from './img/header_success.png';
 import { appURL } from '../../App';
-import { RootState } from '../../store';
+import { AppDispatch, RootState } from '../../store';
 import { getRouteFetchData } from '../../reducers/getRoute';
 import { orderReset } from '../../reducers/order';
 import { selectedSeatsReset } from '../../reducers/selectedSeats';
@@ -23,11 +23,11 @@ export type Props = {
 };
 
 export const Header = memo<Props>(({ className }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const [findDisabled, setFindDisabled] = useState<boolean>(true);
   const searchParams = useSelector((store: RootState) => store.searchParams);
   const location = useLocation();
-  const history = useHistory();
+  const navigate = useNavigate();
   const { pathname } = location;
   const splitLocation: string = pathname.replace(appURL, '').split('/')[1];
 
@@ -55,7 +55,7 @@ export const Header = memo<Props>(({ className }) => {
     dispatch(orderReset());
     dispatch(selectedSeatsReset());
     dispatch(getRouteFetchData(searchParams));
-    history.push('/select');
+    navigate('/select');
   };
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export const Header = memo<Props>(({ className }) => {
                 <div className={s.picker_holder_main_destination_helper}>
                   <DestinationPicker />
                 </div>
-                <DatePickerOrigin pickerPlace="headerPicker" />
+                <DatePickerOrigin pickerPlace='headerPicker' />
                 <div className={s.search_btn_holder}>
                   <Button className={s.searchBtn} onClick={findTickets} disabled={findDisabled}>
                     НАЙТИ БИЛЕТЫ
@@ -115,7 +115,7 @@ export const Header = memo<Props>(({ className }) => {
               <div className={cn(s.picker_holder_select)}>
                 <div className={s.picker_holder_select_row}>
                   <DestinationPicker />
-                  <DatePickerOrigin pickerPlace="headerPicker" />
+                  <DatePickerOrigin pickerPlace='headerPicker' />
                 </div>
                 <div className={s.search_btn_holder_select}>
                   <Button className={s.searchBtn} onClick={findTickets} disabled={findDisabled}>
@@ -130,7 +130,7 @@ export const Header = memo<Props>(({ className }) => {
         {activePreset.class === 'success' && <div className={s.success__msg}>Благодарим Вас за заказ!</div>}
       </div>
 
-      <img className={s.back} src={activePreset.back} alt="header background" />
+      <img className={s.back} src={activePreset.back} alt='header background' />
     </header>
   );
 });

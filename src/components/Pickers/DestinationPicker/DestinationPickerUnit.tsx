@@ -24,7 +24,7 @@ export const DestinationPickerUnit = memo<Props>(({ className, defaultValue, onS
   const term$ = useMemo(() => new BehaviorSubject<string>(defaultValue), [defaultValue]);
   const results$ = useMemo(
     () => term$.pipe(autocomplete(1000, (term: string): Observable<ResponseOptions> => fetch$(term))),
-    [term$]
+    [term$],
   );
 
   // subscription for triggering loading state
@@ -71,18 +71,18 @@ export const DestinationPickerUnit = memo<Props>(({ className, defaultValue, onS
   return (
     <AutoComplete
       backfill
-      dropdownClassName="destinationDropdown"
+      dropdownClassName='destinationDropdown'
       dropdownMatchSelectWidth
       defaultOpen={false}
       value={value}
       options={options}
       filterOption={(inputValue, option) => option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
-      onSelect={(payload) => returnSelectedCity(payload, options, point)}
+      onSelect={(payload: string) => returnSelectedCity(payload, options, point)}
       onChange={(payload: string) => {
         term$.next(payload);
       }}
       className={className}
-      notFoundContent="начните вводить название города"
+      notFoundContent='начните вводить название города'
     >
       <Input
         className={s.autocomplete}

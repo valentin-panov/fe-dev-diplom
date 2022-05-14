@@ -4,7 +4,7 @@ import moment from 'moment';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './DatePickerOrigin.module.scss';
 import { DatePickerOriginUnit, DateType } from './DatePickerOriginUnit';
-import { RootState } from '../../../store';
+import { AppDispatch, RootState } from '../../../store';
 import { searchParamsDateOutboundSet, searchParamsDateReturnSet } from '../../../reducers/searchParams';
 
 export type Props = {
@@ -15,7 +15,7 @@ export type Props = {
 export type TimeObj = moment.Moment | undefined;
 
 export const DatePickerOrigin = memo<Props>(({ className, pickerPlace }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const [forwardMoment, setForwardMoment] = useState<TimeObj>(undefined);
   const [returnMoment, setReturnMoment] = useState<TimeObj>(undefined);
   const forwardStore = useSelector((store: RootState) => store.searchParams.dateOutbound);
@@ -48,7 +48,7 @@ export const DatePickerOrigin = memo<Props>(({ className, pickerPlace }) => {
 
   const outboundPicker = (givenClassName: string) => (
     <DatePickerOriginUnit
-      dateType="forward"
+      dateType='forward'
       defaultValue={forwardMoment}
       disableDate={moment()}
       getDate={onChange}
@@ -58,7 +58,7 @@ export const DatePickerOrigin = memo<Props>(({ className, pickerPlace }) => {
 
   const returnPicker = (givenClassName: string) => (
     <DatePickerOriginUnit
-      dateType="return"
+      dateType='return'
       defaultValue={returnMoment}
       disableDate={forwardMoment || moment()}
       getDate={onChange}

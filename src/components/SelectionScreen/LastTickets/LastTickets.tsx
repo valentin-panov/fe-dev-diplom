@@ -3,7 +3,7 @@ import cn from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './LastTickets.module.scss';
 import { LastTicketCard } from './LastTicketCard';
-import { RootState } from '../../../store';
+import { AppDispatch, RootState } from '../../../store';
 import { lastTicketsFetchData } from '../../../reducers/lastTickets';
 
 export type Props = {
@@ -14,7 +14,7 @@ export const LastTickets = memo<Props>(({ className }) => {
   const status = useSelector((store: RootState) => store.lastTickets.status);
   const items = useSelector((store: RootState) => store.lastTickets.items);
 
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const cardsToShowCount = 3;
 
   useEffect(() => {

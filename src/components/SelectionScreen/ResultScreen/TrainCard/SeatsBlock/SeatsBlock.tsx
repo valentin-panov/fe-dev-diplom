@@ -14,6 +14,7 @@ import {
   appStateSetTrainOutbound,
 } from '../../../../../reducers/appState';
 import { orderReset } from '../../../../../reducers/order';
+import { AppDispatch } from '../../../../../store';
 
 export type Props = {
   className?: string;
@@ -29,7 +30,7 @@ const carriageType = {
 };
 
 export const SeatsBlock = memo<Props>(({ className, train, place }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const {
     departure: {
       have_wifi,
@@ -65,7 +66,7 @@ export const SeatsBlock = memo<Props>(({ className, train, place }) => {
         )}
       </div>
       <div className={s.bottom_block}>
-        <ServiceBlock services={{ have_wifi, is_express, have_air_conditioning }} className="ticketCard" />
+        <ServiceBlock services={{ have_wifi, is_express, have_air_conditioning }} className='ticketCard' />
         {place === 'select' && (
           <Button className={s.btn} onClick={() => selectTrain(train)}>
             Выбрать места

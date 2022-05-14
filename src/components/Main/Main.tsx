@@ -4,7 +4,7 @@ import s from './Main.module.scss';
 
 export type Props = {
   className?: string;
-  children: React.ReactChildren | React.ReactNode;
+  children: React.ReactNode;
 };
 
 export const Main = memo<Props>(({ className, children }) => <main className={cn(s.root, className)}>{children}</main>);

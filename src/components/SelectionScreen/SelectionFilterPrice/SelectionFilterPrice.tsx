@@ -5,6 +5,7 @@ import { Slider } from 'antd';
 import s from './SelectionFilterPrice.module.scss';
 import './rewrite.css';
 import { searchParamsFiltersSet } from '../../../reducers/searchParams';
+import { AppDispatch } from '../../../store';
 
 export type Range = [number, number];
 
@@ -15,8 +16,7 @@ export type Props = {
 };
 
 export const SelectionFilterPrice = memo<Props>(({ className, initialRange, stubRange }) => {
-  const dispatch = useDispatch();
-
+  const dispatch: AppDispatch = useDispatch();
   const [range, setRange] = useState<Range>(initialRange);
   const min = initialRange[0];
   const max = initialRange[1];
@@ -47,7 +47,7 @@ export const SelectionFilterPrice = memo<Props>(({ className, initialRange, stub
         step={10}
         defaultValue={range}
         tooltipVisible
-        tooltipPlacement="bottom"
+        tooltipPlacement='bottom'
         onChange={(value: number | Range) => onChangeRange(value)}
       />
     </div>

@@ -3,7 +3,7 @@ import cn from 'clsx';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Collapse } from 'antd';
 import s from './PassengerCards.module.scss';
-import { RootState } from '../../../../store';
+import { AppDispatch, RootState } from '../../../../store';
 import { PassengerCard } from './PassengerCard';
 import { ReactComponent as Minus } from '../../../../svg/passCardMinus.svg';
 import { ReactComponent as Plus } from '../../../../svg/passCardPlus.svg';
@@ -19,7 +19,7 @@ export type Props = {
 };
 
 export const PassengerCards = memo<Props>(({ className }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const order = useSelector((store: RootState) => store.order);
   const title = useRef<HTMLDivElement>(document.createElement('div'));
   const [activeKey, setActiveKey] = useState<string>('0');
@@ -47,7 +47,7 @@ export const PassengerCards = memo<Props>(({ className }) => {
         activeKey={activeKey}
         ghost
         destroyInactivePanel={false}
-        expandIconPosition="left"
+        expandIconPosition='left'
         expandIcon={({ isActive }) => (isActive ? <Minus /> : <Plus />)}
       >
         {order.departure.seats.map((el, index) => (
@@ -56,7 +56,7 @@ export const PassengerCards = memo<Props>(({ className }) => {
             className={s.panel}
             header={
               <button
-                type="button"
+                type='button'
                 onClick={() => {
                   setActiveKey(index.toString());
                 }}

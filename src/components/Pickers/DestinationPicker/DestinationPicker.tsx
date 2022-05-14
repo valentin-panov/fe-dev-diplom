@@ -6,7 +6,7 @@ import s from './DestinationPicker.module.scss';
 import { ReactComponent as SwapBtn } from '../../../svg/swapBtn.svg';
 
 import { DestinationPickerUnit, Point } from './DestinationPickerUnit';
-import { RootState } from '../../../store';
+import { AppDispatch, RootState } from '../../../store';
 import { ICity } from '../../../interfaces/Interfaces';
 import { searchParamsCityArrivalSet, searchParamsCityDepartureSet } from '../../../reducers/searchParams';
 
@@ -15,7 +15,7 @@ export type Props = {
 };
 
 export const DestinationPicker = memo<Props>(({ className }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const departureStore = useSelector((store: RootState) => store.searchParams.cityDeparture);
   const arrivalStore = useSelector((store: RootState) => store.searchParams.cityArrival);
 
@@ -33,10 +33,10 @@ export const DestinationPicker = memo<Props>(({ className }) => {
   };
 
   const unitDeparture = (
-    <DestinationPickerUnit point="departure" defaultValue={departureStore.value} onSelect={selectPoint} />
+    <DestinationPickerUnit point='departure' defaultValue={departureStore.value} onSelect={selectPoint} />
   );
   const unitArrival = (
-    <DestinationPickerUnit point="arrival" defaultValue={arrivalStore.value} onSelect={selectPoint} />
+    <DestinationPickerUnit point='arrival' defaultValue={arrivalStore.value} onSelect={selectPoint} />
   );
 
   return (
@@ -44,7 +44,7 @@ export const DestinationPicker = memo<Props>(({ className }) => {
       <span className={s.title}>Направление</span>
       <div className={s.input_holder}>
         {unitDeparture}
-        <Button shape="circle" className={s.geoIcon} onClick={swapPoints}>
+        <Button shape='circle' className={s.geoIcon} onClick={swapPoints}>
           <SwapBtn />
         </Button>
         {unitArrival}

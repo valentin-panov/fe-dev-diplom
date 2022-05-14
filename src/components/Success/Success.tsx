@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import { Button, Rate } from 'antd';
 import { StarOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import s from './Success.module.scss';
 import { ReactComponent as Icon1 } from './svg/Group1.svg';
@@ -17,7 +17,7 @@ export type Props = {
 };
 
 export const Success = memo<Props>(({ className }) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const user = useSelector((store: RootState) => store.order.user);
   const selectedSeats = useSelector((store: RootState) => store.selectedSeats);
   const orderSummary = selectedSeats.reduce((sum, el): number => sum + Number(el.price), 0);
@@ -84,7 +84,7 @@ export const Success = memo<Props>(({ className }) => {
           <Button
             className={s.success__return_btn}
             onClick={() => {
-              history.push('/');
+              navigate('/');
             }}
           >
             вернуться на главную

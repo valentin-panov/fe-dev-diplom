@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './SummaryPassengers.module.scss';
 import { IOrderSeat } from '../../../../interfaces/Interfaces';
-import { RootState } from '../../../../store';
+import { AppDispatch, RootState } from '../../../../store';
 import { appStateSetProgress } from '../../../../reducers/appState';
 import { orderReset } from '../../../../reducers/order';
 import { SummaryPassengerCard } from './SummaryPassengerCard';
@@ -11,7 +11,7 @@ import { getBeautifulNumber } from '../../../../utils/getBeatifulNumber';
 import { iconsCollection } from '../../../../collections/collections';
 
 export const SummaryPassengers = memo(() => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const seats = useSelector((store: RootState) => store.order.departure.seats);
   const selectedSeats = useSelector((store: RootState) => store.selectedSeats);
   const orderSummary = selectedSeats.reduce((sum, el): number => sum + Number(el.price), 0);

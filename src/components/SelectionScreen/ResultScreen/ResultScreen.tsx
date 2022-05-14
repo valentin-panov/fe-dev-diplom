@@ -1,14 +1,13 @@
 import React, { memo, useState } from 'react';
 import cn from 'clsx';
-import { CascaderValueType } from 'rc-cascader/lib/interface';
+// import { CascaderValueType } from 'rc-cascader/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './ResultScreen.module.scss';
 import { SortFilter } from './SortFilter';
 import { ResultsLimit } from './ResultsLimit';
 import { TrainCard } from './TrainCard';
 import { PaginationOrigin } from '../PaginationOrigin';
-// import { trainsList } from './data';
-import { RootState } from '../../../store';
+import { AppDispatch, RootState } from '../../../store';
 import ZeroFound from '../../ZeroFound/ZeroFound';
 import { ISortOptions } from '../../../interfaces/Interfaces';
 import { searchParamsLimitSet, searchParamsOffsetSet, searchParamsSortSet } from '../../../reducers/searchParams';
@@ -33,14 +32,14 @@ export const sortOptions: ISortOptions = [
 ];
 
 export const ResultScreen = memo<Props>(({ className }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const searchParams = useSelector((store: RootState) => store.searchParams);
   const { limit, sort, offset } = searchParams;
 
   const totalCount = useSelector((store: RootState) => store.getRoute.data.totalCount);
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
 
-  const [activeSort, setActiveSort] = useState<CascaderValueType>([sort]);
+  const [activeSort, setActiveSort] = useState<unknown>([sort]);
   const [currentPage, setCurrentPage] = useState(offset / limit + 1);
 
   const onClickLimit = (el: number) => {
@@ -48,7 +47,7 @@ export const ResultScreen = memo<Props>(({ className }) => {
     dispatch(searchParamsOffsetSet(0));
   };
 
-  const onChangeSort = (value: CascaderValueType) => {
+  const onChangeSort = (value: unknown) => {
     setActiveSort(value);
     const valueStr = `${value}`;
     dispatch(searchParamsSortSet(valueStr));
@@ -79,7 +78,7 @@ export const ResultScreen = memo<Props>(({ className }) => {
             {trainsList.map((trainsPair) => {
               // eslint-disable-next-line no-underscore-dangle
               const key = trainsPair[0].departure.train._id;
-              return <TrainCard trains={trainsPair} key={key} place="select" />;
+              return <TrainCard trains={trainsPair} key={key} place='select' />;
             })}
           </div>
           <div className={s.pagination}>

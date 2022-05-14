@@ -2,17 +2,17 @@ import React, { memo, useEffect } from 'react';
 import cn from 'clsx';
 import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import s from './SummaryScreen.module.scss';
 import { TrainCard } from '../ResultScreen/TrainCard';
-import { RootState } from '../../../store';
+import { AppDispatch, RootState } from '../../../store';
 import { SummaryPassengers } from './SummaryPassengers';
 import { SummaryPayment } from './SummaryPayment';
 import { asyncPostOrder } from '../../../reducers/order';
 
 export const SummaryScreen = memo(() => {
-  const dispatch = useDispatch();
-  const history = useHistory();
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
   const order = useSelector((store: RootState) => store.order);
   // eslint-disable-next-line no-underscore-dangle
@@ -24,16 +24,16 @@ export const SummaryScreen = memo(() => {
 
   useEffect(() => {
     if (order.status === 'success') {
-      history.push('/success');
+      navigate('/success');
     }
-  }, [history, order]);
+  }, [navigate, order]);
 
   return (
     <div className={s.root}>
       <div className={s.card}>
         <div className={cn(s.row_subheading, s.row_padding)}>Поезд</div>
         <div className={s.row_trainCard}>
-          <TrainCard trains={train[0]} place="summary" />
+          <TrainCard trains={train[0]} place='summary' />
         </div>
       </div>
       <div className={s.card}>

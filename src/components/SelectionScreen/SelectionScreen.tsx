@@ -10,7 +10,7 @@ import { iconsCollection } from '../../collections/collections';
 import { ResultScreen } from './ResultScreen';
 import { Progress } from './Progress';
 import { Loading } from '../Loading';
-import { RootState } from '../../store';
+import { AppDispatch, RootState } from '../../store';
 import Error404 from '../Error404/Error404';
 import { DatePickerOrigin } from '../Pickers/DatePickerOrigin';
 import { getPriceRange } from '../../utils/getPriceRange';
@@ -29,7 +29,7 @@ export type Props = {
 };
 
 export const SelectionScreen = memo<Props>(({ className }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const status = useSelector((store: RootState) => store.getRoute.status);
   const trainsList = useSelector((store: RootState) => store.getRoute.data.items);
   const filters = useSelector((store: RootState) => store.searchParams.filters);
@@ -76,31 +76,31 @@ export const SelectionScreen = memo<Props>(({ className }) => {
               <>
                 <div>
                   <section className={s.sideSelection}>
-                    <DatePickerOrigin pickerPlace="asidePicker" />
+                    <DatePickerOrigin pickerPlace='asidePicker' />
                     <div className={s.divider} />
                     <ul className={s.filterList}>
                       <SelectionFilterItem
                         onChange={changeFilter}
-                        filter="have_second_class"
+                        filter='have_second_class'
                         checked={filters.have_second_class}
                       />
                       <SelectionFilterItem
                         onChange={changeFilter}
-                        filter="have_third_class"
+                        filter='have_third_class'
                         checked={filters.have_third_class}
                       />
                       <SelectionFilterItem
                         onChange={changeFilter}
-                        filter="have_fourth_class"
+                        filter='have_fourth_class'
                         checked={filters.have_fourth_class}
                       />
                       <SelectionFilterItem
                         onChange={changeFilter}
-                        filter="have_first_class"
+                        filter='have_first_class'
                         checked={filters.have_first_class}
                       />
-                      <SelectionFilterItem onChange={changeFilter} filter="have_wifi" checked={filters.have_wifi} />
-                      <SelectionFilterItem onChange={changeFilter} filter="is_express" checked={filters.is_express} />
+                      <SelectionFilterItem onChange={changeFilter} filter='have_wifi' checked={filters.have_wifi} />
+                      <SelectionFilterItem onChange={changeFilter} filter='is_express' checked={filters.is_express} />
                     </ul>
                     <div className={s.divider} />
                     <div className={s.sideSelection__title}>Стоимость</div>
@@ -113,9 +113,9 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                       stubRange={stubRange}
                     />
                     <div className={s.divider} />
-                    <SelectionFilterTime icon={iconsCollection.forward} type="outbound" />
+                    <SelectionFilterTime icon={iconsCollection.forward} type='outbound' />
                     <div className={s.divider} />
-                    <SelectionFilterTime icon={iconsCollection.backward} type="return" />
+                    <SelectionFilterTime icon={iconsCollection.backward} type='return' />
                   </section>
                   <LastTickets />
                 </div>
@@ -131,9 +131,9 @@ export const SelectionScreen = memo<Props>(({ className }) => {
                   <section className={s.sideSelection}>
                     <OrderTitle />
                     <div className={s.divider} />
-                    <OrderTrainData icon={iconsCollection.forward} type="outbound" />
+                    <OrderTrainData icon={iconsCollection.forward} type='outbound' />
                     <div className={s.divider} />
-                    <OrderTrainData icon={iconsCollection.backward} type="return" />
+                    <OrderTrainData icon={iconsCollection.backward} type='return' />
                     <div className={s.divider} />
                     <OrderPassengers />
                     <div className={s.divider} />

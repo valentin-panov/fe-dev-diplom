@@ -2,11 +2,11 @@ import React, { memo } from 'react';
 import { Button } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './SummaryPayment.module.scss';
-import { RootState } from '../../../../store';
+import { AppDispatch, RootState } from '../../../../store';
 import { appStateSetProgress } from '../../../../reducers/appState';
 
 export const SummaryPayment = memo(() => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const paymantMethod = useSelector((store: RootState) => store.order.user?.payment_method);
 
   const onClick = () => {

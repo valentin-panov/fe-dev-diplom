@@ -2,6 +2,7 @@ import React, { memo, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Slider } from 'antd';
 import { searchParamsFiltersSet } from '../../../reducers/searchParams';
+import { AppDispatch } from '../../../store';
 
 export type Range = [number, number];
 
@@ -11,7 +12,7 @@ export type Props = {
 };
 
 export const SelectionFilterTimeOrigin = memo<Props>(({ initialRange, type }) => {
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useDispatch();
   const forward = useRef(null);
 
   const [range, setRange] = useState<Range>(initialRange);
@@ -51,7 +52,7 @@ export const SelectionFilterTimeOrigin = memo<Props>(({ initialRange, type }) =>
         step={30}
         defaultValue={range}
         tooltipVisible
-        tooltipPlacement="bottom"
+        tooltipPlacement='bottom'
         tipFormatter={(value) => formatterDuration(value)}
         onChange={(value: number | Range) => onChangeRange(value)}
         getTooltipPopupContainer={() => forward.current as unknown as HTMLElement}
