@@ -77,7 +77,7 @@ export const DestinationPickerUnit = memo<Props>(({ className, defaultValue, onS
       value={value}
       options={options}
       filterOption={(inputValue, option) => option?.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1}
-      onSelect={(payload) => returnSelectedCity(payload, options, point)}
+      onSelect={(payload: string) => returnSelectedCity(payload, options, point)}
       onChange={(payload: string) => {
         term$.next(payload);
       }}
