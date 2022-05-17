@@ -59,3 +59,5 @@ export const Wrapper = ({ className, children }: Props): ReactElement => {
 
   return <div className={cn(s.root, className)}>{children}</div>;
 };
+
+Wrapper.defaultProps = { className: '' };

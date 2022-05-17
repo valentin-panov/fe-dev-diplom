@@ -3,7 +3,6 @@ import React, { ReactElement } from 'react';
 import smoothscroll from 'smoothscroll-polyfill';
 
 export type Props = {
-  id: number;
   className: string;
   title: string;
   pathName: string;
