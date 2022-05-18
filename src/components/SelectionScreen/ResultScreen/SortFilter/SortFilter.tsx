@@ -2,9 +2,10 @@ import React, { memo } from 'react';
 import cn from 'clsx';
 import { Select } from 'antd';
 import './reant.css';
-import { CascaderValueType } from 'rc-cascader/lib/interface';
 import s from './SortFilter.module.scss';
 import { ISortOptions } from '../../../../interfaces/Interfaces';
+
+export type CascaderValueType = (string | number)[];
 
 export type Props = {
   className?: string;

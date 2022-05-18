@@ -1,13 +1,11 @@
 import React, { memo, useState } from 'react';
 import cn from 'clsx';
-import { CascaderValueType } from 'rc-cascader/lib/interface';
 import { useDispatch, useSelector } from 'react-redux';
 import s from './ResultScreen.module.scss';
-import { SortFilter } from './SortFilter';
+import { CascaderValueType, SortFilter } from './SortFilter';
 import { ResultsLimit } from './ResultsLimit';
 import { TrainCard } from './TrainCard';
 import { PaginationOrigin } from '../PaginationOrigin';
-// import { trainsList } from './data';
 import { RootState } from '../../../store';
 import ZeroFound from '../../ZeroFound/ZeroFound';
 import { ISortOptions } from '../../../interfaces/Interfaces';
